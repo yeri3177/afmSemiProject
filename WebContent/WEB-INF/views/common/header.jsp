@@ -133,7 +133,7 @@ header{position: fixed;}
           <div>
 				<div class="main-nav">
 					<div class="home"><a href="<%= request.getContextPath() %>">Home</a></div>
-					<div class="info"><a href="<%= request.getContextPath() %>">소개</a></div>
+					<div class="info"><a href="<%= request.getContextPath() %>/info.jsp">소개</a></div>
 					<div class="product"><a href="<%= request.getContextPath() %>/product/productList">상품</a></div>
 					<div class="cs"><a href="<%= request.getContextPath() %>/csboard/csboardList">고객센터</a></div>
 				</div>
