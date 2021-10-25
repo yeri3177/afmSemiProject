@@ -15,7 +15,7 @@ CREATE TABLE tb_user (
 --drop table tb_user;
 insert into tb_user
 	values (
-		'admin', '관리자','admin@admin.com','kvOffyqGmDjNUIXm8X/IIQm8+YzWKkfLw3njjegLvAITojzubkoT3myq4K3Yo5AnLW8Ig8J0Mgsf9g28/G3XUA==', sysdate,'01000000000',sysdate,0, 'A', default,0
+		'admin', '관리자','admin@admin.com','kvOffyqGmDjNUIXm8X/IIQm8+YzWKkfLw3njjegLvAITojzubkoT3myq4K3Yo5AnLW8Ig8J0Mgsf9g28/G3XUA==', sysdate,'01000000000',sysdate, 'A', default
 	);
 delete from tb_user where user_id = 'admin';
 select * from tb_user;
@@ -209,18 +209,16 @@ CREATE TABLE user_delete (
 	delete_birthday DATE,
 	delete_phone CHAR(11) NOT NULL,
 	delete_u_enroll_date DATE,
-	account_no NUMBER NOT NULL,
 	user_role CHAR(1),
 	user_expose CHAR(1),
-	adr_no NUMBER NOT NULL,
 	delete_u_date DATE DEFAULT sysdate
 );
 create or replace trigger trg_user_delete
     after delete on tb_user
     for each row
 begin
-    insert into user_delete(delete_u_id, delete_u_name, delete_u_email, delete_password, delete_birthday, delete_phone, delete_u_enroll_date, account_no, user_role, user_expose, adr_no, delete_u_date)
-    values(:old.user_id, :old.user_name, :old.user_email, :old.password, :old.birthday, :old.phone, :old.user_enroll_date, :old.account_no, :old.user_role, :old.user_expose, :old.adr_no, default);
+    insert into user_delete(delete_u_id, delete_u_name, delete_u_email, delete_password, delete_birthday, delete_phone, delete_u_enroll_date, user_role, user_expose, delete_u_date)
+    values(:old.user_id, :old.user_name, :old.user_email, :old.password, :old.birthday, :old.phone, :old.user_enroll_date, :old.user_role, :old.user_expose, default);
 end;
 /
 

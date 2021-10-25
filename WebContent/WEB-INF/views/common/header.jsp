@@ -1,4 +1,5 @@
 <%-- <%@page import="com.kh.afm.member.model.service.MemberService"%> --%>
+<%@page import="com.kh.afm.user.model.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%-- <%@page import="com.kh.afm.common.vo.Member"%> --%>
@@ -73,7 +74,9 @@ header{position: fixed;}
 .searchinput{border:1px green solid;width: 60%;height: 30%;border-radius:50px;padding-top:5px;font-size:12px;color:#777777;}
 .logofont{padding-top:15px;height:60px;}
 </style>
-
+<%
+	User loginUser = (User)session.getAttribute("loginUser");
+%>
 <script>
 <%
 	String msg = (String)session.getAttribute("msg");
