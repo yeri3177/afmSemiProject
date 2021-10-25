@@ -9,7 +9,6 @@
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css" />
 	<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 </head>
-
 <body>
 
 <!-- 관리자페이지 전체 -->
@@ -20,8 +19,10 @@
 		
 		<!-- 사이드메뉴 맨위 텍스트부분 -->
 	    <div class="side-menu-profile clearfix" id="adminLogo">
-	    	<img src="<%=request.getContextPath()%>/images/admin/setting_icon.png" />
-	    	<span>Settings</span>
+	    	<a href="<%=request.getContextPath()%>/admin/adminMain" >
+		    	<img src="<%=request.getContextPath()%>/images/admin/setting_icon.png" />
+		    	<span>Settings</span>
+	    	</a>
 	    </div>
     
 	    <!-- 사이드메뉴부분 -->
@@ -58,8 +59,7 @@
 	
 	<!-- 오른쪽 콘텐츠 부분 시작 -->
 	<div class="right-contents">
-		
-
+	
 		<!-- 상단박스 시작 -->
 		<div class="topbox">
 			
