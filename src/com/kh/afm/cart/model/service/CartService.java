@@ -1,5 +1,23 @@
 package com.kh.afm.cart.model.service;
 
-public class CartService {
+import static com.kh.afm.common.JdbcTemplate.getConnection;
+import static com.kh.afm.common.JdbcTemplate.close;
 
+import java.sql.Connection;
+import java.util.List;
+
+import com.kh.afm.cart.model.dao.CartDao;
+import com.kh.afm.cart.model.vo.Cart;
+
+public class CartService {
+	
+	private CartDao cartDao = new CartDao();
+
+	public List<Cart> selectAllList(String userId) {
+		Connection conn = getConnection();
+		List<Cart> list = cartDao.selectAllList(conn, userId);
+		close(conn);
+		
+		return list;
+	}
 }
