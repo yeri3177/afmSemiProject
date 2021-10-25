@@ -1,5 +1,5 @@
 package com.kh.afm.admin.model.exception;
 
-public class adminException {
+public class AdminException {
 
 }
