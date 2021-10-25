@@ -19,4 +19,12 @@ public class CsboardService {
 		return list;
 	}
 
+	// 총 게시글 조회
+	public int selectTotalContents() {
+		Connection conn = getConnection();
+		int totalContents = csboardDao.selectTotalContents(conn);
+		close(conn);
+		return totalContents;
+	}
+
 }
