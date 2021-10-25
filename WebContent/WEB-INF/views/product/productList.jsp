@@ -49,9 +49,7 @@
 		value="글쓰기" 
 		id="btn-add" 
 		onclick="location.href='<%= request.getContextPath() %>/product/productForm';" />
-
-</section>
-
+		
 <div id='pageBar'><%= request.getAttribute("pagebar") %></div>
-
+</section>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
