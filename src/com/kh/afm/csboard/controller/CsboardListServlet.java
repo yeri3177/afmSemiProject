@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.afm.common.MvcUtils;
 import com.kh.afm.csboard.model.vo.Csboard;
 import com.kh.afm.csboard.service.CsboardService;
 
@@ -43,8 +44,20 @@ public class CsboardListServlet extends HttpServlet {
 		
 		// b. pagebar 영역
 		// totalContents, url 준비
+		// 총게시글을 조회 --> pagebar를 적절히 설정 할 수 있다.
+		int totalContents = csboardService.selectTotalContents();
+		// 링크 클릭했을 때 이동할 페이지 제공
+		String url = request.getRequestURI();
+		String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
+		System.out.println("pagebar@servlet = " + pagebar);
 		
 		// 3. view단 forwarding
+		request.setAttribute("list", list);
+		request.setAttribute("pagebar", pagebar);
+		request
+			.getRequestDispatcher("/WEB-INF/views/csboard/csboardList.jsp")
+			.forward(request, response);
+		
 	}
 
 

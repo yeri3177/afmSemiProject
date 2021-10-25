@@ -12,9 +12,9 @@ public class Csboard implements Serializable {
 	
 	// field 생성
 	private int boardNo;
+	private String userId;
 	private String boardTitle;
 	private String boardContent;
-	private String userId;
 	private Date boardRegDate;
 	private int boardReadcount;
 	private String boardStatus;
@@ -25,20 +25,19 @@ public class Csboard implements Serializable {
 	private int boardOrderby;
 	private int boardStep;
 	
-	// 기본 생성자
 	public Csboard() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Csboard(int boardNo, String boardTitle, String boardContent, String userId, Date boardRegDate,
+	public Csboard(int boardNo, String userId, String boardTitle, String boardContent, Date boardRegDate,
 			int boardReadcount, String boardStatus, String boardNotice, String boardPassword, String boardLock,
 			int boardFamily, int boardOrderby, int boardStep) {
 		super();
 		this.boardNo = boardNo;
+		this.userId = userId;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
-		this.userId = userId;
 		this.boardRegDate = boardRegDate;
 		this.boardReadcount = boardReadcount;
 		this.boardStatus = boardStatus;
@@ -50,7 +49,6 @@ public class Csboard implements Serializable {
 		this.boardStep = boardStep;
 	}
 
-	// getter, setter
 	public int getBoardNo() {
 		return boardNo;
 	}
@@ -59,11 +57,19 @@ public class Csboard implements Serializable {
 		this.boardNo = boardNo;
 	}
 
-	public String getBoardTiltle() {
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getBoardTitle() {
 		return boardTitle;
 	}
 
-	public void setBoardTiltle(String boardTitle) {
+	public void setBoardTitle(String boardTitle) {
 		this.boardTitle = boardTitle;
 	}
 
@@ -73,14 +79,6 @@ public class Csboard implements Serializable {
 
 	public void setBoardContent(String boardContent) {
 		this.boardContent = boardContent;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 
 	public Date getBoardRegDate() {
@@ -155,15 +153,14 @@ public class Csboard implements Serializable {
 		this.boardStep = boardStep;
 	}
 
-	// String
 	@Override
 	public String toString() {
-		return "Csboard [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
-				+ ", userId=" + userId + ", boardRegDate=" + boardRegDate + ", boardReadcount=" + boardReadcount
+		return "Csboard [boardNo=" + boardNo + ", userId=" + userId + ", boardTitle=" + boardTitle + ", boardContent="
+				+ boardContent + ", boardRegDate=" + boardRegDate + ", boardReadcount=" + boardReadcount
 				+ ", boardStatus=" + boardStatus + ", boardNotice=" + boardNotice + ", boardPassword=" + boardPassword
 				+ ", boardLock=" + boardLock + ", boardFamily=" + boardFamily + ", boardOrderby=" + boardOrderby
 				+ ", boardStep=" + boardStep + "]";
 	}
-
 	
+
 }
