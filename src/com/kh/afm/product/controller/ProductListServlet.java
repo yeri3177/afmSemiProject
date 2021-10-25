@@ -18,7 +18,10 @@ public class ProductListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 2.업무로직
 		
+		
+		// 3.view단 forwarding
 		request
 			.getRequestDispatcher("/WEB-INF/views/product/productList.jsp")
 			.forward(request, response);

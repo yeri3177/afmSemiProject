@@ -10,7 +10,7 @@
 	enctype="multipart/form-data">
 	<table id="tbl-board-view">
 	<tr>
-		<th>상품 이름</th>
+		<th>상품 제목</th>
 		<td><input type="text" name="title" required></td>
 	</tr>
 	<tr>
@@ -35,19 +35,13 @@
 		</select>
 		</td>
 	</tr>
-		<tr>
+	<tr>
 		<th>배송</th>
 		<td>
 		<select name="post" id="post">
 			<option value="later">착불</option>
 			<option value="free">무료배송</option>
 		</select>
-		</td>
-	</tr>
-	<tr>
-		<th>대표 이미지</th>
-		<td>			
-			<input type="file" name="upFile">
 		</td>
 	</tr>
 	<tr>
