@@ -17,6 +17,11 @@ insert into tb_user
 	values (
 		'admin', '관리자','admin@admin.com','kvOffyqGmDjNUIXm8X/IIQm8+YzWKkfLw3njjegLvAITojzubkoT3myq4K3Yo5AnLW8Ig8J0Mgsf9g28/G3XUA==', sysdate,'01000000000',sysdate, 'A', default
 	);
+    
+    insert into tb_user
+    values (
+        'honggd', '홍길동','honggd@naver.com','kvOffyqGmDjNUIXm8X/IIQm8+YzWKkfLw3njjegLvAITojzubkoT3myq4K3Yo5AnLW8Ig8J0Mgsf9g28/G3XUA==', sysdate,'01000001000',sysdate, 'A', default
+    );
 delete from tb_user where user_id = 'admin';
 select * from tb_user;
 select * from user_delete;
