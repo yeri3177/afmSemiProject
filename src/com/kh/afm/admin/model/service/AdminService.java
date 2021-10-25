@@ -16,12 +16,21 @@ public class AdminService {
 	/**
 	 * 전체 회원 조회
 	 */
-	public List<User> selectAllUser() {
+	public List<User> selectAllUser(int startRownum, int endRownum) {
 		Connection conn = getConnection();
-		List<User> list = adminDao.selectAllMember(conn);
+		List<User> list = adminDao.selectAllMember(conn, startRownum, endRownum);
 		close(conn);		
 		
 		return list;
 	}
 
+	/**
+	 * 페이징 - 전체회원수 
+	 */
+	public int selectTotalContents() {
+		Connection conn = getConnection();
+		int totalContent = adminDao.selectTotalContents(conn);
+		close(conn);
+		return totalContent;
+	}
 }
