@@ -110,18 +110,27 @@ header{position: fixed;}
         	<div class="dropdown">
 	        	<div class="button">
 				  <button class="profileImg">
-					  <a href="#"><img class="profile" src="<%= request.getContextPath() %>/images/common/profile.png">
+					  <a href="<%= request.getContextPath() %>/user/userLogin"><img class="profile" src="<%= request.getContextPath() %>/images/common/profile.png">
+				  <% if(loginUser == null){ %>
 					 	 <span class="buttonImgName">로그인</span>
+				  <% }else{ %>
+					 	 <span class="buttonImgName"><%= loginUser.getUserName() %>님</span>
+				  <% } %>
 					  </a>
 				  </button>
 				  </div>
 				<div class="button">
 				  	<button class="cartImg">
+				  	<% if(loginUser == null){ %>
+					  <a href="<%= request.getContextPath() %>/user/userLogin"><img class="cart" src="<%= request.getContextPath() %>/images/common/cart3.png">
+				  <% }else{ %>
 					  <a href="<%= request.getContextPath() %>/cart/cartList"><img class="cart" src="<%= request.getContextPath() %>/images/common/cart3.png">
+				  <% } %>
 					  	<span class="buttonImgName">장바구니</span>
 					  </a>
 					</button>
 				  </div>
+				  <%-- <% if(!(loginUser == null) && ("U").equals(loginUser.getUserRole())){ %> --%>
 				<div class="button">
 				  <button class="settingImg">
 					  <a href="<%= request.getContextPath() %>/admin/adminMain"><img class="setting" src="<%= request.getContextPath() %>/images/common/settings.png">
@@ -129,6 +138,7 @@ header{position: fixed;}
 					  </a>
 				  </button>
 				</div>
+				  <%-- <% } %> --%>
 			</div>
 		</div>
       </nav>

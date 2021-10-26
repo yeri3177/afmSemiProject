@@ -36,20 +36,20 @@
 	              <a href="<%=request.getContextPath()%>/admin/userList">회원 목록</a>
 	            </li>
 	            <li>
-	              <a href="#">탈퇴회원 목록</a>
+	              <a href="<%=request.getContextPath()%>/admin/delUserList">탈퇴회원 목록</a>
 	            </li>
 	          </ul>
 	        </li>
 	
 			<!----------------- 메뉴2 --------------------->
 	        <li class="on">
-	            <a href="javascript:void(0)">상품 관리</a>
+	            <a href="#">상품 관리</a>
 	            <ul>
 	              <li>
-	                <a href="javascript:void(0)">상품 목록</a>
+	                <a href="<%=request.getContextPath()%>/admin/productList">상품 목록</a>
 	              </li>
 	              <li>
-	                <a href="javascript:void(0)">상품 신고내역</a>
+	                <a href="<%=request.getContextPath()%>/admin/productReportList">상품 신고내역</a>
 	              </li>
 	            </ul>
 	          </li>

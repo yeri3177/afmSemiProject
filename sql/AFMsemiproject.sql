@@ -259,6 +259,7 @@ begin
 end;
 /
 
+<<<<<<< HEAD
 -- 박종서
 comment on column csboard.board_no is '고객센터번호';
 comment on column csboard.board_title is '고객센터제목';
@@ -540,3 +541,9 @@ delete from tb_user where user_id='mina_111';
 insert into cart values(seq_cart_no.nextval,9,'honggd',1);
 insert into cart values(seq_cart_no.nextval,8,'aaaaa',3);
 insert into cart values(seq_cart_no.nextval,10,'honggd',2);
+=======
+
+select * from tb_user;
+select * from address;
+select * from tb_account;
+>>>>>>> branch 'master' of https://github.com/yeri3177/afmSemiProject.git

@@ -47,6 +47,16 @@ time, mark, audio, video, fieldset{
   /* background: #f1f1f1; */ /* 연한회색 */
 }
 
+/*페이징 : 페이지바 */
+div#pageBar{
+	margin-top:30px; 
+	text-align:center; 
+	background-color:rgba(0, 188, 212, 0.3);
+	padding: 5px;
+}
+div#pageBar span.cPage{color: #0066ff; margin-right: 5px;}
+div#pageBar a{margin-right: 5px; text-decoration: none;}
+div#pageBar a:hover {text-decoration: underline;}
 
 /**************************************
  * 사이드메뉴 영역
@@ -73,7 +83,7 @@ time, mark, audio, video, fieldset{
 }
 
 /* 사이드메뉴부분 */
-.snb{
+.snb {
   height: calc(100% - 155px);
   overflow-y:scroll;
   -ms-overflow-style:none;
@@ -115,9 +125,9 @@ time, mark, audio, video, fieldset{
 }
 
 /* 상위 메뉴 펼쳤을때 a태그 텍스트 */
-.snb > ul > li.on > a{
-  color: #e51737;
-}
+/* .snb > ul > li.on > a{
+  	color: #e51737;
+} */
 
 /* 상위 메뉴 a태그 텍스트 */
 .snb > ul > li > a{
@@ -185,4 +195,39 @@ time, mark, audio, video, fieldset{
 
 .right-bottom-contents {
 	text-align: center;
+}
+
+/**************************************
+ * userList.jsp
+ **************************************/
+ 
+ #tbl-user {
+	border: 1px solid black;
+	border-collapse: collapse;
+	margin: 0 auto;
+}
+
+#tbl-user > tr, th, td {
+	border: 1px solid black;
+	padding: 10px;
+}
+ 
+.data-box {
+	width: 450x;
+	height: 25px;
+	background-color: #fbf5bd;
+	margin: 30px 200px;
+	display : flex;
+	justify-content: space-between;
+	padding: 10px 35px;
+}
+
+.serarchbox {
+	background-color: aqua;
+	display : inline-block;
+}
+
+.sortbox {
+	background-color: aqua;
+	display : inline-block;
 }

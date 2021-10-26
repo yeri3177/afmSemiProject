@@ -44,6 +44,7 @@ private Properties prop = new Properties();
 				cart.setCartNo(rset.getInt("cart_no"));
 				cart.setProductNo(rset.getInt("p_no"));
 				cart.setAttachNo(rset.getInt("attach_no"));
+				cart.setProductName(rset.getString("p_name"));
 				cart.setProductPrice(rset.getInt("p_price"));
 				cart.setProductQuantity(rset.getInt("cart_product_quantity"));
 				list.add(cart);
@@ -55,6 +56,22 @@ private Properties prop = new Properties();
 				close(pstmt);
 			}
 		return list;
+	}
+
+	public int deleteAllCart(Connection conn, String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteAllCart");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }

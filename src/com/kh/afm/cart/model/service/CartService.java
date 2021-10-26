@@ -1,6 +1,8 @@
 package com.kh.afm.cart.model.service;
 
 import static com.kh.afm.common.JdbcTemplate.getConnection;
+import static com.kh.afm.common.JdbcTemplate.commit;
+import static com.kh.afm.common.JdbcTemplate.rollback;
 import static com.kh.afm.common.JdbcTemplate.close;
 
 import java.sql.Connection;
@@ -20,4 +22,17 @@ public class CartService {
 		
 		return list;
 	}
+
+	public int deleteAllCart(String userId) {
+		Connection conn = getConnection();
+		int result = cartDao.deleteAllCart(conn, userId);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+
+
 }
