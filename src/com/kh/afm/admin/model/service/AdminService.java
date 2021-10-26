@@ -1,11 +1,13 @@
 package com.kh.afm.admin.model.service;
 
-import static com.kh.afm.common.JdbcTemplate.*;
+import static com.kh.afm.common.JdbcTemplate.close;
+import static com.kh.afm.common.JdbcTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.List;
 
 import com.kh.afm.admin.model.dao.AdminDao;
+import com.kh.afm.user.model.vo.DelUser;
 import com.kh.afm.user.model.vo.User;
 
 public class AdminService {
@@ -32,5 +34,16 @@ public class AdminService {
 		int totalContent = adminDao.selectTotalContents(conn);
 		close(conn);
 		return totalContent;
+	}
+
+	/**
+	 * 탈퇴한 전체 회원 조회
+	 */
+	public List<DelUser> selectAllDelUser(int startRownum, int endRownum) {
+		Connection conn = getConnection();
+		List<DelUser> list = adminDao.selectAllDelUser(conn, startRownum, endRownum);
+		close(conn);		
+		
+		return list;
 	}
 }
