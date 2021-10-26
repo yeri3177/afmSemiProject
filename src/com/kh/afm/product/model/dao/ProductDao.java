@@ -1,6 +1,6 @@
 package com.kh.afm.product.model.dao;
 
-import static com.kh.afm.common.JdbcTemplate.*;
+import static com.kh.afm.common.JdbcTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,7 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.kh.afm.product.model.vo.Attachment;
 import com.kh.afm.product.model.vo.Product;
+import com.kh.afm.product.model.exception.ProductException;
+import com.kh.afm.product.model.exception.ProductException;
 
 public class ProductDao {
 
@@ -53,7 +56,7 @@ public class ProductDao {
 				product.setpNo(rset.getInt("p_no"));
 				product.setpTitle(rset.getString("p_title"));
 				product.setpPrice(rset.getInt("p_price"));
-				product.setpWriter(rset.getString("p_user_id"));
+				product.setUserId(rset.getString("p_user_id"));
 				product.setpRegDate(rset.getDate("p_reg_date"));
 				product.setpRecommend(rset.getInt("p_recommend"));
 				
@@ -90,6 +93,79 @@ public class ProductDao {
 		}
 		
 		return totalContents;
+	}
+
+	public int insertProduct(Connection conn, Product product) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertProduct");
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, product.getUserId());
+			pstmt.setString(2, product.getpTitle());
+			pstmt.setString(3, product.getpContent());
+			pstmt.setString(4, product.getpPost());
+			pstmt.setInt(5, product.getpPrice());
+			pstmt.setInt(6, product.getpCnt());
+			pstmt.setString(7, product.getpCategory());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ProductException("게시글 등록 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int selectLastProductNo(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectLastProductNo");
+		int pNo = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery(sql);
+			if(rset.next()) {
+				pNo = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ProductException("게시글번호 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return pNo;
+	}
+
+	public int insertAttachment(Connection conn, Attachment attach) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertAttachment");
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, attach.getpNo());
+			pstmt.setString(2, attach.getOriginalFileName());
+			pstmt.setString(3, attach.getRenamedFileName());
+			pstmt.setString(4, attach.getImgFlag());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ProductException("첨부파일 등록 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	
