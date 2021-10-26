@@ -107,5 +107,31 @@ public class CsboardDao {
 		return totalContents;
 	}
 
+	// DML
+	public int insertCsboard(Connection conn, Csboard csboard) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertCsboard");
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, csboard.getUserId());
+			pstmt.setString(2, csboard.getBoardPassword());
+			pstmt.setString(3, csboard.getBoardTitle());
+			pstmt.setString(4, csboard.getBoardContent());
+//			pstmt.setString(5, csboard.getBoardLock());
+			
+			// DML
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 
 }

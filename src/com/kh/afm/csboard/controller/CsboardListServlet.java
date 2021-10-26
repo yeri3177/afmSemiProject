@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.afm.common.MvcUtils;
 import com.kh.afm.csboard.model.vo.Csboard;
-import com.kh.afm.csboard.service.CsboardService;
+import com.kh.afm.csboard.model.service.CsboardService;
 
 /**
  * Servlet implementation class CsboardListServlet

@@ -25,7 +25,7 @@ public class CsboardFormServlet extends HttpServlet {
 		// getRequestDispatcher
 		// : 컨테이너 내에서 request, response 객체를 전송하여 처리할 컴포넌트(jsp 파일등)을 불러오는 메소드로 forward() 메소드와 같이 사용
 		request
-			.getRequestDispatcher("/WEB-INF/views/csboardForm.jsp")
+			.getRequestDispatcher("/WEB-INF/views/csboard/csboardForm.jsp")
 			.forward(request, response);
 		
 	}
