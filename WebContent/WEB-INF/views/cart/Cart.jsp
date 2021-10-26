@@ -1,3 +1,4 @@
+<%@page import="com.kh.afm.cart.model.vo.Cart"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -117,10 +118,12 @@ Number.prototype.formatNumber = function(){
     return nstr;
 };
 </script>
-
+<%
+	List<Cart> list = (List<Cart>)request.getAttribute("list");
+%>
 <h2>장바구니</h2>
 <%
-	//if(List == null){
+	if(list == null){
 %>
 
     <!-- list null일때... -->
@@ -128,7 +131,7 @@ Number.prototype.formatNumber = function(){
         <h3>장바구니가 비어있습니다.</h3>
         
 <%
-	//}else{
+	}else{
 %>
 
     <!-- list null이 아닐때, 즉 자료가 있을때 -->
@@ -146,29 +149,32 @@ Number.prototype.formatNumber = function(){
             <div class="basketcmd">&nbsp;</div>
             </div>
 	<%
-		//forEach문 사용
+	int sum = 0;
+	int sumcount = 0;
+		for(Cart _cart : list){
+			sum += (_cart.getProductPrice() * _cart.getProductQuantity());
+			sumcount += _cart.getProductQuantity();
 	%>
 			<div class="cartdata">
 	            <div class="cartcheck"><input type="checkbox" name="buy" value="260" checked="">&nbsp;</div>
 	            <div class="cartimg"><img src="<%= request.getContextPath() %>/images/<%= //attach value %>" width="60"></div>
-				<div class="cartproductname"><span><%= //product_name %></span></div>
-	            <div class="cartprice"><input type="hidden" name="p_price" id="p_price1" class="p_price" value="<%= //price %>"><%= //price %>원</div>
+				<div class="cartproductname"><span><%= _cart.getProductName() %></span></div>
+	            <div class="cartprice"><input type="hidden" name="p_price" id="p_price1" class="p_price" value="<%= _cart.getProductPrice() %>"><%= _cart.getProductPrice() %>원</div>
 	            <div class="cartcount">
 	                <!-- "장바구니 수량 변경" -->
 	                <div class="cartcountupdown">
-	                    <input type="text" name="p_num1" id="p_num1" size="2" maxlength="4" class="p_num" value="<%= //count %>">
+	                    <input type="text" name="p_num1" id="p_num1" size="2" maxlength="4" class="p_num" value="<%= _cart.getProductQuantity() %>">
 	                    <span><i class="fas fa-arrow-alt-circle-up up"></i></span>
 	                    <span><i class="fas fa-arrow-alt-circle-down down"></i></span>
 	                </div>
 	            </div>
-	            <!-- "장바구니 상품 합계" -->
-	            <div class="sum"><%= // price * count %>원</div>
+	            <div class="sum"><%= _cart.getProductPrice() * _cart.getProductQuantity() %>원</div>
 	            <div class="cartDelete"><a href="#" class="btnCartDelete">삭제</a></div>
 	        </div>
 	    </div>
     
 	<%
-		//forEach문 끝
+		}//forEach문 끝
 	%>
                 <!-- "장바구니 기능 버튼" -->
 	    <div class="cartcontrolAll">
@@ -176,8 +182,8 @@ Number.prototype.formatNumber = function(){
 	        <a href="#" class="deleteAll">장바구니비우기</a>
 	    </div>
     <!-- "장바구니 전체 합계 정보" -->
-	    <div class="cartpcount" id="cartpcount">상품갯수: <%= // list size %>개</div>
-	    <div class="cartAllPrice" id="cartAllPrice">합계금액: <%= //합계계산 %>원</div>
+	    <div class="cartpcount" id="cartpcount">상품갯수: <%= sumcount %>개</div>
+	    <div class="cartAllPrice" id="cartAllPrice">합계금액: <%= sum %>원</div>
         <div id="cartcheckbuy" class="">
 	        <div class="clear"></div>
 	        <div class="buttongroup">
@@ -185,9 +191,7 @@ Number.prototype.formatNumber = function(){
 	        </div>
     	</div>
         </form>
-<%
-	//}
-%>
+<% } %>
 <button type="button" id="btnProductList">상품목록</button>
 
 
