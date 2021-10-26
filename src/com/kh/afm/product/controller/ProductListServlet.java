@@ -33,7 +33,7 @@ public class ProductListServlet extends HttpServlet {
 		} catch (NumberFormatException e) {
 			
 		}
-		
+		System.out.println("cPage = " + cPage);
 		
 		// 2.업무로직
 		// a.content영역 - paging query

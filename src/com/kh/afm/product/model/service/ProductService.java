@@ -13,6 +13,7 @@ public class ProductService {
 	private ProductDao productDao = new ProductDao();
 	
 	public List<Product> selectProductList(int start, int end) {
+		
 		Connection conn = getConnection();
 		List<Product> list = productDao.selectProductList(conn, start, end);
 		close(conn);

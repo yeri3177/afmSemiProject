@@ -22,6 +22,12 @@ insert into tb_user
     values (
         'honggd', '홍길동','honggd@naver.com','kvOffyqGmDjNUIXm8X/IIQm8+YzWKkfLw3njjegLvAITojzubkoT3myq4K3Yo5AnLW8Ig8J0Mgsf9g28/G3XUA==', sysdate,'01000001000',sysdate, 'A', default
     );
+    
+    insert into tb_user
+    values (
+        'aaaaa', '아아아','aaa@naver.com','kvOffyqGmDjNUIXm8X/IIQm8+YzWKkfLw3njjegLvAITojzubkoT3myq4K3Yo5AnLW8Ig8J0Mgsf9g28/G3XUA==', sysdate,'01000001010',sysdate, 'A', default
+    );
+
 delete from tb_user where user_id = 'admin';
 select * from tb_user;
 select * from user_delete;
@@ -253,7 +259,291 @@ begin
 end;
 /
 
+<<<<<<< HEAD
+-- 박종서
+comment on column csboard.board_no is '고객센터번호';
+comment on column csboard.board_title is '고객센터제목';
+comment on column csboard.user_id is '고객센터작성자 아이디';
+comment on column csboard.board_content is '고객센터내용';
+comment on column csboard.board_reg_date is '고객센터작성일시';
+comment on column csboard.board_readcount is '조회수';
+
+insert into csboard (board_no, user_id, board_title, board_content, board_reg_date, board_readcount, board_status, board_noticeYN, board_password, board_lockYN, board_family, board_orderby, board_step) 
+    values (seq_csboard_no.nextval, 'honggd', '안녕하세요, 고객센터입니다 - 1', '반갑습니다', to_date('18/02/10','RR/MM/DD'), 0,'N', 'N', '1234','Y', 0, 0, 0);
+insert into csboard (board_no, user_id, board_title, board_content, board_reg_date, board_readcount, board_status, board_noticeYN, board_password, board_lockYN, board_family, board_orderby, board_step) 
+    values (seq_csboard_no.nextval, 'honggd', '안녕하세요, 고객센터입니다 - 2', '반갑습니다', to_date('18/02/11','RR/MM/DD'), 0,'N', 'N', '1234','Y', 0, 0, 0);
+insert into csboard (board_no, user_id, board_title, board_content, board_reg_date, board_readcount, board_status, board_noticeYN, board_password, board_lockYN, board_family, board_orderby, board_step) 
+    values (seq_csboard_no.nextval, 'honggd', '안녕하세요, 고객센터입니다 - 3', '반갑습니다', to_date('18/02/12','RR/MM/DD'), 0,'N', 'N', '1234','Y', 0, 0, 0);
+insert into csboard (board_no, user_id, board_title, board_content, board_reg_date, board_readcount, board_status, board_noticeYN, board_password, board_lockYN, board_family, board_orderby, board_step) 
+    values (seq_csboard_no.nextval, 'honggd', '안녕하세요, 고객센터입니다 - 4', '반갑습니다', to_date('18/02/13','RR/MM/DD'), 0,'N', 'N', '1234','Y', 0, 0, 0);    
+insert into csboard (board_no, user_id, board_title, board_content, board_reg_date, board_readcount, board_status, board_noticeYN, board_password, board_lockYN, board_family, board_orderby, board_step) 
+    values (seq_csboard_no.nextval, 'honggd', '안녕하세요, 고객센터입니다 - 5', '반갑습니다', to_date('18/02/14','RR/MM/DD'), 0,'N', 'N', '1234','Y', 0, 0, 0);
+insert into csboard (board_no, user_id, board_title, board_content, board_reg_date, board_readcount, board_status, board_noticeYN, board_password, board_lockYN, board_family, board_orderby, board_step) 
+    values (seq_csboard_no.nextval, 'honggd', '안녕하세요, 고객센터입니다 - 6', '반갑습니다', to_date('18/02/15','RR/MM/DD'), 0,'N', 'N', '1234','Y', 0, 0, 0);
+insert into csboard (board_no, user_id, board_title, board_content, board_reg_date, board_readcount, board_status, board_noticeYN, board_password, board_lockYN, board_family, board_orderby, board_step) 
+    values (seq_csboard_no.nextval, 'honggd', '안녕하세요, 고객센터입니다 - 7', '반갑습니다', to_date('18/02/16','RR/MM/DD'), 0,'N', 'N', '1234','Y', 0, 0, 0);
+insert into csboard (board_no, user_id, board_title, board_content, board_reg_date, board_readcount, board_status, board_noticeYN, board_password, board_lockYN, board_family, board_orderby, board_step) 
+    values (seq_csboard_no.nextval, 'honggd', '안녕하세요, 고객센터입니다 - 8', '반갑습니다', to_date('18/02/17','RR/MM/DD'), 0,'N', 'N', '1234','Y', 0, 0, 0);
+insert into csboard (board_no, user_id, board_title, board_content, board_reg_date, board_readcount, board_status, board_noticeYN, board_password, board_lockYN, board_family, board_orderby, board_step) 
+    values (seq_csboard_no.nextval, 'honggd', '안녕하세요, 고객센터입니다 - 9', '반갑습니다', to_date('18/02/18','RR/MM/DD'), 0,'N', 'N', '1234','Y', 0, 0, 0);
+insert into csboard (board_no, user_id, board_title, board_content, board_reg_date, board_readcount, board_status, board_noticeYN, board_password, board_lockYN, board_family, board_orderby, board_step) 
+    values (seq_csboard_no.nextval, 'honggd', '안녕하세요, 고객센터입니다 - 10', '반갑습니다', to_date('18/02/19','RR/MM/DD'), 0,'N', 'N', '1234','Y', 0, 0, 0);
+insert into csboard (board_no, user_id, board_title, board_content, board_reg_date, board_readcount, board_status, board_noticeYN, board_password, board_lockYN, board_family, board_orderby, board_step) 
+    values (seq_csboard_no.nextval, 'honggd', '안녕하세요, 고객센터입니다 - 11', '반갑습니다', to_date('18/02/20','RR/MM/DD'), 0,'N', 'N', '1234','Y', 0, 0, 0);
+
+
+--정예리
+--아이디, 이름, 이메일, 비밀번호, 생일, 핸드폰번호11자리, 가입일, 회원권한, 공개여부)
+--1
+insert into tb_user 
+values(
+    'yeri3177', 
+    '정예리', 
+    'yeri3177@gmail.com', 
+    '1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==',
+    '930325',
+    '01012345678',
+    sysdate,
+    'A',
+    'Y'
+);
+
+--2
+insert into tb_user 
+values(
+    'jenny99', 
+    '김제니', 
+    'bp_123@gmail.com', 
+    '1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==',
+    '960505',
+    '01035345678',
+    sysdate,
+    'U',
+    'Y'
+);
+
+--3
+insert into tb_user 
+values(
+    'qwerty123', 
+    '김철수', 
+    'kim_33@naver.com', 
+    '1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==',
+    '880624',
+    '01045891222',
+    sysdate,
+    'U',
+    'Y'
+);
+
+--4
+insert into tb_user 
+values(
+    'ho123', 
+    '김윤호', 
+    'yoonho88@gmail.com', 
+    '1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==',
+    '970802',
+    '01012345678',
+    sysdate,
+    'U',
+    'Y'
+);
+
+--5
+insert into tb_user 
+values(
+    'rose32', 
+    '김로제', 
+    'rose32@naver.com', 
+    '1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==',
+    '930325',
+    '01012345678',
+    sysdate,
+    'U',
+    'Y'
+);
+
+--6
+insert into tb_user 
+values(
+    'monika66', 
+    '모니카', 
+    'monika42@gmail.com', 
+    '1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==',
+    '840523',
+    '01012345678',
+    sysdate,
+    'A',
+    'Y'
+);
+
+--7
+insert into tb_user 
+values(
+    'noze123', 
+    '김노제', 
+    'nozelove@gmail.com', 
+    '1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==',
+    '970328',
+    '01012345678',
+    sysdate,
+    'U',
+    'Y'
+);
+
+--8
+insert into tb_user 
+values(
+    'yoona123', 
+    '임윤아', 
+    'gg99@gmail.com', 
+    '1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==',
+    '901025',
+    '01012345678',
+    sysdate,
+    'A',
+    'Y'
+);
+
+--9
+insert into tb_user 
+values(
+    'jessica_sa', 
+    '제시카', 
+    'jessi123@gmail.com', 
+    '1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==',
+    '891002',
+    '01012345678',
+    sysdate,
+    'U',
+    'Y'
+);
+
+--10
+insert into tb_user 
+values(
+    'karina11', 
+    '카리나', 
+    'aespa@gmail.com', 
+    '1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==',
+    '030303',
+    '01012345678',
+    sysdate,
+    'U',
+    'Y'
+);
+
+--11
+insert into tb_user 
+values(
+    'hey123', 
+    '김가비', 
+    'gabee123@gmail.com', 
+    '1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==',
+    '990325',
+    '01012345678',
+    sysdate,
+    'U',
+    'Y'
+);
+
+--12
+insert into tb_user 
+values(
+    'momo123', 
+    '김모모', 
+    'momo123@naver.com', 
+    '1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==',
+    '961231',
+    '01012345678',
+    sysdate,
+    'U',
+    'Y'
+);
+
+--13
+insert into tb_user 
+values(
+    'nayeon', 
+    '임나연', 
+    'twice123@gmail.com', 
+    '1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==',
+    '970512',
+    '01012345678',
+    sysdate,
+    'A',
+    'Y'
+);
+
+--14
+insert into tb_user 
+values(
+    'sana_twice', 
+    '김사나', 
+    'sana33@gmail.com', 
+    '1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==',
+    '910421',
+    '01012345678',
+    sysdate,
+    'S',
+    'Y'
+);
+
+--15
+insert into tb_user 
+values(
+    'mina_111', 
+    '권미나', 
+    'mmm_123@daum.com', 
+    '1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==',
+    '730602',
+    '01012345678',
+    sysdate,
+    'S',
+    'Y'
+);
+
+insert into tb_user 
+values(
+    'mina_111', 
+    '권미나', 
+    'mmm_123@daum.com', 
+    '1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==',
+    '730602',
+    '01012345678',
+    sysdate,
+    'S',
+    'Y'
+);
+
+insert into tb_user 
+values(
+    'leesu_11', 
+    '이수근', 
+    'leesu_11@daum.com', 
+    '1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==',
+    '730602',
+    '01012345000',
+    sysdate,
+    'S',
+    'Y'
+);
+
+
+
+--탈퇴회원 
+delete from tb_user where user_id='rose32';
+delete from tb_user where user_id='jessica_sa';
+delete from tb_user where user_id='mina_111';
+
+--강구진
+insert into cart values(seq_cart_no.nextval,9,'honggd',1);
+insert into cart values(seq_cart_no.nextval,8,'aaaaa',3);
+insert into cart values(seq_cart_no.nextval,10,'honggd',2);
+=======
 
 select * from tb_user;
 select * from address;
 select * from tb_account;
+>>>>>>> branch 'master' of https://github.com/yeri3177/afmSemiProject.git

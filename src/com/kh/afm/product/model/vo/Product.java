@@ -1,6 +1,7 @@
 package com.kh.afm.product.model.vo;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class Product implements Serializable{
 
@@ -10,9 +11,19 @@ public class Product implements Serializable{
 	private String pTitle;
 	private int pPrice;
 	private String pWriter;
-	private int pRegDate;
+	private Date pRegDate;
 	private int pRecommend;
 	
+	public Product(int pNo, String pTitle, int pPrice, String pWriter, Date pRegDate, int pRecommend) {
+		super();
+		this.pNo = pNo;
+		this.pTitle = pTitle;
+		this.pPrice = pPrice;
+		this.pWriter = pWriter;
+		this.pRegDate = pRegDate;
+		this.pRecommend = pRecommend;
+	}
+
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -50,11 +61,11 @@ public class Product implements Serializable{
 		this.pWriter = pWriter;
 	}
 
-	public int getpRegDate() {
+	public Date getpRegDate() {
 		return pRegDate;
 	}
 
-	public void setpRegDate(int pRegDate) {
+	public void setpRegDate(Date pRegDate) {
 		this.pRegDate = pRegDate;
 	}
 
