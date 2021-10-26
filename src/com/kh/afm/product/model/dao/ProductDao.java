@@ -2,6 +2,8 @@ package com.kh.afm.product.model.dao;
 
 import static com.kh.afm.common.JdbcTemplate.*;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,26 +18,44 @@ public class ProductDao {
 
 	private Properties prop = new Properties();
 	
+	public ProductDao() {
+		String filepath = ProductDao.class.getResource("/sql/product/product-query.properties").getPath();
+		try {
+			prop.load(new FileReader(filepath));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public List<Product> selectProductList(Connection conn, int start, int end) {
+		
+		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectProductList");
 		List<Product> list = new ArrayList<>();
 		
 		try {
+			System.out.println(start);
+			System.out.println(end);
+			System.out.println(22);
 			pstmt = conn.prepareStatement(sql);
+			System.out.println(33);
 			pstmt.setInt(1, start);
+			System.out.println(44);
 			pstmt.setInt(2, end);
+			System.out.println(55);
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				Product product = new Product();
-				product.setpNo(rset.getInt("pNo"));
-				product.setpTitle(rset.getString("pTitle"));
-				product.setpPrice(rset.getInt("pPrice"));
-				product.setpWriter(rset.getString("pWriter"));
-				product.setpRecommend(rset.getInt("pRecommend"));
+				product.setpNo(rset.getInt("p_no"));
+				product.setpTitle(rset.getString("p_title"));
+				product.setpPrice(rset.getInt("p_price"));
+				product.setpWriter(rset.getString("p_user_id"));
+				product.setpRegDate(rset.getDate("p_reg_date"));
+				product.setpRecommend(rset.getInt("p_recommend"));
 				
 				list.add(product);
 			}

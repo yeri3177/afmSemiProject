@@ -1,3 +1,4 @@
+<%@page import="java.sql.Date"%>
 <%@page import="com.kh.afm.product.model.vo.Product"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -31,12 +32,13 @@
 	for(Product _product : list){
 %>
 		<tr>
-			<td><%= _product.getpNo() %></td>
-			<td><img alt="<%= request.getContextPath() %>/images/common/logo.png" src="" width="32px"></td>
-			<td><%= _product.getpTitle() %></td>
-			<td><%= _product.getpWriter() %></td>
-			<td><%= _product.getpRegDate() %></td>
-			<td><%= _product.getpRecommend() %></td>
+			<th><%= _product.getpNo() %></th>
+			<th><img alt="" src="<%= request.getContextPath() %>/images/common/logo.png" width="100px"></th>
+			<th><%= _product.getpTitle() %></th>
+			<th><%= _product.getpPrice() %></th>
+			<th><%= _product.getpWriter() %></th>
+			<th><%= (Date)_product.getpRegDate() %></th>
+			<th><%= _product.getpRecommend() %></th>
 		</tr>
 <%
 	}
