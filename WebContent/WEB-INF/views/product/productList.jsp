@@ -33,8 +33,8 @@
 %>
 		<tr>
 			<th><%= _product.getpNo() %></th>
-			<th><img alt="" src="<%= request.getContextPath() %>/images/common/logo.png" width="100px"></th>
-			<th><%= _product.getpTitle() %></th>
+			<th><img alt="" src="<%= request.getContextPath() %>/images/common/logo.png" width="300px"></th>
+			<th><a href="<%= request.getContextPath() %>/product/productView?no=<%= _product.getpNo() %>"><%= _product.getpTitle() %></a></th>
 			<th><%= _product.getpPrice() %></th>
 			<th><%= _product.getpWriter() %></th>
 			<th><%= (Date)_product.getpRegDate() %></th>
