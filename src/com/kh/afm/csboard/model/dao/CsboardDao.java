@@ -18,7 +18,7 @@ public class CsboardDao {
 	private Properties prop = new Properties();
 	
 	/**
-	 * prop객체에 buildpath로 배포된 /sql/board/board-query.properties 불러오기
+	 * prop객체에 buildpath로 배포된 /sql/csboard/csboard-query.properties 불러오기
 	 */
 	public CsboardDao() {
 		// url 객체가 return되므로 getPath()를 불러온다.
@@ -32,10 +32,13 @@ public class CsboardDao {
 		}
 	}
 
+	// 게시물 조회
+	// DQL
 	public List<Csboard> selectCsboardList(Connection conn, int start, int end) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectCsboardList");
+//		System.out.println("sql = " + sql);
 		List<Csboard> list = new ArrayList<>();
 		
 		try {
@@ -51,9 +54,9 @@ public class CsboardDao {
 				// 테이블 record 1개가 VO 객체 1개로 변환이 된다.
 				Csboard csboard = new Csboard();
 				csboard.setBoardNo(rset.getInt("board_no"));
-				csboard.setBoardTiltle(rset.getString("board_title"));
-				csboard.setBoardContent(rset.getString("board_content"));
 				csboard.setUserId(rset.getString("user_id"));
+				csboard.setBoardTitle(rset.getString("board_title"));
+				csboard.setBoardContent(rset.getString("board_content"));
 				csboard.setBoardRegDate(rset.getDate("board_reg_date"));
 				csboard.setBoardReadcount(rset.getInt("board_readcount"));
 				csboard.setBoardStatus(rset.getString("board_status"));
@@ -76,7 +79,32 @@ public class CsboardDao {
 		}
 		
 		
-		return null;
+		return list;
+	}
+
+	// 게시물 총 개수 조회
+	// DQL
+	public int selectTotalContents(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectTotalContents");
+		int totalContents = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				totalContents = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return totalContents;
 	}
 
 

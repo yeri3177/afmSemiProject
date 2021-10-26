@@ -9,7 +9,7 @@ public class Product implements Serializable{
 	private int pNo;
 	private String pTitle;
 	private int pPrice;
-	private int pWriter;
+	private String pWriter;
 	private int pRegDate;
 	private int pRecommend;
 	
@@ -42,11 +42,11 @@ public class Product implements Serializable{
 		this.pPrice = pPrice;
 	}
 
-	public int getpWriter() {
+	public String getpWriter() {
 		return pWriter;
 	}
 
-	public void setpWriter(int pWriter) {
+	public void setpWriter(String pWriter) {
 		this.pWriter = pWriter;
 	}
 
@@ -71,6 +71,7 @@ public class Product implements Serializable{
 		return "Product [pNo=" + pNo + ", pTitle=" + pTitle + ", pPrice=" + pPrice + ", pWriter=" + pWriter
 				+ ", pRegDate=" + pRegDate + ", pRecommend=" + pRecommend + "]";
 	}
+	
 	
 	
 }
