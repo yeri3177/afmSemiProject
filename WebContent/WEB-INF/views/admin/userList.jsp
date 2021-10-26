@@ -5,28 +5,52 @@
 
 <%
 	List<User> list = (List<User>) request.getAttribute("list");
+	String searchType = request.getParameter("searchType");
+	String searchKeyword = request.getParameter("searchKeyword");
 %>
 <style>
-#tbl-user {
-	border: 1px solid black;
-	border-collapse: collapse;
-	margin: 0 auto;
+div#search-memberId {
+	display: <%= searchType == null || "memberId".equals(searchType) ? "inline-block" : "none" %>;
 }
-
-#tbl-user > tr, th, td {
-	border: 1px solid black;
-	padding: 10px;
+div#search-memberName{
+	display: <%= "memberName".equals(searchType) ? "inline-block" : "none" %>;
 }
-
-/*페이징 : 페이지바 */
-div#pageBar{margin-top:10px; text-align:center; background-color:rgba(0, 188, 212, 0.3);}
-div#pageBar span.cPage{color: #0066ff; margin-right: 5px;}
-div#pageBar a{margin-right: 5px; text-decoration: none;}
-div#pageBar a:hover {text-decoration: underline;}
+div#search-gender{
+	display: <%= "gender".equals(searchType) ? "inline-block" : "none" %>;
+}
 </style>
 
-<br><br><br>
-<h1>회원목록</h1>
+<div class="data-box">
+	
+	<!-- 데이터 검색 -->
+	<div class="serarchbox">
+		
+		<!-- 검색타입 -->
+		search
+		<select id="searchType">
+		    <option value="userId" <%= "userId".equals(searchType) ? "selected" : "" %>>아이디</option>		
+		    <option value="userName" <%= "userName".equals(searchType) ? "selected" : "" %>>회원명</option>
+		    <option value="userRole" <%= "userRole".equals(searchType) ? "selected" : "" %>>회원권한</option>
+		</select>
+		
+		
+		<input type="text" />
+		
+		
+		<button>검색</button>
+		
+	</div>
+	
+	<!-- 데이터 정렬 -->
+	<div class="sortbox">
+		sort
+		<select name="" id="">
+			<option value="">아이디</option>
+			<option value="">회원명</option>
+			<option value="">회원권한</option>
+		</select>
+	</div>
+</div>
 
 <table id="tbl-user">
     <thead>
@@ -69,4 +93,18 @@ div#pageBar a:hover {text-decoration: underline;}
 <div id="pageBar">
 	<%= request.getAttribute("pagebar") %>
 </div>	
+
+<script>
+$("#searchType").change((e) => {
+  	// e.target 이벤트발생객체 -> #searchType
+  	const type = $(e.target).val();
+  	console.log(type);
+  	
+  	// 1. .search-type 감추기
+  	$(".search-type").hide();
+  	
+  	// 2. #search-${type} 보여주기 (display : inline-block)
+  	$(`#search-\${type}`).css("display", "inline-block");
+}); 
+</script>
 <%@ include file="/WEB-INF/views/admin/adminFooter.jsp" %>		

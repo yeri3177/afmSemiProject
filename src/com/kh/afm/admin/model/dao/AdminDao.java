@@ -1,6 +1,6 @@
 package com.kh.afm.admin.model.dao;
 
-import static com.kh.afm.common.JdbcTemplate.*;
+import static com.kh.afm.common.JdbcTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.kh.afm.user.model.vo.DelUser;
 import com.kh.afm.user.model.vo.User;
 
 public class AdminDao {
@@ -40,7 +41,6 @@ public class AdminDao {
 	public List<User> selectAllMember(Connection conn, int startRownum, int endRownum) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("selectAllUser"); 
-		System.out.println("sql = " + sql);
 		ResultSet rset = null;
 		List<User> list = new ArrayList<>();
 		
@@ -103,5 +103,46 @@ public class AdminDao {
 		}
 		
 		return totalContents;
+	}
+
+
+	/**
+	 * 탈퇴한 전체 회원 조회
+	 */
+	public List<DelUser> selectAllDelUser(Connection conn, int startRownum, int endRownum) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectAllDelUser"); 
+		ResultSet rset = null;
+		List<DelUser> list = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRownum);
+			pstmt.setInt(2, endRownum);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				DelUser delUser = new DelUser();
+				delUser.setDeleteUId(rset.getString("delete_u_id"));
+				delUser.setDeleteUName(rset.getString("delete_u_name"));
+				delUser.setDeleteUEmail(rset.getString("delete_u_email"));
+				delUser.setDeletePassword(rset.getString("delete_password"));
+				delUser.setDeleteBirthday(rset.getString("delete_birthday"));
+				delUser.setDeletePhone(rset.getString("delete_phone"));
+				delUser.setDeleteUEnroll_date(rset.getDate("delete_u_enroll_date"));
+				delUser.setUserRole(rset.getString("user_role"));
+				delUser.setUserExpose(rset.getString("user_expose"));
+				delUser.setDeleteUDate(rset.getDate("delete_u_date"));
+
+				list.add(delUser);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 }

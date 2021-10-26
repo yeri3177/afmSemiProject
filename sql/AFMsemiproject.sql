@@ -252,3 +252,8 @@ begin
     values(:old.board_no, :old.user_id, :old.board_title, :old.board_content, :old.board_reg_date, :old.board_readcount, :old.board_status, :old.board_noticeYN, :old.board_password, :old.board_lockYN, :old.board_family, :old.board_orderby, :old.board_step, default);
 end;
 /
+
+
+select * from tb_user;
+select * from address;
+select * from tb_account;
