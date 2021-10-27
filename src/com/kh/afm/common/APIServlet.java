@@ -48,7 +48,7 @@ public class APIServlet extends HttpServlet {
 			String line;
 			while ((line = br.readLine()) != null) {
 				result = result + line + "\n";
-				System.out.println("호출 되니?"+result);
+				//System.out.println("호출 되니?"+result);
 			}
 			response.getWriter().append(result);
 		} catch (Exception e) {
