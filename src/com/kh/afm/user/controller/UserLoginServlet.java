@@ -57,17 +57,12 @@ public class UserLoginServlet extends HttpServlet {
 			session.setAttribute("loginUser", user);
 			session.setAttribute("msg", "로그인 성공했습니다.");
 			
-			// session 유효시간
-			/* session.setMaxInactiveInterval(60); */
-			//session.setMaxInactiveInterval(60); //60초
-			
-			// 아이디저장 #saveId 처리 
-			// 응답메세지에 Set-cookie 헤더값으로 전송
+			// 아이디저장 쿠키
 			Cookie cookie = new Cookie("saveId", userId);
 			cookie.setPath(request.getContextPath()); 
 			if(saveId != null) {
 				// 체크한 경우
-				cookie.setMaxAge(7*24*60*60); // 7일을 초(second)로 지정함 (7일 24시간 60분 60초)
+				cookie.setMaxAge(7*24*60*60); // 7일
 			}
 			else {
 				// 체크하지 않은 경우
