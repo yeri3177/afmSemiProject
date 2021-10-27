@@ -32,7 +32,7 @@ public class APIServlet extends HttpServlet {
 		BufferedReader br = null;
 		try {
 			String urlstr = "https://www.kamis.or.kr/service/price/xml.do?action=dailyPriceByCategoryList"
-					+ "&p_product_cls_code=01"
+					+ "&p_product_cls_code=02"
 					+ "&p_country_code=1101"
 					+ "&p_regday=2021-10-26"
 					+ "&p_convert_kg_yn=Y"
