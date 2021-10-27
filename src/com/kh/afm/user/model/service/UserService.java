@@ -20,9 +20,12 @@ public class UserService {
 	
 	private UserDao userDao = new UserDao();
 	
+	/**
+	 * 로그인
+	 */
 	public User selectOneUser(String userId) {
 		Connection conn = getConnection();
-		User user = userDao.selectOneUSER(conn, userId);
+		User user = userDao.selectOneUser(conn, userId);
 		close(conn);
 		return user;
 	}
@@ -61,12 +64,6 @@ public class UserService {
 			return result;
 		}
 
-		public List<User> selectAllUser(int startRownum, int endRownum) {
-			Connection conn = getConnection();
-			List<User> list = userDao.selectAllUser(conn, startRownum, endRownum);
-			close(conn);
-			return list;
-		}
 
 	    public int updatePassword(User user) {
 			Connection conn = getConnection();
@@ -79,22 +76,8 @@ public class UserService {
 			return result;
 		}
 
-		public int updateMemberRole(String memberId, String memberRole) {
-			Connection conn = getConnection();
-			int result = userDao.updateUserRole(conn, memberId, memberRole);
-			//DML요청은 트랜잭션처리 필수 
-			if(result > 0) commit(conn);
-			else rollback(conn);
-			close(conn);
-			return result;
-		}
 
-		public List<User> searchUser(Map<String, Object> param) {
-			Connection conn = getConnection();
-			List<User> list = userDao.searchUser(conn, param);
-			close(conn);
-			return list;
-		}
+
 
 		public int selectTotalContents() {
 			Connection conn = getConnection();
@@ -103,13 +86,6 @@ public class UserService {
 			return totalContent;
 		}
 
-		public int searchUserCount(Map<String, Object> param) {
-			Connection conn = getConnection();
-			int totalContent = userDao.searchUserCount(conn, param);
-			close(conn);
-			return totalContent;
-
-		}	
 
 
 
