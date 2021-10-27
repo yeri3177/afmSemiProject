@@ -63,7 +63,7 @@
 				<!-- 5행 : 회원가입 -->
 				<tr>
 					<td>
-						<input type="button" value="회원가입" onclick="location.href='<%= request.getContextPath() %>/user/userEnroll';">
+						<input type="button" value="회원가입" onclick="location.href='<%= request.getContextPath() %>/user/userTypeEnroll.jsp';">
 					</td>
 				</tr>
 			</table>
