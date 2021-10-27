@@ -11,7 +11,7 @@
 	<div id="enrolltype-container">
 		
 		<!-- 로고이미지 -->
-		<img class="logo-img" src="<%=request.getContextPath()%>/images/common/logofont.png" />
+		<a href="<%= request.getContextPath() %>/index.jsp"><img class="logo-img" src="<%=request.getContextPath()%>/images/common/logofont.png" /></a>
 		<br />
 		
 		<!-- 일반회원 가입 -->

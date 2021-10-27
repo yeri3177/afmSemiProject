@@ -31,10 +31,13 @@ public class CsboardViewServlet extends HttpServlet {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		
 		// 2. 비즈니스 로직 호출
+		//주회수 증가
+		int result = csboardService.updateReadCount(boardNo);
 		
 		// 게시글 하나 가져오기
 		Csboard csboard = csboardService.selectOneCsboard(boardNo);
 		System.out.println("CsboardViewServlet = " + csboard);
+		
 		
 		// 게시글 가져오기에 실패한 경우
 		if(csboard == null) {
