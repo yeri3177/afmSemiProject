@@ -138,8 +138,45 @@ public class CsboardDao {
 	}
 
 	public Csboard selectOneCsboard(Connection conn, int boardNo) {
+		System.out.println("CsboardDao - selectOneCsboard");
+		Csboard csboard = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		
-		return null;
+		String query = prop.getProperty("selectOneCsboard");
+		
+		try {
+			// 미완성 쿼리문을 가지고 객체 생성.
+			pstmt = conn.prepareStatement(query);
+			// 쿼리문 미완성
+			pstmt.setInt(1, boardNo);
+			// 쿼리문 실행
+			// 완성된 쿼리를 가지고 있는 pstmt 실행(파라미터 없음)
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				csboard = new Csboard();
+				csboard.setBoardNo(rset.getInt("board_no"));
+				csboard.setUserId(rset.getString("user_id"));
+				csboard.setBoardTitle(rset.getString("board_title"));
+				csboard.setBoardContent(rset.getString("board_content"));
+				csboard.setBoardRegDate(rset.getDate("board_reg_date"));
+				csboard.setBoardReadcount(rset.getInt("board_readcount"));
+				csboard.setBoardStatus(rset.getString("board_status"));
+				csboard.setBoardNotice(rset.getString("board_noticeYN"));
+				csboard.setBoardPassword(rset.getString("board_password"));
+				csboard.setBoardLock(rset.getString("board_lockYN"));
+				csboard.setBoardFamily(rset.getInt("board_family"));
+				csboard.setBoardOrderby(rset.getInt("board_orderby"));
+				csboard.setBoardStep(rset.getInt("board_step"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return csboard;
 	}
 
 

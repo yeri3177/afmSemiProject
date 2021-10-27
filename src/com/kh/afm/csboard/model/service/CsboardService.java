@@ -43,6 +43,7 @@ public class CsboardService {
 	}
 
 	public Csboard selectOneCsboard(int boardNo) {
+		System.out.println("CsboardService - selectOneCsboard");
 		Connection conn = getConnection();
 		Csboard csboard = csboardDao.selectOneCsboard(conn, boardNo);
 		close(conn);
