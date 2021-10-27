@@ -40,14 +40,14 @@ private Properties prop = new Properties();
 			pstmt = conn.prepareStatement(query);
 			//쿼리문미완성
 			pstmt.setString(1, user.getUserId());
-			pstmt.setString(2, user.getPassword());
-			pstmt.setString(3, user.getUserName());
-			pstmt.setString(4, user.getUserRole());
-			pstmt.setDate(6, user.getBirthday());
-			pstmt.setString(7, user.getUserEmail());
-			pstmt.setString(8, user.getPhone());
-			
-			
+			pstmt.setString(2, user.getUserName());
+			pstmt.setString(3, user.getUserEmail());
+			pstmt.setString(4, user.getPassword());
+			pstmt.setDate(5, user.getBirthday());
+			pstmt.setString(6, user.getPhone());
+			/* getUserEnrollDate */ //디폴트값
+			pstmt.setString(7, user.getUserRole());
+			/* getUserExpose */ //디폴트값
 			
 			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
 			//DML은 executeUpdate()
@@ -58,7 +58,6 @@ private Properties prop = new Properties();
 		} finally {
 			close(pstmt);
 		}
-		
 		return result;
 	}
 

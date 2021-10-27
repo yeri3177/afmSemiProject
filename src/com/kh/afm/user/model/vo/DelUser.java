@@ -11,7 +11,7 @@ public class DelUser implements Serializable {
 	private String deleteUName; //이름
 	private String deleteUEmail; //이메일
 	private String deletePassword; //비밀번호
-	private String deleteBirthday; //생일
+	private Date deleteBirthday; //생일
 	private String deletePhone; //전화번호
 	private Date deleteUEnroll_date; //가입일
 	private String userRole; //회원권한
@@ -21,8 +21,9 @@ public class DelUser implements Serializable {
 	public DelUser() {
 		super();
 	}
+	
 	public DelUser(String deleteUId, String deleteUName, String deleteUEmail, String deletePassword,
-			String deleteBirthday, String deletePhone, Date deleteUEnroll_date, String userRole, String userExpose,
+			Date deleteBirthday, String deletePhone, Date deleteUEnroll_date, String userRole, String userExpose,
 			Date deleteUDate) {
 		super();
 		this.deleteUId = deleteUId;
@@ -36,6 +37,8 @@ public class DelUser implements Serializable {
 		this.userExpose = userExpose;
 		this.deleteUDate = deleteUDate;
 	}
+
+
 	public String getDeleteUId() {
 		return deleteUId;
 	}
@@ -60,12 +63,15 @@ public class DelUser implements Serializable {
 	public void setDeletePassword(String deletePassword) {
 		this.deletePassword = deletePassword;
 	}
-	public String getDeleteBirthday() {
+
+	public Date getDeleteBirthday() {
 		return deleteBirthday;
 	}
-	public void setDeleteBirthday(String deleteBirthday) {
+
+	public void setDeleteBirthday(Date deleteBirthday) {
 		this.deleteBirthday = deleteBirthday;
 	}
+
 	public String getDeletePhone() {
 		return deletePhone;
 	}

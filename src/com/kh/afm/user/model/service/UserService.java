@@ -30,7 +30,9 @@ public class UserService {
 		return user;
 	}
 
-
+	/**
+	 * 회원 추가하기 (회원가입)
+	 */
 	public int insertUser(User user) {
 		Connection conn = getConnection();
 		int result = userDao.insertUser(conn, user);

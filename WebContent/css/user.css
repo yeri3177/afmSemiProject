@@ -3,7 +3,7 @@
 
 
 /*************************************************
- * 로그인 페이지 
+ * userLogin.jsp (로그인 페이지)
  **************************************************/
 /* 전체영역 */
 #login-container {
@@ -30,3 +30,58 @@
 	width: 200px;
 	height: 30px;
 }
+
+/*************************************************
+ * userTypeEnroll.jsp (회원가입시 회원유형 페이지)
+ **************************************************/
+#enrolltype-container {
+	margin: 0 auto;
+	text-align: center;
+	position: relative;
+	top: 200px;
+	padding: 30px;
+}
+ 
+#enrolltype-container .logo-img {
+	margin: 60px 0;
+}
+
+#enrolltype-container a {
+	margin : 20px;
+}
+
+/*************************************************
+ * userEnroll.jsp (일반회원 회원가입폼)
+ **************************************************/
+#user-enroll-container {
+	
+	text-align: center;
+	position: relative;
+	top: 30px;
+	padding: 30px;
+}
+
+#user-enroll-container .logo-img {
+	margin: 60px 0;
+}
+ 
+#user-enroll-container table {
+	border: 1px solid black;
+	border-collapse: collapse;
+	margin: 0 auto;
+	width: 650px;
+}
+ 
+#user-enroll-container tr, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+	text-align: left;
+}
+ 
+ 
+#blank {
+	height: 50px;
+}
+
+ 
+ 

@@ -31,5 +31,4 @@ public class CsboardFormServlet extends HttpServlet {
 			.forward(request, response);
 		
 	}
-
 }
