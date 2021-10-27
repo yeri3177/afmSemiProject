@@ -12,23 +12,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Festive&display=swap" rel="stylesheet">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&display=swap" rel="stylesheet">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Lobster&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
 <!-- favicon -->
 <link rel="icon" href="<%= request.getContextPath() %>/images/common/logofont.png">
@@ -44,9 +28,9 @@
 
 /* body{font-family: 'Gaegu', cursive; font-weight:bold; overflow-x: hidden;} */
 
-body{font-family: 'Hahmlet', serif; overflow-x: hidden;padding:0;margin:0;padding-top: 15%;}
+body{font-family: 'Noto Sans KR', sans-serif; overflow-x: hidden;padding:0;margin:0;padding-top: 15%;}
 a{text-decoration:none;}
-header{position: fixed;}
+header{position: fixed;z-index:99999;}
 .mainHeader{background-color:#FBF6F0;top: 0;left: 0;font-weight: bold;justify-content: space-between;width: 100%;height: 20%;display: flex;position: fixed;}
 .homepageName{padding-left:10px;color:green;display: flex;top: 0;}
 /* .homepageName{font-family: 'Lobster', cursive;padding-left:10px;color:green;display: flex;top: 0;font-weight: bold;} */
