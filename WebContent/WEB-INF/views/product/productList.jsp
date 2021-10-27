@@ -33,13 +33,6 @@
 		<tr>
 			<th><%= _product.getpNo() %></th>
 <%
-	if(_product.getAttach1() == null){
-%>
-			<th><img alt="" src="<%= request.getContextPath() %>/images/common/logo.png" width="300px"></th>
-<%
-	}
-%>
-<%
 	if(_product.getAttach1() != null){
 %>
 			<th><img alt="" src="<%= request.getContextPath() %>/upload/product/<%= _product.getAttach1().getRenamedFileName() %>" width="300px" height="300px"></th>
