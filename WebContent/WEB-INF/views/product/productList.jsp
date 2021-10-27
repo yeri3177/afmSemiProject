@@ -7,7 +7,6 @@
 <%
 	List<Product> list = (List<Product>)request.getAttribute("list");
 %>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css" />
 
 <section id="board-container">
 
@@ -33,7 +32,20 @@
 %>
 		<tr>
 			<th><%= _product.getpNo() %></th>
+<%
+	if(_product.getAttach1() == null){
+%>
 			<th><img alt="" src="<%= request.getContextPath() %>/images/common/logo.png" width="300px"></th>
+<%
+	}
+%>
+<%
+	if(_product.getAttach1() != null){
+%>
+			<th><img alt="" src="<%= request.getContextPath() %>/upload/product/<%= _product.getAttach1().getRenamedFileName() %>" width="300px" height="300px"></th>
+<%
+	}
+%>
 			<th><a href="<%= request.getContextPath() %>/product/productView?no=<%= _product.getpNo() %>"><%= _product.getpTitle() %></a></th>
 			<th><%= _product.getpPrice() %></th>
 			<th><%= _product.getUserId() %></th>
