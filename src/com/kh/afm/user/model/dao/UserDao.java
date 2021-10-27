@@ -240,7 +240,7 @@ private Properties prop = new Properties();
 		return result;
 	}
 
-	public List<User> searchMember(Connection conn, Map<String, Object> param) {
+	public List<User> searchUser(Connection conn, Map<String, Object> param) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<User> list = new ArrayList<>();
@@ -348,6 +348,8 @@ private Properties prop = new Properties();
 		
 		return totalContents;
 	}
+
+
 
 
 

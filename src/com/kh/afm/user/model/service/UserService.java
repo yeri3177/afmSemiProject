@@ -91,7 +91,7 @@ public class UserService {
 
 		public List<User> searchUser(Map<String, Object> param) {
 			Connection conn = getConnection();
-			List<User> list = userDao.searchMember(conn, param);
+			List<User> list = userDao.searchUser(conn, param);
 			close(conn);
 			return list;
 		}
