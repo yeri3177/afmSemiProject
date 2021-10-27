@@ -16,12 +16,11 @@ public class User implements Serializable {
 	private Date userEnrollDate; //가입일
 	private String userRole; //회원권한
 	private String userExpose; //회원공개여부
+	private String address; //회원주소
 	
-	public User() {
-		super();
-	}
+	
 	public User(String userId, String userName, String userEmail, String password, String birthday, String phone,
-			Date userEnrollDate, String userRole, String userExpose) {
+			Date userEnrollDate, String userRole, String userExpose, String address) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -32,6 +31,10 @@ public class User implements Serializable {
 		this.userEnrollDate = userEnrollDate;
 		this.userRole = userRole;
 		this.userExpose = userExpose;
+		this.address = address;
+	}
+	public User() {
+		// TODO Auto-generated constructor stub
 	}
 	public String getUserId() {
 		return userId;
@@ -87,6 +90,15 @@ public class User implements Serializable {
 	public void setUserExpose(String userExpose) {
 		this.userExpose = userExpose;
 	}
+	
+	public String getAddress() {
+		return address;
+	}
+	
+	public void setAddress(String address){
+		this.address = address;
+	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -95,6 +107,6 @@ public class User implements Serializable {
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName + ", userEmail=" + userEmail + ", password="
 				+ password + ", birthday=" + birthday + ", phone=" + phone + ", userEnrollDate=" + userEnrollDate
-				+ ", userRole=" + userRole + ", userExpose=" + userExpose + "]";
+				+ ", userRole=" + userRole + ", userExpose=" + userExpose + ", address=" + address + "]";
 	}
 }
