@@ -45,7 +45,7 @@ window.onload = function(){
 	updateTable();
  };
  $(function() {
-		setInterval(updateTable, 100000);
+		setInterval(updateTable, 3600000);
 	});
 
 	function updateTable() {
@@ -92,7 +92,15 @@ window.onload = function(){
 
 <div>
 	<h2>베스트 상품</h2>
+	<div>
+		
+	</div>
+	<div>
 	
+	</div>
+	<div>
+	
+	</div>
 </div>
 <div>
 	<h2>최신 상품</h2>

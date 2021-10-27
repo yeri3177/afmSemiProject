@@ -44,7 +44,7 @@ private Properties prop = new Properties();
 				cart.setCartNo(rset.getInt("cart_no"));
 				cart.setProductNo(rset.getInt("p_no"));
 				cart.setAttachNo(rset.getInt("attach_no"));
-				cart.setProductName(rset.getString("p_name"));
+				cart.setProductName(rset.getString("p_title"));
 				cart.setProductPrice(rset.getInt("p_price"));
 				cart.setProductQuantity(rset.getInt("cart_product_quantity"));
 				list.add(cart);

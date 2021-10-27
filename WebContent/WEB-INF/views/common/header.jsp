@@ -33,14 +33,15 @@ a{text-decoration:none;}
 header{position: fixed;z-index:99999;}
 .mainHeader{background-color:#FBF6F0;top: 0;left: 0;font-weight: bold;justify-content: space-between;width: 100%;height: 20%;display: flex;position: fixed;}
 .homepageName{padding-left:10px;color:green;display: flex;top: 0;}
-/* .homepageName{font-family: 'Lobster', cursive;padding-left:10px;color:green;display: flex;top: 0;font-weight: bold;} */
-.profileImg{background-color:#FBF6F0;padding: 10px;border: none;}
-.cartImg{background-color:#FBF6F0;padding: 10px;border: none;}
-.settingImg{background-color:#FBF6F0;padding: 10px;border: none;}
-.profile{padding-top:15px;width:40px;}
-.cart{padding-top:15px;padding-left:10px;width:40px;}
-.setting{padding-top:15px;padding-left:10px;width:40px;}
-.logoImg{width:35%;}
+.profileImg{background-color:#FBF6F0;padding: 3px;border: none;}
+.cartImg{background-color:#FBF6F0;padding: 3px;border: none;}
+.settingImg{background-color:#FBF6F0;padding: 3px;border: none;}
+.indexlogoutImg{background-color:#FBF6F0;padding: 3px;border: none;}
+.indexlogout{padding-top:20px;padding-left:5px;width:40px;}
+.profile{padding-top:20px;width:40px;}
+.cart{padding-top:20px;padding-left:5px;width:40px;}
+.setting{padding-top:20px;padding-left:5px;width:40px;}
+.logoImg{width:30%;}
 .nickName{font-size:45px;padding:0;margin:0;padding-top:1%;}
 .main-nav{background-color:#FFA45B;padding:0px;margin:auto;display:flex;position:fixed;top:18%;left:50%;transform:translate(-50%,-50%);width:100%;}
 .main-nav div{width: 100%;height: 10%;float: left;text-align: center;border-left: 1px #47C83E solid;}
@@ -50,8 +51,8 @@ header{position: fixed;z-index:99999;}
 .main-nav div:hover > a{color:#FFCD12;}
 .dropdown{display: flex;}
 .buttonImgName{display: flex;font-weight: 400;justify-content: flex-end;}
-.search{display: flex;padding-top:25px;width: 45%;justify-content: center;}
-.searchform{width:100%}
+.search{display: flex;padding-top:25px;width: 40%;justify-content: center;}
+.searchform{width:90%}
 .searchImg{width:40px;vertical-align: middle;}
 .btnSearch{background-color:#FBF6F0;padding: 10px;border: none;}
 .btnSearch:hover{cursor:pointer;}
@@ -60,15 +61,13 @@ header{position: fixed;z-index:99999;}
 </style>
 <%
 	User loginUser = (User)session.getAttribute("loginUser");
+System.out.println("indexpage"+loginUser);
 %>
 <script>
 <%
 	String msg = (String)session.getAttribute("msg");
 	//System.out.println("msg@header.jsp = " + msg);
 	if(msg != null) session.removeAttribute("msg");
-	
-	/* Member loginMember = (Member)session.getAttribute("loginMember"); */
-	//System.out.println("loginMember@header.jsp = " + loginMember);
 
 %>
 <% if(msg != null) {%>
@@ -103,6 +102,15 @@ header{position: fixed;z-index:99999;}
 					  </a>
 				  </button>
 				  </div>
+				  <% if(loginUser != null){ %>
+				  <div class="button">
+					  <button class="indexlogoutImg">
+						  <a href="<%= request.getContextPath() %>/user/logout"><img class="indexlogout" src="<%= request.getContextPath() %>/images/common/logout_icon.png">
+						 	 <span class="buttonImgName">로그아웃</span>
+					  <% } %>
+						  </a>
+					  </button>
+				  </div>
 				<div class="button">
 				  	<button class="cartImg">
 				  	<% if(loginUser == null){ %>
@@ -114,7 +122,7 @@ header{position: fixed;z-index:99999;}
 					  </a>
 					</button>
 				  </div>
-				  <%-- <% if(!(loginUser == null) && ("U").equals(loginUser.getUserRole())){ %> --%>
+				  <% if((loginUser != null) && ("A").equals(loginUser.getUserRole())){ %>
 				<div class="button">
 				  <button class="settingImg">
 					  <a href="<%= request.getContextPath() %>/admin/adminMain"><img class="setting" src="<%= request.getContextPath() %>/images/common/settings.png">
@@ -122,7 +130,7 @@ header{position: fixed;z-index:99999;}
 					  </a>
 				  </button>
 				</div>
-				  <%-- <% } %> --%>
+				  <% } %>
 			</div>
 		</div>
       </nav>

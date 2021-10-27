@@ -23,6 +23,10 @@ public class CartListServlet extends HttpServlet {
 	private CartService cartService = new CartService();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.doPost(request,response);
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
 		HttpSession session = request.getSession(false);
@@ -30,9 +34,13 @@ public class CartListServlet extends HttpServlet {
 		String userId = loginUser.getUserId();
 		
 		List<Cart> list = cartService.selectAllList(userId);
+		System.out.println("servlet @ "+list);
 		
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("/WEB-INF/views/cart/cart.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/cart/Cart.jsp").forward(request, response);
+//		String location = request.getContextPath() + "/cart";
+//		response.sendRedirect(location);
 	}
+	
 
 }
