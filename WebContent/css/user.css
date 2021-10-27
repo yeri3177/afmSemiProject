@@ -1,15 +1,32 @@
 @charset "UTF-8";
 @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
-	
+
+
+/*************************************************
+ * 로그인 페이지 
+ **************************************************/
+/* 전체영역 */
 #login-container {
 	margin: 0 auto;
 	text-align: center;
+	position: relative;
+	top: 200px;
+	padding: 30px;
+	background-color: #fffacf;
 }
 
+/* 로고 이미지 */
 .logo-img {
 	width: 200px;
 }
 
+/* 로그인정보 테이블 */
 #loginFrm table {
 	margin: 0 auto;
+}
+
+/* input 태그 */
+#login-container #userId, #login-container #password {
+	width: 200px;
+	height: 30px;
 }

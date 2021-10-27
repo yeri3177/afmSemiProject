@@ -34,13 +34,13 @@ public class UserLoginServlet extends HttpServlet {
 		// 2. 사용자입력값
 		String userId = request.getParameter("userId");
 		String password = MvcUtils.getEncryptedPassword(request.getParameter("password"));
-		/* String saveId = request.getParameter("saveId"); */
+		String saveId = request.getParameter("saveId");
 		
 		
 		// 제대로 값 가져오는지 확인 (변수명@위치)
 		System.out.println("userId@servlet = " + userId);
 		System.out.println("password@servlet = " + password);
-		/* System.out.println("saveId@servlet = " + saveId); */
+		System.out.println("saveId@servlet = " + saveId);
 		
 		// 3. 업무로직 실행
 		// a. db에서 memberId와 일치하는 회원 조회 
@@ -62,13 +62,17 @@ public class UserLoginServlet extends HttpServlet {
 			
 			// 아이디저장 #saveId 처리 
 			// 응답메세지에 Set-cookie 헤더값으로 전송
-			/*
-			 * Cookie cookie = new Cookie("saveId", memberId);
-			 * cookie.setPath(request.getContextPath()); // '/mvc'로 시작하는 경로에 사용할 쿠키
-			 * if(saveId != null) { // 체크한 경우 cookie.setMaxAge(7*24*60*60); // 7일을
-			 * 초(second)로 지정함 (7일 24시간 60분 60초) } else { // 체크하지 않은 경우 cookie.setMaxAge(0);
-			 * // 즉시삭제 } response.addCookie(cookie);
-			 */
+			Cookie cookie = new Cookie("saveId", userId);
+			cookie.setPath(request.getContextPath()); 
+			if(saveId != null) {
+				// 체크한 경우
+				cookie.setMaxAge(7*24*60*60); // 7일을 초(second)로 지정함 (7일 24시간 60분 60초)
+			}
+			else {
+				// 체크하지 않은 경우
+				cookie.setMaxAge(0); // 즉시삭제 
+			}
+			response.addCookie(cookie);
 		} 
 		else {
 			// 로그인 실패 
@@ -76,11 +80,7 @@ public class UserLoginServlet extends HttpServlet {
 		}
 		
 		// 4. 응답메세지 작성 :redirect302
-		// 지정한 location 주소로 다시 요청할것을 브라우져에게 명시 
 		String location = request.getContextPath() + "/";
-		
-		
-		/* String location = request.getHeader("Referer"); */
 		response.sendRedirect(location);
 	}
 }
