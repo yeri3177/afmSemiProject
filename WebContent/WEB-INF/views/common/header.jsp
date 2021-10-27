@@ -37,10 +37,10 @@ header{position: fixed;z-index:99999;}
 .cartImg{background-color:#FBF6F0;padding: 3px;border: none;}
 .settingImg{background-color:#FBF6F0;padding: 3px;border: none;}
 .indexlogoutImg{background-color:#FBF6F0;padding: 3px;border: none;}
-.indexlogout{padding-top:20px;padding-left:5px;width:40px;}
-.profile{padding-top:20px;padding-left:5px;width:40px;}
-.cart{padding-top:20px;padding-left:5px;width:40px;}
-.setting{padding-top:20px;padding-left:5px;width:40px;}
+.indexlogout{padding-top:20px;padding-left:5px;width:45px;}
+.profile{padding-top:20px;padding-left:5px;width:45px;}
+.cart{padding-top:20px;padding-left:5px;width:45px;}
+.setting{padding-top:20px;padding-left:5px;width:45px;}
 .logoImg{width:30%;}
 .nickName{font-size:45px;padding:0;margin:0;padding-top:1%;}
 .main-nav{background-color:#FFA45B;padding:0px;margin:auto;display:flex;position:fixed;top:18%;left:50%;transform:translate(-50%,-50%);width:100%;}
@@ -95,13 +95,33 @@ System.out.println("indexpage"+loginUser);
 				  <button class="profileImg">
 					  <a href="<%= request.getContextPath() %>/user/userLogin"><img class="profile" src="<%= request.getContextPath() %>/images/common/profile.png">
 <% if(loginUser == null){ %>
-					 	 <span class="buttonImgName">로그인</span>
+					 	 <span class="buttonImgName">&nbsp;&nbsp;로그인</span>
 <% }else{ %>
 					 	 <span class="buttonImgName"><%= loginUser.getUserName() %>님</span>
 <% } %>
 					  </a>
 				  </button>
 				</div>
+				<div class="button">
+				  	<button class="cartImg">
+				  	<% if(loginUser == null){ %>
+					  <a href="<%= request.getContextPath() %>/user/userLogin"><img class="cart" src="<%= request.getContextPath() %>/images/common/cart3.png">
+				  <% }else{ %>
+					  <a href="<%= request.getContextPath() %>/cart/cartList"><img class="cart" src="<%= request.getContextPath() %>/images/common/cart3.png">
+				  <% } %>
+					  	<span class="buttonImgName">&nbsp;장바구니</span>
+					  </a>
+					</button>
+				  </div>
+				<div class="button">
+				  <% if((loginUser != null) && ("A").equals(loginUser.getUserRole())){ %>
+				  <button class="settingImg">
+					  <a href="<%= request.getContextPath() %>/admin/adminMain"><img class="setting" src="<%= request.getContextPath() %>/images/common/settings.png">
+					  	<span class="buttonImgName">&nbsp;&nbsp;관리자</span>
+					  </a>
+				  </button>
+				</div>
+				  <% } %>
 				<div class="button">
 				  <% if(loginUser != null){ %>
 					  <button class="indexlogoutImg">
@@ -111,26 +131,6 @@ System.out.println("indexpage"+loginUser);
 						  </a>
 					  </button>
 				  </div>
-				<div class="button">
-				  	<button class="cartImg">
-				  	<% if(loginUser == null){ %>
-					  <a href="<%= request.getContextPath() %>/user/userLogin"><img class="cart" src="<%= request.getContextPath() %>/images/common/cart3.png">
-				  <% }else{ %>
-					  <a href="<%= request.getContextPath() %>/cart/cartList"><img class="cart" src="<%= request.getContextPath() %>/images/common/cart3.png">
-				  <% } %>
-					  	<span class="buttonImgName">장바구니</span>
-					  </a>
-					</button>
-				  </div>
-				  <% if((loginUser != null) && ("A").equals(loginUser.getUserRole())){ %>
-				<div class="button">
-				  <button class="settingImg">
-					  <a href="<%= request.getContextPath() %>/admin/adminMain"><img class="setting" src="<%= request.getContextPath() %>/images/common/settings.png">
-					  	<span class="buttonImgName">관리자</span>
-					  </a>
-				  </button>
-				</div>
-				  <% } %>
 			</div>
 		</div>
       </nav>
