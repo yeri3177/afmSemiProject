@@ -33,7 +33,7 @@ public class CsboardViewServlet extends HttpServlet {
 		
 		// 게시글 하나 가져오기
 		Csboard csboard = csboardService.selectOneCsboard(boardNo);
-		System.out.println(csboard);
+		System.out.println("CsboardViewServlet = " + csboard);
 		
 		// 게시글 가져오기에 실패한 경우
 		if(csboard == null) {
@@ -44,6 +44,7 @@ public class CsboardViewServlet extends HttpServlet {
 		// 3. view단 처리 위임
 		request.setAttribute("csboard", csboard);
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/csboard/csboardView.jsp");
+		System.out.println("CsboardViewSerlvet");
 		reqDispatcher.forward(request, response);
 	}
 
