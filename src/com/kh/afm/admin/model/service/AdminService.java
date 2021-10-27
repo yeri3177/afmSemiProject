@@ -1,10 +1,10 @@
 package com.kh.afm.admin.model.service;
 
-import static com.kh.afm.common.JdbcTemplate.close;
-import static com.kh.afm.common.JdbcTemplate.getConnection;
+import static com.kh.afm.common.JdbcTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import com.kh.afm.admin.model.dao.AdminDao;
 import com.kh.afm.user.model.vo.DelUser;
@@ -45,5 +45,25 @@ public class AdminService {
 		close(conn);		
 		
 		return list;
+	}
+
+	/**
+	 * 회원 검색하기
+	 */
+	public List<User> searchUser(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<User> list = adminDao.searchUser(conn, param);
+		close(conn);
+		return list;
+	}
+
+	/**
+	 * 검색결과의 전체회원수
+	 */
+	public int searchUserCount(Map<String, Object> param) {
+		Connection conn = getConnection();
+		int totalContent = adminDao.searchUserCount(conn, param);
+		close(conn);
+		return totalContent;
 	}
 }

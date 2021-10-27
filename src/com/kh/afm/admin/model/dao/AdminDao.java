@@ -1,6 +1,6 @@
 package com.kh.afm.admin.model.dao;
 
-import static com.kh.afm.common.JdbcTemplate.close;
+import static com.kh.afm.common.JdbcTemplate.*;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import com.kh.afm.user.model.vo.DelUser;
@@ -23,7 +24,7 @@ public class AdminDao {
 	private Properties prop = new Properties();
 	
 	/**
-	 * MemberDao 생성자 
+	 * AdminDao 생성자 
 	 */
 	public AdminDao() {
 		String filepath = AdminDao.class.getResource("/sql/admin/admin-query.properties").getPath();
@@ -144,5 +145,102 @@ public class AdminDao {
 			close(pstmt);
 		}
 		return list;
+	}
+
+
+	/**
+	  * 회원 검색하기 
+	  */
+	public List<User> searchUser(Connection conn, Map<String, Object> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<User> list = new ArrayList<>();
+		String sql = null;
+		String searchType = (String) param.get("searchType");
+		
+		switch(searchType) {
+		case "userId":
+			sql = prop.getProperty("searchUserByUserId");
+			param.put("searchKeyword", "%" + param.get("searchKeyword") + "%"); 
+			break;
+		case "userName":
+			sql = prop.getProperty("searchUserByUserName");
+			param.put("searchKeyword", "%" + param.get("searchKeyword") + "%");
+			break;
+		case "userRole":
+			sql = prop.getProperty("searchUserByUserRole");
+			break;
+		}
+		
+		try {
+			// 1. PreparedStatement객체 생성 & 미완성쿼리 값대입
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, (String) param.get("searchKeyword"));
+			pstmt.setInt(2, (int) param.get("start"));
+			pstmt.setInt(3, (int) param.get("end"));
+			
+			// 2. 쿼리실행 및 ResultSet처리
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				User user = new User();
+				user.setUserId(rset.getString("user_id"));
+				user.setUserName(rset.getString("user_name"));
+				user.setUserEmail(rset.getString("user_email"));
+				user.setPassword(rset.getString("password"));
+				user.setBirthday(rset.getString("birthday"));
+				user.setPhone(rset.getString("phone"));
+				user.setUserEnrollDate(rset.getDate("user_enroll_date"));
+				user.setUserRole(rset.getString("user_role"));
+				user.setUserExpose(rset.getString("user_expose"));
+				list.add(user);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+	/**
+	 * 검색결과의 전체회원수
+	 */
+	public int searchUserCount(Connection conn, Map<String, Object> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalContents = 0;
+		
+		String sql = null;
+		String searchType = (String) param.get("searchType");
+		switch(searchType) {
+		case "userId":
+			sql = prop.getProperty("searchUserCountByUserId");
+			param.put("searchKeyword", "%" + param.get("searchKeyword") + "%"); 
+			break;
+		case "userName":
+			sql = prop.getProperty("searchUserCountByUserName");
+			param.put("searchKeyword", "%" + param.get("searchKeyword") + "%");
+			break;
+		case "userRole":
+			sql = prop.getProperty("searchUserCountByUserRole");
+			break;
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, (String) param.get("searchKeyword"));
+			rset = pstmt.executeQuery();
+			if(rset.next())
+				totalContents = rset.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalContents;
 	}
 }
