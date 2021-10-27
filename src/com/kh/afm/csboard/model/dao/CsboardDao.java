@@ -1,6 +1,7 @@
 package com.kh.afm.csboard.model.dao;
 
 import static com.kh.afm.common.JdbcTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.kh.afm.csboard.model.exception.CsboardException;
 import com.kh.afm.csboard.model.vo.Csboard;
 
 public class CsboardDao {
@@ -116,20 +118,22 @@ public class CsboardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, csboard.getUserId());
-			pstmt.setString(2, csboard.getBoardPassword());
-			pstmt.setString(3, csboard.getBoardTitle());
-			pstmt.setString(4, csboard.getBoardContent());
+			pstmt.setString(2, csboard.getBoardTitle());
+			pstmt.setString(3, csboard.getBoardContent());
+			pstmt.setString(4, csboard.getBoardPassword());
 //			pstmt.setString(5, csboard.getBoardLock());
 			
 			// DML
 			result = pstmt.executeUpdate();
 			
-		} catch (SQLException e) {
+
+			
+		} catch (Exception e) {
 			e.printStackTrace();
+			throw new CsboardException("게시글 등록 오류", e);
 		} finally {
 			close(pstmt);
 		}
-		
 		return result;
 	}
 
