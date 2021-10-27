@@ -26,6 +26,8 @@ public class CsboardEnrollServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("utf-8");
+		
 		// 1. 사용자입력값 처리
 		String userId = request.getParameter("user_id");
 		String boardPassword = request.getParameter("board_password");
@@ -33,7 +35,8 @@ public class CsboardEnrollServlet extends HttpServlet {
 		String boardContent = request.getParameter("board_content");
 //		String boardLock = request.getParameter("board_lockYN");
 		Csboard csboard = new Csboard(0, userId, boardTitle, boardContent, null, 0, null, null, boardPassword, null, 0, 0, 0);
-		System.out.println("csboard@servlet = " + csboard);
+		
+		System.out.println("csboard1232123@servlet = " + csboard);
 		
 		// 2. 업무로직 (db에 저장)
 		int result = csboardService.insertCsboard(csboard);

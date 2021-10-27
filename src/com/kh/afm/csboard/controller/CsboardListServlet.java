@@ -40,6 +40,7 @@ public class CsboardListServlet extends HttpServlet {
 		int start = cPage * numPerPage - (numPerPage - 1);
 		int end = cPage * numPerPage;
 		List<Csboard> list = csboardService.selectCsboardList(start, end);
+		
 		System.out.println("list@servlet = " + list);
 		
 		// b. pagebar 영역

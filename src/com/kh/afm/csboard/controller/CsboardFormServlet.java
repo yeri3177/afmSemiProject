@@ -15,11 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/csboard/csboardForm")
 public class CsboardFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setCharacterEncoding("utf-8");
 		
 		// csboardForm.jsp에게 해당하는 html을 만들어달라고 요청
 		// getRequestDispatcher

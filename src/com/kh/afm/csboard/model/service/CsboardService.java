@@ -1,6 +1,10 @@
 package com.kh.afm.csboard.model.service;
 
-import static com.kh.afm.common.JdbcTemplate.*;
+import static com.kh.afm.common.JdbcTemplate.close;
+import static com.kh.afm.common.JdbcTemplate.commit;
+import static com.kh.afm.common.JdbcTemplate.getConnection;
+import static com.kh.afm.common.JdbcTemplate.rollback;
+
 import java.sql.Connection;
 import java.util.List;
 
@@ -36,6 +40,13 @@ public class CsboardService {
 		
 		close(conn);
 		return result;
+	}
+
+	public Csboard selectOneCsboard(int boardNo) {
+		Connection conn = getConnection();
+		Csboard csboard = csboardDao.selectOneCsboard(conn, boardNo);
+		close(conn);
+		return csboard;
 	}
 
 }
