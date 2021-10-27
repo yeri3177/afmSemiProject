@@ -58,6 +58,7 @@ public class UserLoginServlet extends HttpServlet {
 			session.setAttribute("msg", "로그인 성공했습니다.");
 			
 			// session 유효시간
+			/* session.setMaxInactiveInterval(60); */
 			//session.setMaxInactiveInterval(60); //60초
 			
 			// 아이디저장 #saveId 처리 
