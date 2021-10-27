@@ -26,8 +26,6 @@ public class CsboardEnrollServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("utf-8");
-		
 		// 1. 사용자입력값 처리
 		String userId = request.getParameter("user_id");
 		String boardPassword = request.getParameter("board_password");
@@ -36,16 +34,18 @@ public class CsboardEnrollServlet extends HttpServlet {
 //		String boardLock = request.getParameter("board_lockYN");
 		Csboard csboard = new Csboard(0, userId, boardTitle, boardContent, null, 0, null, null, boardPassword, null, 0, 0, 0);
 		
-		System.out.println("csboard1232123@servlet = " + csboard);
+		System.out.println("CsboardEnrollServlet@servlet = " + csboard);
 		
 		// 2. 업무로직 (db에 저장)
 		int result = csboardService.insertCsboard(csboard);
-		String msg = result > 0 ? "게시물 등록 성공!" : "게시물 등록 실패!";
+//		String msg = result > 0 ? "게시물 등록 성공!" : "게시물 등록 실패!";
+		
+		System.out.println("CsboardEnrollServlet@servlet = " + csboard);
 		
 		// 3. 응답 처리 : redirect(DML이기 때문에)
 		HttpSession session = request.getSession();
-		session.setAttribute("msg", msg);
-		String location = request.getContextPath() + "/csboard/csboardList";
+//		session.setAttribute("msg", msg);
+		String location = request.getContextPath() + "/csboard/csboardView?boardNo=" + csboard.getBoardNo();
 		response.sendRedirect(location);
 	}
 

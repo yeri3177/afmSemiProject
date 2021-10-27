@@ -33,21 +33,49 @@ public class CsboardService {
 
 	public int insertCsboard(Csboard csboard) {
 		Connection conn = getConnection();
-		int result = csboardDao.insertCsboard(conn, csboard);
-		// transaction처리
-		if(result > 0) commit(conn);
-		else rollback(conn);
+		int result = 0;
 		
+		try {
+			// board 테이블 추가
+			result = csboardDao.insertCsboard(conn, csboard);
+			
+			// 생성된 board_no 가져오기
+			int csboardNo = csboardDao.selectLastCsboardNo(conn);
+			System.out.println("insertCsboard@service = " + csboardNo);
+			
+			// csboard 객체에 set -> servlet에서 참조
+			csboard.setBoardNo(csboardNo);
+			
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			result = 0;
+		}
+					
 		close(conn);
 		return result;
 	}
 
 	public Csboard selectOneCsboard(int boardNo) {
-		System.out.println("CsboardService - selectOneCsboard");
 		Connection conn = getConnection();
 		Csboard csboard = csboardDao.selectOneCsboard(conn, boardNo);
 		close(conn);
 		return csboard;
 	}
+
+	// DML
+	public int updateReadCount(int boardNo) {
+		Connection conn = getConnection();
+		int result = csboardDao.updateReadCount(conn, boardNo);
+		
+		// transaction
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		
+		// 자원반납
+		close(conn);
+		return result;
+	}
+
 
 }

@@ -11,15 +11,15 @@
 <section id="csboard-container">
 	<h2>고객센터</h2>
 
-<%-- loginMember가 null이 아니라면 : 회원이라면 --%>	
-<%-- <% if(loginUser != null){ --%>
+<%-- loginUser가 null이 아니라면 : 회원이라면 --%>	
+    <% if(loginUser != null){ %>
 	<%-- 글쓰기 버튼 --%>
 	<input 
 		type="button" 
 		value="글쓰기" 
 		id="btn-add" 
 		onclick="location.href='<%= request.getContextPath() %>/csboard/csboardForm';" />
-<%-- <% } --%>
+    <% } %>
 
 	<table id="tbl-csboard">
 		<tr>
