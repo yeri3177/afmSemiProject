@@ -18,9 +18,9 @@ import com.kh.afm.user.model.vo.User;
 	"/user/userDetail", 
 	"/user/userDelete", 
 	"/user/userUpdate",
-	"/board/boardForm",
-	"/board/boardUpdate",
-	"/board/boardDelete"
+	"/csboard/csboardForm",
+	"/csboard/csboardUpdate",
+	"/csboard/csboardDelete"
 })
 public class LoginFilter implements Filter {
 

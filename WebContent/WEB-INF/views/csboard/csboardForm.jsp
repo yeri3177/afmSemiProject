@@ -7,23 +7,23 @@
 /**
 * csboardEnrollFrm 유효성 검사
 */
-function csboardValidate(){
+function csboardValidate(e){
 	// writer는 이미 값이 들어와 있이므로 유효성 검사는 하지 않는다.
-	const $title = $("[name=title]");
-	const $title = $("[name=content]");
+	const $board_title = $("[name=board_title]");
+	const $board_content = $("[name=board_content]");
 	//제목을 작성하지 않은 경우 폼제출할 수 없음.
 	// ^ : 입력의 시작 문자열에 매칭
 	// $ : 입력의 끝 문자열에 매칭
 	// . : 다음 줄 문자(개행 문자)를 제외한 문자열에 매칭(임의의 글자)
 	// + : 1번 이상 반복되는 문자열에 매칭(한글자 이상)
-	if(!/^.+$/.test($title.val())){
+	if(!/^.+$/.test($board_title.val())){
 		alert("제목을 입력하세요.");
 		return false;
 	}
 					   
 	//내용을 작성하지 않은 경우 폼제출할 수 없음.
 	//.(임의의 문자)에는 \n(개행문자)가 포함되지 않는다.
-	if(!/^(.|\n)+$/.test($content.val())){
+	if(!/^(.|\n)+$/.test($board_content.val())){
 		alert("내용을 입력하세요.");
 		return false;
 	}
@@ -50,8 +50,7 @@ $(() => {
 	<tr>
 		<th>작성자</th>
 		<td>
-			<input type="text" name="user_id" />
-			<%-- value="loginUser.getUserId()로 수정예정" readonly --%>
+			<input type="text" name="user_id" value="<%= loginUser.getUserId() %>" readonly />
 		</td>  
 	</tr>
 	<tr>
