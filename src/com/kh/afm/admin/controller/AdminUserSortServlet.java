@@ -16,17 +16,18 @@ import com.kh.afm.common.MvcUtils;
 import com.kh.afm.user.model.vo.User;
 
 /**
- * 회원 검색 
+ * 회원 정렬
  */
-@WebServlet("/admin/userFinder")
-public class AdminUserFinderServlet extends HttpServlet {
+@WebServlet("/admin/userSort")
+public class AdminUserSortServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AdminService adminService = new AdminService(); 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 검색유형, 검색키워드
-		String searchType = request.getParameter("searchType");
-		String searchKeyword = request.getParameter("searchKeyword");
+		
+		// 정렬유형, 정렬키워드 가져오기 
+		String sortType = request.getParameter("sortType");
+		String sortKeyword = request.getParameter("sortKeyword");
 		
 		// 검색결과 페이징 처리
 		int cPage = 1;
@@ -41,22 +42,22 @@ public class AdminUserFinderServlet extends HttpServlet {
 		
 		// 업무로직
 		Map<String, Object> param = new HashMap<>();
-		param.put("searchType", searchType);
-		param.put("searchKeyword", searchKeyword);
+		param.put("sortType", sortType);
+		param.put("sortKeyword", sortKeyword);
 		param.put("start", start);
 		param.put("end", end);
-		System.out.println("param@servlet = " + param);
+		System.out.println("param@sortservlet = " + param);
 		
 		// 검색결과 리스트 
-		List<User> list = adminService.searchUser(param);
-		System.out.println("검색결과 list" + list);
+		List<User> list = adminService.sortUser(param);
+		System.out.println("정렬결과 sortlist" + list);
 		
 		// 페이지바
-		int totalContents = adminService.searchUserCount(param);
-		String queryString = String.format("?searchType=%s&searchKeyword=%s", searchType, searchKeyword);
+		int totalContents = adminService.selectTotalContents();
+		String queryString = String.format("?sortType=%s&sortKeyword=%s", sortType, sortKeyword);
 		String url = request.getRequestURI() + queryString; 
 		String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
-		System.out.println("pagebar@SearchServlet = " + pagebar);
+		System.out.println("pagebar@SortServlet = " + pagebar);
 		
 		// view단처리
 		request.setAttribute("list", list);

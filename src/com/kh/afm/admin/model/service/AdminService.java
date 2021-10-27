@@ -66,4 +66,14 @@ public class AdminService {
 		close(conn);
 		return totalContent;
 	}
+
+	/**
+	 * 회원 정렬하기
+	 */
+	public List<User> sortUser(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<User> list = adminDao.sortUser(conn, param);
+		close(conn);
+		return list;
+	}
 }

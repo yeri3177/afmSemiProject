@@ -243,4 +243,62 @@ public class AdminDao {
 		}
 		return totalContents;
 	}
+
+
+	/**
+	 * 회원 정렬하기
+	 */
+	public List<User> sortUser(Connection conn, Map<String, Object> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<User> list = new ArrayList<>();
+		String sql = null;
+		String sortType = (String) param.get("sortType");
+		String sortKeyword = (String) param.get("sortKeyword");
+		
+		if("userId".equals(sortKeyword)) {
+			sql = prop.getProperty("sortUserByUserId"); 
+		}
+		else if("userName".equals(sortKeyword)) {
+			sql = prop.getProperty("sortUserByUserName"); 
+		}
+		else if("userRole".equals(sortKeyword)) {
+			sql = prop.getProperty("sortUserByUserRole"); 
+		}
+		
+		System.out.println("sortType@dao = " + sortType);
+		System.out.println("sortKeyword@dao = " + sortKeyword);
+		System.out.println("sql@dao = " + sql);
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, sortType);
+			pstmt.setInt(2, (int) param.get("start"));
+			pstmt.setInt(3, (int) param.get("end"));
+			
+			// 2. 쿼리실행 및 ResultSet처리
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				User user = new User();
+				user.setUserId(rset.getString("user_id"));
+				user.setUserName(rset.getString("user_name"));
+				user.setUserEmail(rset.getString("user_email"));
+				user.setPassword(rset.getString("password"));
+				user.setBirthday(rset.getString("birthday"));
+				user.setPhone(rset.getString("phone"));
+				user.setUserEnrollDate(rset.getDate("user_enroll_date"));
+				user.setUserRole(rset.getString("user_role"));
+				user.setUserExpose(rset.getString("user_expose"));
+				list.add(user);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 }

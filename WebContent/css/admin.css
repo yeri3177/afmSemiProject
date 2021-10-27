@@ -294,33 +294,35 @@ div#pageBar a:hover {
 
 /* 검색, 정렬 박스 */
 .data-box {
-	width: 450x;
-	height: 30px;
+	width: 500x;
+	height: 45px;
 	background-color: #ffdfaf;
 	margin: 30px 200px;
-	display : flex;
-	justify-content: space-between;
-	padding: 10px 35px;
+	/* display : flex;
+	justify-content: space-between; */
+	/* padding: 10px 20px; */
 	font-family: 'Ubuntu', sans-serif;
 	font-weight: 500;
-	
 	
 }
 
 /* 검색 영역 */
 .serarchbox {
-	/* background-color: aqua; */
+	background-color: aqua;
 	display : inline-block;
 	position: relative;
-	/* top: 1px; */
 }
 
 /* 정렬 영역 */
 .sortbox {
-	/* background-color: aqua; */
+	background-color: pink;
 	display : inline-block;
 	position: relative;
-	top: 3px;
+}
+
+.sortbox span {
+	display : inline-block;
+	width: 30px;
 }
 
 .data-box select {
@@ -333,7 +335,7 @@ div#pageBar a:hover {
 	border: 1px solid black;
 }
 
-.search-btn {
+.search-btn, .sort-btn {
 	height: 30px;
 	width: 70px;
 	

@@ -81,11 +81,21 @@ div#search-userRole {
 	<!-- 데이터 정렬 -->
 	<div class="sortbox">
 		<span>sort</span>
-		<select name="" id="">
-			<option value="">아이디</option>
-			<option value="">회원명</option>
-			<option value="">회원권한</option>
-		</select>
+		<form action="<%=request.getContextPath()%>/admin/userSort">
+			
+			<!-- 정렬 타입 -->
+			<input type="radio" name="sortType" value="asc"/>오름차순
+			<input type="radio" name="sortType" value="desc"/>내림차순
+			
+			<!-- 정렬 키워드 -->
+			<select name=sortKeyword>
+				<option value="userId">아이디</option>
+				<option value="userName">회원명</option>
+				<option value="userRole">회원권한</option>
+			</select>
+			
+			<button type="submit" class="sort-btn">정렬</button>
+		</form>
 	</div>
 </div>
 
@@ -130,11 +140,11 @@ div#search-userRole {
 
 </section>
 
+
 <script>
+/* 검색유형 체인지 이벤트 */
 $("#searchType").change((e) => {
-  	// e.target 이벤트발생객체 -> #searchType
   	const type = $(e.target).val();
-  	console.log(type);
   	
   	// 1. .search-type 감추기
   	$(".search-type").hide();
@@ -142,5 +152,16 @@ $("#searchType").change((e) => {
   	// 2. #search-${type} 보여주기 (display : inline-block)
   	$(`#search-\${type}`).css("display", "inline-block");
 }); 
+
+/* 정렬유형 체인지 이벤트 */
+/* $("#sortType").change((e) => {
+	const $this = $(e.target);
+	const sortType = $this.val();
+	console.log("sortType : " + sortType);
+	
+	const $frm = $(document.userSortFrm);
+	$frm.find("[name=sortType]").val(sortType);
+	$frm.submit();
+}); */
 </script>
 <%@ include file="/WEB-INF/views/admin/adminFooter.jsp" %>		
