@@ -16,6 +16,10 @@ public class User implements Serializable {
 	private Date userEnrollDate; //가입일
 	private String userRole; //회원권한
 	private String userExpose; //회원공개여부
+	private String address1; //주소
+	private String address2; //상세주소
+	private String banknum; //계좌번호
+	private String bankname; //계좌명
 	
 	public User() {
 		super();

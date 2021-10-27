@@ -14,12 +14,26 @@
 	padding: 30px;
 	background-color: #fffacf;
 }
+#loginFrm {
+	margin: 0 545px;
+}
+#loginFrm input {
+	margin: 7px;	
+}
+
+
+
+#loginbtn1 input {
+	width: 200px;
+	height:30px;
+}
 
 /* 로고 이미지 */
 .logo-img {
 	width: 200px;
 }
 
+.loginFrm 
 /* 로그인정보 테이블 */
 #loginFrm table {
 	margin: 0 auto;
@@ -60,6 +74,7 @@
 	top: 30px;
 	padding: 30px;
 }
+
 
 #user-enroll-container .logo-img {
 	margin: 60px 0;
