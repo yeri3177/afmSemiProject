@@ -30,6 +30,8 @@
 			<th>내 용</th>
 			<td><%= csboard.getBoardContent() %></td>
 		</tr>
+		
+		<%-- 
 		<% if(loginUser != null &&
 				(
 				 loginUser.getUserId().equals(csboard.getUserId())
@@ -37,6 +39,7 @@
 				)
 		   ){ %>
 		<tr>
+		--%>
 			<%-- 작성자와 관리자만 마지막행 수정/삭제 버튼이 보일 수 있게 할 것 --%>
 			<th colspan="2">
 				<input type="button" value="수정하기" onclick="updateCsboard()"/>
