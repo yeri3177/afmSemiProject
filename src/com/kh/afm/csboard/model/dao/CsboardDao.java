@@ -200,5 +200,28 @@ public class CsboardDao {
 		return csboardNo;
 	}
 
+	// DML
+	// 조회수
+	public int updateReadCount(Connection conn, int boardNo) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateReadCount");
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new CsboardException("조회수 1 증가 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 
 }
