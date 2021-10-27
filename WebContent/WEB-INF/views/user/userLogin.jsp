@@ -25,7 +25,7 @@
 <body>
 	<div id="login-container">
 		<!-- 로고이미지 -->
-		<img class="logo-img" src="<%=request.getContextPath()%>/images/common/logofont.png" />
+		<a href="<%= request.getContextPath() %>/index.jsp"><img class="logo-img" src="<%=request.getContextPath()%>/images/common/logofont.png" /></a>
 		
 		<!-- 로그인 텍스트 -->
 		<h1 class="loginFrm-headline">Login</h1>
@@ -47,7 +47,7 @@
 				
 				<!-- 3행 : 로그인버튼 -->
 				<tr>
-					<td>
+					<td  id="loginbtn1">
 						<input type="submit" value="로그인">
 					</td>
 				</tr>
