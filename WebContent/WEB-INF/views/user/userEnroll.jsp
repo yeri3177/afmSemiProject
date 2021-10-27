@@ -7,6 +7,6 @@
 <title>user Join page</title>
 </head>
 <body>
-
+	<h1>회원가입페이지</h1>
 </body>
 </html>

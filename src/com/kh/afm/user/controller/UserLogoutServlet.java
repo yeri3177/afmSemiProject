@@ -31,7 +31,6 @@ public class UserLogoutServlet {
 			response.sendRedirect(location);
 			
 		}
-
 }
 
 
