@@ -49,13 +49,13 @@
 		</td>
 	</tr>
 	<tr>
-		<th>대표 이미지</th>
+		<th>대표 이미지(필수)</th>
 		<td>			
 			<input type="file" multiple name="upFile1">
 		</td>
 	</tr>
 		<tr>
-		<th>상세 이미지</th>
+		<th>상세 이미지(필수)</th>
 		<td>			
 			<input type="file" multiple name="upFile2">
 		</td>

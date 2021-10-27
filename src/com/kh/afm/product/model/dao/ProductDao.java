@@ -45,7 +45,6 @@ public class ProductDao {
 			pstmt.setInt(2, end);
 			
 			rset = pstmt.executeQuery();
-			
 			while(rset.next()) {
 				Product product = new Product();
 				
@@ -56,7 +55,7 @@ public class ProductDao {
 				product.setpRegDate(rset.getDate("p_reg_date"));
 				product.setpRecommend(rset.getInt("p_recommend"));
 				
-				if(rset.getString("img_flag") != "N") {
+				if(rset.getString("img_flag").equals("Y")) {
 					Attachment attach = new Attachment();
 					attach.setAttachNo(rset.getInt("attach_no"));
 					attach.setpNo(rset.getInt("p_no"));
@@ -64,11 +63,12 @@ public class ProductDao {
 					attach.setRenamedFileName(rset.getString("renamed_filename"));
 					attach.setRegDate(rset.getDate("reg_date"));
 					attach.setImgFlag(rset.getString("img_flag"));
-			
-				product.setAttach1(attach);
-				}
+					
+					product.setAttach1(attach);
 				
 				list.add(product);
+			}
+				
 			}
 			
 		} catch (SQLException e) {
@@ -78,7 +78,6 @@ public class ProductDao {
 			close(pstmt);
 		}
 		
-		System.out.println("list@memberDao = " + list );
 		return list;
 	}
 
