@@ -19,6 +19,7 @@ div#search-userRole {
 	display: <%= "userRole".equals(searchType) ? "inline-block" : "none" %>;
 }
 </style>
+<section id="userList-container">
 
 <div class="data-box">
 	
@@ -126,6 +127,8 @@ div#search-userRole {
 <div id="pageBar">
 	<%= request.getAttribute("pagebar") %>
 </div>	
+
+</section>
 
 <script>
 $("#searchType").change((e) => {
