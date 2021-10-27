@@ -54,8 +54,9 @@ public class ProductDao {
 				product.setpPrice(rset.getInt("p_price"));
 				product.setUserId(rset.getString("p_user_id"));
 				product.setpRegDate(rset.getDate("p_reg_date"));
+				product.setpRecommend(rset.getInt("p_recommend"));
 				
-				if(rset.getInt("attach_no") != 0) {
+				if(rset.getString("img_flag") != "N") {
 					Attachment attach = new Attachment();
 					attach.setAttachNo(rset.getInt("attach_no"));
 					attach.setpNo(rset.getInt("p_no"));
@@ -63,8 +64,8 @@ public class ProductDao {
 					attach.setRenamedFileName(rset.getString("renamed_filename"));
 					attach.setRegDate(rset.getDate("reg_date"));
 					attach.setImgFlag(rset.getString("img_flag"));
-					
-					product.setAttach1(attach);
+			
+				product.setAttach1(attach);
 				}
 				
 				list.add(product);
@@ -77,7 +78,7 @@ public class ProductDao {
 			close(pstmt);
 		}
 		
-		
+		System.out.println("list@memberDao = " + list );
 		return list;
 	}
 
