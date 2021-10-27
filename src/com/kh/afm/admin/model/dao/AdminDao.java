@@ -58,7 +58,7 @@ public class AdminDao {
 				user.setUserName(rset.getString("user_name"));
 				user.setUserEmail(rset.getString("user_email"));
 				user.setPassword(rset.getString("password"));
-				user.setBirthday(rset.getString("birthday"));
+				user.setBirthday(rset.getDate("birthday"));
 				user.setPhone(rset.getString("phone"));
 				user.setUserEnrollDate(rset.getDate("user_enroll_date"));
 				user.setUserRole(rset.getString("user_role"));
@@ -187,7 +187,7 @@ public class AdminDao {
 				user.setUserName(rset.getString("user_name"));
 				user.setUserEmail(rset.getString("user_email"));
 				user.setPassword(rset.getString("password"));
-				user.setBirthday(rset.getString("birthday"));
+				user.setBirthday(rset.getDate("birthday"));
 				user.setPhone(rset.getString("phone"));
 				user.setUserEnrollDate(rset.getDate("user_enroll_date"));
 				user.setUserRole(rset.getString("user_role"));
@@ -285,7 +285,7 @@ public class AdminDao {
 				user.setUserName(rset.getString("user_name"));
 				user.setUserEmail(rset.getString("user_email"));
 				user.setPassword(rset.getString("password"));
-				user.setBirthday(rset.getString("birthday"));
+				user.setBirthday(rset.getDate("birthday"));
 				user.setPhone(rset.getString("phone"));
 				user.setUserEnrollDate(rset.getDate("user_enroll_date"));
 				user.setUserRole(rset.getString("user_role"));
