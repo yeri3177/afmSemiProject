@@ -129,7 +129,7 @@ public class AdminDao {
 				delUser.setDeleteUName(rset.getString("delete_u_name"));
 				delUser.setDeleteUEmail(rset.getString("delete_u_email"));
 				delUser.setDeletePassword(rset.getString("delete_password"));
-				delUser.setDeleteBirthday(rset.getString("delete_birthday"));
+				delUser.setDeleteBirthday(rset.getDate("delete_birthday"));
 				delUser.setDeletePhone(rset.getString("delete_phone"));
 				delUser.setDeleteUEnroll_date(rset.getDate("delete_u_enroll_date"));
 				delUser.setUserRole(rset.getString("user_role"));
