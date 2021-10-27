@@ -6,7 +6,41 @@
 <title>장바구니</title>
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<style>
+.cartheaderh2{
+font-size:40px;
+}
+.cartdiv{
+width: 100%;
+border-top: 1px solid #e0e0e0;
+float: left;
+padding:0;
+}
+.cartheader{
+width: 100%;
+display:flex;
+justify-content: space-around;
+border-bottom: 2px solid #888;
+box-sizing: border-box;
+background-color: #f4f4f4;
+font-weight: 500;
+width: 100%;
+padding:0;
+}
+.cartdata{
+align-items: center;
+display:flex;
+justify-content: space-around;
+border-bottom: 1px dashed #888;
+box-sizing: border-box;
+width: 100%;
+padding:0;
+}
+.cartcontrolAll{
+float: right;
+}
 
+</style>
 
 <script>
 //이벤트 리스너 등록
@@ -32,14 +66,6 @@ document.addEventListener('DOMContentLoaded', function(){
         function(item, idx){
             //수량 입력 필드 값 변경
             item.querySelector('input').addEventListener('keyup', function(){
-                cart.changePNum(idx+1);
-            });
-            //수량 증가 화살표 클릭
-            item.children[1].addEventListener('click', function(){
-                cart.changePNum(idx+1);
-            });
-            //수량 감소 화살표 클릭
-            item.children[2].addEventListener('click', function(){
                 cart.changePNum(idx+1);
             });
         }
@@ -93,7 +119,7 @@ let cart = {
 	    //개별 수량 변경
 	    changePNum: function (pos) {
 	        var item = document.querySelector('input[name=p_num'+pos+']');
-	        var p_num = parseInt(item.getAttribute('value'));
+	        var p_num = item.getAttribute('#value');
 	        var newval = event.target.classList.contains('up') ? p_num+1 : event.target.classList.contains('down') ? p_num-1 : event.target.value;
 	        if (parseInt(newval) < 1 || parseInt(newval) > 99) { return false; }
 	        item.setAttribute('value', newval);
@@ -112,16 +138,14 @@ let cart = {
 	}
 Number.prototype.formatNumber = function(){
     if(this==0) return 0;
-    let regex = /(^[+-]?\d+)(\d)/;
     let nstr = (this + '');
-    while (regex.test(nstr)) nstr = nstr.replace(regex, '$1' + ',' + '$2');
     return nstr;
 };
 </script>
 <%
 	List<Cart> list = (List<Cart>)request.getAttribute("list");
 %>
-<h2>장바구니</h2>
+<h2 class="cartheaderh2">장바구니</h2>
 <%
 	if(list == null){
 %>
@@ -138,16 +162,16 @@ Number.prototype.formatNumber = function(){
     <!-- form을 실행한다.  -->
         <form id="cartform" name="cartform" class="cartform" method="post"
         action="/cart/update.do">
-        <div class="cart">
+        <div class="cartdiv">
             <div class="cartheader">
-            <div class="cartcheck">선택</div>
-            <div class="cartimg">이미지</div>
-            <div class="cartproductname">상품명</div>
-            <div class="cartprice">가격</div>
-            <div class="cartcount">수량</div>
-            <div class="cartsum">합계</div>
-            <div class="basketcmd">&nbsp;</div>
-            </div>
+	            <div class="cartcheck">선택</div>
+	            <div class="cartlistimg">이미지</div>
+	            <div class="cartproductname">상품명</div>
+	            <div class="cartprice">가격</div>
+	            <div class="cartcount">수량</div>
+	            <div class="cartsum">합계</div>
+	            <div class="empty">&nbsp;</div>
+        	</div>
 	<%
 	int sum = 0;
 	int sumcount = 0;
@@ -157,18 +181,16 @@ Number.prototype.formatNumber = function(){
 	%>
 			<div class="cartdata">
 	            <div class="cartcheck"><input type="checkbox" name="buy" value="260" checked="<%= _cart.getCartNo() %>">&nbsp;</div>
-	            <div class="cartimg"><img src="<%= request.getContextPath() %>/images/<%= _cart.getAttachNo() %>" width="60"></div>
+	            <div class="cartlistimg"><img src="<%= request.getContextPath() %>/images/<%= _cart.getAttachNo() %>.png" width="60"></div>
 				<div class="cartproductname"><span><%= _cart.getProductName() %></span></div>
 	            <div class="cartprice"><input type="hidden" name="p_price" id="p_price1" class="p_price" value="<%= _cart.getProductPrice() %>"><%= _cart.getProductPrice() %>원</div>
 	            <div class="cartcount">
 	                <!-- "장바구니 수량 변경" -->
 	                <div class="cartcountupdown">
-	                    <input type="text" name="p_num1" id="p_num1" size="2" maxlength="4" class="p_num" value="<%= _cart.getProductQuantity() %>">
-	                    <span><i class="fas fa-arrow-alt-circle-up up"></i></span>
-	                    <span><i class="fas fa-arrow-alt-circle-down down"></i></span>
+	                    <input type="text" name="p_num1" id="p_num1" size="2" maxlength="4" class="p_num" value="<%= _cart.getProductQuantity() %>">개
 	                </div>
 	            </div>
-	            <div class="sum"><%= _cart.getProductPrice() * _cart.getProductQuantity() %>원</div>
+	            <div class="sum" style="width:70px;padding:0;"><%= _cart.getProductPrice() * _cart.getProductQuantity() %>원</div>
 	            <div class="cartDelete"><a href="#" class="btnCartDelete">삭제</a></div>
 	        </div>
 	    </div>
