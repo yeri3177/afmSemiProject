@@ -61,18 +61,17 @@ window.onload = function(){
 				
 			const $itemArr = $root.children();
 			const $table = $("<table class='apitable'></table>")
-				$table.append("<tr class='apihead'><th>상품명</th><th>상태</th><th>품종명</th><th>단위</th><th>조회일가격(원)</th><th>평년 가격(원)</th></tr>");
+				$table.append("<tr class='apihead'><th>상품명</th><th>상태</th><th>품종명(단위)</th><th>조회일가격(원)</th><th>평년 가격(원)</th></tr>");
 				
 					$itemArr.each((i,item)=>{
 					console.log(i,item);
 					const $name = $(item).children("item_name");
 					const $rank = $(item).children("rank");
 					const $kind = $(item).children("kind_name");
-					const $unit = $(item).children("unit");
 					const $dpr = $(item).children("dpr1");
 					const $dpr7 = $(item).children("dpr7");
 					if($name != ""){
-					$table.append(`<tr class="apidata"><td>\${$name.text()}</td><td>\${$rank.text()}</td><td>\${$kind.text()}</td><td>\${$unit.text()}</td><td>\${$dpr.text()}</td><td>\${$dpr7.text()}</td></tr>`);
+					$table.append(`<tr class="apidata"><td>\${$name.text()}</td><td>\${$rank.text()}</td><td>\${$kind.text()}</td><td>\${$dpr.text()}</td><td>\${$dpr7.text()}</td></tr>`);
 					}
 				});
 		$('.apitable').html($table);
