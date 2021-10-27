@@ -168,9 +168,7 @@ public class Product implements Serializable{
 				+ pRecommend + ", attach1=" + attach1 + ", attach2=" + attach2 + "]";
 	}
 
-	
 
-	
 	
 	
 	

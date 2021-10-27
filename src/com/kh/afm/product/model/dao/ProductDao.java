@@ -39,29 +39,37 @@ public class ProductDao {
 		List<Product> list = new ArrayList<>();
 		
 		try {
-			System.out.println(start);
-			System.out.println(end);
-			System.out.println(22);
+			
 			pstmt = conn.prepareStatement(sql);
-			System.out.println(33);
 			pstmt.setInt(1, start);
-			System.out.println(44);
 			pstmt.setInt(2, end);
-			System.out.println(55);
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				Product product = new Product();
+				
 				product.setpNo(rset.getInt("p_no"));
 				product.setpTitle(rset.getString("p_title"));
 				product.setpPrice(rset.getInt("p_price"));
 				product.setUserId(rset.getString("p_user_id"));
 				product.setpRegDate(rset.getDate("p_reg_date"));
-				product.setpRecommend(rset.getInt("p_recommend"));
+				
+				if(rset.getInt("attach_no") != 0) {
+					Attachment attach = new Attachment();
+					attach.setAttachNo(rset.getInt("attach_no"));
+					attach.setpNo(rset.getInt("p_no"));
+					attach.setOriginalFileName(rset.getString("original_filename"));
+					attach.setRenamedFileName(rset.getString("renamed_filename"));
+					attach.setRegDate(rset.getDate("reg_date"));
+					attach.setImgFlag(rset.getString("img_flag"));
+					
+					product.setAttach1(attach);
+				}
 				
 				list.add(product);
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
