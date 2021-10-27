@@ -156,8 +156,8 @@ Number.prototype.formatNumber = function(){
 			sumcount += _cart.getProductQuantity();
 	%>
 			<div class="cartdata">
-	            <div class="cartcheck"><input type="checkbox" name="buy" value="260" checked="">&nbsp;</div>
-	            <div class="cartimg"><img src="<%= request.getContextPath() %>/images/<%= //attach value %>" width="60"></div>
+	            <div class="cartcheck"><input type="checkbox" name="buy" value="260" checked="<%= _cart.getCartNo() %>">&nbsp;</div>
+	            <div class="cartimg"><img src="<%= request.getContextPath() %>/images/<%= _cart.getAttachNo() %>" width="60"></div>
 				<div class="cartproductname"><span><%= _cart.getProductName() %></span></div>
 	            <div class="cartprice"><input type="hidden" name="p_price" id="p_price1" class="p_price" value="<%= _cart.getProductPrice() %>"><%= _cart.getProductPrice() %>원</div>
 	            <div class="cartcount">
