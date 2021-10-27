@@ -45,7 +45,7 @@ $(() => {
 	name="boardEnrollFrm"
 	action="<%=request.getContextPath() %>/csboard/csboardEnroll" 
 	method="POST"
-	enctype="application/www-form-urlencoded">
+	>
 	<table id="tbl-board-view">
 	<tr>
 		<th>작성자</th>

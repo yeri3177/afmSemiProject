@@ -34,7 +34,9 @@
 %>
 	<tr>
 		<td><%= csboard.getBoardNo() %></td>
-		<td><%= csboard.getBoardTitle() %></td>
+		<td>
+			<a href="<%= request.getContextPath() %>/csboard/csboardView?boardNo=<%= csboard.getBoardNo() %>"><%= csboard.getBoardTitle() %></a>
+		</td>
 		<td><%= csboard.getUserId() %></td>
 		<td><%= csboard.getBoardRegDate() %></td>
 		<td><%= csboard.getBoardReadcount() %></td>

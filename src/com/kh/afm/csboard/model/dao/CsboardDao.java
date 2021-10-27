@@ -137,5 +137,10 @@ public class CsboardDao {
 		return result;
 	}
 
+	public Csboard selectOneCsboard(Connection conn, int boardNo) {
+		
+		return null;
+	}
+
 
 }
