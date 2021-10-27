@@ -14,9 +14,16 @@ public class IndexService {
 
 	public String selectNewProduct() {
 		Connection conn = getConnection();
-		String indexXml = indexDao.selectNewProduct(conn);
+		String csv = indexDao.selectNewProduct(conn);
 		close(conn);
-		return indexXml;
+		return csv;
+	}
+
+	public String selectBestProduct() {
+		Connection conn = getConnection();
+		String csv = indexDao.selectBestProduct(conn);
+		close(conn);
+		return csv;
 	}
 	
 }
