@@ -3,8 +3,6 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>    
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/csboard.css" />
 
-System.out.println()
-
 <script>
 /**
 * csboardEnrollFrm 유효성 검사
@@ -35,9 +33,9 @@ function csboardValidate(){
 // onload 함수
 // submit 핸들러로 csboardValidate 지정
 // csboardEnrollFrm이 제줄 직전에 csboardValidate 호출
-$(( => {
+$(() => {
 	$(document.csboardEnrollFrm).submit(csboardValidate);
-}));
+});
 
 </script>
 
@@ -46,27 +44,27 @@ $(( => {
 <form
 	name="boardEnrollFrm"
 	action="<%=request.getContextPath() %>/csboard/csboardEnroll" 
-	method="post"
-	>
+	method="POST"
+	enctype="application/www-form-urlencoded">
 	<table id="tbl-board-view">
 	<tr>
 		<th>작성자</th>
 		<td>
-			<input type="text" name="writer" value="loginUser.getUserId()로 수정예정" readonly/>
+			<input type="text" name="user_id" />
+			<%-- value="loginUser.getUserId()로 수정예정" readonly --%>
 		</td>  
 	</tr>
 	<tr>
 		<th>비밀번호</th>
-		<td><input type="text" name="name" /> * 필수 (게시물
-			삭제시 필요합니다.)</td>
+		<td><input type="password" name="board_password" /> * 필수 (게시물 삭제시 필요합니다.)</td>
 	</tr>
 	<tr>
 		<th>제 목</th>
-		<td><input type="text" name="title" required></td>
+		<td><input type="text" name="board_title" required></td>
 	</tr>
 	<tr>
 		<th>내 용</th>
-		<td><textarea rows="5" cols="40" name="content"></textarea></td>
+		<td><textarea rows="5" cols="40" name="board_content"></textarea></td>
 	</tr>
 </table>
 <br />
