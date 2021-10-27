@@ -38,7 +38,7 @@ header{position: fixed;z-index:99999;}
 .settingImg{background-color:#FBF6F0;padding: 3px;border: none;}
 .indexlogoutImg{background-color:#FBF6F0;padding: 3px;border: none;}
 .indexlogout{padding-top:20px;padding-left:5px;width:40px;}
-.profile{padding-top:20px;width:40px;}
+.profile{padding-top:20px;padding-left:5px;width:40px;}
 .cart{padding-top:20px;padding-left:5px;width:40px;}
 .setting{padding-top:20px;padding-left:5px;width:40px;}
 .logoImg{width:30%;}
@@ -49,8 +49,8 @@ header{position: fixed;z-index:99999;}
 .main-nav div a {display: block;padding:.4em;text-decoration: none;color: black;font-weight: bold;}
 .main-nav div:hover{background-color:#00C652;}
 .main-nav div:hover > a{color:#FFCD12;}
-.dropdown{display: flex;}
-.buttonImgName{display: flex;font-weight: 400;justify-content: flex-end;}
+.dropdown{display: flex;justify-content: flex-end;}
+.buttonImgName{display: flex;font-weight: 400;}
 .search{display: flex;padding-top:25px;width: 40%;justify-content: center;}
 .searchform{width:90%}
 .searchImg{width:40px;vertical-align: middle;}
@@ -94,16 +94,16 @@ System.out.println("indexpage"+loginUser);
 	        	<div class="button">
 				  <button class="profileImg">
 					  <a href="<%= request.getContextPath() %>/user/userLogin"><img class="profile" src="<%= request.getContextPath() %>/images/common/profile.png">
-				  <% if(loginUser == null){ %>
+<% if(loginUser == null){ %>
 					 	 <span class="buttonImgName">로그인</span>
-				  <% }else{ %>
+<% }else{ %>
 					 	 <span class="buttonImgName"><%= loginUser.getUserName() %>님</span>
-				  <% } %>
+<% } %>
 					  </a>
 				  </button>
-				  </div>
+				</div>
+				<div class="button">
 				  <% if(loginUser != null){ %>
-				  <div class="button">
 					  <button class="indexlogoutImg">
 						  <a href="<%= request.getContextPath() %>/user/logout"><img class="indexlogout" src="<%= request.getContextPath() %>/images/common/logout_icon.png">
 						 	 <span class="buttonImgName">로그아웃</span>
