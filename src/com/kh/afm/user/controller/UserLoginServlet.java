@@ -3,6 +3,7 @@ package com.kh.afm.user.controller;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,19 +14,29 @@ import com.kh.afm.common.MvcUtils;
 import com.kh.afm.user.model.service.UserService;
 import com.kh.afm.user.model.vo.User;
 
+@WebServlet("/user/userLogin")
 public class UserLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserService userService = new UserService();
 	
+	//로그인페이지요청
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// view단 연결
+		request
+			.getRequestDispatcher("/WEB-INF/views/user/userLogin.jsp")
+			.forward(request, response);
+	}
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. encoding처리
-		request.setCharacterEncoding("utf-8");
+		//1. 인코딩처리
+		request.setCharacterEncoding("UTF-8");
 		
 		// 2. 사용자입력값처리
 		String userId = request.getParameter("userId");
 		String password = MvcUtils.getEncryptedPassword(request.getParameter("password"));
 		String saveId = request.getParameter("saveId"); 
-		System.out.println("memberId@servlet = " + userId);
+		System.out.println("userId@servlet = " + userId);
 		System.out.println("password@servlet = " + password);
 		System.out.println("saveId@servlet = " + saveId);
 		

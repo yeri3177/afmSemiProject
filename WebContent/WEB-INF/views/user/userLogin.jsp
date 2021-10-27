@@ -4,39 +4,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>user login</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/user.css" />
 </head>
 <body>
-	 <div class="page-container">
-        <div class="login-form-container shadow">
-            <div class="login-form-right-side">
-                <div class="top-logo-wrap">
-                    
-                </div>
-                <h1>AFM login</h1>
-                <p>AFM (A Farmers)의 </p>
-            </div>
-            <div class="login-form-left-side">
-                <div class="login-top-wrap">
-                    <span>Don't have an account?</span>
-                    <button class="create-account-btn shadow-light">Create Profile</button>
-                </div>
-                <div class="login-input-container">
-                    <div class="login-input-wrap input-id">
-                        <i class="far fa-envelope"></i>
-                        <input placeholder="Email" type="text">
-                    </div>
-                    <div class="login-input-wrap input-password">
-                        <i class="fas fa-key"></i>
-                        <input placeholder="Password"  type="password">
-                    </div>
-                </div>
-                <div class="login-btn-wrap">
-                    <button class="login-btn">Login</button>
-                    <a href="#" >Forgot password?</a>
-                </div>
-            </div>
+		<img class="frmlogo" src="<%=request.getContextPath()%>/images/common/logofont.png" />
+		<h1 class="loginFrm-headline">Login</h1>
+	<div class="loginFrmDiv">
+		<form class="loginFrm" method="POST" onSubmit="logincall();">
+		<label for="inputEmail" class="loginFrmId">아이디</label>
+        <input type="text" id="userId" class="frmid" placeholder="아이디를 입력하세요."  required autofocus><BR>
+        <label for="inputPassword" class="frmpassword">비밀번호</label>
+        <input type="password" id="upw" class="form-control" placeholder="비밀번호를 입력하세요." required><br>
+        <div class="logincheckbox">
+          <input 
+				type="checkbox" 
+				name="saveId" 
+				id="saveId" />
+				<label for="saveId">아이디저장</label>
         </div>
-    </div>
+        <div class="join">
+        	<a href="<%=request.getContextPath()%>/user/userJoin.jsp">회원가입</a> 
+        </div>
+                <button id="loginFrmbtn" class="loginFrmbtn" type="submit">로 그 인</button>
+		</form>
+	
+	</div>
 </body>
 </html>
