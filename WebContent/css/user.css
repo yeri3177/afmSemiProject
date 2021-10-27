@@ -1,33 +1,15 @@
 @charset "UTF-8";
 @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
 	
-	
-	body {
-	    width:100%;
-	    height:100%;
-  		text-decoration:none;
-  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
-  		background-repeat: no-repeat;
-  		
-	}
-	
-	.loginFrm-headline{
-		text-align: center;
-	
-	}
-	
-	img.frmlogo {
-	
-		padding-left:500px;
-	
-	}
-    .loginFrmDiv {
-        padding-top: 300px;
-  		padding-bottom: 30px;
-  		padding-left: 500px;
-        float: none; 
-        margin-bottom: 10px; 
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        background:linear-gradient(to bottom right, #0098FF, #6BA8D1);
-	}
+#login-container {
+	margin: 0 auto;
+	text-align: center;
+}
 
+.logo-img {
+	width: 200px;
+}
+
+#loginFrm table {
+	margin: 0 auto;
+}

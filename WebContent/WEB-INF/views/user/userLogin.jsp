@@ -8,9 +8,9 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/user.css" />
 </head>
 <body>
-	<div class="login-container">
+	<div id="login-container">
 		<!-- 로고이미지 -->
-		<img class="frmlogo" src="<%=request.getContextPath()%>/images/common/logofont.png" />
+		<img class="logo-img" src="<%=request.getContextPath()%>/images/common/logofont.png" />
 		
 		<!-- 로그인 텍스트 -->
 		<h1 class="loginFrm-headline">Login</h1>
