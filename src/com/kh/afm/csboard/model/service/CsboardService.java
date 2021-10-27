@@ -63,5 +63,19 @@ public class CsboardService {
 		return csboard;
 	}
 
+	// DML
+	public int updateReadCount(int boardNo) {
+		Connection conn = getConnection();
+		int result = csboardDao.updateReadCount(conn, boardNo);
+		
+		// transaction
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		
+		// 자원반납
+		close(conn);
+		return result;
+	}
+
 
 }
