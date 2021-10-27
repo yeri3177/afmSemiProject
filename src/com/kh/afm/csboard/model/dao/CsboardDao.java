@@ -126,8 +126,6 @@ public class CsboardDao {
 			// DML
 			result = pstmt.executeUpdate();
 			
-
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new CsboardException("게시글 등록 오류", e);
@@ -177,6 +175,29 @@ public class CsboardDao {
 			close(pstmt);
 		}
 		return csboard;
+	}
+
+	public int selectLastCsboardNo(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectLastCsboardNo");
+		int csboardNo = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				csboardNo = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new CsboardException("게시물 번호 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return csboardNo;
 	}
 
 
