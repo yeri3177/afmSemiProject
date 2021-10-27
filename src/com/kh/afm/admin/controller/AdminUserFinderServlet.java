@@ -64,7 +64,7 @@ public class AdminUserFinderServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("pagebar", pagebar);
 		request
-			.getRequestDispatcher("/WEB-INF/views/admin/memberList.jsp")
+			.getRequestDispatcher("/WEB-INF/views/admin/userList.jsp")
 			.forward(request, response);
 	}
 }
