@@ -9,14 +9,14 @@
 	String searchKeyword = request.getParameter("searchKeyword");
 %>
 <style>
-div#search-memberId {
-	display: <%= searchType == null || "memberId".equals(searchType) ? "inline-block" : "none" %>;
+div#search-userId {
+	display: <%= searchType == null || "userId".equals(searchType) ? "inline-block" : "none" %>;
 }
-div#search-memberName{
-	display: <%= "memberName".equals(searchType) ? "inline-block" : "none" %>;
+div#search-userName {
+	display: <%= "userName".equals(searchType) ? "inline-block" : "none" %>;
 }
-div#search-gender{
-	display: <%= "gender".equals(searchType) ? "inline-block" : "none" %>;
+div#search-userRole {
+	display: <%= "userRole".equals(searchType) ? "inline-block" : "none" %>;
 }
 </style>
 
@@ -26,24 +26,60 @@ div#search-gender{
 	<div class="serarchbox">
 		
 		<!-- 검색타입 -->
-		search
+		<span>search</span>
 		<select id="searchType">
-		    <option value="userId" <%= "userId".equals(searchType) ? "selected" : "" %>>아이디</option>		
-		    <option value="userName" <%= "userName".equals(searchType) ? "selected" : "" %>>회원명</option>
-		    <option value="userRole" <%= "userRole".equals(searchType) ? "selected" : "" %>>회원권한</option>
+		    <option value="userId" <%= "userId".equals(searchType) ? "selected" : "" %>>
+		    	아이디
+		    </option>		
+		    <option value="userName" <%= "userName".equals(searchType) ? "selected" : "" %>>
+		    	회원명
+		    </option>
+		    <option value="userRole" <%= "userRole".equals(searchType) ? "selected" : "" %>>
+		    	회원권한
+		    </option>
 		</select>
 		
+		<!-- 아이디 검색 -->
+		<div id="search-userId" class="search-type">
+			<form action="<%=request.getContextPath()%>/admin/userFinder">
+				<input type="hidden" name="searchType" value="userId"/>
+				<input type="text" name="searchKeyword" 
+					placeholder="검색할 아이디를 입력하세요." size="25" 
+					value="<%= "userId".equals(searchType) ? searchKeyword : "" %>"/>
+				<button type="submit" class="search-btn">검색</button>
+			</form>
+		</div>
 		
-		<input type="text" />
+		<!-- 회원명 검색 -->
+		<div id="search-userName" class="search-type">
+			<form action="<%=request.getContextPath()%>/admin/userFinder">
+				<input type="hidden" name="searchType" value="userName"/>
+				<input type="text" name="searchKeyword" 
+					placeholder="검색할 이름을 입력하세요." size="25" 
+					value="<%= "userName".equals(searchType) ? searchKeyword : "" %>"/>
+				<button type="submit" class="search-btn">검색</button>
+			</form>
+		</div>
 		
-		
-		<button>검색</button>
+		<!-- 회원권한 검색 -->
+		<div id="search-userRole" class="search-type">
+			<form action="<%=request.getContextPath()%>/admin/userFinder">
+				<input type="hidden" name="searchType" value="userRole"/>
+		        <input type="radio" name="searchKeyword" value="A" 
+		        	<%= "userRole".equals(searchType) && "A".equals(searchKeyword) ? "checked" : "" %>> admin
+		        <input type="radio" name="searchKeyword" value="U" 
+		        	<%= "userRole".equals(searchType) && "U".equals(searchKeyword) ? "checked" : "" %>> user
+		        <input type="radio" name="searchKeyword" value="S" 
+		        	<%= "userRole".equals(searchType) && "S".equals(searchKeyword) ? "checked" : "" %>> seller
+				<button type="submit" class="search-btn">검색</button>
+			</form>
+		</div>
 		
 	</div>
 	
 	<!-- 데이터 정렬 -->
 	<div class="sortbox">
-		sort
+		<span>sort</span>
 		<select name="" id="">
 			<option value="">아이디</option>
 			<option value="">회원명</option>
@@ -79,17 +115,14 @@ div#search-gender{
 		<td><%=user.getUserRole() %></td>
 		<td><%=user.getUserExpose() %></td>
 		<td><%=user.getUserEnrollDate() %></td>
-
-		
-	
 	</tr>
-
 <%
     }
 %>
 	</tbody>	
 </table>	
 
+<!-- 페이지바 영역 -->
 <div id="pageBar">
 	<%= request.getAttribute("pagebar") %>
 </div>	

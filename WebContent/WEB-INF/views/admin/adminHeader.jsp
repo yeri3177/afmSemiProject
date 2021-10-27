@@ -7,6 +7,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>afm 관리자 페이지</title>
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css" />
+	
+	<!-- 폰트 -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	
+	<!-- Alfa Slab One -->
+	<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+	
+	<!-- Ubuntu -->
+	<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+	
+	<!-- favicon -->
+	<link rel="icon" href="<%= request.getContextPath() %>/images/admin/setting_icon.png">
+
 	<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 </head>
 <body>
@@ -30,7 +44,7 @@
 	      <ul>
 	      	<!----------------- 메뉴1 --------------------->
 	        <li class="on">
-	          <a href="#">사용자 관리</a>
+	          <a href="<%=request.getContextPath()%>/admin/userList">사용자 관리</a>
 	          <ul>
 	            <li>
 	              <a href="<%=request.getContextPath()%>/admin/userList">회원 목록</a>
@@ -68,10 +82,10 @@
 				관리자 페이지
 			</div>
 			
-			<!-- 로그아웃 -->
+			<!-- 로그아웃 버튼 -->
 			<div class="logoutbox">
-				로그아웃
-				<img src="<%=request.getContextPath()%>/images/admin/logout_icon.png" />
+				<img src="<%=request.getContextPath()%>/images/admin/logout_icon.png" /><br />
+				<span>logout</span>
 			</div>
 		</div> <!-- 상단박스 끝 -->
 		

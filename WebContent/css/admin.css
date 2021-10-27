@@ -47,23 +47,36 @@ time, mark, audio, video, fieldset{
   /* background: #f1f1f1; */ /* 연한회색 */
 }
 
-/*페이징 : 페이지바 */
+/**************************************
+ * 페이징바
+ **************************************/
 div#pageBar{
 	margin-top:30px; 
 	text-align:center; 
-	background-color:rgba(0, 188, 212, 0.3);
+	/* background-color:rgba(0, 188, 212, 0.3); */
 	padding: 5px;
 }
-div#pageBar span.cPage{color: #0066ff; margin-right: 5px;}
-div#pageBar a{margin-right: 5px; text-decoration: none;}
-div#pageBar a:hover {text-decoration: underline;}
+div#pageBar span.cPage{
+	color: red;
+	font-weight: bold; 
+	margin-right: 5px;
+}
+div#pageBar a{
+	margin-right: 5px; 
+	text-decoration: none;
+}
+div#pageBar a:hover {
+	/* text-decoration: underline; */
+	color: red;
+}
 
 /**************************************
  * 사이드메뉴 영역
  **************************************/
 /* 사이드메뉴 전체 */
 .side-menu-box{
-  width: 20%;
+  width: 20%; 
+  min-width: 20%;
   height: 100%;
   background: #dddddd;
   float:left;
@@ -75,11 +88,43 @@ div#pageBar a:hover {text-decoration: underline;}
   background: #e51737;
   color: #fff;
   font-size: 35px;
+  font-family: 'Alfa Slab One', cursive;
   cursor: pointer;
+  position:relative;
+  height: 45px;
 }
 
+/* Settings 텍스트 */
+.side-menu-profile span {
+	/* background-color: aqua; */
+	position: absolute;
+	top: 27px;
+	left : 73px;
+	display: inline-block;
+}
+
+/* 톱니바퀴 이미지 */
 .side-menu-profile img {
 	width: 50px;
+	position: absolute;
+	top: 27px;
+	
+	/* 영역확인용 */
+	/* background-color: aqua; */
+}
+
+/* 세팅즈 a태그 hover할때 애니메이션 효과 주기 */
+.side-menu-profile a:hover > img {
+	/* 애니메이션 효과 */
+	animation: setting_icon_anime 6s ease-in infinite;
+	transform-origin: 50% 50%;
+}
+
+/* 360도 회전하는 애니메이션 효과  */
+@keyframes setting_icon_anime {
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* 사이드메뉴부분 */
@@ -95,7 +140,9 @@ div#pageBar a:hover {text-decoration: underline;}
 }
 .snb > ul > li{
   position: relative;
-  border-bottom: 1px solid #919191; /* li 사이 경계선 색깔*/
+  
+  /* li 사이 경계선 색깔*/
+  border-bottom: 1px solid #919191; 
 }
 .snb > ul > li > a{
   display: inline-block;
@@ -173,8 +220,8 @@ div#pageBar a:hover {text-decoration: underline;}
 .topbox {
 	height: 50px;
 	border-bottom: 1px solid gray;
-	padding: 20px;
-	font-size: 25px;
+	padding: 15px 40px;
+	font-size: 28px;
 	
 	display:flex;
 	justify-content: space-between;
@@ -183,15 +230,40 @@ div#pageBar a:hover {text-decoration: underline;}
 
 .pagename {
 	display: inline-block;
+	position: relative;
+	top: 3px;
 }
 
+/* 로그아웃 영역 */
 .logoutbox {
 	display: inline-block;
+	font-family: 'Alfa Slab One', cursive;
+	position: relative;
+	cursor: pointer;
+	/* margin-right: 40px; */
+	
+	/* 영역확인용 */
+	/* background-color: aqua; */
 }
 
+/* 로그아웃 아이콘 이미지 */
 .logoutbox img {
-	width: 35px;
+	width: 40px;
+	position: relative;
+	top: 3px;
+	right:6px;
 }
+/* 로그아웃 텍스트 */
+.logoutbox span {
+	/* background-color: pink; */
+	position: absolute;
+	font-size: 14px;
+	top: 43px;
+	right: 2px;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 500;
+}
+
 
 .right-bottom-contents {
 	text-align: center;
@@ -201,7 +273,7 @@ div#pageBar a:hover {text-decoration: underline;}
  * userList.jsp
  **************************************/
  
- #tbl-user {
+#tbl-user {
 	border: 1px solid black;
 	border-collapse: collapse;
 	margin: 0 auto;
@@ -211,23 +283,63 @@ div#pageBar a:hover {text-decoration: underline;}
 	border: 1px solid black;
 	padding: 10px;
 }
+
+#tbl-user th {
+	background-color: #ffc6bf;
+}
  
+#tbl-user tr:hover {
+	background-color: #dfdfdf;
+}
+
+/* 검색, 정렬 박스 */
 .data-box {
 	width: 450x;
-	height: 25px;
-	background-color: #fbf5bd;
+	height: 30px;
+	background-color: #ffdfaf;
 	margin: 30px 200px;
 	display : flex;
 	justify-content: space-between;
 	padding: 10px 35px;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 500;
+	
+	
 }
 
+/* 검색 영역 */
 .serarchbox {
-	background-color: aqua;
+	/* background-color: aqua; */
 	display : inline-block;
+	position: relative;
+	/* top: 1px; */
 }
 
+/* 정렬 영역 */
 .sortbox {
-	background-color: aqua;
+	/* background-color: aqua; */
 	display : inline-block;
+	position: relative;
+	top: 3px;
+}
+
+.data-box select {
+	height: 26px;
+	border-radius: 7px;
+}
+
+.data-box input {
+	height: 23px;
+	border: 1px solid black;
+}
+
+.search-btn {
+	height: 30px;
+	width: 70px;
+	
+	position: relative;
+	top: 2px;
+	background-color: #ffb445;
+	font-weight: bold;
+	
 }
