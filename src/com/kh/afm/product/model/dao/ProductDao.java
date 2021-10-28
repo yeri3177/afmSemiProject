@@ -193,6 +193,7 @@ public class ProductDao {
 			
 			if(rset.next()) {
 				product = new Product();
+				product.setpNo(rset.getInt("p_no"));
 				product.setUserId(rset.getString("p_user_id"));
 				product.setpTitle(rset.getString("p_title"));
 				product.setpRegDate(rset.getDate("p_reg_date"));
@@ -287,7 +288,7 @@ public class ProductDao {
 ////				attach.setRegDate(rset.getDate("reg_date"));
 ////				attach.setImgFlag(rset.getString("img_flag"));
 //				
-//				product.setAttach1(attach);
+//					product.setAttach1(attach);
 //			}
 //			
 //			}

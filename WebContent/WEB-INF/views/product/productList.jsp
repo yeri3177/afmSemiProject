@@ -10,13 +10,13 @@
 
 <section id="board-container">
 
-<h1>Category</h1>
+<h2>Category</h1>
 <ul>
 	<li><a href="">곡류</a></li>
 	<li><a href="">과실류</a></li>
 	<li><a href="">채소류</a></li>
 </ul>
-
+<h2>상품 목록</h1>
 	<table id="tbl-board">
 		<tr>
 			<th>번호</th>
