@@ -81,4 +81,30 @@ public class ProductService {
 		
 	}
 
+	public static int updateProduct(Product product) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		try {
+			// 1. 첨부파일1,2 업데이트 하기
+			Attachment attach1 = productDao.updateAttachmentY(conn, product);
+			System.out.println(attach1);
+
+			Attachment attach2 = productDao.updateAttachmentN(conn, product);
+			System.out.println(attach2);
+
+			// 2. 게시글 수정 updateProdcut문
+			result = productDao.updateProduct(conn, product);
+			
+			
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
 }

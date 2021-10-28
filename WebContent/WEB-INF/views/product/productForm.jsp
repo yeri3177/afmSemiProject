@@ -10,10 +10,6 @@
 	enctype="multipart/form-data">
 	<table id="tbl-board-view">
 	<tr>
-		<th>작성자</th>
-		<td><input type="text" name="userId" value="<%= loginUser.getUserId() %>" readonly/></td>
-	</tr>
-	<tr>
 		<th>상품 제목</th>
 		<td><input type="text" name="pTitle" required></td>
 	</tr>

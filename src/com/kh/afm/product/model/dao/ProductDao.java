@@ -451,6 +451,21 @@ public class ProductDao {
 
 	}
 
+	public Attachment updateAttachmentY(Connection conn, Product product) {
+		
+		return null;
+	}
+
+	public Attachment updateAttachmentN(Connection conn, Product product) {
+		
+		return null;
+	}
+
+	public int updateProduct(Connection conn, Product product) {
+		
+		return 0;
+	}
+
 
 	
 }
