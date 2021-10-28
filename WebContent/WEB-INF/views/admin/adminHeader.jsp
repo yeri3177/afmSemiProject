@@ -1,4 +1,8 @@
+<%@page import="com.kh.afm.user.model.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	User loginUser = (User) session.getAttribute("loginUser");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,13 +83,15 @@
 			
 			<!-- 페이지명 -->
 			<div class="pagename">
-				관리자 페이지
+				<span>관리자 페이지</span>
+				<div class="loginName">
+					<mark><%= loginUser.getUserName() +"("+ loginUser.getUserId()%>)</mark>님 안녕하세요.
+				</div>
 			</div>
 			
 			<!-- 로그아웃 버튼 -->
 			<div class="logoutbox" onclick="location.href='<%= request.getContextPath() %>/user/logout';">
 				<img src="<%=request.getContextPath()%>/images/admin/logout_icon.png" /><br />
-				<span>logout</span>
 			</div>
 		</div> <!-- 상단박스 끝 -->
 		

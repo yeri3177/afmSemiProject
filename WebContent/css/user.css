@@ -14,8 +14,9 @@
 	padding: 30px;
 	background-color: #fffacf;
 }
-#loginFrm {
-	margin: 0 545px;
+#loginFrm table {
+	/* margin: 0 545px; */
+	margin: 0 auto;
 }
 #loginFrm input {
 	margin: 7px;	
@@ -99,4 +100,8 @@
 }
 
  
- 
+.enrollinfo {
+	width: 100%; 
+	height: 80px; 
+	overflow: scroll;
+}

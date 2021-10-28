@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.afm.common.MvcUtils;
 import com.kh.afm.user.model.service.UserService;
+import com.kh.afm.user.model.vo.Address;
 import com.kh.afm.user.model.vo.User;
 
 /**
@@ -70,18 +71,22 @@ public class UserEnrollServlet extends HttpServlet {
 		if(s_birth != null && !"".equals(s_birth)) {
 			d_birth = Date.valueOf(s_birth);
 		}
-
-		
-		// 주소 2개 -> 1개
-		String address = address1+" "+address2;
-		System.out.println("address : " + address);
 		
 		// User 객체 생성
 		User user = new User(userId, userName, email, password, d_birth, phone, null, UserService.USER_ROLE, null);
 		System.out.println("user : " + user);
 		
+		// Address 객체 생성
+		Address address = new Address(0, "기본주소", address1, address2, userId);
+		System.out.println("address : " + address);
+		
 		// 업무로직 (insert 처리)
 		int result = userService.insertUser(user);
+		System.out.println("insertUser_result : " + result);
+		
+		int result2 = userService.insertAddress(address);
+		System.out.println("insertAddress_result2 : " + result2);
+		
 		String msg = result > 0 ? "성공적으로 회원가입했습니다." : "회원가입 실패했습니다.";
 		
 		// 응답처리

@@ -11,9 +11,13 @@
 
 <section id="delUserList-container" class="admin-container">
 
+<button>전체선택</button>
+<button>삭제</button>
+
 <table id="tbl-user">
     <thead>
         <tr>
+        	<th>no</th>
 			<th>아이디</th>
 			<th>이름</th>
 			<th>이메일</th>
@@ -31,6 +35,7 @@
 	for(DelUser user : list){
 %>
 	<tr>
+		<td><input type="checkbox" value="<%=user.getDeleteUId()%>" /></td>
 		<td><%=user.getDeleteUId()%></td>
 		<td><%=user.getDeleteUName()%></td>
 		<td><%=user.getDeleteUEmail()%></td>

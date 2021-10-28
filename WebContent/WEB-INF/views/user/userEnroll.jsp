@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>user Join page</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/user.css" />
+<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 </head>
 <body>
 
@@ -13,6 +14,12 @@
 카카오도로명주소
 https://tyrannocoding.tistory.com/48
 -->
+
+<!-- 아이디중복검사 폼전송 -->
+<form name="checkIdDuplicateFrm" action="<%= request.getContextPath() %>/user/checkIdDuplicate" method="POST">
+	<input type="hidden" name="userId" />
+</form>
+
 
 <section id=user-enroll-container>
 
@@ -44,7 +51,7 @@ https://tyrannocoding.tistory.com/48
 			</tr>
 			<tr>
 				<td>
-					<div style="width:100%; height:80px; overflow:auto">
+					<div class="enrollinfo">
 						<span class="chk">
 							<input type="checkbox"/>
 						</span>
@@ -60,7 +67,7 @@ https://tyrannocoding.tistory.com/48
 			
 			<tr>
 				<td>
-					<div style="width:100%; height:80px; overflow:auto">
+					<div class="enrollinfo">
 						<span class="chk">
 							<input type="checkbox"/>
 						</span>
@@ -166,6 +173,12 @@ https://tyrannocoding.tistory.com/48
 
 
 <script>
+/**
+* 중복검사 이후 아이디를 수정하는 경우
+*/
+$(_userId).change((e) => {
+	$(idValid).val(0);
+});
 
 /**
 * 아이디 중복검사 함수
@@ -197,27 +210,38 @@ function findAddr(){
 	new daum.Postcode({
         oncomplete: function(data) {
         	
-        	console.log(data);
-        	
-            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-            var roadAddr = data.roadAddress; // 도로명 주소 변수
-            
-            var jibunAddr = data.jibunAddress; // 지번 주소 변수
-            
-            
-            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.getElementById('member_post').value = data.zonecode;
-            if(roadAddr !== ''){
-                document.getElementById("member_addr").value = roadAddr;
-            } 
-            else if(jibunAddr !== ''){
-                document.getElementById("member_addr").value = jibunAddr;
-            }
+	       	console.log(data);
+	       	
+           // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+           // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+           // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+           var roadAddr = data.roadAddress; // 도로명 주소 변수
+           
+           var jibunAddr = data.jibunAddress; // 지번 주소 변수
+           
+           
+           // 우편번호와 주소 정보를 해당 필드에 넣는다.
+           document.getElementById('member_post').value = data.zonecode;
+           if(roadAddr !== ''){
+               document.getElementById("member_addr").value = roadAddr;
+           } 
+           else if(jibunAddr !== ''){
+               document.getElementById("member_addr").value = jibunAddr;
+           }
         }
     }).open();
 }
+
+
+/**
+* userEnrollFrm 유효성 검사
+* 1. 필수항목 값입력 확인
+* 2. 아이디/비번 4글자이상
+* 3. 비밀번호 일치 확인
+*/
+
+
+
 </script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
