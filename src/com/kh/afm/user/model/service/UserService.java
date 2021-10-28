@@ -6,10 +6,9 @@ import static com.kh.afm.common.JdbcTemplate.getConnection;
 import static com.kh.afm.common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
-import java.util.List;
-import java.util.Map;
 
 import com.kh.afm.user.model.dao.UserDao;
+import com.kh.afm.user.model.vo.Account;
 import com.kh.afm.user.model.vo.Address;
 import com.kh.afm.user.model.vo.User;
 
@@ -96,6 +95,19 @@ public class UserService {
 		public int insertAddress(Address address) {
 			Connection conn = getConnection();
 			int result = userDao.insertAddress(conn, address);
+			if(result>0)
+				commit(conn);
+			else 
+				rollback(conn);
+			close(conn);
+			return result;
+		}
+		/**
+		 * 회원가입 (Account 테이블 행 추가)
+		 */
+		public int insertAccount(Account tb_account) {
+			Connection conn = getConnection();
+			int result = userDao.insertAccount(conn, tb_account);
 			if(result>0)
 				commit(conn);
 			else 
