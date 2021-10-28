@@ -76,6 +76,10 @@ public class SellerEnrollServlet extends HttpServlet {
 		String address = address1+" "+address2;
 		System.out.println("address : " + address);
 		
+		// 계좌번호 + 은행명
+		String account = banknum + " " + bankname;
+		System.out.println("account : " + account);
+		
 		// User 객체 생성
 		User user = new User(userId, userName, email, password, d_birth, phone, null, UserService.SELLER_ROLE, null);
 		System.out.println("user : " + user);
