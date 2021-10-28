@@ -83,7 +83,7 @@
 			</div>
 			
 			<!-- 로그아웃 버튼 -->
-			<div class="logoutbox">
+			<div class="logoutbox" onclick="location.href='<%= request.getContextPath() %>/user/logout';">
 				<img src="<%=request.getContextPath()%>/images/admin/logout_icon.png" /><br />
 				<span>logout</span>
 			</div>

@@ -256,26 +256,30 @@ public class AdminDao {
 		String sortType = (String) param.get("sortType");
 		String sortKeyword = (String) param.get("sortKeyword");
 		
-		if("userId".equals(sortKeyword)) {
-			sql = prop.getProperty("sortUserByUserId"); 
+		if("asc".equals(sortType) && "userId".equals(sortKeyword)) {
+			sql = prop.getProperty("sortUserByUserIdOrderAsc");
 		}
-		else if("userName".equals(sortKeyword)) {
-			sql = prop.getProperty("sortUserByUserName"); 
+		else if("asc".equals(sortType) && "userName".equals(sortKeyword)) {
+			sql = prop.getProperty("sortUserByUserNameOrderAsc");
 		}
-		else if("userRole".equals(sortKeyword)) {
-			sql = prop.getProperty("sortUserByUserRole"); 
+		else if("asc".equals(sortType) && "userRole".equals(sortKeyword)) {
+			sql = prop.getProperty("sortUserByUserRoleOrderAsc");
 		}
-		
-		System.out.println("sortType@dao = " + sortType);
-		System.out.println("sortKeyword@dao = " + sortKeyword);
-		System.out.println("sql@dao = " + sql);
+		else if("desc".equals(sortType) && "userId".equals(sortKeyword)) {
+			sql = prop.getProperty("sortUserByUserIdOrderDesc");
+		}
+		else if("desc".equals(sortType) && "userName".equals(sortKeyword)) {
+			sql = prop.getProperty("sortUserByUserNameOrderDesc");
+		}
+		else if("desc".equals(sortType) && "userRole".equals(sortKeyword)) {
+			sql = prop.getProperty("sortUserByUserRoleOrderDesc");
+		}
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int) param.get("start"));
+			pstmt.setInt(2, (int) param.get("end"));
 			
-			pstmt.setString(1, sortType);
-			pstmt.setInt(2, (int) param.get("start"));
-			pstmt.setInt(3, (int) param.get("end"));
 			
 			// 2. 쿼리실행 및 ResultSet처리
 			rset = pstmt.executeQuery();
