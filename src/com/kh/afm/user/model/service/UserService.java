@@ -44,6 +44,9 @@ public class UserService {
 		return result;
 	}
 	
+	/**
+	 * 회원 수정하기 (회원수정)
+	 */
 	 public int updateUser(User user) {
 			Connection conn = getConnection();
 			int result = userDao.updateUser(conn, user);
@@ -54,7 +57,8 @@ public class UserService {
 			close(conn);
 			return result;
 		}
-	    
+	 
+
 	    public int deleteUser(String userId) {
 			Connection conn = getConnection();
 			int result = userDao.deleteUser(conn, userId);

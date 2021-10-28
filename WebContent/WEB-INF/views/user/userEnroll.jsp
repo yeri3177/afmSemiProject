@@ -166,6 +166,33 @@ https://tyrannocoding.tistory.com/48
 
 
 <script>
+
+/**
+* 아이디 중복검사 함수
+*/
+const checkIdDuplicate = () => {
+	//userId 유효성 검사
+	const $userId = $("#_userId");
+	//아이디는 영문자/숫자  4글자이상만 허용 
+	if(/^[a-zA-Z0-9]{4,}$/.test($userId.val()) == false){
+		alert("아이디는 최소 4자리이상이어야 합니다.");
+		$userId.select();
+		return;
+	}
+	
+	const title = "popupCheckId";
+	const spec = "left=500px, top=300px, width=300px, height=200px";
+	const popup = open("", title, spec);
+	
+	const $frm = $(document.checkIdDuplicateFrm);
+	$frm.find("[name=userId]").val($(_userId).val());
+	$frm.attr("target", title) // form제출을 popup에서 진행
+		.submit();
+};
+
+
+
+//주소api
 function findAddr(){
 	new daum.Postcode({
         oncomplete: function(data) {
