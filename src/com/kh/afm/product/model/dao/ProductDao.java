@@ -276,13 +276,16 @@ public class ProductDao {
 //			if(rset.getString("img_flag").equals("Y")) {
 //				
 //				for(int i = 0; i < list.size(); i++) {
-//				Attachment attach = new Attachment();
-//				attach.setAttachNo(rset.getInt("attach_no"));
-//				attach.setpNo(rset.getInt("p_no"));
-//				attach.setOriginalFileName(rset.getString("original_filename"));
-//				attach.setRenamedFileName(rset.getString("renamed_filename"));
-//				attach.setRegDate(rset.getDate("reg_date"));
-//				attach.setImgFlag(rset.getString("img_flag"));
+//					attach = list[i];
+//					product.setAttach1(attach);
+//					
+////				Attachment attach = new Attachment();
+////				attach.setAttachNo(rset.getInt("attach_no"));
+////				attach.setpNo(rset.getInt("p_no"));
+////				attach.setOriginalFileName(rset.getString("original_filename"));
+////				attach.setRenamedFileName(rset.getString("renamed_filename"));
+////				attach.setRegDate(rset.getDate("reg_date"));
+////				attach.setImgFlag(rset.getString("img_flag"));
 //				
 //				product.setAttach1(attach);
 //			}
@@ -298,31 +301,31 @@ public class ProductDao {
 			
 			
 			
-			if(rset.getString("img_flag").equals("Y")) {
-				Attachment attach = new Attachment();
-				attach.setAttachNo(rset.getInt("attach_no"));
-				attach.setpNo(rset.getInt("p_no"));
-				attach.setOriginalFileName(rset.getString("original_filename"));
-				attach.setRenamedFileName(rset.getString("renamed_filename"));
-				attach.setRegDate(rset.getDate("reg_date"));
-				attach.setImgFlag(rset.getString("img_flag"));
-				
-				product.setAttach1(attach);
-				
-			}
-			
-			if(rset.getString("img_flag").equals("N")) {
-				Attachment attach = new Attachment();
-				attach.setAttachNo(rset.getInt("attach_no"));
-				attach.setpNo(rset.getInt("p_no"));
-				attach.setOriginalFileName(rset.getString("original_filename"));
-				attach.setRenamedFileName(rset.getString("renamed_filename"));
-				attach.setRegDate(rset.getDate("reg_date"));
-				attach.setImgFlag(rset.getString("img_flag"));
-				
-				product.setAttach2(attach);
-				
-			}
+//			if(rset.getString("img_flag").equals("Y")) {
+//				Attachment attach = new Attachment();
+//				attach.setAttachNo(rset.getInt("attach_no"));
+//				attach.setpNo(rset.getInt("p_no"));
+//				attach.setOriginalFileName(rset.getString("original_filename"));
+//				attach.setRenamedFileName(rset.getString("renamed_filename"));
+//				attach.setRegDate(rset.getDate("reg_date"));
+//				attach.setImgFlag(rset.getString("img_flag"));
+//				
+//				product.setAttach1(attach);
+//				
+//			}
+//			
+//			if(rset.getString("img_flag").equals("N")) {
+//				Attachment attach = new Attachment();
+//				attach.setAttachNo(rset.getInt("attach_no"));
+//				attach.setpNo(rset.getInt("p_no"));
+//				attach.setOriginalFileName(rset.getString("original_filename"));
+//				attach.setRenamedFileName(rset.getString("renamed_filename"));
+//				attach.setRegDate(rset.getDate("reg_date"));
+//				attach.setImgFlag(rset.getString("img_flag"));
+//				
+//				product.setAttach2(attach);
+//				
+//			}
 
 			
 			
