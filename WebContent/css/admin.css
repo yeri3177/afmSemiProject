@@ -294,54 +294,49 @@ div#pageBar a:hover {
 
 /* 검색, 정렬 박스 */
 .data-box {
-	width: 500x;
-	height: 45px;
+	width: 870px;
+	height: 32px;
 	background-color: #ffdfaf;
-	margin: 30px 200px;
-	/* display : flex;
-	justify-content: space-between; */
-	/* padding: 10px 20px; */
-	font-family: 'Ubuntu', sans-serif;
-	font-weight: 500;
-	
+	margin: 30px auto;
+	padding: 10px;	
 }
 
 /* 검색 영역 */
 .serarchbox {
-	background-color: aqua;
+	/* background-color: aqua; */
 	display : inline-block;
-	position: relative;
+	margin: 0 15px;
 }
 
 /* 정렬 영역 */
 .sortbox {
-	background-color: pink;
+	/* background-color: pink; */
 	display : inline-block;
-	position: relative;
-}
-
-.sortbox span {
-	display : inline-block;
-	width: 30px;
+	margin: 0 15px;
 }
 
 .data-box select {
-	height: 26px;
-	border-radius: 7px;
+	height: 28px;
+	/* border-radius: 7px; */
 }
 
 .data-box input {
-	height: 23px;
+	height: 24px;
 	border: 1px solid black;
 }
 
+/* 검색, 정렬 버튼 */
 .search-btn, .sort-btn {
 	height: 30px;
 	width: 70px;
-	
-	position: relative;
-	top: 2px;
 	background-color: #ffb445;
 	font-weight: bold;
 	
+}
+
+/**************************************
+ * delUserList.jsp
+ **************************************/
+#delUserList-container {
+	margin-top: 70px;
 }

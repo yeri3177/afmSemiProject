@@ -2,13 +2,15 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/admin/adminHeader.jsp" %>
-	<h1>탈퇴회원목록</h1>
 
 <%
 	List<DelUser> list = (List<DelUser>) request.getAttribute("list");
 	String searchType = request.getParameter("searchType");
 	String searchKeyword = request.getParameter("searchKeyword");
 %>
+
+<section id="delUserList-container" class="admin-container">
+
 <table id="tbl-user">
     <thead>
         <tr>
@@ -38,10 +40,6 @@
 		<td><%=user.getUserExpose()%></td>
 		<td><%=user.getDeleteUEnroll_date()%></td>
 		<td><%=user.getDeleteUDate()%></td>
-		
-
-		
-	
 	</tr>
 
 <%
@@ -49,4 +47,11 @@
 %>
 	</tbody>	
 </table>	
+
+<!-- 페이지바 영역 -->
+<div id="pageBar">
+	<%= request.getAttribute("pagebar") %>
+</div>	
+
+</section>
 <%@ include file="/WEB-INF/views/admin/adminFooter.jsp" %>

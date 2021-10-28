@@ -7,6 +7,8 @@
 	List<User> list = (List<User>) request.getAttribute("list");
 	String searchType = request.getParameter("searchType");
 	String searchKeyword = request.getParameter("searchKeyword");
+	String sortType = request.getParameter("sortType");
+	String sortKeyword = request.getParameter("sortKeyword");
 %>
 <style>
 div#search-userId {
@@ -19,7 +21,7 @@ div#search-userRole {
 	display: <%= "userRole".equals(searchType) ? "inline-block" : "none" %>;
 }
 </style>
-<section id="userList-container">
+<section id="userList-container" class="admin-container">
 
 <div class="data-box">
 	
@@ -80,18 +82,18 @@ div#search-userRole {
 	
 	<!-- 데이터 정렬 -->
 	<div class="sortbox">
-		<span>sort</span>
+		
 		<form action="<%=request.getContextPath()%>/admin/userSort">
-			
+			<span>sort</span>
 			<!-- 정렬 타입 -->
-			<input type="radio" name="sortType" value="asc"/>오름차순
-			<input type="radio" name="sortType" value="desc"/>내림차순
+			<input type="radio" name="sortType" value="asc" <%= "asc".equals(sortType) ? "checked" : "" %> />오름차순
+			<input type="radio" name="sortType" value="desc" <%= "desc".equals(sortType) ? "checked" : "" %> />내림차순
 			
 			<!-- 정렬 키워드 -->
 			<select name=sortKeyword>
-				<option value="userId">아이디</option>
-				<option value="userName">회원명</option>
-				<option value="userRole">회원권한</option>
+				<option value="userId" <%= "userId".equals(sortKeyword) ? "selected" : "" %>>아이디</option>
+				<option value="userName" <%= "userName".equals(sortKeyword) ? "selected" : "" %>>회원명</option>
+				<option value="userRole" <%= "userRole".equals(sortKeyword) ? "selected" : "" %>>회원권한</option>
 			</select>
 			
 			<button type="submit" class="sort-btn">정렬</button>
