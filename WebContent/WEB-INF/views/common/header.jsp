@@ -18,46 +18,42 @@
 <link rel="icon" href="<%= request.getContextPath() %>/images/common/logofont.png">
 
 <style>
-/* body{font-family: 'Gothic A1', sans-serif; overflow-x: hidden;} */
-
-/* body{font-family: 'Nanum Gothic Coding', monospace; overflow-x: hidden;} */
-
-/* body{font-family: 'Sunflower', sans-serif; overflow-x: hidden;} */
-
-/* body{font-family: 'IBM Plex Sans KR', sans-serif; overflow-x: hidden;} */
-
-/* body{font-family: 'Gaegu', cursive; font-weight:bold; overflow-x: hidden;} */
-
-body{font-family: 'Noto Sans KR', sans-serif; overflow-x: hidden;padding:0;margin:0;padding-top: 15%;}
+/* @media all and (min-width:820px) and (max-width:1044px){ */
+body{font-family: 'Noto Sans KR', sans-serif; overflow-x: hidden;padding:0;margin:0;padding-top: 20vh;}
 a{text-decoration:none;}
 header{position: fixed;z-index:99999;}
 .mainHeader{background-color:#FBF6F0;top: 0;left: 0;font-weight: bold;justify-content: space-between;width: 100%;height: 20%;display: flex;position: fixed;}
-.homepageName{padding-left:10px;color:green;display: flex;top: 0;}
-.profileImg{background-color:#FBF6F0;padding: 3px;border: none;}
-.cartImg{background-color:#FBF6F0;padding: 3px;border: none;}
-.settingImg{background-color:#FBF6F0;padding: 3px;border: none;}
-.indexlogoutImg{background-color:#FBF6F0;padding: 3px;border: none;}
-.indexlogout{padding-top:20px;padding-left:5px;width:45px;}
-.profile{padding-top:20px;padding-left:5px;width:45px;}
-.cart{padding-top:20px;padding-left:5px;width:45px;}
-.setting{padding-top:20px;padding-left:5px;width:45px;}
-.logoImg{width:30%;}
-.nickName{font-size:45px;padding:0;margin:0;padding-top:1%;}
-.main-nav{background-color:#FFA45B;padding:0px;margin:auto;display:flex;position:fixed;top:18%;left:50%;transform:translate(-50%,-50%);width:100%;}
-.main-nav div{width: 100%;height: 10%;float: left;text-align: center;border-left: 1px #47C83E solid;}
+.homepageName{padding:1vw;color:green;display: flex;top: 0;width: 100%;}
+.profileImg{background-color:#FBF6F0;padding: 0.1vw;border: none;}
+.profileImg a{background-color:#FBF6F0;font-size:1.2vw;}
+.cartImg{background-color:#FBF6F0;padding: 0.1vw;border: none;}
+.cartImg a{background-color:#FBF6F0;font-size:1.2vw;}
+.settingImg{background-color:#FBF6F0;padding: 0.1vw;border: none;}
+.settingImg a{background-color:#FBF6F0;font-size:1.2vw;}
+.indexlogoutImg{background-color:#FBF6F0;padding: 0.1vw;border: none;}
+.indexlogoutImg a{background-color:#FBF6F0;font-size:1.2vw;}
+.indexlogout{padding-top:1.5vw;padding-left:0.5vw;width:4vw;}
+.profile{padding-top:1.5vw;padding-left:0.5vw;width:4vw;}
+.cart{padding-top:1.5vw;padding-left:0.5vw;width:4vw;}
+.setting{padding-top:1.5vw;padding-left:0.5vw;width:4vw;}
+.logoImg{width:30%;height:30%}
+.nickName{font-size:4.5vw;padding:0;margin:0;padding-top:1vh;}
+.main-nav{background-color:#FFA45B;padding:0px;margin:auto;display:flex;position:fixed;top:18%;left:50%;transform:translate(-50%,-50%);width:100%;height:4%;font-size:1.1vw;}
+.main-nav div{width: 100%;float: left;text-align: center;border-left: 1px #47C83E solid;height:100%;}
 .main-nav div:first-of-type{border-left:none;}
-.main-nav div a {display: block;padding:.4em;text-decoration: none;color: black;font-weight: bold;}
+.main-nav div a {display: block;padding:.4vw;text-decoration: none;color: black;font-weight: bold;}
 .main-nav div:hover{background-color:#00C652;}
 .main-nav div:hover > a{color:#FFCD12;}
 .dropdown{display: flex;justify-content: flex-end;}
 .buttonImgName{display: flex;font-weight: 400;}
-.search{display: flex;padding-top:25px;width: 40%;justify-content: center;}
+.search{display: flex;padding-top:4vh;width: 40%;justify-content: center;}
 .searchform{width:90%}
-.searchImg{width:40px;vertical-align: middle;}
-.btnSearch{background-color:#FBF6F0;padding: 10px;border: none;}
+.searchImg{width:4vw;vertical-align: middle;}
+.btnSearch{background-color:#FBF6F0;padding: 1vw;border: none;}
 .btnSearch:hover{cursor:pointer;}
-.searchinput{border:1px green solid;width: 60%;height: 30%;border-radius:50px;padding-top:5px;font-size:12px;color:#777777;}
-.logofont{padding-top:15px;height:60px;}
+.searchinput{border:1px green solid;width: 60%;height: 30%;border-radius:5vw;padding-top:0.5vh;font-size:12px;color:#777777;}
+.logofont{padding-top:0.5vw;height:5vw;}
+/* } */
 </style>
 <%
 	User loginUser = (User)session.getAttribute("loginUser");
