@@ -276,13 +276,16 @@ public class ProductDao {
 //			if(rset.getString("img_flag").equals("Y")) {
 //				
 //				for(int i = 0; i < list.size(); i++) {
-//				Attachment attach = new Attachment();
-//				attach.setAttachNo(rset.getInt("attach_no"));
-//				attach.setpNo(rset.getInt("p_no"));
-//				attach.setOriginalFileName(rset.getString("original_filename"));
-//				attach.setRenamedFileName(rset.getString("renamed_filename"));
-//				attach.setRegDate(rset.getDate("reg_date"));
-//				attach.setImgFlag(rset.getString("img_flag"));
+//					attach = list[i];
+//					product.setAttach1(attach);
+//					
+////				Attachment attach = new Attachment();
+////				attach.setAttachNo(rset.getInt("attach_no"));
+////				attach.setpNo(rset.getInt("p_no"));
+////				attach.setOriginalFileName(rset.getString("original_filename"));
+////				attach.setRenamedFileName(rset.getString("renamed_filename"));
+////				attach.setRegDate(rset.getDate("reg_date"));
+////				attach.setImgFlag(rset.getString("img_flag"));
 //				
 //				product.setAttach1(attach);
 //			}
@@ -291,7 +294,8 @@ public class ProductDao {
 //			
 			
 			
-			
+			product.setAttach1(attach1);
+			product.setAttach2(attach2);
 			
 			
 			
@@ -374,7 +378,7 @@ public class ProductDao {
 		Attachment attach = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("selectAttachmentListY");
+		String query = prop.getProperty("selectAttachmentY");
 		
 		
 		try {
@@ -412,7 +416,7 @@ public class ProductDao {
 		Attachment attach = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("selectAttachmentListN");
+		String query = prop.getProperty("selectAttachmentN");
 		
 		
 		try {
