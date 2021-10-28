@@ -218,9 +218,9 @@ div#pageBar a:hover {
 
 /* 상단박스 영역 */
 .topbox {
-	height: 50px;
+	height: 95px;
 	border-bottom: 1px solid gray;
-	padding: 15px 40px;
+	/* padding: 15px 40px; */
 	font-size: 28px;
 	
 	display:flex;
@@ -231,7 +231,12 @@ div#pageBar a:hover {
 .pagename {
 	display: inline-block;
 	position: relative;
-	top: 3px;
+	top: 11px;
+	left: 20px;
+}
+
+.pagename .loginName {
+	font-size: 17px;
 }
 
 /* 로그아웃 영역 */
@@ -248,10 +253,10 @@ div#pageBar a:hover {
 
 /* 로그아웃 아이콘 이미지 */
 .logoutbox img {
-	width: 40px;
+	width: 55px;
 	position: relative;
-	top: 3px;
-	right:6px;
+	top: 13px;
+	right:60px;
 }
 /* 로그아웃 텍스트 */
 .logoutbox span {
@@ -340,3 +345,26 @@ div#pageBar a:hover {
 #delUserList-container {
 	margin-top: 70px;
 }
+
+
+
+/**************************************
+ * adminMain.jsp
+ **************************************/
+ #adminmain-container {
+ 	margin: 70px auto;
+ 	background-color: lightblue;
+ 	font-size: 25px;
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

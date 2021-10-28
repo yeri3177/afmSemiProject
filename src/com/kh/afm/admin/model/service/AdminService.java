@@ -76,4 +76,14 @@ public class AdminService {
 		close(conn);
 		return list;
 	}
+	
+	/**
+	 * 메인페이지 쿼리
+	 */
+	public Map<String, Integer> adminMainQuery(Map<String, Integer> param) {
+		Connection conn = getConnection();
+		Map<String, Integer> result = adminDao.adminMainQuery(conn, param);
+		close(conn);
+		return result;
+	}
 }

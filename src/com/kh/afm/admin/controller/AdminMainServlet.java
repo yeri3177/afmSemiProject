@@ -1,22 +1,42 @@
 package com.kh.afm.admin.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.afm.admin.model.service.AdminService;
+
 /**
- * 관리자페이지 - 메인페이지 
+ * 관리자 메인 페이지 
  */
 @WebServlet("/admin/adminMain")
 public class AdminMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private AdminService adminService = new AdminService(); 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		// 업무로직
+		Map<String, Integer> param = new HashMap<>();
+		param.put("recentlyUserCnt", 90);
+		param.put("allUserCnt", 10);
+		param.put("recentlyProdCnt", 30);
+		param.put("allProdCnt", 50);
+		
+		System.out.println("param@servlet = " + param);
+		
+		// 검색결과 리스트
+//		param = adminService.adminMainQuery(param);
+		
+		// view단 연결 
+		request.setAttribute("param", param);
 		request
 			.getRequestDispatcher("/WEB-INF/views/admin/adminMain.jsp")
 			.forward(request, response);	

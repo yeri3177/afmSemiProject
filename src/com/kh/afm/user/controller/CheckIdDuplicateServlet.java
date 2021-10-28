@@ -12,7 +12,7 @@ import com.kh.afm.user.model.service.UserService;
 import com.kh.afm.user.model.vo.User;
 
 /**
- * Servlet implementation class CheckIdDuplicateServlet
+ * 아이디중복검사 서블릿
  */
 @WebServlet("/user/checkIdDuplicate")
 public class CheckIdDuplicateServlet extends HttpServlet {
@@ -41,5 +41,4 @@ public class CheckIdDuplicateServlet extends HttpServlet {
 			.getRequestDispatcher("/WEB-INF/views/user/checkIdDuplicate.jsp")
 			.forward(request, response);
 	}
-
 }

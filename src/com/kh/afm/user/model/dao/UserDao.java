@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.kh.afm.user.model.vo.Address;
 import com.kh.afm.user.model.vo.User;
 
 public class UserDao {
@@ -30,6 +31,9 @@ private Properties prop = new Properties();
 		
 	}
 	
+	/**
+	 * 회원가입 (User 테이블 행 추가)
+	 */
 	public int insertUser(Connection conn, User user) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -214,5 +218,31 @@ private Properties prop = new Properties();
 		return totalContents;
 	}
 
-
+	/**
+	 * 회원가입 (Address 테이블 행 추가)
+	 */
+	public int insertAddress(Connection conn, Address address) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertAddress"); 
+		
+		try {
+			//미완성쿼리문을 가지고 객체생성
+			pstmt = conn.prepareStatement(query);
+			
+			//쿼리문미완성
+			pstmt.setString(1, address.getUserId());
+			pstmt.setString(2, address.getAdrName());
+			pstmt.setString(3, address.getAdrRoad());
+			pstmt.setString(4, address.getAdrDetail());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }
