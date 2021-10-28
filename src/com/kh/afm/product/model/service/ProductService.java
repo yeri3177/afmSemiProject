@@ -64,4 +64,21 @@ public class ProductService {
 		return result;
 	}
 
+	public Product selectOneProduct(int no) {
+		Connection conn = getConnection();
+//		List<Attachment> list = productDao.selectAttachment(conn, no);
+		//대표이미지 attach1에 담기
+		Attachment attach1 = productDao.selectAttachmentY(conn, no);
+		System.out.println(attach1);
+		//상세이미지 attach2에 담기
+		Attachment attach2 = productDao.selectAttachmentN(conn, no);
+		System.out.println(attach2);
+		Product product = productDao.selectOneProduct(conn, no, attach1, attach2);
+		
+		close(conn);
+		
+		return product;
+		
+	}
+
 }

@@ -32,14 +32,8 @@
 %>
 		<tr>
 			<th><%= _product.getpNo() %></th>
-<%
-	if(_product.getAttach1() != null){
-%>
 			<th><img alt="" src="<%= request.getContextPath() %>/upload/product/<%= _product.getAttach1().getRenamedFileName() %>" width="300px" height="300px"></th>
-<%
-	}
-%>
-			<th><a href="<%= request.getContextPath() %>/product/productView?no=<%= _product.getpNo() %>"><%= _product.getpTitle() %></a></th>
+			<th><a href="<%= request.getContextPath() %>/product/productView?pNo=<%= _product.getpNo() %>"><%= _product.getpTitle() %></a></th>
 			<th><%= _product.getpPrice() %></th>
 			<th><%= _product.getUserId() %></th>
 			<th><%= (Date)_product.getpRegDate() %></th>
@@ -50,13 +44,17 @@
 %>
 	</table>
 
-
+<% 
+	if(loginUser != null){ 
+%>	
 <input 
 		type="button" 
 		value="글쓰기" 
 		id="btn-add" 
 		onclick="location.href='<%= request.getContextPath() %>/product/productForm';" />
-		
+<%
+	} 
+%>
 <div id='pageBar'><%= request.getAttribute("pagebar") %></div>
 </section>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
