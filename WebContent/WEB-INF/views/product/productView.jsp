@@ -7,7 +7,7 @@
 %>
 <section id="board-container">
 	<h2>게시판</h2>
-	<div><img src="<%= request.getContextPath() %>/upload/product/<%= product.getAttach1().getRenamedFileName() %>" alt="대표이미지" width="300px" height="300px"/></div>
+	<div><img src="<%= request.getContextPath() %>/upload/product/<%= product.getAttach1().getRenamedFileName() %>" alt="대표이미지" width="300px" height="300px"/></div>	
 	<br />
 	<hr />
 	<br />
@@ -22,6 +22,7 @@
 	<br />
 	<hr />
 	<br />
+	<div><img src="<%= request.getContextPath() %>/upload/product/<%= product.getAttach2().getRenamedFileName() %>" alt="상세이미지" width="300px" height="300px"/></div>	
 	<div>본문 : <%= product.getpContent() %></div>
 	
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
