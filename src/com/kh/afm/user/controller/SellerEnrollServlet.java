@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.afm.common.MvcUtils;
 import com.kh.afm.user.model.service.UserService;
+import com.kh.afm.user.model.vo.Account;
+import com.kh.afm.user.model.vo.Address;
 import com.kh.afm.user.model.vo.User;
 
 /**
@@ -71,21 +73,28 @@ public class SellerEnrollServlet extends HttpServlet {
 			d_birth = Date.valueOf(s_birth);
 		}
 
-		
-		// 주소 2개 -> 1개
-		String address = address1+" "+address2;
-		System.out.println("address : " + address);
-		
-		// 계좌번호 + 은행명
-		String account = banknum + " " + bankname;
-		System.out.println("account : " + account);
-		
 		// User 객체 생성
 		User user = new User(userId, userName, email, password, d_birth, phone, null, UserService.SELLER_ROLE, null);
 		System.out.println("user : " + user);
 		
+		// Address 객체 생성
+		Address address = new Address(0, "기본주소", address1, address2, userId);
+		System.out.println("address : " + address);
+		
+		// Account 객체 생성
+		Account tb_account = new Account(0, banknum, bankname, userId);
+		System.out.println("account : " + tb_account);
+		
 		// 업무로직 (insert 처리)
 		int result = userService.insertUser(user);
+		System.out.println("insertUser_result : " + result);
+		
+		int result2 = userService.insertAddress(address);
+		System.out.println("insertAddress_result2 : " + result2);
+		
+		int result3 = userService.insertAccount(tb_account);
+		System.out.println("insertAccount_result3 : " + result3);
+		
 		String msg = result > 0 ? "성공적으로 회원가입했습니다." : "회원가입 실패했습니다.";
 		
 		// 응답처리
