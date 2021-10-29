@@ -1,3 +1,4 @@
+<%@page import="com.kh.afm.user.model.service.UserService"%>
 <%@page import="com.kh.afm.user.model.vo.User"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -104,14 +105,24 @@ div#search-userRole {
 <table id="tbl-user">
     <thead>
         <tr>
-			<th>아이디</th>
-			<th>이름</th>
-			<th>이메일</th>
-			<th>생년월일</th>
-			<th>전화번호</th>
-			<th>회원권한</th>
-			<th>공개여부</th>
-			<th>가입일</th>
+        	<!---- user ---->
+			<th class="user-th">아이디</th>
+			<th class="user-th">이름</th>
+			<th class="user-th">이메일</th>
+			<th class="user-th">전화번호</th>
+			<th class="user-th">회원권한</th>
+			<th class="user-th">공개여부</th>
+			<th class="user-th">가입일</th>
+			
+			<!---- address ---->
+			<th class="address-th">주소NO</th>
+			<th class="address-th" id="adr-th">주소지</th>
+			
+			<!---- account ---->
+			<th class="account-th">계좌NO</th>
+			<th class="account-th">은행명</th>
+			<th class="account-th">계좌번호</th>
+			
         </tr>
     </thead>
     
@@ -120,14 +131,37 @@ div#search-userRole {
 	for(User user : list){
 %>
 	<tr>
-		<td><%=user.getUserId() %></td>
-		<td><%=user.getUserName() %></td>
-		<td><%=user.getUserEmail() %></td>
-		<td><%=user.getBirthday() %></td>
-		<td><%=user.getPhone() %></td>
-		<td><%=user.getUserRole() %></td>
-		<td><%=user.getUserExpose() %></td>
-		<td><%=user.getUserEnrollDate() %></td>
+		<!---- user ---->
+		<td><%= user.getUserId() %></td>
+		<td><%= user.getUserName() %></td>
+		<td><%= user.getUserEmail() %></td>
+		<td><%= user.getPhone() %></td>
+		<td>
+			<%= "U".equals(user.getUserRole()) ? "일반회원" : "S".equals(user.getUserRole()) ? "판매자" : "관리자" %>
+		</td>
+		
+		<td> <!-- 회원공개여부 select-option태그 -->	
+			<select class="user_expose" data-user-id="<%= user.getUserId() %>">
+				<option value="Y"
+					<%= "Y".equals(user.getUserExpose()) ? "selected" : "" %>>공개
+				</option>
+				
+				<option value="N"
+					<%= "N".equals(user.getUserExpose()) ? "selected" : "" %>>차단
+				</option>
+			</select>
+		</td>
+		
+		<td><%= user.getUserEnrollDate() %></td>
+		
+		<!---- address ---->
+		<td><%= user.getAddress().getAdrNo() %></td>
+		<td><%= user.getAddress().getAdrRoad() %> <%= user.getAddress().getAdrDetail() %></td>
+		
+		<!---- account ---->
+		<td><%= user.getAccount().getAccountNo() != 0 ? user.getAccount().getAccountNo() : "" %></td>
+		<td><%= user.getAccount().getBankName() != null ? user.getAccount().getBankName() : "" %></td>
+		<td><%= user.getAccount().getAccountNumber() != null ? user.getAccount().getAccountNumber() : "" %></td>
 	</tr>
 <%
     }
@@ -142,6 +176,17 @@ div#search-userRole {
 
 </section>
 
+<!-- 회원권한 변경시 폼전송 -->
+<form action="<%=request.getContextPath()%>/admin/updateMemberRole" method="POST" name="updateMemberRoleFrm">
+	<input type="hidden" name="memberId" />
+	<input type="hidden" name="memberRole" />
+</form>
+
+<!-- 공개여부 변경시 폼전송 -->
+<form action="<%=request.getContextPath()%>/admin/updateUserExpose" method="POST" name="updateUserExposeFrm">
+	<input type="hidden" name="userId" />
+	<input type="hidden" name="userExpose" />
+</form>
 
 <script>
 /* 검색유형 체인지 이벤트 */
@@ -155,15 +200,25 @@ $("#searchType").change((e) => {
   	$(`#search-\${type}`).css("display", "inline-block");
 }); 
 
-/* 정렬유형 체인지 이벤트 */
-/* $("#sortType").change((e) => {
+
+/* 공개여부값 변경시 체인지 이벤트 */
+$(".user_expose").change((e) => {
 	const $this = $(e.target);
-	const sortType = $this.val();
-	console.log("sortType : " + sortType);
+	const userId = $this.data("userId");
+	const userExpose = $this.val();
+	const userExpose_kr = userExpose=="Y"?"공개":"차단";
 	
-	const $frm = $(document.userSortFrm);
-	$frm.find("[name=sortType]").val(sortType);
-	$frm.submit();
-}); */
+	const msg = `[\${userId}] 회원의 공개여부 설정을 [\${userExpose_kr}] 하시겠습니까?`;
+	
+	if(confirm(msg)){
+		const $frm = $(document.updateUserExposeFrm);
+		$frm.find("[name=userId]").val(userId);
+		$frm.find("[name=userExpose]").val(userExpose);
+		$frm.submit();
+	}
+	else{
+		$this.find("[selected]").prop("selected", true);
+	}
+});
 </script>
 <%@ include file="/WEB-INF/views/admin/adminFooter.jsp" %>		

@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.kh.afm.user.model.vo.Account;
+import com.kh.afm.user.model.vo.Address;
 import com.kh.afm.user.model.vo.DelUser;
 import com.kh.afm.user.model.vo.User;
 
@@ -52,17 +54,37 @@ public class AdminDao {
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) {
+				// 회원객체
 				User user = new User();
 				user.setUserId(rset.getString("user_id"));
 				user.setUserName(rset.getString("user_name"));
 				user.setUserEmail(rset.getString("user_email"));
-				user.setPassword(rset.getString("password"));
-				user.setBirthday(rset.getDate("birthday"));
+				/* user.setPassword(rset.getString("password")); */
+				/* user.setBirthday(rset.getDate("birthday")); */
 				user.setPhone(rset.getString("phone"));
 				user.setUserEnrollDate(rset.getDate("user_enroll_date"));
 				user.setUserRole(rset.getString("user_role"));
 				user.setUserExpose(rset.getString("user_expose"));
-
+				
+				
+				if(rset.getString("user_id") != null) {
+					// 계좌
+					Account account = new Account();
+					account.setAccountNo(rset.getInt("account_no"));
+					account.setBankName(rset.getString("bank_name"));
+					account.setAccountNumber(rset.getString("account_number"));
+					
+					// 주소
+					Address address = new Address();
+					address.setAdrNo(rset.getInt("account_no"));
+					address.setAdrName(rset.getString("adr_name"));
+					address.setAdrRoad(rset.getString("adr_road"));
+					address.setAdrDetail(rset.getString("adr_detail"));
+					
+					user.setAccount(account);
+					user.setAddress(address);
+				}
+				
 				list.add(user);
 			}
 		} catch (SQLException e) {
@@ -188,6 +210,25 @@ public class AdminDao {
 				user.setUserEnrollDate(rset.getDate("user_enroll_date"));
 				user.setUserRole(rset.getString("user_role"));
 				user.setUserExpose(rset.getString("user_expose"));
+				
+				if(rset.getString("user_id") != null) {
+					// 계좌
+					Account account = new Account();
+					account.setAccountNo(rset.getInt("account_no"));
+					account.setBankName(rset.getString("bank_name"));
+					account.setAccountNumber(rset.getString("account_number"));
+					
+					// 주소
+					Address address = new Address();
+					address.setAdrNo(rset.getInt("account_no"));
+					address.setAdrName(rset.getString("adr_name"));
+					address.setAdrRoad(rset.getString("adr_road"));
+					address.setAdrDetail(rset.getString("adr_detail"));
+					
+					user.setAccount(account);
+					user.setAddress(address);
+				}
+				
 				list.add(user);
 			}
 
@@ -282,6 +323,25 @@ public class AdminDao {
 				user.setUserEnrollDate(rset.getDate("user_enroll_date"));
 				user.setUserRole(rset.getString("user_role"));
 				user.setUserExpose(rset.getString("user_expose"));
+				
+				if(rset.getString("user_id") != null) {
+					// 계좌
+					Account account = new Account();
+					account.setAccountNo(rset.getInt("account_no"));
+					account.setBankName(rset.getString("bank_name"));
+					account.setAccountNumber(rset.getString("account_number"));
+					
+					// 주소
+					Address address = new Address();
+					address.setAdrNo(rset.getInt("account_no"));
+					address.setAdrName(rset.getString("adr_name"));
+					address.setAdrRoad(rset.getString("adr_road"));
+					address.setAdrDetail(rset.getString("adr_detail"));
+					
+					user.setAccount(account);
+					user.setAddress(address);
+				}
+				
 				list.add(user);
 			}
 
@@ -293,36 +353,117 @@ public class AdminDao {
 		}
 		return list;
 	}
-
+	
 	/**
 	 * 메인페이지 쿼리
 	 */
-	public Map<String, Integer> adminMainQuery(Connection conn, Map<String, Integer> param) {
+	public Map<String, Integer> adminMainQuery (Connection conn, Map<String, Integer> param) {
+
+		// param 키값 4개 
+		String key_Arr[] = {"recentlyUserCnt", "allUserCnt", "recentlyProdCnt", "allProdCnt"};
+		
+		// 개수
+		int cnt = 0;
+		
+		// 향상된 for문 
+		for(String key : key_Arr) {
+			
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = null;
+			
+			if(key == key_Arr[0]) {
+				sql = prop.getProperty("countUserWeek");
+			}
+			else if(key == key_Arr[1]) {
+				sql = prop.getProperty("countUserAll");
+			}
+			else if(key == key_Arr[2]) {
+				sql = prop.getProperty("countProductWeek");
+			}
+			else if(key == key_Arr[3]) {
+				sql = prop.getProperty("countProductAll");
+			}
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					cnt = rset.getInt(1);
+				}
+				
+				param.put(key, cnt);
+				System.out.println("key = " + key + ", cnt = " + cnt);
+				
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			} 
+			finally {
+				
+				close(rset);
+				close(pstmt);
+			}
+		}
+		return param;
+	}
+
+	/**
+	 * 페이징 - 전체탈퇴회원수 
+	 */
+	public int selectDelUserTotalContents(Connection conn) {
+		String sql = prop.getProperty("selectDelUserTotalContents");
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = null;
+		int totalContents = 0;
 
-		int recentlyUserCnt = 0; // 최근한달내회원수
-		int allUserCnt = 0; // 전최회원수
-		int recentlyProdCnt = 0; // 최근한달내상품수
-		int allProdCnt = 0; // 전체상품수
+		try {
+			// 1.PreparedStatment객체 생성 및 미완성쿼리 값대입
+			pstmt = conn.prepareStatement(sql);
 
-		/*
-		 * switch(searchType) { case "userId": sql =
-		 * prop.getProperty("searchUserCountByUserId"); param.put("searchKeyword", "%" +
-		 * param.get("searchKeyword") + "%"); break; case "userName": sql =
-		 * prop.getProperty("searchUserCountByUserName"); param.put("searchKeyword", "%"
-		 * + param.get("searchKeyword") + "%"); break; case "userRole": sql =
-		 * prop.getProperty("searchUserCountByUserRole"); break; }
-		 */
+			// 2.실행 & ResultSet객체 리턴
+			rset = pstmt.executeQuery();
 
-		/*
-		 * try { pstmt = conn.prepareStatement(sql); pstmt.setString(1, (String)
-		 * param.get("searchKeyword")); rset = pstmt.executeQuery(); if(rset.next())
-		 * totalContents = rset.getInt(1); } catch (SQLException e) {
-		 * e.printStackTrace(); } finally { close(rset); close(pstmt); }
-		 */
+			// 3.ResultSet -> totalContents
+			if (rset.next()) {
+				totalContents = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
 
-		return param;
+		return totalContents;
+	}
+
+	/**
+	 * 사용자 공개여부 변경 
+	 */
+	public int updateUserExpose(Connection conn, String userId, String userExpose) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateUserExpose"); 
+		
+		try {
+			// 미완성쿼리문 객체생성
+			pstmt = conn.prepareStatement(sql);
+			
+			// 쿼리문 셋팅
+			pstmt.setString(1, userExpose);
+			pstmt.setString(2, userId);
+			
+			// 쿼리실행 
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }

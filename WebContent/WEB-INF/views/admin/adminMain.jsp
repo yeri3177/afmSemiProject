@@ -7,28 +7,44 @@
 
 <section id="adminmain-container" class="admin-container">
 
-	
-	<div>
-		최근 한달내에 가입한 회원수 
-		<span> <%= param.get("recentlyUserCnt") %> </span>
-	</div>
+	<table>
+		<tr>
+			<td class="text1">
+				최근 일주일간 가입한 회원수
+			</td>
+			<td class="text2">
+				<%= param.get("recentlyUserCnt") %>
+			</td>
+		</tr>
 		
-	<div>
-		전체 회원수
-		<span> <%= param.get("allUserCnt") %> </span>
-	</div>
-
-	<div>
-		최근 한달내에 추가한 상품수
-		<span> <%= param.get("recentlyProdCnt") %> </span>
-	</div>
+		<tr>
+			<td class="text1">
+				전체 회원수
+			</td>
+			<td class="text2">
+				<%= param.get("allUserCnt") %>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="text1">
+				최근 일주일간 추가한 상품수
+			</td>
+			<td class="text2">
+				<%= param.get("recentlyProdCnt") %>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="text1">
+				전체 상품수 
+			</td>
+			<td class="text2">
+				<%= param.get("allProdCnt") %>
+			</td>
+		</tr>
 	
-	<div>
-		전체 상품수 
-		<span> <%= param.get("allProdCnt") %> </span>
-	</div>
-
-
+	</table>
 
 
 </section>	

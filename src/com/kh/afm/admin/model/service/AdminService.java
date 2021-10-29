@@ -86,4 +86,28 @@ public class AdminService {
 		close(conn);
 		return result;
 	}
+
+	/**
+	 * 페이징 - 전체탈퇴회원수 
+	 */
+	public int selectDelUserTotalContents() {
+		Connection conn = getConnection();
+		int totalContent = adminDao.selectDelUserTotalContents(conn);
+		close(conn);
+		return totalContent;
+	}
+
+	/**
+	 * 사용자 공개여부 변경 
+	 */
+	public int updateUserExpose(String userId, String userExpose) {
+		Connection conn = getConnection();
+		int result = adminDao.updateUserExpose(conn, userId, userExpose);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		
+		return result;
+	}
 }

@@ -16,11 +16,13 @@ public class User implements Serializable {
 	private Date userEnrollDate; //가입일
 	private String userRole; //회원권한
 	private String userExpose; //회원공개여부
+	private Account account; //계좌
+	private Address address; //주소
 	
 	public User() {
 		super();
 	}
-
+	
 	public User(String userId, String userName, String userEmail, String password, Date birthday, String phone,
 			Date userEnrollDate, String userRole, String userExpose) {
 		super();
@@ -35,10 +37,26 @@ public class User implements Serializable {
 		this.userExpose = userExpose;
 	}
 
+	public User(String userId, String userName, String userEmail, String password, Date birthday, String phone,
+			Date userEnrollDate, String userRole, String userExpose, Account account, Address address) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.password = password;
+		this.birthday = birthday;
+		this.phone = phone;
+		this.userEnrollDate = userEnrollDate;
+		this.userRole = userRole;
+		this.userExpose = userExpose;
+		this.account = account;
+		this.address = address;
+	}
+
 	public String getUserId() {
 		return userId;
 	}
-
+	
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
@@ -110,11 +128,30 @@ public class User implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
+	
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName + ", userEmail=" + userEmail + ", password="
 				+ password + ", birthday=" + birthday + ", phone=" + phone + ", userEnrollDate=" + userEnrollDate
-				+ ", userRole=" + userRole + ", userExpose=" + userExpose + "]";
+				+ ", userRole=" + userRole + ", userExpose=" + userExpose + ", account=" + account + ", address="
+				+ address + "]";
 	}
 }
