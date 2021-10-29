@@ -39,7 +39,7 @@ $(() => {
 
 </script>
 
-<section id="csboard-container">
+<section id="csboardForm-container" class="csboard-container">
 <h2>고객센터 게시글 작성</h2>
 <form
 	name="boardEnrollFrm"

@@ -8,7 +8,7 @@
 	Csboard csboard = (Csboard) request.getAttribute("csboard");
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/csboard.css" />
-<section id="board-container">
+<section id="csboardView-container" class="csboard-container">
 	<h2>고객센터 게시판</h2>
 	<table id="tbl-csboard-view">
 		<tr>
