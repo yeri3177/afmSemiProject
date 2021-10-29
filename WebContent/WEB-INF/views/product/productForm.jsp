@@ -9,6 +9,9 @@
 	method="post"
 	enctype="multipart/form-data">
 	<table id="tbl-board-view">
+	<input type="hidden" name="userId" value="<%= loginUser.getUserId() %>" readonly>
+
+	
 	<tr>
 		<th>상품 제목</th>
 		<td><input type="text" name="pTitle" required></td>
@@ -40,7 +43,7 @@
 		<td>
 		<select name="pPost" id="pPost">
 			<option name="Y" value="Y">무료배송</option>
-			<option name="N" value="N">무착불</option>
+			<option name="N" value="N">착불</option>
 		</select>
 		</td>
 	</tr>

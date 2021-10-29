@@ -451,19 +451,77 @@ public class ProductDao {
 
 	}
 
-	public Attachment updateAttachmentY(Connection conn, Product product) {
-		
-		return null;
-	}
-
-	public Attachment updateAttachmentN(Connection conn, Product product) {
-		
-		return null;
-	}
 
 	public int updateProduct(Connection conn, Product product) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateProduct");
+		int result = 0;
 		
-		return 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, product.getpTitle());
+			pstmt.setInt(2, product.getpPrice());
+			pstmt.setInt(3, product.getpCnt());
+			pstmt.setString(4, product.getpCategory());
+			pstmt.setString(5, product.getpPost());
+			pstmt.setString(6, product.getpContent());
+			pstmt.setInt(7, product.getpNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ProductException("게시글 등록 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+
+	}
+
+	public int updateAttachmentY(Connection conn,  Product product, Attachment attach1) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateAttachmentY");
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, attach1.getOriginalFileName());
+			pstmt.setString(2, attach1.getRenamedFileName());
+			pstmt.setInt(3, product.getpNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ProductException("첨부파일 등록 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateAttachmentN(Connection conn, Product product, Attachment attach2) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateAttachmentN");
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, attach2.getOriginalFileName());
+			pstmt.setString(2, attach2.getRenamedFileName());
+			pstmt.setInt(3, product.getpNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ProductException("첨부파일 등록 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 

@@ -43,7 +43,6 @@ if(editable){
 	<div>작성자 : <%= product.getUserId() %></div>
 	<div>제목 : <%= product.getpTitle() %></div>
 	<div>가격 : <%= product.getpPrice() %></div>
-	<div>제목 : <%= product.getpTitle() %></div>
 	<div>배송 : <%= product.getpPost() %></div>
 	<div>남은 수량 : <%= product.getpCnt() %></div>
 	<div>카테고리 : <%= product.getpCategory() %></div>
