@@ -4,7 +4,7 @@ public class Cart {
 	private String userId;
 	private int cartNo;
 	private int productNo;
-	private int attachNo;
+	private String renamedFilename;
 	private String productName;
 	private int productPrice;
 	private int productQuantity;
@@ -12,13 +12,13 @@ public class Cart {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Cart(String userId, int cartNo, int productNo, int attachNo, String productName, int productPrice,
+	public Cart(String userId, int cartNo, int productNo, String renamedFilename, String productName, int productPrice,
 			int productQuantity) {
 		super();
 		this.userId = userId;
 		this.cartNo = cartNo;
 		this.productNo = productNo;
-		this.attachNo = attachNo;
+		this.renamedFilename = renamedFilename;
 		this.productName = productName;
 		this.productPrice = productPrice;
 		this.productQuantity = productQuantity;
@@ -41,11 +41,11 @@ public class Cart {
 	public void setProductNo(int productNo) {
 		this.productNo = productNo;
 	}
-	public int getAttachNo() {
-		return attachNo;
+	public String getRenamedFilename() {
+		return renamedFilename;
 	}
-	public void setAttachNo(int attachNo) {
-		this.attachNo = attachNo;
+	public void setRenamedFilename(String renamedFilename) {
+		this.renamedFilename = renamedFilename;
 	}
 	public String getProductName() {
 		return productName;
@@ -67,10 +67,11 @@ public class Cart {
 	}
 	@Override
 	public String toString() {
-		return "Cart [userId=" + userId + ", cartNo=" + cartNo + ", productNo=" + productNo + ", attachNo=" + attachNo
-				+ ", productName=" + productName + ", productPrice=" + productPrice + ", productQuantity="
-				+ productQuantity + "]";
+		return "Cart [userId=" + userId + ", cartNo=" + cartNo + ", productNo=" + productNo + ", renamedFilename="
+				+ renamedFilename + ", productName=" + productName + ", productPrice=" + productPrice
+				+ ", productQuantity=" + productQuantity + "]";
 	}
+	
 	
 	
 }

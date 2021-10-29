@@ -43,7 +43,7 @@ private Properties prop = new Properties();
 				cart.setUserId(rset.getString("user_id"));
 				cart.setCartNo(rset.getInt("cart_no"));
 				cart.setProductNo(rset.getInt("p_no"));
-				cart.setAttachNo(rset.getInt("attach_no"));
+				cart.setRenamedFilename(rset.getString("renamed_filename"));
 				cart.setProductName(rset.getString("p_title"));
 				cart.setProductPrice(rset.getInt("p_price"));
 				cart.setProductQuantity(rset.getInt("cart_product_quantity"));
@@ -71,6 +71,60 @@ private Properties prop = new Properties();
 		} finally {
 			close(pstmt);
 		}
+		return result;
+	}
+
+	public int cartUpdate(Connection conn, String cartNo, String productQuantity) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("cartUpdate");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, productQuantity);
+			pstmt.setString(2, cartNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteOneItem(Connection conn, String cartNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteOneItem");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cartNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int cartInsert(Connection conn, Cart cart) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("cartInsert"); 
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, cart.getProductNo());
+			pstmt.setString(2, cart.getUserId());
+			pstmt.setInt(3, cart.getProductQuantity());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
 		return result;
 	}
 
