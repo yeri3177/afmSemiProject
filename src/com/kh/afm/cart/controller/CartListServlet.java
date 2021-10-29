@@ -34,13 +34,8 @@ public class CartListServlet extends HttpServlet {
 		String userId = loginUser.getUserId();
 		
 		List<Cart> list = cartService.selectAllList(userId);
-		System.out.println("servlet @ "+list);
 		
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/WEB-INF/views/cart/Cart.jsp").forward(request, response);
-//		String location = request.getContextPath() + "/cart";
-//		response.sendRedirect(location);
 	}
-	
-
 }

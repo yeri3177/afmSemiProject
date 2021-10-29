@@ -34,5 +34,38 @@ public class CartService {
 		return result;
 	}
 
+	public int cartUpdate(String cartNo, String productQuantity) {
+		Connection conn = getConnection();
+		int result = cartDao.cartUpdate(conn, cartNo, productQuantity);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int deleteOneItem(String cartNo) {
+		Connection conn = getConnection();
+		int result = cartDao.deleteOneItem(conn, cartNo);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int cartInsert(String userId, Cart cart) {
+		Connection conn = getConnection();
+		int result = cartDao.cartInsert(conn, cart);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+
 
 }

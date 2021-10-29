@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.infoform{display:flex;justify-content: center;position:absolute;top: 75%;left: 50%;transform: translate( -50%, -50% );}
+.infoImg{width:100%;}
+.infoImgText{display: flex;flex-direction: column;}
+.logofont2{width:10vw;}
+.logoImg2{width:20vw;}
+.infoImgText h2{font-size: 2vw;}
+.infoImgTextp{font-size: 2vw;padding: 0;margin:0;}
+.apihead{width: 900px;height: 10%;background: #e9e3d5;padding: 10vw;font-weight: bold;vertical-align: top;color: #427f2f;text-align:right;}
+.apidata{text-align:right;width: 100%;padding: 1vw;font-weight: bold;vertical-align: top;background: #fff;width: 350px;padding: 10px;vertical-align: top;}
+.apitable{font-family: 'Noto Sans KR', sans-serif;width:95%;text-align: left;line-height: 1.5;border: 1px solid #427f2f;margin: 0 auto;margin-top:5px;margin-bottom:5px;}
+.RDproducts{display:flex;width:100%;justify-content: space-evenly;}
+.RDData{display:flex;float: left;flex-direction: column;width:30%;}
+.indexRDproducts{width:100%;background-color:#E9E3D5;display:flex;justify-content: space-around;text-align:left;}
+.RDproductsh2{background-color:#E9E3D5;}
+.RDDateImg{width:100%;hieght:100%;}
+.RDDataP{font-size:1.5vw;}
+.RDDataA{font-size:1.5vw;}
+.BEproducts{display:flex;width:100%;justify-content: space-evenly;}
+.BEData{display:flex;float: left;flex-direction: column;width:30%;}
+.indexBEproducts{width:100%;display:flex;justify-content: space-around;text-align:left;}
+.BEDateImg{width:100%;hieght:100%;}
+.BEDataP{font-size:1.5vw;}
+.BEDataA{font-size:1.5vw;}

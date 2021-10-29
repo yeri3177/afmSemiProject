@@ -23,7 +23,11 @@ import com.kh.afm.user.model.vo.User;
 	"/csboard/csboardDelete",
 	"/product/productForm",
 	"/product/productUpdate",
-	"/product/productDelete"
+	"/product/productDelete",
+	"/cart/cartList",
+	"/cart/cartDeleteAll",
+	"/cart/cartUpdate",
+	"/cart/deleteOneItem"
 	
 	
 })
