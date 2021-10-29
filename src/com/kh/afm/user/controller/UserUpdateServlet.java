@@ -30,7 +30,7 @@ public class UserUpdateServlet extends HttpServlet {
 		
 		// 2.사용자입력값 -> User객체
 		String userId = request.getParameter("userId");
-		String password = MvcUtils.getEncryptedPassword(request.getParameter("password"));
+		//String password = MvcUtils.getEncryptedPassword(request.getParameter("password"));
 		String email = request.getParameter("email");
 		String userName = request.getParameter("userName");
 		String phone = request.getParameter("phone");
@@ -57,7 +57,7 @@ public class UserUpdateServlet extends HttpServlet {
 		}
 
 		// User 객체 생성
-		User user = new User(userId, userName, email, password, d_birth, phone, null, UserService.USER_ROLE, null);
+		User user = new User(userId, userName, email, null, d_birth, phone, null, UserService.USER_ROLE, null);
 		System.out.println("user : " + user);
 //
 //		// Address 객체 생성

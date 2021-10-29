@@ -8,7 +8,7 @@
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/csboard.css" />
 
-<section id="csboard-container">
+<section id="csboardList-container" class="csboard-container">
 	<h2>고객센터</h2>
 
 <%-- loginUser가 null이 아니라면 : 회원이라면 --%>	
