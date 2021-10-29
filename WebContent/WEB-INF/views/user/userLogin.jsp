@@ -45,14 +45,7 @@
 					<td><input type="password" name="password" id="password" placeholder="비밀번호" tabindex="2"></td>
 				</tr>
 				
-				<!-- 3행 : 로그인버튼 -->
-				<tr>
-					<td  id="loginbtn1">
-						<input type="submit" value="로그인">
-					</td>
-				</tr>
-				
-				<!-- 4행 : 아이디저장 -->
+				<!-- 3행 : 아이디저장 -->
 				<tr>
 					<td>
 						<input type="checkbox" name="saveId" id="saveId" <%= saveId != null? "checked" : "" %> />
@@ -60,10 +53,19 @@
 					</td>
 				</tr>
 				
+				<!-- 4행 : 로그인버튼 -->
+				<tr>
+					<td  id="loginbtn1">
+						<input type="submit" value="로그인" class="login-con-btn">
+					</td>
+				</tr>
+				
+				
+				
 				<!-- 5행 : 회원가입 -->
 				<tr>
 					<td>
-						<input type="button" value="회원가입" onclick="location.href='<%= request.getContextPath() %>/user/userTypeEnroll';">
+						<input type="button" value="회원가입" class="login-con-btn" onclick="location.href='<%= request.getContextPath() %>/user/userTypeEnroll';">
 					</td>
 				</tr>
 			</table>

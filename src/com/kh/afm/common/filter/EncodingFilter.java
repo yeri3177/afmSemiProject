@@ -26,7 +26,7 @@ public class EncodingFilter implements Filter {
 		// servlet 가기전!
 		// 사용자입력값 encoding처리
 		request.setCharacterEncoding("utf-8");
-		System.out.println("[utf-8 encoding처리!]");
+		//System.out.println("[utf-8 encoding처리!]");
 		
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
@@ -34,5 +34,4 @@ public class EncodingFilter implements Filter {
 		// servlet 다녀온후!
 		
 	}
-
 }

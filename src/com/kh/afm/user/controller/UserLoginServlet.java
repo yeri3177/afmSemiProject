@@ -36,19 +36,10 @@ public class UserLoginServlet extends HttpServlet {
 		String password = MvcUtils.getEncryptedPassword(request.getParameter("password"));
 		String saveId = request.getParameter("saveId");
 		
-		
-		// 제대로 값 가져오는지 확인 (변수명@위치)
-		System.out.println("userId@servlet = " + userId);
-		System.out.println("password@servlet = " + password);
-		System.out.println("saveId@servlet = " + saveId);
-		
 		// 3. 업무로직 실행
 		// a. db에서 memberId와 일치하는 회원 조회 
-		User user = userService.selectOneUser(userId);
-		System.out.println("member@servlet = " + user);
-		
+		User user = userService.selectOneUser(userId);	
 		HttpSession session = request.getSession();
-		System.out.println(session.getId());
 		
 		// b. 리턴된 회원객체에서 비밀번호 일치여부 검사 
 		if(user != null && password.equals(user.getPassword())) {

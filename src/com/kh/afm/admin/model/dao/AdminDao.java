@@ -76,7 +76,7 @@ public class AdminDao {
 					
 					// 주소
 					Address address = new Address();
-					address.setAdrNo(rset.getInt("account_no"));
+					address.setAdrNo(rset.getInt("adr_no"));
 					address.setAdrName(rset.getString("adr_name"));
 					address.setAdrRoad(rset.getString("adr_road"));
 					address.setAdrDetail(rset.getString("adr_detail"));

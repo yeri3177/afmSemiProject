@@ -74,6 +74,8 @@ private Properties prop = new Properties();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		User user = null;
+		Account account = null;
+		Address address = null;
 		
 		try {
 			// 1.PreparedStatment객체 생성 및 미완성쿼리 값대입
@@ -85,20 +87,37 @@ private Properties prop = new Properties();
 			
 			// 3.ResultSet -> User
 			if(rset.next()) {
+				//tb_user테이블 정보
 				String password = rset.getString("password");
 				String userName = rset.getString("user_name");
 				String userRole = rset.getString("user_role");
 				Date birthday = rset.getDate("birthday");
 				String email = rset.getString("user_email");
 				String phone = rset.getString("phone");
-				/* String address = rset.getString("address"); */
 				Date enrollDate = rset.getDate("user_enroll_date");
-				String userExpose = rset.getString("user_expose"); //회원공개여부
+				String userExpose = rset.getString("user_expose"); 
 				
-				user = new User(userId, userName, email, password, birthday, phone, enrollDate, userRole, userExpose);
+				//tb_account 정보
+				int account_no = rset.getInt("account_no");
+				String account_number = rset.getString("account_number");
+				String bank_name = rset.getString("bank_name");
+				
+				//address 정보
+				int adr_no = rset.getInt("adr_no");
+				String adr_name = rset.getString("adr_name");
+				String adr_road = rset.getString("adr_road");
+				String adr_detail = rset.getString("adr_detail");
+				
+				// 계좌정보 셋팅 
+				account = new Account(account_no, account_number, bank_name, userId);
+				
+				// 주소정보 셋팅
+				address = new Address(adr_no, adr_name, adr_road, adr_detail, userId);
+				
+				// 회원정보 셋팅 
+				user = new User(userId, userName, email, password, birthday, phone, enrollDate, userRole, userExpose, account, address);
+				System.out.println("user@selectOneUser@dao" + user);
 			}
-			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
