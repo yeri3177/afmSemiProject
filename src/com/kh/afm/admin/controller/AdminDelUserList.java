@@ -38,8 +38,7 @@ public class AdminDelUserList extends HttpServlet {
 		System.out.println("list@adminUserListServlet = " + list);
 		
 		// 페이징영역
-		int totalContents = adminService.selectTotalContents(); 
-		System.out.println("totalContents@servlet = " + totalContents);
+		int totalContents = adminService.selectDelUserTotalContents(); 
 		String url = request.getRequestURI();
 		String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
 		

@@ -282,15 +282,29 @@ div#pageBar a:hover {
 	border: 1px solid black;
 	border-collapse: collapse;
 	margin: 0 auto;
+	font-size: 15px;
 }
 
 #tbl-user > tr, th, td {
 	border: 1px solid black;
-	padding: 10px;
+	padding: 3px;
+	vertical-align: middle;
 }
 
-#tbl-user th {
-	background-color: #ffc6bf;
+.user-th {
+	background-color: #ffdc74;
+}
+
+.address-th {
+	background-color: #a8d8ff;
+}
+
+.account-th {
+	background-color: #96dfd8;
+}
+
+#adr-th {
+	width: 200px;
 }
  
 #tbl-user tr:hover {
@@ -343,28 +357,72 @@ div#pageBar a:hover {
  * delUserList.jsp
  **************************************/
 #delUserList-container {
-	margin-top: 70px;
+	margin-top: 30px;
 }
 
+#delUserList-container table {
+	margin: 0 auto;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
 
+#delUserList-container td,th {
+	padding: 10px;
+}
+
+#delUserList-container table th {
+	background-color: #ffd4d0;
+}
+
+.del-box {
+	background-color: pink;
+	margin: 30px auto 10px auto;
+	height: 40px;
+	text-align: left;
+	width: 70%;
+}
+
+.del-box button {
+	width: 100px;
+	height : 35px;
+}
 
 /**************************************
  * adminMain.jsp
  **************************************/
- #adminmain-container {
- 	margin: 70px auto;
- 	background-color: lightblue;
+#adminmain-container {
+	margin: 70px auto;
+	background-color: lightblue;
  	font-size: 25px;
- }
+ 	padding: 30px;
+}
  
+#adminmain-container table {
+ 	margin : 0 auto;
+ 	
+}
+
+#adminmain-container table td {
+	margin: 10px;
+	border: none;
+}
+#adminmain-container table .text1 {
+ 	text-align: left;
+}
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+#adminmain-container table .text2 {
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 15px;
+	font-weight: 900;
+}
+
+
+
+
+
+
+
+
+
+

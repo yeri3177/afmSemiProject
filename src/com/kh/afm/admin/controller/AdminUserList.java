@@ -19,8 +19,6 @@ import com.kh.afm.user.model.vo.User;
 @WebServlet("/admin/userList")
 public class AdminUserList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	// 어드민서비스 객체
 	private AdminService adminService = new AdminService(); 
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

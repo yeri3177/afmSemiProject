@@ -11,10 +11,13 @@
 
 <section id="delUserList-container" class="admin-container">
 
-<button>전체선택</button>
-<button>삭제</button>
+<div class="del-box">
+	<button onclick="fnCheckAll();">전체선택</button>
+	<button onclick="fnCheckNotAll();">전체해제</button>
+	<button>데이터삭제</button>
+</div>
 
-<table id="tbl-user">
+<table id="tbl-deluser">
     <thead>
         <tr>
         	<th>no</th>
@@ -35,7 +38,7 @@
 	for(DelUser user : list){
 %>
 	<tr>
-		<td><input type="checkbox" value="<%=user.getDeleteUId()%>" /></td>
+		<td><input type="checkbox" value="<%=user.getDeleteUId()%>" name="delUserData" /></td>
 		<td><%=user.getDeleteUId()%></td>
 		<td><%=user.getDeleteUName()%></td>
 		<td><%=user.getDeleteUEmail()%></td>
@@ -59,4 +62,25 @@
 </div>	
 
 </section>
+
+<script>
+// 전체선택 버튼
+function fnCheckAll() {
+    let delUserDatas = document.getElementsByName("delUserData");
+    
+    for(let i=0; i<delUserDatas.length; i++){
+    	delUserDatas[i].checked = true;
+    }
+}
+
+//전체해제 버튼
+function fnCheckNotAll() {
+    let delUserDatas = document.getElementsByName("delUserData");
+    
+    for(let i=0; i<delUserDatas.length; i++){
+    	delUserDatas[i].checked = false;
+    }
+}
+</script>
+
 <%@ include file="/WEB-INF/views/admin/adminFooter.jsp" %>

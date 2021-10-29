@@ -25,15 +25,9 @@ public class AdminMainServlet extends HttpServlet {
 		
 		// 업무로직
 		Map<String, Integer> param = new HashMap<>();
-		param.put("recentlyUserCnt", 90);
-		param.put("allUserCnt", 10);
-		param.put("recentlyProdCnt", 30);
-		param.put("allProdCnt", 50);
-		
-		System.out.println("param@servlet = " + param);
 		
 		// 검색결과 리스트
-//		param = adminService.adminMainQuery(param);
+		param = adminService.adminMainQuery(param);
 		
 		// view단 연결 
 		request.setAttribute("param", param);
