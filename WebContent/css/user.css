@@ -105,3 +105,11 @@
 	height: 80px; 
 	overflow: scroll;
 }
+
+
+/*************************************************
+ * updatePassword.jsp (일반회원 회원가입폼)
+ **************************************************/
+ #enroll-container updatePswBtn {
+  text-align: center;
+ }
