@@ -26,6 +26,21 @@
 	<link rel="icon" href="<%= request.getContextPath() %>/images/admin/setting_icon.png">
 
 	<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
+
+<script>
+<%
+	// 로그인 메세지 출력 
+	String msg = (String) session.getAttribute("msg");
+	System.out.println("msg = " + msg);
+	
+	if(msg != null) session.removeAttribute("msg");
+%>
+<% if(msg!= null) { %>
+	// 사용자 메세지 전달
+	alert("<%= msg %>");
+<% } %>
+</script>	
+
 </head>
 <body>
 
@@ -61,7 +76,7 @@
 	
 			<!----------------- 메뉴2 --------------------->
 	        <li class="on">
-	            <a href="#">상품 관리</a>
+	            <a href="<%=request.getContextPath()%>/admin/productList">상품 관리</a>
 	            <ul>
 	              <li>
 	                <a href="<%=request.getContextPath()%>/admin/productList">상품 목록</a>

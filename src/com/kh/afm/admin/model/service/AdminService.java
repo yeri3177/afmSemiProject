@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.afm.admin.model.dao.AdminDao;
+import com.kh.afm.product.model.vo.Product;
 import com.kh.afm.user.model.vo.DelUser;
 import com.kh.afm.user.model.vo.User;
 
@@ -109,5 +110,29 @@ public class AdminService {
 		close(conn);
 		
 		return result;
+	}
+
+	/**
+	 * 탈퇴회원 데이터 삭제하기 
+	 */
+	public int deleteDelUser(String[] userId_arr) {
+		Connection conn = getConnection();
+		int result = adminDao.deleteDelUser(conn, userId_arr);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+
+	/**
+	 * 상품 목록 조회하기 
+	 */
+	public List<Product> selectAllProduct(int startRownum, int endRownum) {
+		Connection conn = getConnection();
+		List<Product> list = adminDao.selectAllProduct(conn, startRownum, endRownum);
+		close(conn);
+		return list;
 	}
 }

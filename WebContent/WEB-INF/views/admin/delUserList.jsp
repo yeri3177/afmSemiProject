@@ -5,17 +5,16 @@
 
 <%
 	List<DelUser> list = (List<DelUser>) request.getAttribute("list");
-	String searchType = request.getParameter("searchType");
-	String searchKeyword = request.getParameter("searchKeyword");
 %>
-
+<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 <section id="delUserList-container" class="admin-container">
 
 <div class="del-box">
 	<button onclick="fnCheckAll();">전체선택</button>
 	<button onclick="fnCheckNotAll();">전체해제</button>
-	<button>데이터삭제</button>
+	<button onclick="fnDeleteUser();">회원삭제</button>
 </div>
+
 
 <table id="tbl-deluser">
     <thead>
@@ -56,12 +55,20 @@
 	</tbody>	
 </table>	
 
+
+
 <!-- 페이지바 영역 -->
 <div id="pageBar">
 	<%= request.getAttribute("pagebar") %>
 </div>	
 
 </section>
+
+
+<!-- 회원삭제 전송폼 -->
+<%-- <form action="<%= request.getContextPath() %>/admin/deleteDelUser" name="userDeleteFrm" method="POST">
+
+</form> --%>
 
 <script>
 // 전체선택 버튼
@@ -73,7 +80,7 @@ function fnCheckAll() {
     }
 }
 
-//전체해제 버튼
+// 전체해제 버튼
 function fnCheckNotAll() {
     let delUserDatas = document.getElementsByName("delUserData");
     
@@ -81,6 +88,70 @@ function fnCheckNotAll() {
     	delUserDatas[i].checked = false;
     }
 }
+
+// 회원삭제 버튼
+function fnDeleteUser() {
+
+	// 체크박스에 체크를 안한 경우 
+	$is_chk = $('input:checkbox[name="delUserData"]').is(":checked");
+	
+	if($is_chk == ""){
+		alert("삭제할 회원을 체크해주십시오.");
+		return false;
+	}
+	
+	// 삭제할 회원 목록이 없는 경우 (되는지 확인 X)
+	<% if(list == null){ %>
+	
+		alert("삭제할 회원이 없습니다.")
+		return false;
+	<% } %>	
+	
+	// 선택된 목록 가져오기
+	const chkuser = 'input[name="delUserData"]:checked';
+	const chkusers = document.querySelectorAll(chkuser);
+	
+	// 삭제할 회원 아이디 담을 배열
+	var delUser_arr = new Array();
+  	
+  	// 다중값 배열에 담기 
+  	chkusers.forEach((e) => {
+    	delUser_arr.push(e.value);
+  	});
+  	
+ 	// confirm에 사용할 메세지
+ 	const msg = "삭제할 회원 목록 : "+delUser_arr
+		+"\n-----------------------------------------------------------\n"
+		+"정말로 삭제하시겠습니까?";
+ 	
+ 	// 삭제할건지 확인 받기
+ 	if(confirm(msg)){
+ 		
+ 		//동적으로 폼 생성 
+ 		const $frm = $('<form></form');
+ 		$frm.attr('action', '<%= request.getContextPath() %>/admin/deleteDelUser');
+ 		$frm.attr('method', 'POST');
+ 		$frm.appendTo('body');
+ 		
+ 		for(i=0; i<delUser_arr.length; i++){
+ 			
+ 			$frm.append(`<input type="hidden" name="userId" id="userId\${i}" />`);
+ 			$frm.find('[id=userId'+i+']').val(delUser_arr[i]);
+ 			
+ 		}
+ 		console.log($frm);
+ 		//폼전송이 안됨 ;;;
+ 		console.log("서브밋전");
+ 		
+ 		$frm.submit();
+ 		
+ 		console.log("서브밋후");
+		
+ 	}else{
+ 		return false;
+ 	}
+}
+
 </script>
 
 <%@ include file="/WEB-INF/views/admin/adminFooter.jsp" %>
