@@ -39,7 +39,7 @@ public class AdminProductList extends HttpServlet {
 		System.out.println("list@adminproductlist = " + list);
 		
 		// 페이징영역
-		int totalContents = adminService.selectTotalContents(); 
+		int totalContents = adminService.selectProductTotalContents(); 
 		String url = request.getRequestURI();
 		String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
 		

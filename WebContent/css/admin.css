@@ -269,7 +269,7 @@ div#pageBar a:hover {
 	font-weight: 500;
 }
 
-
+/* 오른쪽하단 전체적인 콘텐츠 영역 */
 .right-bottom-contents {
 	text-align: center;
 }
@@ -391,11 +391,14 @@ div#pageBar a:hover {
 }
 
 .del-box {
-	background-color: pink;
 	margin: 30px auto 10px auto;
 	height: 40px;
 	text-align: left;
 	width: 70%;
+	
+	/* 영역확인용 */
+	/* background-color: pink; */
+	
 }
 
 .del-box button {
@@ -433,12 +436,52 @@ div#pageBar a:hover {
 	font-weight: 900;
 }
 
+/**************************************
+ * productList.jsp
+ **************************************/
+#tbl-product {
+	margin: 0 auto;
+	position: relative;
+	top: 50px;
+	border-collapse: collapse;
+}
+
+#tbl-product td, th { 
+	padding: 13px;
+}
+
+#productList-container #pageBar {
+	position: relative;
+	margin: 75px 0;
+}
 
 
+#tbl-product th {
+	background-color: #ffbab5;
+}
 
 
+/**************************************
+ * productReportList.jsp
+ **************************************/
+ #tbl-report {
+ 	margin: 0 auto;
+	position: relative;
+	top: 50px;
+	border-collapse: collapse;
+}
 
+#tbl-report td, th { 
+	padding: 13px;
+}
 
+#tbl-report th {
+	background-color: #ffbab5;
+}
 
-
-
+#productReportList-container #pageBar {
+	position: relative;
+	margin: 75px 0;
+}
+ 
+ 

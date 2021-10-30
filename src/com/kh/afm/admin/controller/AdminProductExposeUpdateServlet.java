@@ -6,15 +6,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.kh.afm.admin.model.service.AdminService;
 
 /**
- * 사용자 공개여부 변경 서블릿
+ * 상품 노출여부 변경 서블릿
  */
-@WebServlet("/admin/updateUserExpose")
-public class AdminUserExposeUpdateServlet extends HttpServlet {
+@WebServlet("/admin/updateProductExpose")
+public class AdminProductExposeUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AdminService adminService = new AdminService(); 
 
@@ -23,15 +22,16 @@ public class AdminUserExposeUpdateServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		// 사용자입력값
-		String userId = request.getParameter("userId");
-		String userExpose = request.getParameter("userExpose");
-		String userExpose_kr = "Y".equals(userExpose) ? "노출" : "비공개";
+		String pNo = request.getParameter("pNo");
+		String pExpose = request.getParameter("pExpose");
+		String pExpose_kr = "Y".equals(pExpose) ? "노출" : "비공개";
 		
 		// 업무로직 
-		int result = adminService.updateUserExpose(userId, userExpose);
+		int result = adminService.updateProductExpose(pNo, pExpose);
+		System.out.println("상품노출여부result = " + result);
 		
 		// 메세지 세션
-		String msg = result > 0 ? "사용자 공개여부값 ["+userExpose_kr+"]로 변경 성공" : "사용자 공개여부 변경 실패";
+		String msg = result > 0 ? "상품노출여부값 ["+pExpose_kr+"]로 변경 성공" : "상품노출여부값 변경 실패";
 		request.getSession().setAttribute("msg", msg);
 		
 		// 리다이렉트

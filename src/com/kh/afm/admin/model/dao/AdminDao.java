@@ -16,6 +16,7 @@ import java.util.Properties;
 
 import com.kh.afm.product.model.vo.Attachment;
 import com.kh.afm.product.model.vo.Product;
+import com.kh.afm.product.model.vo.Report;
 import com.kh.afm.user.model.vo.Account;
 import com.kh.afm.user.model.vo.Address;
 import com.kh.afm.user.model.vo.DelUser;
@@ -482,7 +483,6 @@ public class AdminDao {
 		String id_str = "";
 		for(int i=0; i<userId_arr.length; i++) {
 			id_str += (i != userId_arr.length-1) ? (id_str = "'" + userId_arr[i] + "',") : (id_str = "'" + userId_arr[i] + "'");
-			//id_str += (i != userId_arr.length-1) ? (id_str = userId_arr[i] + ",") : (id_str = userId_arr[i]);
 		}
 		System.out.println("id_str = "+id_str);
 		
@@ -527,49 +527,20 @@ public class AdminDao {
 				Product product = new Product();
 				product.setpNo(rset.getInt("p_no"));
 				product.setUserId(rset.getString("p_user_id"));
-				product.setUserId(rset.getString("p_reg_date"));
-				product.setUserId(rset.getString("p_title"));
-				product.setUserId(rset.getString("p_content"));
-				product.setUserId(rset.getString("p_post"));
-				product.setUserId(rset.getString("p_price"));
-				product.setUserId(rset.getString("p_cnt"));
-				product.setUserId(rset.getString("p_category"));
-				product.setUserId(rset.getString("p_expose"));
-				product.setUserId(rset.getString("p_report"));
-				product.setUserId(rset.getString("p_recommend"));
-				
-				
-				if(rset.getInt("p_no") != 0) {
+				product.setpRegDate(rset.getDate("p_reg_date"));
+				product.setpTitle(rset.getString("p_title"));
+				product.setpContent(rset.getString("p_content"));
+				product.setpPost(rset.getString("p_post"));
+				product.setpPrice(rset.getInt("p_price"));
+				product.setpCnt(rset.getInt("p_cnt"));
+				product.setpCategory(rset.getString("p_category"));
+				product.setpExpose(rset.getString("p_expose"));
+				product.setpReport(rset.getString("p_report"));
+				product.setpRecommend(rset.getInt("p_recommend"));
 					
-					if(rset.getString("img_flag").equals("Y")) {
-						Attachment attach = new Attachment();
-						attach.setAttachNo(rset.getInt("attach_no"));
-						attach.setpNo(rset.getInt("p_no"));
-						attach.setOriginalFileName(rset.getString("original_filename"));
-						attach.setRenamedFileName(rset.getString("renamed_filename"));
-						attach.setRegDate(rset.getDate("reg_date"));
-						attach.setImgFlag(rset.getString("img_flag"));
-						
-						product.setAttach1(attach);
-					}
-					
-					if(rset.getString("img_flag").equals("N")) {
-						Attachment attach = new Attachment();
-						attach.setAttachNo(rset.getInt("attach_no"));
-						attach.setpNo(rset.getInt("p_no"));
-						attach.setOriginalFileName(rset.getString("original_filename"));
-						attach.setRenamedFileName(rset.getString("renamed_filename"));
-						attach.setRegDate(rset.getDate("reg_date"));
-						attach.setImgFlag(rset.getString("img_flag"));
-						
-						product.setAttach2(attach);
-					}
-					
-				}
-				
-				
 				list.add(product);
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -578,4 +549,134 @@ public class AdminDao {
 		}
 		return list;
 	}
+
+	/**
+	 * 페이징 - 전체 상품수 
+	 */
+	public int selectProductTotalContents(Connection conn) {
+		String sql = prop.getProperty("selectProductTotalContents");
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalContents = 0;
+
+		try {
+			// 1.PreparedStatment객체 생성 및 미완성쿼리 값대입
+			pstmt = conn.prepareStatement(sql);
+
+			// 2.실행 & ResultSet객체 리턴
+			rset = pstmt.executeQuery();
+
+			// 3.ResultSet -> totalContents
+			if (rset.next()) {
+				totalContents = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return totalContents;
+	}
+
+	/**
+	 * 상품 노출여부 변경
+	 */
+	public int updateProductExpose(Connection conn, String pNo, String pExpose) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateProductExpose"); 
+		
+		try {
+			// 미완성쿼리문 객체생성
+			pstmt = conn.prepareStatement(sql);
+			
+			// 쿼리문 셋팅
+			pstmt.setString(1, pExpose);
+			pstmt.setString(2, pNo);
+			
+			// 쿼리실행 
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 상품 신고내역 조회
+	 */
+	public List<Report> selectAllReport(Connection conn, int startRownum, int endRownum) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectAllReport");
+		ResultSet rset = null;
+		List<Report> list = new ArrayList<>();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, startRownum);
+			pstmt.setInt(2, endRownum);
+
+			rset = pstmt.executeQuery();
+
+
+			while (rset.next()) {
+				Report report = new Report();
+				report.setReportNo(rset.getInt("report_no"));
+				report.setpNo(rset.getInt("p_no"));
+				report.setReportTitle(rset.getString("report_title"));
+				report.setReportType(rset.getString("report_type"));
+				report.setReportContent(rset.getString("report_content"));
+				report.setUserId(rset.getString("user_id"));
+				report.setReportRegDate(rset.getDate("report_reg_date"));
+				report.setReportStatus(rset.getString("report_status"));
+					
+				list.add(report);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	/**
+	 * 페이징 - 전체 신고내역수  
+	 */
+	public int selectReportTotalContents(Connection conn) {
+		String sql = prop.getProperty("selectReportTotalContents");
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalContents = 0;
+
+		try {
+			// 1.PreparedStatment객체 생성 및 미완성쿼리 값대입
+			pstmt = conn.prepareStatement(sql);
+
+			// 2.실행 & ResultSet객체 리턴
+			rset = pstmt.executeQuery();
+
+			// 3.ResultSet -> totalContents
+			if (rset.next()) {
+				totalContents = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return totalContents;
+	}
+	
 }
