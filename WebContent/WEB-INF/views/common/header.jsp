@@ -53,7 +53,7 @@
 					  <a href="<%= request.getContextPath() %>/user/userLogin"><img class="profile" src="<%= request.getContextPath() %>/images/common/profile.png">
 					 	 <span class="buttonImgName">&nbsp;&nbsp;로그인</span>
 <% }else{ %>
-					  <a href="<%= request.getContextPath() %>/user/userLogin"><img class="profile" src="<%= request.getContextPath() %>/images/common/mypage.png">
+					  <a href="<%= request.getContextPath() %>/user/userDetail"><img class="profile" src="<%= request.getContextPath() %>/images/common/mypage.png">
 					 	 <span class="buttonImgName"><%= loginUser.getUserName() %>님</span>
 <% } %>
 					  </a>
