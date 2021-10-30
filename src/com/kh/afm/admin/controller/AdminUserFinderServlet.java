@@ -45,18 +45,18 @@ public class AdminUserFinderServlet extends HttpServlet {
 		param.put("searchKeyword", searchKeyword);
 		param.put("start", start);
 		param.put("end", end);
-		System.out.println("param@servlet = " + param);
+		//System.out.println("param@servlet = " + param);
 		
 		// 검색결과 리스트 
 		List<User> list = adminService.searchUser(param);
-		System.out.println("검색결과 list" + list);
+		//System.out.println("검색결과 list" + list);
 		
 		// 페이지바
 		int totalContents = adminService.searchUserCount(param);
 		String queryString = String.format("?searchType=%s&searchKeyword=%s", searchType, searchKeyword);
 		String url = request.getRequestURI() + queryString; 
 		String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
-		System.out.println("pagebar@SearchServlet = " + pagebar);
+		//System.out.println("pagebar@SearchServlet = " + pagebar);
 		
 		// view단처리
 		request.setAttribute("list", list);

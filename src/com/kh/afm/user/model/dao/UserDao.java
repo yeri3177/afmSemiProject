@@ -130,7 +130,7 @@ private Properties prop = new Properties();
 	}
 
 	/**
-	 * 회원정보 수정 
+	 * 회원 정보 수정하기 (address 테이블)
 	 */
 	public int updateUser(Connection conn, User user) {
 		int result = 0;
@@ -140,15 +140,72 @@ private Properties prop = new Properties();
 		try {
 			//미완성쿼리문을 가지고 객체생성.
 			pstmt = conn.prepareStatement(sql);
+			
 			//쿼리문미완성
-			pstmt.setString(1, user.getUserName());
-			pstmt.setDate(3, user.getBirthday());
-			pstmt.setString(4, user.getUserEmail());
-			pstmt.setString(5, user.getPhone());
-			pstmt.setString(8, user.getUserId());
+			pstmt.setString(1, user.getUserEmail());
+			pstmt.setString(2, user.getPhone());
+			pstmt.setString(3, user.getUserId());
 			
 			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
-			//DML은 executeUpdate()
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 회원 정보 수정하기 (address 테이블)
+	 */
+	public int updateAddress(Connection conn, Address address) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateAddress"); 
+		System.out.println(sql);
+		try {
+			//미완성쿼리문을 가지고 객체생성.
+			pstmt = conn.prepareStatement(sql);
+			
+			//쿼리문미완성
+			pstmt.setString(1, address.getAdrName());
+			pstmt.setString(2, address.getAdrRoad());
+			pstmt.setString(3, address.getAdrDetail());
+			pstmt.setString(4, address.getUserId());
+			
+			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 회원 정보 수정하기 (tb_account 테이블)
+	 */
+	public int updateAccount(Connection conn, Account account) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateAccount"); 
+		System.out.println(sql);
+		try {
+			//미완성쿼리문을 가지고 객체생성.
+			pstmt = conn.prepareStatement(sql);
+			
+			//쿼리문미완성
+			pstmt.setString(1, account.getAccountNumber());
+			pstmt.setString(2, account.getBankName());
+			pstmt.setString(3, account.getUserId());
+			
+			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -293,4 +350,6 @@ private Properties prop = new Properties();
 		}
 		return result;
 	}
+
+	
 }

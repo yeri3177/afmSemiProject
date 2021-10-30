@@ -14,7 +14,7 @@ import com.kh.afm.common.MvcUtils;
 import com.kh.afm.user.model.vo.DelUser;
 
 /**
- * Servlet implementation class AdminDelUserList
+ * 탈퇴한 회원 목록 보기 
  */
 @WebServlet("/admin/delUserList")
 public class AdminDelUserList extends HttpServlet {
@@ -35,7 +35,7 @@ public class AdminDelUserList extends HttpServlet {
 		
 		// 업무로직
 		List<DelUser> list = adminService.selectAllDelUser(startRownum, endRownum);
-		System.out.println("list@adminUserListServlet = " + list);
+		//System.out.println("list@adminUserListServlet = " + list);
 		
 		// 페이징영역
 		int totalContents = adminService.selectDelUserTotalContents(); 
