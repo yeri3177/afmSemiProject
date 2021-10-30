@@ -1,6 +1,9 @@
 package com.kh.afm.cart.model.vo;
 
-public class Cart {
+import java.io.Serializable;
+
+public class Cart implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String userId;
 	private int cartNo;
 	private int productNo;
