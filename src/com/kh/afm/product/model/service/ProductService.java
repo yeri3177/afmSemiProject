@@ -87,15 +87,27 @@ public class ProductService {
 		
 		try {
 			// 1. 첨부파일1,2 업데이트 하기
-			Attachment attach1 = productDao.updateAttachmentY(conn, product);
-			System.out.println(attach1);
 
-			Attachment attach2 = productDao.updateAttachmentN(conn, product);
-			System.out.println(attach2);
-
-			// 2. 게시글 수정 updateProdcut문
+			//product업데이트
 			result = productDao.updateProduct(conn, product);
 			
+			//pNo 가져오기
+//			int pNo = product.getpNo();
+			
+			//product객체에 set -> servlet에서 참조
+//			product.setpNo(pNo);
+			
+			//attachment테이블 행 추가
+			Attachment attach1 = product.getAttach1();
+			if(attach1 != null) {
+				result = productDao.updateAttachmentY(conn, product ,attach1);
+			}
+			
+			Attachment attach2 = product.getAttach2();
+			if(attach2 != null) {
+				result = productDao.updateAttachmentN(conn, product, attach2);
+			}
+			commit(conn);
 			
 		} catch (Exception e) {
 			rollback(conn);
@@ -107,4 +119,61 @@ public class ProductService {
 		return result;
 	}
 
+	public int deleteProduct(int no) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		try {
+			result = productDao.deleteProduct(conn, no);
+			if(result == 0)
+				throw new IllegalArgumentException("해당 게시글이 존재하지 않습니다. : " + no );
+			commit(conn);
+		} catch (Exception e) {
+			e.printStackTrace();
+			rollback(conn);
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
+	public int deleteAttachmentY(int no) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		try {
+			result = productDao.deleteAttachmentY(conn, no);
+			if(result == 0)
+				throw new IllegalArgumentException("해당 첨부파일이 존재하지 않습니다. : " + no );
+			commit(conn);
+		} catch (Exception e) {
+			e.printStackTrace();
+			rollback(conn);
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+	
+	public int deleteAttachmentN(int no) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		try {
+			result = productDao.deleteAttachmentN(conn, no);
+			if(result == 0)
+				throw new IllegalArgumentException("해당 첨부파일이 존재하지 않습니다. : " + no );
+			commit(conn);
+		} catch (Exception e) {
+			e.printStackTrace();
+			rollback(conn);
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+
+	}
 }

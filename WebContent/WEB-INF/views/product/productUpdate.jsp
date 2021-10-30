@@ -14,26 +14,28 @@
 	method="post"
 	enctype="multipart/form-data">
 	<table id="tbl-board-view">
+	<input type="hidden" name="pNo" value="<%= product.getpNo() %>" readonly>
+	<input type="hidden" name="userId" value="<%= loginUser.getUserId() %>" readonly>
 	<tr>
 		<th>상품 제목</th>
-		<td><input type="text" name="pTitle" required></td>
+		<td><input type="text" name="pTitle" value="<%= product.getpTitle() %>" required></td>
 	</tr>
 	<tr>
 		<th>상품 가격</th>
 		<td>
-			<input type="text" name="pPrice" value="" required/>
+			<input type="text" name="pPrice" value="<%= product.getpPrice()%>" required/>
 		</td>
 	</tr>
 	<tr>
 		<th>상품 수량</th>
 		<td>
-			<input type="number" name="pCnt" min=1 placeholder="최소 1개 이상" required>		
+			<input type="number" name="pCnt" min=1 placeholder="최소 1개 이상" value="<%= product.getpCnt()%>" required>		
 		</td>
 	</tr>
 	<tr>
 		<th>카테고리</th>
 		<td>
-		<select name="pCategory" id="pCategory">
+		<select name="pCategory" value="<%= product.getpCategory() %>" id="pCategory">
 			<option name="곡류" value="곡류">곡류</option>
 			<option name="과실류" value="과실류">과실류</option>
 			<option name="채소류" value="채소류">채소류</option>
@@ -43,7 +45,7 @@
 	<tr>
 		<th>배송</th>
 		<td>
-		<select name="pPost" id="pPost">
+		<select name="pPost" value="<%= product.getpPost() %>" id="pPost">
 			<option name="Y" value="Y">무료배송</option>
 			<option name="N" value="N">무착불</option>
 		</select>
@@ -84,7 +86,7 @@
 
 	<tr>
 		<th>내 용</th>
-		<td><textarea style="resize:none;" rows="40" cols="120" name="pContent"></textarea></td>
+		<td><textarea style="resize:none;" rows="40" cols="120" name="pContent" value="<%= product.getpContent() %>"></textarea></td>
 	</tr>
 	<tr>
 		<th colspan="2">
