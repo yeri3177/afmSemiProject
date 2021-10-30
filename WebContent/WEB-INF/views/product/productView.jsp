@@ -21,7 +21,7 @@ if(editable){
 	<input 
 		type="button" 
 		value="삭제하기" 
-		onclick="updateBoard()" />
+		onclick="deleteProduct()" />
 		
 <%
 }
@@ -56,9 +56,18 @@ if(editable){
 <%
 if(editable){
 %>
+<form action="<%= request.getContextPath() %>/product/productDelete" name="deleteProductFrm">
+	<input type="hidden" name ="pNo" value="<%= product.getpNo() %>"/>
+</form>
 <script>
 const updateProduct =
 () => location.href = "<%= request.getContextPath() %>/product/productUpdate?pNo=<%= product.getpNo() %>";
+
+const deleteProduct = () => {
+	if(confirm("이 상품을 정말로 삭제하시겠습니까?")){
+		$(document.deleteProductFrm).submit();
+	}
+};
 <%
 }
 %>

@@ -119,4 +119,61 @@ public class ProductService {
 		return result;
 	}
 
+	public int deleteProduct(int no) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		try {
+			result = productDao.deleteProduct(conn, no);
+			if(result == 0)
+				throw new IllegalArgumentException("해당 게시글이 존재하지 않습니다. : " + no );
+			commit(conn);
+		} catch (Exception e) {
+			e.printStackTrace();
+			rollback(conn);
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
+	public int deleteAttachmentY(int no) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		try {
+			result = productDao.deleteAttachmentY(conn, no);
+			if(result == 0)
+				throw new IllegalArgumentException("해당 첨부파일이 존재하지 않습니다. : " + no );
+			commit(conn);
+		} catch (Exception e) {
+			e.printStackTrace();
+			rollback(conn);
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+	
+	public int deleteAttachmentN(int no) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		try {
+			result = productDao.deleteAttachmentN(conn, no);
+			if(result == 0)
+				throw new IllegalArgumentException("해당 첨부파일이 존재하지 않습니다. : " + no );
+			commit(conn);
+		} catch (Exception e) {
+			e.printStackTrace();
+			rollback(conn);
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+
+	}
 }
