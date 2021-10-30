@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.kh.afm.admin.model.dao.AdminDao;
 import com.kh.afm.product.model.vo.Product;
+import com.kh.afm.product.model.vo.Report;
 import com.kh.afm.user.model.vo.DelUser;
 import com.kh.afm.user.model.vo.User;
 
@@ -131,8 +132,56 @@ public class AdminService {
 	 */
 	public List<Product> selectAllProduct(int startRownum, int endRownum) {
 		Connection conn = getConnection();
+		
 		List<Product> list = adminDao.selectAllProduct(conn, startRownum, endRownum);
+		
+		
 		close(conn);
 		return list;
+	}
+
+	/**
+	 * 페이징 - 전체 상품수 
+	 */
+	public int selectProductTotalContents() {
+		Connection conn = getConnection();
+		int totalContent = adminDao.selectProductTotalContents(conn);
+		close(conn);
+		return totalContent;
+	}
+
+	/**
+	 * 상품 노출여부 변경
+	 */
+	public int updateProductExpose(String pNo, String pExpose) {
+		Connection conn = getConnection();
+		int result = adminDao.updateProductExpose(conn, pNo, pExpose);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+
+	/**
+	 * 상품 신고내역 조회
+	 */
+	public List<Report> selectAllReport(int startRownum, int endRownum) {
+		Connection conn = getConnection();
+		List<Report> list = adminDao.selectAllReport(conn, startRownum, endRownum);
+		close(conn);		
+		
+		return list;
+	}
+
+	/**
+	 * 페이징 - 전체 신고내역수  
+	 */
+	public int selectReportTotalContents() {
+		Connection conn = getConnection();
+		int totalContent = adminDao.selectReportTotalContents(conn);
+		close(conn);
+		return totalContent;
 	}
 }
