@@ -31,15 +31,7 @@
 <% } %>
 </script>
 <title>a farmer's market</title>
-<style>
-.header-navMenu{z-index: 99999;}
-.headerDropDownBtn {z-index: 99999;}
-.headerDropDown {position: relative;display: inline-block;z-index: 99999;}
-.headerDropDownMenu {display: none;position: fixed;min-width: 160px;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);z-index: 99999;}
-.headerDropDownMenu a {color: black;padding: 12px 16px;text-decoration: none;display: block;z-index: 99999;}
-.headerDropDownMenu a:hover {background-color: #ddd;z-index: 99999;}
-.headerDropDown:hover .headerDropDownMenu {display: block;position: fixed;z-index: 99999;}
-</style>
+
 </head>
 <body>
     <!-- Header -->

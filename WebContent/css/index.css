@@ -1,12 +1,12 @@
 @charset "UTF-8";
 
-.infoform{display:flex;justify-content: center;position:absolute;top: 75%;left: 50%;transform: translate( -50%, -50% );}
+.infoform{display:flex;justify-content: center;position:absolute;top: 75%;left: 50%;transform: translate( -50%, -50% );z-index:1;}
 .infoImg{width:100%;}
 .infoImgText{display: flex;flex-direction: column;}
 .logofont2{width:10vw;}
 .logoImg2{width:20vw;}
-.infoImgText h2{font-size: 2vw;}
-.infoImgTextp{font-size: 2vw;padding: 0;margin:0;}
+.infoImgText h2{font-size: 2vw;z-index:1;}
+.infoImgTextp{font-size: 2vw;padding: 0;margin:0;z-index:1;}
 .apihead{width: 900px;height: 10%;background: #e9e3d5;padding: 10vw;font-weight: bold;vertical-align: top;color: #427f2f;text-align:right;}
 .apidata{text-align:right;width: 100%;padding: 1vw;font-weight: bold;vertical-align: top;background: #fff;width: 350px;padding: 10px;vertical-align: top;}
 .apitable{font-family: 'Noto Sans KR', sans-serif;width:95%;text-align: left;line-height: 1.5;border: 1px solid #427f2f;margin: 0 auto;margin-top:5px;margin-bottom:5px;}
