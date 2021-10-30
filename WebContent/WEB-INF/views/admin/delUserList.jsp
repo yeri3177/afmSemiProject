@@ -138,14 +138,8 @@ function fnDeleteUser() {
  			$frm.append(`<input type="hidden" name="userId" id="userId\${i}" />`);
  			$frm.find('[id=userId'+i+']').val(delUser_arr[i]);
  			
- 		}
- 		console.log($frm);
- 		//폼전송이 안됨 ;;;
- 		console.log("서브밋전");
- 		
+ 		}		
  		$frm.submit();
- 		
- 		console.log("서브밋후");
 		
  	}else{
  		return false;
