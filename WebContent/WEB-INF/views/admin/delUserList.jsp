@@ -12,7 +12,7 @@
 <div class="del-box">
 	<button onclick="fnCheckAll();">전체선택</button>
 	<button onclick="fnCheckNotAll();">전체해제</button>
-	<button onclick="fnDeleteUser();">회원삭제</button>
+	<button onclick="fnDeleteUser();">데이터삭제</button>
 </div>
 
 
