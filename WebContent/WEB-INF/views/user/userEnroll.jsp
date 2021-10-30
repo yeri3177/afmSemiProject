@@ -150,9 +150,7 @@ https://tyrannocoding.tistory.com/48
 				<td>
 					주소<sup>*</sup> <br />
 					<input id="member_post"  type="text" placeholder="우편번호" readonly onclick="findAddr()"><br>
-					
 					<input id="member_addr" type="text" name="address1" id="address1" placeholder="도로명 주소" readonly> <br>
-					
 					<input type="text" name="address2" id="address2" placeholder="상세 주소">
 				</td>
 			</tr>

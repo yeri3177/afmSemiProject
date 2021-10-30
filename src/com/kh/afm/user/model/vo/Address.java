@@ -1,6 +1,11 @@
 package com.kh.afm.user.model.vo;
 
-public class Address {
+import java.io.Serializable;
+
+public class Address implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private int adrNo; //배송지번호
 	private String adrName; //배송지명
 	private String adrRoad; //도로명주소

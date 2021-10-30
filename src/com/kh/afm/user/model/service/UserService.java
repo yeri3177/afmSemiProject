@@ -45,7 +45,35 @@ public class UserService {
 	}
 	
 	/**
-	 * 회원 수정하기 (회원수정)
+	 * 회원 정보 수정하기 (address 테이블)
+	 */
+	public int updateAddress(Address address) {
+		Connection conn = getConnection();
+		int result = userDao.updateAddress(conn, address);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	/**
+	 * 회원 정보 수정하기 (tb_account 테이블)
+	 */
+	public int updateAccount(Account account) {
+		Connection conn = getConnection();
+		int result = userDao.updateAccount(conn, account);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	/**
+	 * 회원 정보 수정하기 (tb_user 테이블)
 	 */
 	 public int updateUser(User user) {
 			Connection conn = getConnection();
@@ -115,5 +143,7 @@ public class UserService {
 			close(conn);
 			return result;
 		}
+
+		
 
 }

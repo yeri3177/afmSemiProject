@@ -9,10 +9,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.kh.afm.product.model.vo.Attachment;
+import com.kh.afm.product.model.vo.Product;
 import com.kh.afm.user.model.vo.Account;
 import com.kh.afm.user.model.vo.Address;
 import com.kh.afm.user.model.vo.DelUser;
@@ -465,5 +468,114 @@ public class AdminDao {
 		}
 		
 		return result;
+	}
+	
+	/**
+	 * 탈퇴회원 데이터 삭제하기 
+	 */
+	public int deleteDelUser(Connection conn, String[] userId_arr) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		//String sql = prop.getProperty("deleteDelUser"); 
+		
+		// String[] -> String
+		String id_str = "";
+		for(int i=0; i<userId_arr.length; i++) {
+			id_str += (i != userId_arr.length-1) ? (id_str = "'" + userId_arr[i] + "',") : (id_str = "'" + userId_arr[i] + "'");
+			//id_str += (i != userId_arr.length-1) ? (id_str = userId_arr[i] + ",") : (id_str = userId_arr[i]);
+		}
+		System.out.println("id_str = "+id_str);
+		
+		String sql = "delete from user_delete where delete_u_id in ( "+id_str+" )";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			//pstmt.setString(1, id_str);
+			result = pstmt.executeUpdate();			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	/**
+	 * 상품 목록 조회하기 
+	 */
+	public List<Product> selectAllProduct(Connection conn, int startRownum, int endRownum) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectAllProduct");
+		ResultSet rset = null;
+
+
+		List<Product> list = new ArrayList<>();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, startRownum);
+			pstmt.setInt(2, endRownum);
+
+			rset = pstmt.executeQuery();
+
+
+			while (rset.next()) {
+				// 상품
+				Product product = new Product();
+				product.setpNo(rset.getInt("p_no"));
+				product.setUserId(rset.getString("p_user_id"));
+				product.setUserId(rset.getString("p_reg_date"));
+				product.setUserId(rset.getString("p_title"));
+				product.setUserId(rset.getString("p_content"));
+				product.setUserId(rset.getString("p_post"));
+				product.setUserId(rset.getString("p_price"));
+				product.setUserId(rset.getString("p_cnt"));
+				product.setUserId(rset.getString("p_category"));
+				product.setUserId(rset.getString("p_expose"));
+				product.setUserId(rset.getString("p_report"));
+				product.setUserId(rset.getString("p_recommend"));
+				
+				
+				if(rset.getInt("p_no") != 0) {
+					
+					if(rset.getString("img_flag").equals("Y")) {
+						Attachment attach = new Attachment();
+						attach.setAttachNo(rset.getInt("attach_no"));
+						attach.setpNo(rset.getInt("p_no"));
+						attach.setOriginalFileName(rset.getString("original_filename"));
+						attach.setRenamedFileName(rset.getString("renamed_filename"));
+						attach.setRegDate(rset.getDate("reg_date"));
+						attach.setImgFlag(rset.getString("img_flag"));
+						
+						product.setAttach1(attach);
+					}
+					
+					if(rset.getString("img_flag").equals("N")) {
+						Attachment attach = new Attachment();
+						attach.setAttachNo(rset.getInt("attach_no"));
+						attach.setpNo(rset.getInt("p_no"));
+						attach.setOriginalFileName(rset.getString("original_filename"));
+						attach.setRenamedFileName(rset.getString("renamed_filename"));
+						attach.setRegDate(rset.getDate("reg_date"));
+						attach.setImgFlag(rset.getString("img_flag"));
+						
+						product.setAttach2(attach);
+					}
+					
+				}
+				
+				
+				list.add(product);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 }
