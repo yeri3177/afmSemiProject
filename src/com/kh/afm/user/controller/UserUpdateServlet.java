@@ -69,19 +69,19 @@ public class UserUpdateServlet extends HttpServlet {
 		
 		
 		// 성공적으로 회원정보를 수정했다면, session의 속성 loginMember객체도 갱신해야 한다.
-//		if (result > 0) {
-//			HttpSession session = request.getSession();
-//			User newUser = userService.selectOneUser(userId);
-//			session.setAttribute("loginUser", newUser);
-//			System.out.println("userUpdateSession");
-//		}
+		if (result > 0) {
+			HttpSession session = request.getSession();
+			User newUser = userService.selectOneUser(userId);
+			session.setAttribute("loginUser", newUser);
+			System.out.println("userUpdateSession");
+		}
 			
 			// 4.응답처리 msg속성 저장후 /afm로 redirect할 것.
 			HttpSession session = request.getSession();
 			session.setAttribute("msg", msg);
 
 			
-			String location = request.getContextPath() + "/";
+			String location = request.getContextPath() + "/user/userDetail";
 			response.sendRedirect(location);
 		}
 }

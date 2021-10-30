@@ -20,6 +20,7 @@ public class AdminDelUserDeleteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// encoding처리
 		request.setCharacterEncoding("UTF-8");
+		System.out.println("11111111111111111111111111");
 		
 		// 사용자입력값 처리 
 		String[] userId_arr = request.getParameterValues("userId");
