@@ -29,7 +29,10 @@ public class AdminDelUserDeleteServlet extends HttpServlet {
 		
 		// 업무로직
 		int result = adminService.deleteDelUser(userId_arr);
-		System.out.println("result = " + result);
+		
+		// 메세지 세션
+		String msg = result > 0 ? "탈퇴회원 데이터 "+result+"개 삭제 성공" : "탈퇴회원 데이터 삭제 실패";
+		request.getSession().setAttribute("msg", msg);
 		
 		// 리다이렉트
 		response.sendRedirect(request.getContextPath() + "/admin/delUserList");
