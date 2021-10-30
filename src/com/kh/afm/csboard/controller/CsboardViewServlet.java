@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,13 +32,60 @@ public class CsboardViewServlet extends HttpServlet {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		
 		// 2. 비즈니스 로직 호출
-		//주회수 증가
-		int result = csboardService.updateReadCount(boardNo);
+		// 읽음 여부 확인(cookie)
+		// 쿠키 가져오기
+		Cookie[] cookies = request.getCookies();
+		// 게시글을 읽었습니까?
+		boolean hasRead = false;
+		// csboardValue 변수 생성
+		String csboardValue = "";
+		// null일 때 : 완전 첫 방문일 때
+		if(cookies != null) {
+			for(Cookie c : cookies) {
+				// cookie에서 name과 value를 가져온다.
+				String name = c.getName();
+				String value = c.getValue();
+				System.out.println("??");
+				System.out.println(name + " : " + value);
+				
+				// csboard라는 cookie가 있냐
+				if("csboard".equals(name)) {
+					csboardValue = value;
+					// 현재 게시글 읽음 여부
+					// boardNo를 포함하고 있는가?
+					if(value.contains("|" + boardNo + "|")) {
+						hasRead = true;
+					}
+					break;
+				}
+			}
+		}
+		
+		// %b : boolean 출력
+		// %s : 문자형 출력
+		// %n : 줄 바꿈
+		System.out.printf("hasRead = %b, csboardValue = %s%n", hasRead, csboardValue);
+		
+		// 게시글을 처음 읽는 경우
+		if(!hasRead) {
+			// 게시글 Cookie
+			// 뭐를 읽었는지 cookie에 담아둔다.
+			// boardNo : 현재 게시글 번호
+			Cookie cookie = new Cookie("csboard", csboardValue + "|" + boardNo + "|");
+			// cookie 유효기간
+			cookie.setMaxAge(365 * 24 * 60 * 60);
+			// 언제만 쓸거냐? /csboard/csboardView 쓸 때만
+			// 해당 요청시만 cookie 전송 / 결국 브라우저에 저장할 것이니까.
+			cookie.setPath(request.getContextPath() + "/csboard/csboardView"); 
+			response.addCookie(cookie);
+			
+			//주회수 증가
+			int result = csboardService.updateReadCount(boardNo);
+		}
 		
 		// 게시글 하나 가져오기
 		Csboard csboard = csboardService.selectOneCsboard(boardNo);
 		System.out.println("CsboardViewServlet = " + csboard);
-		
 		
 		// 게시글 가져오기에 실패한 경우
 		if(csboard == null) {

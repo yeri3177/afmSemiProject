@@ -27,10 +27,11 @@ public class AdminUserExposeUpdateServlet extends HttpServlet {
 		String userExpose = request.getParameter("userExpose");
 		
 		
-		// 3.업무로직 
+		// 업무로직 
 		int result = adminService.updateUserExpose(userId, userExpose);
 		
-		String msg = result > 0 ? "성공" : "실패";
+		// 메세지 세션
+		String msg = result > 0 ? "사용자 공개여부값 "+userExpose+"로 변경 성공" : "사용자 공개여부 변경 실패";
 		request.getSession().setAttribute("msg", msg);
 		
 		// 리다이렉트

@@ -274,6 +274,22 @@ div#pageBar a:hover {
 	text-align: center;
 }
 
+/* 상단에 session msg 출력 영역 */
+#msgbox {
+	background-color: lightgray;
+	width: 430px;
+	height: 60px;
+	position: relative;
+	top: 16px;
+	text-align : center;
+}
+
+#msgbox span {
+	position: relative;
+	top: 8px;
+	font-size: 15px;
+}  
+
 /**************************************
  * userList.jsp
  **************************************/
@@ -304,7 +320,7 @@ div#pageBar a:hover {
 }
 
 #adr-th {
-	width: 200px;
+	width: 160px;
 }
  
 #tbl-user tr:hover {

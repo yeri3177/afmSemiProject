@@ -1,6 +1,11 @@
 package com.kh.afm.user.model.vo;
 
-public class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private int accountNo; //계좌일련번호
 	private String accountNumber; //계좌번호
 	private String bankName; //은행명

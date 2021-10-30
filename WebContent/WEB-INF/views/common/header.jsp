@@ -31,6 +31,15 @@
 <% } %>
 </script>
 <title>a farmer's market</title>
+<style>
+.header-navMenu{z-index: 99999;}
+.headerDropDownBtn {z-index: 99999;}
+.headerDropDown {position: relative;display: inline-block;z-index: 99999;}
+.headerDropDownMenu {display: none;position: fixed;min-width: 160px;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);z-index: 99999;}
+.headerDropDownMenu a {color: black;padding: 12px 16px;text-decoration: none;display: block;z-index: 99999;}
+.headerDropDownMenu a:hover {background-color: #ddd;z-index: 99999;}
+.headerDropDown:hover .headerDropDownMenu {display: block;position: fixed;z-index: 99999;}
+</style>
 </head>
 <body>
     <!-- Header -->
@@ -52,11 +61,18 @@
 <% if(loginUser == null){ %>
 					  <a href="<%= request.getContextPath() %>/user/userLogin"><img class="profile" src="<%= request.getContextPath() %>/images/common/profile.png">
 					 	 <span class="buttonImgName">&nbsp;&nbsp;로그인</span>
-<% }else{ %>
-					  <a href="<%= request.getContextPath() %>/user/userDetail"><img class="profile" src="<%= request.getContextPath() %>/images/common/mypage.png">
-					 	 <span class="buttonImgName"><%= loginUser.getUserName() %>님</span>
-<% } %>
 					  </a>
+<% }else{ %>
+					<div class="headerDropDown">
+					  <div class="headerDropDownBtn"><img class="profile" src="<%= request.getContextPath() %>/images/common/mypage.png">
+					 	 <span class="buttonImgName"><%= loginUser.getUserName() %>님</span></div>
+					 	 <div class="headerDropDownMenu">
+						 	 <a href="<%= request.getContextPath() %>/user/userDetail">내 정보 보기</a>
+						 	 <a href="#">주문 내역</a>
+						 	 <a href="#">판매 내역</a>
+					 	 </div>
+					</div>
+<% } %>
 				  </button>
 				</div>
 				<div class="button">

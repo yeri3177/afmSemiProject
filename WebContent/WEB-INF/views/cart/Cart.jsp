@@ -134,7 +134,7 @@ List<Cart> list = (List<Cart>)request.getAttribute("list");
 <%
 	}else{
 %>
-    <form name="orderform" id="orderform" method="post" class="orderform" action="/Page">
+    <form name="orderform" id="orderform" method="post" class="orderform" action="order/cartOrder">
     
             <input type="hidden" name="cmd" value="order">
             <div class="basketdiv" id="basket">

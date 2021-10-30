@@ -2,6 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	User loginUser = (User) session.getAttribute("loginUser");
+
+	String msg = (String) session.getAttribute("msg");
+	if(msg != null) session.removeAttribute("msg");
+	
+	System.out.println(msg);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,20 +31,12 @@
 	<link rel="icon" href="<%= request.getContextPath() %>/images/admin/setting_icon.png">
 
 	<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
+<style>
+#msgbox {
+	visibility : <%= msg == null ? "hidden" : "visible" %>;
+}
+</style>
 
-<script>
-<%
-	// 로그인 메세지 출력 
-	String msg = (String) session.getAttribute("msg");
-	System.out.println("msg = " + msg);
-	
-	if(msg != null) session.removeAttribute("msg");
-%>
-<% if(msg!= null) { %>
-	// 사용자 메세지 전달
-	alert("<%= msg %>");
-<% } %>
-</script>	
 
 </head>
 <body>
@@ -104,6 +101,11 @@
 				</div>
 			</div>
 			
+			<!-- msg session 뜨게 하는곳 -->
+			<div id="msgbox">
+
+			</div>
+			
 			<!-- 로그아웃 버튼 -->
 			<div class="logoutbox" onclick="location.href='<%= request.getContextPath() %>/user/logout';">
 				<img src="<%=request.getContextPath()%>/images/admin/logout_icon.png" /><br />
@@ -112,3 +114,20 @@
 		
 		<!-- 오른쪽 하단 콘텐츠 영역 시작 -->
 		<section class="right-bottom-contents">
+		
+<script>
+
+
+$msgbox = $("#msgbox");
+
+<% if(msg!= null) { %>
+
+	$msgbox.append($("<span> <%= msg %> </span>"));
+	
+	setTimeout(() => {
+		$msgbox.css('visibility','hidden');
+	}, 5000)
+	
+<% } %>
+
+</script>	

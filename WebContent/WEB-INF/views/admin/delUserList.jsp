@@ -12,7 +12,7 @@
 <div class="del-box">
 	<button onclick="fnCheckAll();">전체선택</button>
 	<button onclick="fnCheckNotAll();">전체해제</button>
-	<button onclick="fnDeleteUser();">회원삭제</button>
+	<button onclick="fnDeleteUser();">데이터삭제</button>
 </div>
 
 
@@ -138,14 +138,8 @@ function fnDeleteUser() {
  			$frm.append(`<input type="hidden" name="userId" id="userId\${i}" />`);
  			$frm.find('[id=userId'+i+']').val(delUser_arr[i]);
  			
- 		}
- 		console.log($frm);
- 		//폼전송이 안됨 ;;;
- 		console.log("서브밋전");
- 		
+ 		}		
  		$frm.submit();
- 		
- 		console.log("서브밋후");
 		
  	}else{
  		return false;

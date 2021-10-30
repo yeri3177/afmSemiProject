@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -475,28 +476,22 @@ public class AdminDao {
 	public int deleteDelUser(Connection conn, String[] userId_arr) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("deleteDelUser"); 
-		String [] arr_sql = new String[userId_arr.length];
-		String sql_val = "";
+		//String sql = prop.getProperty("deleteDelUser"); 
 		
-		// 배열값 -> ''로 감싸기
+		// String[] -> String
+		String id_str = "";
 		for(int i=0; i<userId_arr.length; i++) {
-			arr_sql[i] = "'" + userId_arr[i] + "'";
+			id_str += (i != userId_arr.length-1) ? (id_str = "'" + userId_arr[i] + "',") : (id_str = "'" + userId_arr[i] + "'");
+			//id_str += (i != userId_arr.length-1) ? (id_str = userId_arr[i] + ",") : (id_str = userId_arr[i]);
 		}
+		System.out.println("id_str = "+id_str);
 		
-		sql_val = arr_sql.toString();
-		System.out.println("sql_val = "+sql_val);
+		String sql = "delete from user_delete where delete_u_id in ( "+id_str+" )";
 		
 		try {
-			// 미완성쿼리문 객체생성
 			pstmt = conn.prepareStatement(sql);
-			
-			// 쿼리문 셋팅
-			pstmt.setString(1, sql_val);
-			
-			// 쿼리실행 
-			result = pstmt.executeUpdate();
-			
+			//pstmt.setString(1, id_str);
+			result = pstmt.executeUpdate();			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
