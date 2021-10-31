@@ -48,10 +48,10 @@ div#search-pExpose {
 		
 		<!-- 상품번호 검색 -->
 		<div id="search-pNo" class="search-type">
-			<form action="<%=request.getContextPath()%>/admin/productFinder">
+			<form action="<%=request.getContextPath()%>/admin/productFinder" name="searchFrm">
 				<input type="hidden" name="searchType" value="pNo"/>
 				<input type="text" name="searchKeyword" 
-					placeholder="검색키워드 입력" size="16" 
+					placeholder="검색키워드 입력" size="13" id="searchInput"
 					value="<%= "pNo".equals(searchType) ? searchKeyword : "" %>"/>
 				<button type="submit" class="search-btn">검색</button>
 			</form>
@@ -59,10 +59,10 @@ div#search-pExpose {
 		
 		<!-- 판매자아이디 검색 -->
 		<div id="search-userId" class="search-type">
-			<form action="<%=request.getContextPath()%>/admin/productFinder">
+			<form action="<%=request.getContextPath()%>/admin/productFinder" name="searchFrm">
 				<input type="hidden" name="searchType" value="userId"/>
 				<input type="text" name="searchKeyword"
-					placeholder="검색키워드 입력" size="16" 
+					placeholder="검색키워드 입력" size="13" id="searchInput"
 					value="<%= "userId".equals(searchType) ? searchKeyword : "" %>"/>
 				<button type="submit" class="search-btn">검색</button>
 			</form>
@@ -70,26 +70,36 @@ div#search-pExpose {
 		
 		<!-- 상품카테고리 검색 -->
 		<div id="search-pCategory" class="search-type">
-			<form action="<%=request.getContextPath()%>/admin/productFinder">
-				<input type="hidden" name="searchType" value="pCategory"/>
-		        <input type="radio" name="searchKeyword" value="채소류" 
-		        	<%= "pCategory".equals(searchType) && "A".equals(searchKeyword) ? "checked" : "" %>> 채소류
-		        <input type="radio" name="searchKeyword" value="과실류" 
-		        	<%= "pCategory".equals(searchType) && "U".equals(searchKeyword) ? "checked" : "" %>> 곡류
-		        <input type="radio" name="searchKeyword" value="곡류" 
-		        	<%= "pCategory".equals(searchType) && "S".equals(searchKeyword) ? "checked" : "" %>> 과실류
-				<button type="submit" class="search-btn">검색</button>
+			<form action="<%=request.getContextPath()%>/admin/productFinder" name="searchFrm">
+					<input type="hidden" name="searchType" value="pCategory"/>
+			    <label>
+			        <input type="radio" name="searchKeyword" value="채소류" checked
+			        	<%= "pCategory".equals(searchType) && "A".equals(searchKeyword) ? "checked" : "" %>> 채소류
+			    </label>
+			    <label> 
+			        <input type="radio" name="searchKeyword" value="과실류" 
+			        	<%= "pCategory".equals(searchType) && "U".equals(searchKeyword) ? "checked" : "" %>> 곡류
+			    </label>
+			    <label>
+			        <input type="radio" name="searchKeyword" value="곡류" 
+			        	<%= "pCategory".equals(searchType) && "S".equals(searchKeyword) ? "checked" : "" %>> 과실류
+			    </label>    	
+					<button type="submit" class="search-btn">검색</button>
 			</form>
 		</div>
 		
 		<!-- 상품노출여부 검색 -->
 		<div id="search-pExpose" class="search-type">
-			<form action="<%=request.getContextPath()%>/admin/productFinder">
+			<form action="<%=request.getContextPath()%>/admin/productFinder" name="searchFrm">
 				<input type="hidden" name="searchType" value="pExpose"/>
-		        <input type="radio" name="searchKeyword" value="Y" 
-		        	<%= "pExpose".equals(searchType) && "Y".equals(searchKeyword) ? "checked" : "" %>> 노출
-		        <input type="radio" name="searchKeyword" value="N" 
-		        	<%= "pExpose".equals(searchType) && "N".equals(searchKeyword) ? "checked" : "" %>> 비공개
+				<label>
+			        <input type="radio" name="searchKeyword" value="Y" checked
+			        	<%= "pExpose".equals(searchType) && "Y".equals(searchKeyword) ? "checked" : "" %>> 노출
+			    </label>
+			    <label> 
+			        <input type="radio" name="searchKeyword" value="N" 
+			        	<%= "pExpose".equals(searchType) && "N".equals(searchKeyword) ? "checked" : "" %>> 비공개
+				</label>
 				<button type="submit" class="search-btn">검색</button>
 			</form>
 		</div>
@@ -102,8 +112,12 @@ div#search-pExpose {
 		<form action="<%=request.getContextPath()%>/admin/userSort">
 			<span>sort</span>
 			<!-- 정렬 타입 -->
-			<input type="radio" name="sortType" value="asc" <%= "asc".equals(sortType) ? "checked" : "" %> />오름차순
-			<input type="radio" name="sortType" value="desc" <%= "desc".equals(sortType) ? "checked" : "" %> />내림차순
+			<label>	
+				<input type="radio" name="sortType" value="asc" checked <%= "asc".equals(sortType) ? "checked" : "" %> />오름차순
+			</label>
+			<label>	
+				<input type="radio" name="sortType" value="desc" <%= "desc".equals(sortType) ? "checked" : "" %> />내림차순
+			</label>
 			
 			<!-- 정렬 키워드 -->
 			<select name=sortKeyword>
@@ -180,6 +194,19 @@ div#search-pExpose {
 </form>
 
 <script>
+/* 검색할때 값 입력 유효성검사 ★★★★★★★★★★★★★★★★★★★★★★★★★보류 */
+/* $("[name=searchFrm]").submit((e) => {
+	const $searchKeyword = $("[name=searchKeyword]");
+	console.log($searchKeyword.val());
+	
+	if($searchKeyword.val() == ""){
+		alert("검색키워드를 입력하십시오.");
+		$searchKeyword.select();
+		return false;
+	} 
+	return true;
+}); */
+
 /* 노출여부값 변경시 체인지 이벤트 */
 $(".p_expose").change((e) => {
 	const $this = $(e.target);

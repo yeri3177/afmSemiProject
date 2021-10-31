@@ -45,10 +45,10 @@ div#search-userRole {
 		
 		<!-- 아이디 검색 -->
 		<div id="search-userId" class="search-type">
-			<form action="<%=request.getContextPath()%>/admin/userFinder">
+			<form action="<%=request.getContextPath()%>/admin/userFinder" name="searchFrm">
 				<input type="hidden" name="searchType" value="userId"/>
 				<input type="text" name="searchKeyword" 
-					placeholder="검색할 아이디를 입력하세요." size="25" 
+					placeholder="검색할 아이디를 입력하세요." size="22" id="searchInput"
 					value="<%= "userId".equals(searchType) ? searchKeyword : "" %>"/>
 				<button type="submit" class="search-btn">검색</button>
 			</form>
@@ -56,10 +56,10 @@ div#search-userRole {
 		
 		<!-- 회원명 검색 -->
 		<div id="search-userName" class="search-type">
-			<form action="<%=request.getContextPath()%>/admin/userFinder">
+			<form action="<%=request.getContextPath()%>/admin/userFinder" name="searchFrm">
 				<input type="hidden" name="searchType" value="userName"/>
 				<input type="text" name="searchKeyword" 
-					placeholder="검색할 이름을 입력하세요." size="25" 
+					placeholder="검색할 이름을 입력하세요." size="22" id="searchInput"
 					value="<%= "userName".equals(searchType) ? searchKeyword : "" %>"/>
 				<button type="submit" class="search-btn">검색</button>
 			</form>
@@ -67,14 +67,24 @@ div#search-userRole {
 		
 		<!-- 회원권한 검색 -->
 		<div id="search-userRole" class="search-type">
-			<form action="<%=request.getContextPath()%>/admin/userFinder">
+			<form action="<%=request.getContextPath()%>/admin/userFinder" name="searchFrm">
 				<input type="hidden" name="searchType" value="userRole"/>
-		        <input type="radio" name="searchKeyword" value="A" 
-		        	<%= "userRole".equals(searchType) && "A".equals(searchKeyword) ? "checked" : "" %>> admin
-		        <input type="radio" name="searchKeyword" value="U" 
-		        	<%= "userRole".equals(searchType) && "U".equals(searchKeyword) ? "checked" : "" %>> user
-		        <input type="radio" name="searchKeyword" value="S" 
-		        	<%= "userRole".equals(searchType) && "S".equals(searchKeyword) ? "checked" : "" %>> seller
+		        
+		        <label>
+			        <input type="radio" name="searchKeyword" value="A" checked
+			        	<%= "userRole".equals(searchType) && "A".equals(searchKeyword) ? "checked" : "" %>> admin
+		        </label>
+		        	
+		        <label>
+			        <input type="radio" name="searchKeyword" value="U" 
+			        	<%= "userRole".equals(searchType) && "U".equals(searchKeyword) ? "checked" : "" %>> user
+		        </label>
+		        
+		        <label>
+			        <input type="radio" name="searchKeyword" value="S" 
+			        	<%= "userRole".equals(searchType) && "S".equals(searchKeyword) ? "checked" : "" %>> seller
+				</label>
+				
 				<button type="submit" class="search-btn">검색</button>
 			</form>
 		</div>
@@ -87,8 +97,8 @@ div#search-userRole {
 		<form action="<%=request.getContextPath()%>/admin/userSort">
 			<span>sort</span>
 			<!-- 정렬 타입 -->
-			<input type="radio" name="sortType" value="asc" <%= "asc".equals(sortType) ? "checked" : "" %> />오름차순
-			<input type="radio" name="sortType" value="desc" <%= "desc".equals(sortType) ? "checked" : "" %> />내림차순
+			<label><input type="radio" name="sortType" value="asc" checked <%= "asc".equals(sortType) ? "checked" : "" %> />오름차순</label>
+			<label><input type="radio" name="sortType" value="desc" <%= "desc".equals(sortType) ? "checked" : "" %> />내림차순</label>
 			
 			<!-- 정렬 키워드 -->
 			<select name=sortKeyword>
@@ -183,6 +193,37 @@ div#search-userRole {
 </form>
 
 <script>
+/* 검색할때 값 입력 유효성검사 ★★★★★★★★★★★★★★★★★★★★★★★★★보류*/
+/* $("[name=searchFrm]").submit((e) => {
+	const $searchInput = $("#searchInput");
+	const $searchType = $("[name=searchType]");
+	console.log($searchType.val());
+	
+	if($searchType.val() == "userId") {
+		if($searchInput.val() == ""){
+			alert("검색키워드를 입력하십시오.");
+			$searchInput.select();
+			return false;
+		} 
+	}
+	return true;
+}); */
+ 
+$("[name=searchFrm]").submit((e) => {
+	const $searchKeyword = $("[name=searchKeyword]");
+	const $searchType = $("[name=searchType]");
+	console.log($searchType.val());
+	
+	if($searchType.val() == "userId") {
+		if($searchKeyword.val() == ""){
+			alert("검색키워드를 입력하십시오.");
+			$searchKeyword.select();
+			return false;
+		} 
+		return true;
+	}
+});
+
 /* 검색유형 체인지 이벤트 */
 $("#searchType").change((e) => {
   	const type = $(e.target).val();

@@ -713,8 +713,106 @@ public class AdminDao {
 	 * 상품 검색하기
 	 */
 	public List<Product> searchProduct(Connection conn, Map<String, Object> param) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Product> list = new ArrayList<>();
+		String sql = null;
+		String searchType = (String) param.get("searchType");
+
+		switch (searchType) {
+		case "pNo": 
+			sql = prop.getProperty("searchProductByProductNo");
+			param.put("searchKeyword", "%" + param.get("searchKeyword") + "%");
+			break;
+		case "userId":
+			sql = prop.getProperty("searchProductByUserId");
+			param.put("searchKeyword", "%" + param.get("searchKeyword") + "%");
+			break;
+		case "pCategory":
+			sql = prop.getProperty("searchProductByProductCategory");
+			break;
+		case "pExpose":
+			sql = prop.getProperty("searchProductByProductExpose");
+			break;
+		}
+
+		try {
+			// 1. PreparedStatement객체 생성 & 미완성쿼리 값대입
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, (String) param.get("searchKeyword"));
+			pstmt.setInt(2, (int) param.get("start"));
+			pstmt.setInt(3, (int) param.get("end"));
+
+			// 2. 쿼리실행 및 ResultSet처리
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				Product product = new Product();
+				product.setpNo(rset.getInt("p_no"));
+				product.setUserId(rset.getString("p_user_id"));
+				product.setpRegDate(rset.getDate("p_reg_date"));
+				product.setpTitle(rset.getString("p_title"));
+				product.setpContent(rset.getString("p_content"));
+				product.setpPost(rset.getString("p_post"));
+				product.setpPrice(rset.getInt("p_price"));
+				product.setpCnt(rset.getInt("p_cnt"));
+				product.setpCategory(rset.getString("p_category"));
+				product.setpExpose(rset.getString("p_expose"));
+				product.setpReport(rset.getString("p_report"));
+				product.setpRecommend(rset.getInt("p_recommend"));
+				
+				list.add(product);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+
+	/**
+	 * 페이징 - 상품 검색된 수  
+	 */
+	public int searchProductCount(Connection conn, Map<String, Object> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalContents = 0;
+
+		String sql = null;
+		String searchType = (String) param.get("searchType");
+		switch (searchType) {
+		case "pNo":
+			sql = prop.getProperty("searchProductCountByProductNo");
+			break;
+		case "userId":
+			sql = prop.getProperty("searchProductCountByUserId");
+			param.put("searchKeyword", "%" + param.get("searchKeyword") + "%");
+			break;
+		case "pCategory":
+			sql = prop.getProperty("searchProductCountByProductCategory");
+			break;
+		case "pExpose":
+			sql = prop.getProperty("searchProductCountByProductExpose");
+			break;
+		}
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, (String) param.get("searchKeyword"));
+			rset = pstmt.executeQuery();
+			if (rset.next())
+				totalContents = rset.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalContents;
 	}
 	
 }
