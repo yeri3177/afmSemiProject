@@ -13,17 +13,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.afm.admin.model.service.AdminService;
 import com.kh.afm.common.MvcUtils;
-import com.kh.afm.user.model.vo.User;
+import com.kh.afm.product.model.vo.Product;
 
 /**
- * 회원 검색 
+ * 상품 검색하기 
  */
-@WebServlet("/admin/userFinder")
-public class AdminUserFinderServlet extends HttpServlet {
+@WebServlet("/admin/productFinder")
+public class AdminProductFinderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AdminService adminService = new AdminService(); 
-
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		// 검색유형, 검색키워드
 		String searchType = request.getParameter("searchType");
 		String searchKeyword = request.getParameter("searchKeyword");
@@ -47,19 +48,22 @@ public class AdminUserFinderServlet extends HttpServlet {
 		param.put("end", end);
 		
 		// 검색결과 리스트 
-		List<User> list = adminService.searchUser(param);
+		List<Product> list = adminService.searchProduct(param);
 		
 		// 페이지바
-		int totalContents = adminService.searchUserCount(param);
+		int totalContents = adminService.searchProductCount(param);
 		String queryString = String.format("?searchType=%s&searchKeyword=%s", searchType, searchKeyword);
 		String url = request.getRequestURI() + queryString; 
 		String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
 		
-		// view단처리
+		// view단 처리
 		request.setAttribute("list", list);
 		request.setAttribute("pagebar", pagebar);
 		request
-			.getRequestDispatcher("/WEB-INF/views/admin/userList.jsp")
+			.getRequestDispatcher("/WEB-INF/views/admin/productList.jsp")
 			.forward(request, response);
+		
+		
+		
 	}
 }

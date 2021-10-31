@@ -42,7 +42,11 @@ public class AdminProductReportServlet extends HttpServlet {
 		String url = request.getRequestURI();
 		String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
 		
+		// 신고내역 미처리 건수 
+		int rcnt = adminService.selectReportCnt();
+		
 		// view단 처리
+		request.setAttribute("rcnt", rcnt);
 		request.setAttribute("pagebar", pagebar);
 		request.setAttribute("list", list);
 		request

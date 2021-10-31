@@ -184,4 +184,33 @@ public class AdminService {
 		close(conn);
 		return totalContent;
 	}
+
+	/**
+	 * 상품 신고내역 미처리 건수 조회 
+	 */
+	public int selectReportCnt() {
+		Connection conn = getConnection();
+		int cnt = adminDao.selectReportCnt(conn);
+		close(conn);		
+		
+		return cnt;
+	}
+
+	/**
+	 * 상품 검색하기
+	 */
+	public List<Product> searchProduct(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Product> list = adminDao.searchProduct(conn, param);
+		close(conn);
+		return list;
+	}
+
+	/**
+	 * 페이징 - 상품 검색된 수  
+	 */
+	public int searchProductCount(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

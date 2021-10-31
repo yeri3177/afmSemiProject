@@ -176,12 +176,6 @@ div#search-userRole {
 
 </section>
 
-<!-- 회원권한 변경시 폼전송 -->
-<form action="<%=request.getContextPath()%>/admin/updateMemberRole" method="POST" name="updateMemberRoleFrm">
-	<input type="hidden" name="memberId" />
-	<input type="hidden" name="memberRole" />
-</form>
-
 <!-- 공개여부 변경시 폼전송 -->
 <form action="<%=request.getContextPath()%>/admin/updateUserExpose" method="POST" name="updateUserExposeFrm">
 	<input type="hidden" name="userId" />
