@@ -140,22 +140,73 @@ section#enroll-container input[readonly]{
 }
 
 /*************************************************
- * PurchaseDetail.jsp (결제내역 페이지)
+ * OrderComplete.jsp (결제내역 페이지)  
  **************************************************/
-#PurchaseDetail-container {
+#OrderComplete-container {
 	margin: 100px auto;
 	text-align: center;
 }
  
-#PurchaseDetail-container table {
+#OrderComplete-container table {
 	margin: 0 auto;
-	border-collapse: collapse;
+	text-align: center;
+	border-collapse:collapse;
 }
 
-#PurchaseDetail-container table td,th {
+#OrderComplete-container table th {
+	height: 40px;
+	background-color: #ffebb5;
+	text-align: center;
+	padding: 15px;
+}
+
+#OrderComplete-container table td{
+	text-align: center;
 	padding: 15px;
 }
  
+#tbl-orderComplete {
+	width : 80%;
+	height: 70%;
+}
+
+.orderbtn {
+	width : 80px;
+}
+
+#tbl-orderComplete button {
+	background-color: #568A35;
+	color:white;
+	
+	
+}
+/*************************************************
+ * OrderComplete.jsp (구매상세내역 페이지) 
+ **************************************************/
+ #OrderCompleteDeatil-container {
+	margin: 100px auto;
+	text-align: center;
+}
  
- 
+#OrderCompleteDeatil-container table {
+	margin: 0 auto;
+	text-align: center;
+	border-collapse:collapse;
+}
+
+#OrderCompleteDeatil-container th {
+	height: 40px;
+	background-color: #ffebb5;
+	text-align: center;
+	padding: 15px;
+}
+#OrderCompleteDeatil-container table td{
+	text-align: center;
+	padding: 15px;
+}
+
+#tbl-orderCompleteDetail {
+	width : 80%;
+	height: 70%;
+}
  
