@@ -1,4 +1,4 @@
-<%@page import="com.kh.afm.user.model.vo.OrderDetail"%>
+<%@page import="com.kh.afm.user.model.vo.UserOrderDetail"%>
 <%@page import="com.kh.afm.user.model.service.UserService"%>
 <%@page import="com.kh.afm.user.model.vo.User"%>
 <%@page import="java.util.List"%>

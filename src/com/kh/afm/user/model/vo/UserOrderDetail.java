@@ -1,7 +1,7 @@
 package com.kh.afm.user.model.vo;
 
 
-public class OrderDetail {
+public class UserOrderDetail {
 	private int orderDetailNo; //주문상세번호
 	private int pNo; //상품번호
 	private int orderNo; //주문번호
@@ -9,11 +9,11 @@ public class OrderDetail {
 	private int pPrice; //상품가격
 	private String orderStatus; //주문상태
 	
-	public OrderDetail() {
+	public UserOrderDetail() {
 		super();
 	}
 
-	public OrderDetail(int orderDetailNo, int pNo, int orderNo, int pCount, int pPrice, String orderStatus) {
+	public UserOrderDetail(int orderDetailNo, int pNo, int orderNo, int pCount, int pPrice, String orderStatus) {
 		super();
 		this.orderDetailNo = orderDetailNo;
 		this.pNo = pNo;
