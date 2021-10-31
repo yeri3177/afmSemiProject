@@ -124,8 +124,8 @@ if(editable){
 				<button id="btn-insert">등록</button>
 				
 				<input type="hidden" name="commentLevel" value="1"/>
-				<input type="hidden" name="userId" value=""/>
-				<input type="hidden" name="pNo" value=""/>
+				<input type="hidden" name="userId" value="<%= loginUser != null ? loginUser.getUserId() : ""%>"/>
+				<input type="hidden" name="pNo" value="<%= product.getpNo()%>"/>
 				<input type="hidden" name="commentRef" value="0"/>
 			</form>
 		</div>
