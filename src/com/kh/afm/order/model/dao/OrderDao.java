@@ -170,6 +170,78 @@ private Properties prop = new Properties();
 		return result;
 	}
 
+	/**
+	 * 로그인한 회원의 구매내역 찾기 (tb_order 테이블)
+	 * @param userId : 로그인한 회원아이디
+	 * @return List<Order> : 로그인한 회원의 order 데이터 리스트
+	 */
+	public List<Order> selectOrderComplete(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectOrderComplete");
+		List<Order> list = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				Order order = new Order();
+				order.setOrderNo(rset.getInt("order_no"));
+				order.setUserId(rset.getString("user_id"));
+				order.setOrderDate(rset.getDate("order_date"));
+				order.setTotalPrice(rset.getInt("total_price"));
+
+				list.add(order);
+			}
+			
+		}catch (SQLException e) {
+				e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	/**
+	 * 로그인한 회원의 구매내역 찾기 (order_detail 테이블)
+	 * @param orderNo : 클릭한 해당 주문번호
+	 * @return List<OrderDetail> : 해당 주문번호의 주문상세내역 정보
+	 */
+	public List<OrderDetail> selectOrderCompleteDetail(Connection conn, int orderNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectOrderCompleteDetail");
+		List<OrderDetail> list = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, orderNo);
+			
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				OrderDetail orderDetail = new OrderDetail();
+				orderDetail.setOrderDetailNo(rset.getInt("order_detail_no"));
+				orderDetail.setProductNo(rset.getInt("p_no"));
+				orderDetail.setOrderNo(rset.getInt("order_no"));
+				orderDetail.setpCnt(rset.getInt("p_cnt"));
+				orderDetail.setpPrice(rset.getInt("p_price"));
+				orderDetail.setPayStatus(rset.getString("order_status"));
+
+				list.add(orderDetail);
+			}
+			
+		}catch (SQLException e) {
+				e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
 //	public int cartOrderProductCntCheck(Connection conn, int pNo) {
 //		PreparedStatement pstmt = null;
 //		ResultSet rset = null;

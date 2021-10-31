@@ -11,6 +11,7 @@ public class OrderDetail implements Serializable {
 	private int pCnt;
 	private int pPrice;
 	private String payStatus;
+	
 	public OrderDetail() {
 		super();
 		// TODO Auto-generated constructor stub

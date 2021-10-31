@@ -138,4 +138,24 @@
 section#enroll-container input[readonly]{
 	background: lightgray;
 }
+
+/*************************************************
+ * PurchaseDetail.jsp (결제내역 페이지)
+ **************************************************/
+#PurchaseDetail-container {
+	margin: 100px auto;
+	text-align: center;
+}
+ 
+#PurchaseDetail-container table {
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+#PurchaseDetail-container table td,th {
+	padding: 15px;
+}
+ 
+ 
+ 
  
