@@ -12,7 +12,7 @@ import com.kh.afm.admin.model.service.AdminService;
 /**
  * 상품 정렬하기 
  */
-@WebServlet("/admin/userSort")
+@WebServlet("/admin/productSort")
 public class AdminProductSortServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AdminService adminService = new AdminService();    
