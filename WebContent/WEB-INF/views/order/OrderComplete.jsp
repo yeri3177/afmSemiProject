@@ -11,15 +11,15 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/user.css" />
 
 
-<section id="PurchaseDetail-container">
+<section id="OrderComplete-container">
 <h1>order</h1>
 
-<table id="tbl-order">
+<table id="tbl-orderComplete">
 	<tr>
 		<th>구매번호</th>
 		<th>구매일</th>
 		<th>총결제금액</th>
-		<th>상세보기</th>
+		<th id="orderbtn">상세보기</th>
 	</tr>
 <%
 	for(Order order : list) {
