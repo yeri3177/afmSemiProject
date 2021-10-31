@@ -29,6 +29,12 @@
 <% if(msg != null) {%>
 	alert("<%= msg %>");
 <% } %>
+<%-- function orderCheck(){
+	var popupWidth = 800;
+	var popupHeight = 600;
+	var x = (window.screen.width / 2) - (popupWidth / 2);
+	var y = (window.screen.height / 2) - (popupHeight / 2);
+	open("<%= request.getContextPath() %>/order/orderCheck", "", 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ x + ', top='+ y);}; --%>
 </script>
 <title>a farmer's market</title>
 
@@ -60,9 +66,12 @@
 					 	 <span class="buttonImgName"><%= loginUser.getUserName() %>님</span></div>
 					 	 <div class="headerDropDownMenu">
 						 	 <a href="<%= request.getContextPath() %>/user/userDetail">내 정보 보기</a>
-						 	 <a href="#">주문 확인</a>
-						 	 <a href="#">주문 내역</a>
+						 	 <a href="#">구매 내역</a>
+						 	 <!-- <a href="javascript:orderCheck();">주문 확인</a> -->
+						 	 <a href="<%= request.getContextPath() %>/order/orderCheck">주문 확인</a>
+					 	 <% if("S".equals(loginUser.getUserRole())){ %>
 						 	 <a href="#">판매 내역</a>
+						 	 <% } %>
 					 	 </div>
 					</div>
 <% } %>

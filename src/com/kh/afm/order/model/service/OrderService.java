@@ -55,6 +55,20 @@ public class OrderService {
 		return result;
 	}
 
+	public String orderDetailCheckList(int orderNo) {
+		Connection conn = getConnection();
+		String csv = orderDao.orderDetailCheckList(conn, orderNo);
+		close(conn);
+		return csv;
+	}
+
+	public List<Order> orderCheckList(String userId) {
+		Connection conn = getConnection();
+		List<Order> orderList = orderDao.orderCheckList(conn, userId);
+		close(conn);
+		return orderList;
+	}
+
 	/**
 	 * 로그인한 회원의 구매내역 찾기 (tb_order 테이블)
 	 * @param userId : 로그인한 회원아이디
