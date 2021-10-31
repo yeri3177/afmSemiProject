@@ -170,6 +170,71 @@ private Properties prop = new Properties();
 		return result;
 	}
 
+	public String orderDetailCheckList(Connection conn, int orderNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String csvStr = null;
+		StringBuilder csv = new StringBuilder();
+		String sql = prop.getProperty("orderDetailCheckList");
+		List<OrderDetail> orderDetailList = new ArrayList<>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, orderNo);
+			
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				OrderDetail orderDetail = new OrderDetail();
+				orderDetail.setOrderDetailNo(rset.getInt("order_detail_no"));
+				orderDetail.setOrderNo(rset.getInt("order_no"));
+				orderDetail.setProductNo(rset.getInt("p_no"));
+				orderDetail.setpCnt(rset.getInt("p_cnt"));
+				orderDetail.setpPrice(rset.getInt("p_price"));
+				orderDetail.setPayStatus(rset.getString("order_status"));
+				orderDetailList.add(orderDetail);
+				}
+			for(int i = 0; i < orderDetailList.size(); i++){
+				csv.append(orderDetailList.get(i));
+				if(i != orderDetailList.size() -1)
+				csv.append("\n");
+			}
+			csvStr = csv.toString();
+			}catch (SQLException e) {
+					e.printStackTrace();
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
+		return csvStr;
+	}
+
+	public List<Order> orderCheckList(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("orderCheckList");
+		List<Order> orderList = new ArrayList<>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				Order order = new Order();
+				order.setUserId(rset.getString("user_id"));
+				order.setOrderNo(rset.getInt("order_no"));
+				order.setOrderDate(rset.getDate("order_date"));
+				order.setTotalPrice(rset.getInt("total_price"));
+				order.setAdrNo(rset.getInt("adr_no"));
+				orderList.add(order);
+				}
+			}catch (SQLException e) {
+					e.printStackTrace();
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
+		return orderList;
+	}
+
 //	public int cartOrderProductCntCheck(Connection conn, int pNo) {
 //		PreparedStatement pstmt = null;
 //		ResultSet rset = null;

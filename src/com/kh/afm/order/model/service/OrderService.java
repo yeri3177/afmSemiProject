@@ -55,6 +55,20 @@ public class OrderService {
 		return result;
 	}
 
+	public String orderDetailCheckList(int orderNo) {
+		Connection conn = getConnection();
+		String csv = orderDao.orderDetailCheckList(conn, orderNo);
+		close(conn);
+		return csv;
+	}
+
+	public List<Order> orderCheckList(String userId) {
+		Connection conn = getConnection();
+		List<Order> orderList = orderDao.orderCheckList(conn, userId);
+		close(conn);
+		return orderList;
+	}
+
 //	public int cartOrderProductCntCheck(int pNo) {
 //		Connection conn = getConnection();
 //		int pCnt = orderDao.cartOrderProductCntCheck(conn, pNo);
