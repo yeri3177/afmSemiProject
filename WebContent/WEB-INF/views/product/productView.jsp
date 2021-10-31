@@ -1,3 +1,5 @@
+<%@page import="com.kh.afm.product.model.vo.ProductComment"%>
+<%@page import="java.util.List"%>
 <%@page import="com.kh.afm.user.model.service.UserService"%>
 <%@page import="com.kh.afm.product.model.vo.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,21 +12,19 @@
 					   UserService.ADMIN_ROLE.equals(loginUser.getUserRole())
 					   );
 	
+	List<ProductComment> commentList = (List<ProductComment>) request.getAttribute("commentList");
 %>
 
 <section id="product-container">
 	<h2></h2>
 	<br />
-	<div>
-		<form 
-			action="<%= request.getContextPath() %>/product/productOrder" 
-			name="productOrderFrm"
-			method="POST">
-			<input type="hidden" name="productNo" value="<%= product.getpNo() %>"/>
-			<input type="hidden" name="productRenamedFilename" value="<%= product.getAttach1().getRenamedFileName() %>"/>
-			<input type="hidden" name="productPrice" value="<%= product.getpPrice() %>"/>
-		</form>
-	</div>
+<form 
+	action="<%= request.getContextPath() %>/product/productOrder" 
+	name="productOrderFrm"
+	method="POST">
+	<input type="hidden" name="productNo" value="<%= product.getpNo() %>"/>
+	<input type="hidden" name="productRenamedFilename" value="<%= product.getAttach1().getRenamedFileName() %>"/>
+	<input type="hidden" name="productPrice" value="<%= product.getpPrice() %>"/>
 	<table>
 		<tr>
 		    <td colspan="2" rowspan="7"><img src="<%= request.getContextPath() %>/upload/product/<%= product.getAttach1().getRenamedFileName() %>" alt="대표이미지" width="300px" height="300px"/></td>
@@ -40,7 +40,7 @@
 		    <td colspan="5"> 남은 수량 : <%= product.getpCnt() %></td>
 	    </tr>
 	    <tr>
-		    <td colspan="5"><input type="number" placeholder="최소 1개 이상"/></td>
+		    <td colspan="5"><input type="number" name="productQuantity" value="" placeholder="최소 1개 이상"/></td>
 	    </tr>
 	    	
 	    <tr>
@@ -73,19 +73,19 @@ if(editable){
 		    </td>
 		    <td>
 		    	<input 
-					type="button" 
+					type="submit" 
 					value="장바구니" 
-					onclick="cartProduct()" />
+					onclick="javascript: form.action:'/cart/cartProduct';" />
 		    </td>
 		    <td>
 		    	<input 
-					type="button" 
+					type="submit" 
 					value="결제하기" 
-					onclick="orderProduct()" />
+					onclick="javascript: form.action:'/order/orderProduct';" />
 		    </td>
 	    </tr>
 	</table>
-	
+</form>	
 	<br />
 	<br />
 	<br />
@@ -131,56 +131,87 @@ if(editable){
 		</div>
 		
 	<table id="tbl-comment">
+<%
+if(commentList != null && !commentList.isEmpty()){
+	for(ProductComment pc : commentList){
+		boolean removable =
+				loginUser != null &&
+				(
+					loginUser.getUserId().equals(pc.getUserId())
+					|| UserService.ADMIN_ROLE.equals(loginUser.getUserRole())
+				);
+	
+		if(pc.getCommentLevel() == 1) {
+%>
 		<%-- 댓글 --%>
 		<tr class="level1">
 			<td>
-				<sub class="comment-writer"></sub>
-				<sub class="comment-date"></sub>
+				<sub class="comment-writer"><%= pc.getUserId() %></sub>
+				<sub class="comment-date"><%= pc.getRegDate() %></sub>
 				<br />
 				<%-- 댓글 내용 --%>
-				
+				<%= pc.getCommentContent() %>
 			</td>
 			<td>
-				<button class="btn-reply" value="">답글</button>
-				<button class="btn-delete" value="">삭제</button>
+					<button class="btn-reply" value="<%= pc.getCommentNo() %>">답글</button>
+<% if(removable){ %><button class="btn-delete" value="<%= pc.getCommentNo() %>">삭제</button><% } %>
 			</td>
 		</tr>
+		
+<%
+		}
+		else {
+%>
+		<%-- 대댓글(답글) --%>
 		<tr class="level2">
 			<td>
-				<sub class="comment-writer"></sub>
-				<sub class="comment-date"></sub>
+				<sub class="comment-writer"><%= pc.getUserId() %></sub>
+				<sub class="comment-date"><%= pc.getRegDate() %></sub>
 				<br />
 				<%-- 댓글 내용 --%>
+				<%= pc.getCommentContent() %>
 			</td>
 			<td>
-				<button class="btn-delete" value="">삭제</button>
+<% if(removable){ %><button class="btn-delete" value="<%= pc.getCommentNo() %>">삭제</button><% } %>
 			</td>
 		</tr>
+<%
+		}
+	}
+
+}
+%>		
 	</table>
 	</div>
-	
 
 <form 
-	action="<%= request.getContextPath() %>/product/productOrder" 
-	name="productOrderFrm"
+	action="<%= request.getContextPath() %>/product/productCommentDelete"
+	name="productCommentDelFrm"
 	method="POST">
-	
-	<input type="hidden" name="productNo" value="<%= product.getpNo() %>"/>
+	<input type="hidden" name="commentNo" />
+	<input type="hidden" name="pNo" value="<%= product.getpNo() %>"/>
 </form>
+
 <script>
-
-const orderProduct =
-	() => location.href = "<%= request.getContextPath() %>/order/OrderProduct";
-
-const cartProduct =
-	() => location.href = "<%= request.getContextPath() %>/cart/cartProduct";
+$(".btn-delete").click(function(e){
+	
+	if(confirm("해당 댓글을 삭제하시겠습니까?")){
+		var $frm = $(document.productCommentDelFrm);
+		var commentNo = $(this).val();
+		$frm.find("[name=commentNo]").val(commentNo);
+		$frm.submit();
+	}
+});	
 
 </script>
+
 </section>
 <%
 if(editable){
 %>
-<form action="<%= request.getContextPath() %>/product/productDelete" name="deleteProductFrm">
+<form 
+	action="<%= request.getContextPath() %>/product/productDelete" 
+	name="deleteProductFrm">
 	<input type="hidden" name ="pNo" value="<%= product.getpNo() %>"/>
 </form>
 <script>
@@ -196,4 +227,81 @@ const deleteProduct = () => {
 <%
 }
 %>
+<script>
+$(".btn-reply").click((e) => {
+	const commentRef = $(e.target).val();
+	const tr = `<tr>
+	<td colspan="2" style="text-align: left;">
+		<form 
+			action="<%= request.getContextPath() %>/product/productCommentEnroll"
+			method="POST">
+			<textarea name="content" id="" cols="60" rows="2"></textarea>
+			<button class="btn-insert2">등록</button>
+			
+			<input type="hidden" name="commentLevel" value="2"/>
+			<input type="hidden" name="userId" value="<%= loginUser != null ? loginUser.getUserId() : ""%>"/>
+			<input type="hidden" name="pNo" value="<%= product.getpNo()%>"/>
+			<input type="hidden" name="commentRef" value="\${commentRef}" />
+		</form>
+	</td>
+</tr>`;
+	console.log(tr);
+	
+	const $trOfBtn = $(e.target).parent().parent();
+	
+	$(tr)
+		.insertAfter($trOfBtn)
+		.find("form")
+		.submit((e) => {
+<% if(loginUser == null) {%>
+			loginAlert();
+			return false;
+<% } %>
+			// 내용검사
+			const $textarea = $("[name=content]", e.target);
+			
+			if(!/^(.|\n)+$/.test($textarea.val())){
+				alert("댓글 내용을 작성해주세요.");
+				$textarea.focus();
+				return false;
+			}
+		})
+		.find("[name=content]")
+		.focus();
+	
+	// 현재버튼의 handler 제거
+	$(e.target).off('click');
+});
+
+$("[name=content]", document.ProductCommentFrm).focus((e) => {
+<% if(loginUser == null){%> 
+	loginAlert();
+<% } %>
+});
+
+$(document.ProductCommentFrm).submit((e) => {
+<% if(loginUser == null){%> 
+	loginAlert();
+	return false;
+<% } %>	
+
+	// 내용검사
+	// const textarea = $("[name=content]", document.boardCommentFrm);	
+	const $textarea = $("[name=content]", e.target);	
+	
+	if(!/^(.|\n)+$/.test($textarea.val())){
+		alert("댓글 내용을 작성해주세요.");
+		$textarea.focus();
+		return false;
+	}
+	
+});
+
+const loginAlert = () => {
+	alert("로그인후 이용할 수 있습니다.");
+	$("#memberId").focus();
+};
+
+
+</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
