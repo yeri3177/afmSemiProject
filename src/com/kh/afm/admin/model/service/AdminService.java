@@ -60,7 +60,7 @@ public class AdminService {
 	}
 
 	/**
-	 * 검색결과의 전체회원수
+	 * 페이징 - 검색결과의 전체회원수
 	 */
 	public int searchUserCount(Map<String, Object> param) {
 		Connection conn = getConnection();
@@ -210,7 +210,9 @@ public class AdminService {
 	 * 페이징 - 상품 검색된 수  
 	 */
 	public int searchProductCount(Map<String, Object> param) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection conn = getConnection();
+		int totalContent = adminDao.searchProductCount(conn, param);
+		close(conn);
+		return totalContent;
 	}
 }

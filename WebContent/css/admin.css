@@ -47,6 +47,13 @@ time, mark, audio, video, fieldset{
   /* background: #f1f1f1; */ /* 연한회색 */
 }
 
+/* input radio 가운데로 맞춤  */
+.admin-container input[type="radio"]{
+	display: inline-block;
+	position: relative;
+	top:6px;
+}
+
 /**************************************
  * 페이징바
  **************************************/
@@ -239,34 +246,24 @@ div#pageBar a:hover {
 	font-size: 17px;
 }
 
-/* 로그아웃 영역 */
-.logoutbox {
+/* 홈, 로그아웃 버튼영역 */
+.btnbox .iconbtn {
 	display: inline-block;
-	font-family: 'Alfa Slab One', cursive;
 	position: relative;
 	cursor: pointer;
-	/* margin-right: 40px; */
+	top: 5px;
+	right: 60px;
 	
 	/* 영역확인용 */
 	/* background-color: aqua; */
 }
 
-/* 로그아웃 아이콘 이미지 */
-.logoutbox img {
+#logoutbtn img {
 	width: 55px;
-	position: relative;
-	top: 13px;
-	right:60px;
 }
-/* 로그아웃 텍스트 */
-.logoutbox span {
-	/* background-color: pink; */
-	position: absolute;
-	font-size: 14px;
-	top: 43px;
-	right: 2px;
-	font-family: 'Ubuntu', sans-serif;
-	font-weight: 500;
+
+#homebtn img {
+	width: 65px;
 }
 
 /* 오른쪽하단 전체적인 콘텐츠 영역 */
@@ -330,23 +327,27 @@ div#pageBar a:hover {
 
 /* 검색, 정렬 박스 */
 .data-box {
-	width: 870px;
+	width: 900px;
 	height: 32px;
 	background-color: #ffdfaf;
 	margin: 30px auto;
-	padding: 10px;	
+	padding: 8px;	
+}
+
+.data-box span {
+	font-family: 'Abril Fatface', cursive;
 }
 
 /* 검색 영역 */
 .serarchbox {
 	display : inline-block;
-	margin: 0 15px;
+	margin: 0 10px;
 }
 
 /* 정렬 영역 */
 .sortbox {
 	display : inline-block;
-	margin: 0 15px;
+	margin: 0 10px;
 }
 
 .data-box select {
@@ -364,9 +365,16 @@ div#pageBar a:hover {
 	height: 30px;
 	width: 70px;
 	background-color: #ffb445;
-	font-weight: bold;
-	
+	font-weight: bold;	
 }
+
+/* 공개여부칸 select */
+.user_expose {
+	width: 70px;
+	height: 30px;
+	text-align: center;
+}
+
 
 /**************************************
  * delUserList.jsp
@@ -410,7 +418,6 @@ div#pageBar a:hover {
  **************************************/
 #adminmain-container {
 	margin: 70px auto;
-	background-color: lightblue;
  	font-size: 25px;
  	padding: 30px;
 }
@@ -421,20 +428,44 @@ div#pageBar a:hover {
 }
 
 #adminmain-container table td {
-	margin: 10px;
 	border: none;
-}
-#adminmain-container table .text1 {
- 	text-align: left;
-}
+} 
  
-#adminmain-container table .text2 {
-	background-color: white;
-	border: 1px solid black;
-	border-radius: 15px;
-	font-weight: 900;
+#adminmain-container .text2 {
+	background-color: #ffcbc8; /* 배경색:연한빨강색 */
+	border: 1px dashed black; /* 테두리 */
+	font-weight: 900; /* 폰트굵기 */
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	position: relative;
+	text-align: center;
+	top: -1px;
+	line-height: 50px;
 }
 
+#adminmain-container table {
+	border-top: 1px solid black;
+	/* border-bottom: 1px solid black; */
+}
+
+#adminmain-container table td {
+	border-bottom: 1px solid black;
+	padding: 10px;
+}
+
+.tdbox div {
+	display: inline-block;
+	position: relative;
+	top: 5px;
+	width: 500px;
+}
+
+#main-tbl td {
+	display: flex;
+	justify-content: space-between
+	
+}
 /**************************************
  * productList.jsp
  **************************************/
@@ -459,7 +490,7 @@ div#pageBar a:hover {
 	background-color: #ffbab5;
 }
 
-#tbl-product a:hover {
+.admin-container a:hover {
 	font-weight: bold;
 	color: red;
 }
@@ -475,9 +506,12 @@ div#pageBar a:hover {
 }
 
 #productList-container .data-box {
-	font-size: 12px;
+	font-size: 17px;
 }
 
+#search-pCategory label {
+	font-size: 17px;
+}
 /**************************************
  * productReportList.jsp
  **************************************/
@@ -519,3 +553,7 @@ div#pageBar a:hover {
 	height: 30px;
 	text-align: center;
 }
+
+ #tbl-report select option[disabled] {
+ 	background-color: lightgray;
+ }

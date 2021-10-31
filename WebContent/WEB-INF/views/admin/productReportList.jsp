@@ -40,11 +40,12 @@
 		<td><%= report.getReportContent() %></td>
 		<td><%= report.getUserId() %></td>
 		<td><%= report.getReportRegDate() %></td>
-		<td><%= report.getpNo() %></td>
+		<td><a href="<%=request.getContextPath()%>/product/productView?pNo=<%= report.getpNo() %>"><%= report.getpNo() %></a></td>
 		<td><%= "N".equals(report.getReportStatus()) ? "미처리" : "처리완료" %></td>
 		
 		<td> <!-- 상품노출수정 select-option태그 -->	
 			<select>
+				<option value="none" disabled selected>-노출변경-</option>
 				<option value="Y">노출</option>
 				<option value="N">비공개</option>
 			</select>

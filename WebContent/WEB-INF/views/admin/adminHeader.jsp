@@ -17,24 +17,25 @@
 	<title>afm 관리자 페이지</title>
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css" />
 	
-	<!-- 폰트 -->
+	<!--------------- font --------------->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	
-	<!-- Alfa Slab One -->
+	<!-- font : Alfa Slab One -->
 	<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
 	
-	<!-- Ubuntu -->
-	<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+	<!-- font : Abril Fatface -->
+	<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alfa+Slab+One&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
 	
-	<!-- favicon -->
+	<!--------------- favicon --------------->
 	<link rel="icon" href="<%= request.getContextPath() %>/images/admin/setting_icon.png">
 
 	<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
+	
 <style>
-#msgbox {
-	visibility : <%= msg == null ? "hidden" : "visible" %>;
-}
+	#msgbox {
+		visibility : <%= msg == null ? "hidden" : "visible" %>;
+	}
 </style>
 
 
@@ -62,9 +63,11 @@
 	        <li class="on">
 	          <a href="<%=request.getContextPath()%>/admin/userList">사용자 관리</a>
 	          <ul>
+	          	<!-------- 소메뉴 1-1 -------->
 	            <li>
 	              <a href="<%=request.getContextPath()%>/admin/userList">회원 목록</a>
 	            </li>
+	            <!-------- 소메뉴 1-2 -------->
 	            <li>
 	              <a href="<%=request.getContextPath()%>/admin/delUserList">탈퇴회원 목록</a>
 	            </li>
@@ -75,9 +78,11 @@
 	        <li class="on">
 	            <a href="<%=request.getContextPath()%>/admin/productList">상품 관리</a>
 	            <ul>
+	              <!-------- 소메뉴 2-1 -------->
 	              <li>
 	                <a href="<%=request.getContextPath()%>/admin/productList">상품 목록</a>
 	              </li>
+	              <!-------- 소메뉴 2-3 -------->
 	              <li>
 	                <a href="<%=request.getContextPath()%>/admin/productReportList">상품 신고내역</a>
 	              </li>
@@ -106,9 +111,16 @@
 
 			</div>
 			
-			<!-- 로그아웃 버튼 -->
-			<div class="logoutbox" onclick="location.href='<%= request.getContextPath() %>/user/logout';">
-				<img src="<%=request.getContextPath()%>/images/admin/logout_icon.png" /><br />
+			<div class="btnbox">
+				<!-- 홈 버튼 -->
+				<div class="iconbtn" id="homebtn" onclick="location.href='<%= request.getContextPath() %>';">
+					<img src="<%=request.getContextPath()%>/images/admin/home_icon.png" /><br />
+				</div>
+				
+				<!-- 로그아웃 버튼 -->
+				<div class="iconbtn" id="logoutbtn" onclick="location.href='<%= request.getContextPath() %>/user/logout';">
+					<img src="<%=request.getContextPath()%>/images/admin/logout_icon.png" /><br />
+				</div>
 			</div>
 		</div> <!-- 상단박스 끝 -->
 		
