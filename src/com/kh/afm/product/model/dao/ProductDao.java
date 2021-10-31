@@ -15,6 +15,7 @@ import java.util.Properties;
 import com.kh.afm.product.model.exception.ProductException;
 import com.kh.afm.product.model.vo.Attachment;
 import com.kh.afm.product.model.vo.Product;
+import com.kh.afm.product.model.vo.ProductComment;
 
 public class ProductDao {
 
@@ -587,6 +588,34 @@ public class ProductDao {
 		}
 		
 		
+		return result;
+	}
+
+	public int insertProductComment(Connection conn, ProductComment pc) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		System.out.println(111);
+		String query = prop.getProperty("insertProductComment");
+		
+		try {
+			//미완성쿼리문을 가지고 객체생성.
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, pc.getpNo());
+			pstmt.setString(2, pc.getUserId());
+			pstmt.setInt(3, pc.getCommentLevel());
+			pstmt.setString(4, pc.getCommentContent());
+			pstmt.setObject(5, pc.getCommentRef() == 0 ? null : pc.getCommentRef());
+			
+			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
+			//DML은 executeUpdate()
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ProductException("댓글 등록 오류!", e);
+		} finally {
+			close(pstmt);
+		}
 		return result;
 	}
 

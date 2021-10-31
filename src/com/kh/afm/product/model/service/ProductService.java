@@ -8,6 +8,7 @@ import java.util.List;
 import com.kh.afm.product.model.dao.ProductDao;
 import com.kh.afm.product.model.vo.Attachment;
 import com.kh.afm.product.model.vo.Product;
+import com.kh.afm.product.model.vo.ProductComment;
 
 public class ProductService {
 
@@ -175,5 +176,20 @@ public class ProductService {
 		
 		return result;
 
+	}
+
+	public int insertProductComment(ProductComment pc) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = productDao.insertProductComment(conn, pc);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
 	}
 }
