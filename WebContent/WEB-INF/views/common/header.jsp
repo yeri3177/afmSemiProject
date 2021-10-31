@@ -60,6 +60,7 @@
 					 	 <span class="buttonImgName"><%= loginUser.getUserName() %>님</span></div>
 					 	 <div class="headerDropDownMenu">
 						 	 <a href="<%= request.getContextPath() %>/user/userDetail">내 정보 보기</a>
+						 	 <a href="#">주문 확인</a>
 						 	 <a href="#">주문 내역</a>
 						 	 <a href="#">판매 내역</a>
 					 	 </div>

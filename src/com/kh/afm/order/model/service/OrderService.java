@@ -55,4 +55,11 @@ public class OrderService {
 		return result;
 	}
 
+//	public int cartOrderProductCntCheck(int pNo) {
+//		Connection conn = getConnection();
+//		int pCnt = orderDao.cartOrderProductCntCheck(conn, pNo);
+//		close(conn);
+//		return pCnt;
+//	}
+
 }
