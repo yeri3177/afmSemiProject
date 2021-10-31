@@ -55,15 +55,21 @@ $(() => {
 	</tr>
 	<tr>
 		<th>비밀번호</th>
-		<td><input type="password" name="board_password" /> * 필수 (게시물 삭제시 필요합니다.)</td>
+		<td>
+			<input type="password" name="board_password" /> * 필수 (게시물 삭제시 필요합니다.)
+		</td>
 	</tr>
 	<tr>
 		<th>제 목</th>
-		<td><input type="text" name="board_title" required></td>
+		<td>
+			<input type="text" name="board_title" required>
+		</td>
 	</tr>
 	<tr>
 		<th>내 용</th>
-		<td><textarea rows="5" cols="40" name="board_content"></textarea></td>
+		<td>
+			<textarea rows="5" cols="40" name="board_content"></textarea>
+		</td>
 	</tr>
 </table>
 <br />

@@ -223,5 +223,28 @@ public class CsboardDao {
 		return result;
 	}
 
+	public int deleteCsboard(Connection conn, int boardNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("deleteCsboard");
+		
+		try {
+			// 미완성 쿼리문을 가지고 객체 생성.
+			pstmt = conn.prepareStatement(query);
+			// 쿼리문 미완성
+			pstmt.setInt(1, boardNo);
+			
+			// 쿼리문 실행 : 완성된 쿼리를 가지고 있는 pstmt 실행(파라미터 없음)
+			// DML은 executeUpdate()
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 
 }
