@@ -288,6 +288,7 @@ div#pageBar a:hover {
 	position: relative;
 	top: 8px;
 	font-size: 15px;
+	font-weight: bold;
 }  
 
 /**************************************
@@ -298,7 +299,7 @@ div#pageBar a:hover {
 	border: 1px solid black;
 	border-collapse: collapse;
 	margin: 0 auto;
-	font-size: 15px;
+	font-size: 13px;
 }
 
 #tbl-user > tr, th, td {
@@ -323,7 +324,7 @@ div#pageBar a:hover {
 	width: 160px;
 }
  
-#tbl-user tr:hover {
+.admin-container tr:hover {
 	background-color: #dfdfdf;
 }
 
@@ -338,14 +339,12 @@ div#pageBar a:hover {
 
 /* 검색 영역 */
 .serarchbox {
-	/* background-color: aqua; */
 	display : inline-block;
 	margin: 0 15px;
 }
 
 /* 정렬 영역 */
 .sortbox {
-	/* background-color: pink; */
 	display : inline-block;
 	margin: 0 15px;
 }
@@ -442,17 +441,17 @@ div#pageBar a:hover {
 #tbl-product {
 	margin: 0 auto;
 	position: relative;
-	top: 50px;
+	top: 7px;
 	border-collapse: collapse;
 }
 
 #tbl-product td, th { 
-	padding: 13px;
+	padding: 10px;
 }
 
 #productList-container #pageBar {
 	position: relative;
-	margin: 75px 0;
+	margin: 30px 0;
 }
 
 
@@ -460,6 +459,24 @@ div#pageBar a:hover {
 	background-color: #ffbab5;
 }
 
+#tbl-product a:hover {
+	font-weight: bold;
+	color: red;
+}
+
+#productList-container .serarchbox,.sortbox {
+	display: inline-block;
+} 
+
+#tbl-product select {
+	width: 100px;
+	height: 30px;
+	text-align: center;
+}
+
+#productList-container .data-box {
+	font-size: 12px;
+}
 
 /**************************************
  * productReportList.jsp
@@ -467,12 +484,12 @@ div#pageBar a:hover {
  #tbl-report {
  	margin: 0 auto;
 	position: relative;
-	top: 50px;
+	top: 20px;
 	border-collapse: collapse;
 }
 
 #tbl-report td, th { 
-	padding: 13px;
+	padding: 10px;
 }
 
 #tbl-report th {
@@ -484,4 +501,21 @@ div#pageBar a:hover {
 	margin: 75px 0;
 }
  
- 
+#reportcnt {
+	margin : 15px auto;
+	width: 350px;
+	height: 35px;
+	font-size: 20px;
+	background-color: #d7d7d7;
+}
+
+#reportcnt span {
+	color: red;
+	font-weight: bold;
+}
+
+#tbl-report select {
+	width: 100px;
+	height: 30px;
+	text-align: center;
+}

@@ -678,5 +678,43 @@ public class AdminDao {
 
 		return totalContents;
 	}
+
+	/**
+	 * 상품 신고내역 미처리 건수 조회 
+	 */
+	public int selectReportCnt(Connection conn) {
+		String sql = prop.getProperty("selectReportCnt");
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int cnt = 0;
+
+		try {
+			// 1.PreparedStatment객체 생성 및 미완성쿼리 값대입
+			pstmt = conn.prepareStatement(sql);
+
+			// 2.실행 & ResultSet객체 리턴
+			rset = pstmt.executeQuery();
+
+			// 3.ResultSet -> totalContents
+			if (rset.next()) {
+				cnt = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return cnt;
+	}
+
+	/**
+	 * 상품 검색하기
+	 */
+	public List<Product> searchProduct(Connection conn, Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

@@ -4,9 +4,118 @@
 <%@ include file="/WEB-INF/views/admin/adminHeader.jsp" %>
 <%
 	List<Product> list = (List<Product>) request.getAttribute("list");
+	String searchType = request.getParameter("searchType");
+	String searchKeyword = request.getParameter("searchKeyword");
+	String sortType = request.getParameter("sortType");
+	String sortKeyword = request.getParameter("sortKeyword");
 %>	
-
+<style>
+div#search-pNo {
+	display: <%= searchType == null || "pNo".equals(searchType) ? "inline-block" : "none" %>;
+}
+div#search-userId {
+	display: <%= "userId".equals(searchType) ? "inline-block" : "none" %>;
+}
+div#search-pCategory {
+	display: <%= "pCategory".equals(searchType) ? "inline-block" : "none" %>;
+}
+div#search-pExpose {
+	display: <%= "pExpose".equals(searchType) ? "inline-block" : "none" %>;
+}
+</style>
 <section id="productList-container" class="admin-container">
+
+<div class="data-box">
+	<!-- 데이터 검색 -->
+	<div class="serarchbox">
+		
+		<!-- 검색타입 -->
+		<span>search</span>
+		<select id="searchType">
+		    <option value="pNo" <%= "pNo".equals(searchType) ? "selected" : "" %>>
+		    	상품번호
+		    </option>		
+		    <option value="userId" <%= "userId".equals(searchType) ? "selected" : "" %>>
+		    	판매자아이디
+		    </option>
+		    <option value="pCategory" <%= "pCategory".equals(searchType) ? "selected" : "" %>>
+		    	카테고리
+		    </option>
+		    <option value="pExpose" <%= "pExpose".equals(searchType) ? "selected" : "" %>>
+		    	상품노출여부
+		    </option>
+		</select>
+		
+		<!-- 상품번호 검색 -->
+		<div id="search-pNo" class="search-type">
+			<form action="<%=request.getContextPath()%>/admin/productFinder">
+				<input type="hidden" name="searchType" value="pNo"/>
+				<input type="text" name="searchKeyword" 
+					placeholder="검색키워드 입력" size="16" 
+					value="<%= "pNo".equals(searchType) ? searchKeyword : "" %>"/>
+				<button type="submit" class="search-btn">검색</button>
+			</form>
+		</div>
+		
+		<!-- 판매자아이디 검색 -->
+		<div id="search-userId" class="search-type">
+			<form action="<%=request.getContextPath()%>/admin/productFinder">
+				<input type="hidden" name="searchType" value="userId"/>
+				<input type="text" name="searchKeyword"
+					placeholder="검색키워드 입력" size="16" 
+					value="<%= "userId".equals(searchType) ? searchKeyword : "" %>"/>
+				<button type="submit" class="search-btn">검색</button>
+			</form>
+		</div>
+		
+		<!-- 상품카테고리 검색 -->
+		<div id="search-pCategory" class="search-type">
+			<form action="<%=request.getContextPath()%>/admin/productFinder">
+				<input type="hidden" name="searchType" value="pCategory"/>
+		        <input type="radio" name="searchKeyword" value="채소류" 
+		        	<%= "pCategory".equals(searchType) && "A".equals(searchKeyword) ? "checked" : "" %>> 채소류
+		        <input type="radio" name="searchKeyword" value="과실류" 
+		        	<%= "pCategory".equals(searchType) && "U".equals(searchKeyword) ? "checked" : "" %>> 곡류
+		        <input type="radio" name="searchKeyword" value="곡류" 
+		        	<%= "pCategory".equals(searchType) && "S".equals(searchKeyword) ? "checked" : "" %>> 과실류
+				<button type="submit" class="search-btn">검색</button>
+			</form>
+		</div>
+		
+		<!-- 상품노출여부 검색 -->
+		<div id="search-pExpose" class="search-type">
+			<form action="<%=request.getContextPath()%>/admin/productFinder">
+				<input type="hidden" name="searchType" value="pExpose"/>
+		        <input type="radio" name="searchKeyword" value="Y" 
+		        	<%= "pExpose".equals(searchType) && "Y".equals(searchKeyword) ? "checked" : "" %>> 노출
+		        <input type="radio" name="searchKeyword" value="N" 
+		        	<%= "pExpose".equals(searchType) && "N".equals(searchKeyword) ? "checked" : "" %>> 비공개
+				<button type="submit" class="search-btn">검색</button>
+			</form>
+		</div>
+		
+	</div>
+	
+	<!-- 데이터 정렬 -->
+	<div class="sortbox">
+		
+		<form action="<%=request.getContextPath()%>/admin/userSort">
+			<span>sort</span>
+			<!-- 정렬 타입 -->
+			<input type="radio" name="sortType" value="asc" <%= "asc".equals(sortType) ? "checked" : "" %> />오름차순
+			<input type="radio" name="sortType" value="desc" <%= "desc".equals(sortType) ? "checked" : "" %> />내림차순
+			
+			<!-- 정렬 키워드 -->
+			<select name=sortKeyword>
+				<option value="pNo" <%= "pNo".equals(sortKeyword) ? "selected" : "" %>>상품번호</option>
+				<option value="userId" <%= "userId".equals(sortKeyword) ? "selected" : "" %>>판매자아이디</option>
+				<option value="pExpose" <%= "pExpose".equals(sortKeyword) ? "selected" : "" %>>상품노출여부</option>
+			</select>
+			
+			<button type="submit" class="sort-btn">정렬</button>
+		</form>
+	</div>
+</div>
 
 <table id="tbl-product">
     <thead>
@@ -29,7 +138,7 @@
 	for(Product product : list){
 %>
 	<tr>
-		<td><%= product.getpNo() %></td>
+		<td><a href="<%=request.getContextPath()%>/product/productView?pNo=<%= product.getpNo() %>"><%= product.getpNo() %></a></td>
 		<td><%= product.getUserId() %></td>
 		<td><%= product.getpTitle() %></td>
 		<td><%= product.getpPrice() %></td>
@@ -90,6 +199,18 @@ $(".p_expose").change((e) => {
 		$this.find("[selected]").prop("selected", true);
 	}
 });
+
+/* 검색유형 체인지 이벤트 */
+$("#searchType").change((e) => {
+  	const type = $(e.target).val();
+  	
+  	// 1. .search-type 감추기
+  	$(".search-type").hide();
+  	
+  	// 2. #search-${type} 보여주기 (display : inline-block)
+  	$(`#search-\${type}`).css("display", "inline-block");
+}); 
+
 
 </script>
 

@@ -4,8 +4,14 @@
 <%@ include file="/WEB-INF/views/admin/adminHeader.jsp" %>
 <%
 	List<Report> list = (List<Report>) request.getAttribute("list");
+	int rcnt = (int) request.getAttribute("rcnt");
 %>
 <section id="productReportList-container" class="admin-container">
+
+<!-- 신고내역 건수 영역 -->
+<div id="reportcnt">
+	 [ 미처리건수 : <span><%= rcnt %></span> / 전체신고건수 : <span><%= list.size() %></span> ]
+</div>
 
 <table id="tbl-report">
     <thead>
