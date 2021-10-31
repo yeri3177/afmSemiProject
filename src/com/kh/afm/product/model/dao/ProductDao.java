@@ -619,6 +619,58 @@ public class ProductDao {
 		return result;
 	}
 
+	public List<ProductComment> selectCommentList(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectCommentList");
+		List<ProductComment> commentList = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				ProductComment pc = new ProductComment();
+				pc.setCommentNo(rset.getInt("comment_no"));
+				pc.setpNo(rset.getInt("p_no"));
+				pc.setUserId(rset.getString("user_id"));
+				pc.setCommentLevel(rset.getInt("comment_level"));
+				pc.setCommentContent(rset.getString("comment_content"));
+				pc.setCommentRef(rset.getInt("comment_ref"));
+				pc.setRegDate(rset.getDate("reg_date"));
+				
+				commentList.add(pc);
+		
+			}
+		} catch (SQLException e) {
+			throw new ProductException("댓글 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return commentList;
+	}
+
+	public int deleteBoardComment(Connection conn, int commentNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("deleteBoardComment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, commentNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ProductException("댓글 삭제 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+
 
 	
 }

@@ -14,15 +14,15 @@ public class ProductComment implements Serializable {
 	private int commentLevel;
 	private String commentContent;
 	private int commentRef;
-	private Date regdate;
+	private Date regDate;
 	
 	public ProductComment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public ProductComment(int commentNo, int pNo, String userId, int commentLevel, String commentContent,
-			int commentRef, Date regdate) {
+			int commentRef, Date regDate) {
 		super();
 		this.commentNo = commentNo;
 		this.pNo = pNo;
@@ -30,7 +30,7 @@ public class ProductComment implements Serializable {
 		this.commentLevel = commentLevel;
 		this.commentContent = commentContent;
 		this.commentRef = commentRef;
-		this.regdate = regdate;
+		this.regDate = regDate;
 	}
 
 	public int getCommentNo() {
@@ -81,20 +81,20 @@ public class ProductComment implements Serializable {
 		this.commentRef = commentRef;
 	}
 
-	public Date getRegdate() {
-		return regdate;
+	public Date getRegDate() {
+		return regDate;
 	}
 
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
 
 	@Override
 	public String toString() {
 		return "ProductComment [commentNo=" + commentNo + ", pNo=" + pNo + ", userId=" + userId + ", commentLevel="
-				+ commentLevel + ", commentContent=" + commentContent + ", commentRef=" + commentRef + ", regdate="
-				+ regdate + "]";
+				+ commentLevel + ", commentContent=" + commentContent + ", commentRef=" + commentRef + ", regDate="
+				+ regDate + "]";
 	}
 	
-
+	
 }

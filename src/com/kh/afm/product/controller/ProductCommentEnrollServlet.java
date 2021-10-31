@@ -15,7 +15,7 @@ import com.kh.afm.product.model.vo.ProductComment;
  * Servlet implementation class ProductCommentServlet
  */
 @WebServlet("/product/productCommentEnroll")
-public class ProductCommentServlet extends HttpServlet {
+public class ProductCommentEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductService productService = new ProductService();
 	
@@ -32,6 +32,7 @@ public class ProductCommentServlet extends HttpServlet {
 		
 		ProductComment pc = new ProductComment(0, pNo, writer, commentLevel, content, commentRef, null);
 		System.out.println("pc@servlet = " + pc);
+		System.out.println(commentRef);
 		
 		// 업무로직
 		int result = productService.insertProductComment(pc);

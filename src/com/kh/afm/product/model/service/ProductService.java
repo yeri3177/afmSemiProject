@@ -192,4 +192,25 @@ public class ProductService {
 		}
 		return result;
 	}
+
+	public List<ProductComment> selectCommentList(int no) {
+		Connection conn = getConnection();
+		List<ProductComment> commentList = productDao.selectCommentList(conn, no);
+		close(conn);
+		return commentList;
+	}
+
+	public int deleteProductComment(int commentNo) {
+		Connection conn = getConnection(); 
+		int result = 0;
+		try {
+			result = productDao.deleteBoardComment(conn, commentNo);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		}
+		return result;
+	}
+	
 }
