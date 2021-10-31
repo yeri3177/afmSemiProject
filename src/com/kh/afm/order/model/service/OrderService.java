@@ -69,6 +69,30 @@ public class OrderService {
 		return orderList;
 	}
 
+	/**
+	 * 로그인한 회원의 구매내역 찾기 (tb_order 테이블)
+	 * @param userId : 로그인한 회원아이디
+	 * @return List<Order> : 로그인한 회원의 order 데이터 리스트
+	 */
+	public List<Order> selectOrderComplete(String userId) {
+		Connection conn = getConnection();
+		List<Order> list = orderDao.selectOrderComplete(conn, userId);
+		close(conn);
+		return list;
+	}
+
+	/**
+	 * 로그인한 회원의 구매내역 찾기 (order_detail 테이블)
+	 * @param orderNo : 클릭한 해당 주문번호
+	 * @return List<OrderDetail> : 해당 주문번호의 주문상세내역 정보
+	 */
+	public List<OrderDetail> selectOrderCompleteDetail(int orderNo) {
+		Connection conn = getConnection();
+		List<OrderDetail> list = orderDao.selectOrderCompleteDetail(conn, orderNo);
+		close(conn);
+		return list;
+	}
+
 //	public int cartOrderProductCntCheck(int pNo) {
 //		Connection conn = getConnection();
 //		int pCnt = orderDao.cartOrderProductCntCheck(conn, pNo);

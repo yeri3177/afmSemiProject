@@ -9,8 +9,7 @@
 	// 일관된 흐름을 위해 editable을 따로 선언하고 곳곳에 적용시킨다.
 	// loginUser가 null이 아니고 loginUser의 userId와 csboard의 UserId가 같거나 또는 관리자 아이디일 때 적용
 	boolean editable = loginUser != null && (
-				     loginUser.getUserId().equals(csboard.getUserId())
-					 || UserService.ADMIN_ROLE.equals(loginUser.getUserRole())
+				     UserService.ADMIN_ROLE.equals(loginUser.getUserRole())
 					);
 	System.out.println("editable@csboardView.jsp = " + editable);
 %>
@@ -50,7 +49,7 @@
 				<input type="button" value="삭제하기" onclick="deleteCsboard()"/>
 			</th> 
 		</tr> 
-		<% } %> 
+<% } %> 
 	</table>
 </section>
 <%-- editable 함수로 감싸므로써, 글쓴이 해당 아이디거나 관리자일 때만 deleteCsboard 권한이 생기도록 한다. --%>

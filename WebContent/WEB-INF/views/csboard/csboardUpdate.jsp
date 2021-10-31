@@ -1,9 +1,13 @@
+<%@page import="com.kh.afm.user.model.service.UserService"%>
 <%@page import="com.kh.afm.csboard.model.vo.Csboard"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
 	Csboard csboard = (Csboard) request.getAttribute("csboard");
+	boolean editable = loginUser != null && (
+	     UserService.ADMIN_ROLE.equals(loginUser.getUserRole())
+		);
 %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/csboard.css" />
 <section id="csboard-container">
@@ -17,6 +21,9 @@
 		<th>작성자</th>
 		<td>
 			<input type="text" name="user_id" value="<%= csboard.getUserId() %>" readonly />
+			<% if(editable){ %>
+			<input type="checkbox" name="boardNotice_yn" value="Y"/>공지사항 여부
+			<% } %>
 		</td>
 	</tr>
 	<tr>

@@ -1,8 +1,17 @@
+<%@page import="com.kh.afm.user.model.service.UserService"%>
+<%@page import="com.kh.afm.csboard.model.vo.Csboard"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>    
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/csboard.css" />
-
+<%
+	Csboard csboard = (Csboard) request.getAttribute("csboard");
+	// 일관된 흐름을 위해 editable을 따로 선언하고 곳곳에 적용시킨다.
+	// loginUser가 null이 아니고 loginUser의 userId와 csboard의 UserId가 같거나 또는 관리자 아이디일 때 적용
+	boolean editable = loginUser != null && (
+				     UserService.ADMIN_ROLE.equals(loginUser.getUserRole())
+					);
+%>
 <script>
 /**
 * csboardEnrollFrm 유효성 검사
@@ -41,42 +50,42 @@ $(() => {
 
 <section id="csboardForm-container" class="csboard-container">
 <h2>고객센터 게시글 작성</h2>
-<form
-	name="boardEnrollFrm"
-	action="<%=request.getContextPath() %>/csboard/csboardEnroll" 
-	method="POST"
-	>
+<form name="boardEnrollFrm" action="<%=request.getContextPath() %>/csboard/csboardEnroll" method="POST">
 	<table id="tbl-board-view">
+	<tr>
+		<th>제 목</th>
+		<td>
+			<input type="text" name="board_title" style="width:100%" required>
+		</td>
+	</tr>
 	<tr>
 		<th>작성자</th>
 		<td>
 			<input type="text" name="user_id" value="<%= loginUser.getUserId() %>" readonly />
-		</td>  
+			<% if(editable){ %>
+			<input type="checkbox" name="boardNotice_yn" value="Y"/>공지사항 여부
+			<% } %>
+		</td>
 	</tr>
 	<tr>
 		<th>비밀번호</th>
 		<td>
 			<input type="password" name="board_password" /> * 필수 (게시물 삭제시 필요합니다.)
-		</td>
-	</tr>
-	<tr>
-		<th>제 목</th>
-		<td>
-			<input type="text" name="board_title" required>
-		</td>
+		</td>  
 	</tr>
 	<tr>
 		<th>내 용</th>
 		<td>
-			<textarea rows="5" cols="40" name="board_content"></textarea>
+			<textarea rows="5" cols="40" name="board_content" style="width:100%;"></textarea>
 		</td>
 	</tr>
 </table>
-<br />
-<br /><input type="submit" value="등록" 
-	onclick="return csboardCheck()"/> <input type="reset"
-	value="다시 작성" /><input type="button" value="목록" 
-	onclick="location.href='CsboardServlet?command=csboard_list'"/>
+<br/>
+	<div style="text-align:center;">
+		<input type="submit" value="등록" onclick="return csboardCheck()"/> 
+		<input type="reset" value="다시 작성" />
+		<input type="button" value="목록" onclick="location.href='CsboardServlet?command=csboard_list'"/>
+	</div>
 </form>
 </section>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
