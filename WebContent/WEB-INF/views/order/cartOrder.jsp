@@ -5,10 +5,12 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/cartOrder.css"/>
 <title>장바구니 상품 주문</title>
 <%
 List<Cart> list = (List<Cart>)request.getAttribute("list");
 List<OrderAddress> adrList = (List<OrderAddress>)request.getAttribute("adrList");
+/* int[] pNoCheck = request.getAttribute("pNoCheck"); */
 %>
 <script>
 function adrCheckSubmit(){
@@ -18,13 +20,29 @@ function adrCheckSubmit(){
 		address1.focus();
 		return false;
 	}else{
+		<%-- <% 
+		int k = 0;
+		for(Cart order : list){
+				if(pNoCheck[i] < order.getProductNo()){ %>
+					return false;
+				<% } %>
+		
+			
+				<% k++} %>
+		} --%>
 		return true;
 	}
 }
+
 </script>
-<h2>장바구니 상품 주문</h2>
+<h2 class="orderH21">장바구니 상품 주문</h2>
 <form name="order" id="order" method="post" class="order" action="<%= request.getContextPath() %>/order/order" onsubmit="return adrCheckSubmit();">
-	
+	<div class="displayProductHeader">
+		<div class="orderHeaderImg">상품 이미지</div>
+		<div class="orderHeaderName">상품명</div>
+		<div class="orderHeaderCnt">주문 수량</div>
+		<div class="orderHeaderPrice">주문 금액</div>
+	</div>
 	<%
 	int sum = 0;
 	int sumcount = 0;
@@ -33,35 +51,42 @@ function adrCheckSubmit(){
 			sum += (order.getProductPrice() * order.getProductQuantity());
 			sumcount += order.getProductQuantity();
 	%>
-	<div>
-		<div><%= order.getRenamedFilename() %></div>
-		<div>상품명 : <%= order.getProductName() %></div>
-		<div>수량 : <%= order.getProductQuantity() %></div>
-		<div>가격 : <%= order.getProductPrice() * order.getProductQuantity() %></div>
+	<div class="displayProduct">
+		<div class="displayProductImg">
+		<% if(order.getRenamedFilename() != null){ %>
+		<img class="orderProductThumbnail" src="<%= request.getContextPath() %>/upload/product/<%= order.getRenamedFilename() %>" alt="" />
+		<% }else{ %>
+		<img class="orderProductThumbnail" src="<%= request.getContextPath() %>/upload/product/20211027_134914715_460.gif" alt="" />
+		<% } %>
+		</div>
+		<div class="displayProductName"><%= order.getProductName() %></div>
+		<div class="displayProductQuantity"><%= order.getProductQuantity() %> 개</div>
+		<div class="displayProductPrice"><%= order.getProductPrice() * order.getProductQuantity() %> 원</div>
 	</div>
 	<% i++;} %>
-	<div>
-		<h2>배송 주소를 선택해 주세요.</h2>
+		<h2 class="orderH22">배송 주소를 선택해 주세요.</h2>
+	<div class="hiddenOrderAddress">
 	<% 
 	int j = 0;
 	for(OrderAddress adr : adrList){
 	%>
-		<input class="orderAddressRadio" type="radio" name="address" id="address-<%= j %>" value="<%= adr.getAddressNo() %>">
-        <label class="orderAddressRadioLabel" for="address-<%= j %>"><%= adr.getAddressName() %></label>
-        	<div class="orderAddressRoad">주소 : <%= adr.getAddressRoad() %></div>
-        	<div class="orderAddressDetail">상세 주소 : <%= adr.getAddressDetail() %></div>
+		<div class="orderAddressSet">
+			<input class="orderAddressRadio" type="radio" name="address" id="address-<%= j %>" value="<%= adr.getAddressNo() %>">
+	        <label class="orderAddressRadioLabel" for="address-<%= j %>"><%= adr.getAddressName() %></label>
+	        	<div class="orderAddressRoad">주소 : <%= adr.getAddressRoad() %></div>
+	        	<div class="orderAddressDetail">상세 주소 : <%= adr.getAddressDetail() %></div>
+        </div>
 	<% j++;} %>
 	</div>
-	<div>
-		<input type="hidden" name="orderProductList" value="<%= list %>"/>
-		<p class="orderSumcount">주문 상품 갯수 : <%= sumcount %></p>
-		<p class="orderSum">주문 금액 : <%= sum %></p>
+	<div class="hiddenProduct1">
+		<p class="orderSumcount">주문 상품 갯수 : <%= sumcount %> 개</p>
+		<p class="orderSum">주문 금액 : <%= sum %> 원</p>
 	</div>
-	<div>
+	<div class="hiddenProduct2">
 		<input type="hidden" name="totalQuantity" value="<%= sumcount %>" readonly/>
 		<input type="hidden" name="totalPrice" value="<%= sum %>" readonly/>
 	</div>
-	<button type="submit">주문하기</button>
+	<button class="orderProductBtn" type="submit">주문하기</button>
 </form>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

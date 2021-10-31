@@ -124,7 +124,6 @@ Number.prototype.formatNumber = function(){
 <%
 List<Cart> list = (List<Cart>)request.getAttribute("list");
 %>
-<br /><br />
 <h2 class="cartheaderh2">장바구니</h2>
 <%
 	if(list.isEmpty()){

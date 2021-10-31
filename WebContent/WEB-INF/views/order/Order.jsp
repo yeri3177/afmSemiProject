@@ -29,11 +29,23 @@ function adrCheckSubmit(){
 <h2>상품 주문</h2>
 <form name="order" id="order" method="post" class="order" action="<%= request.getContextPath() %>/order/productOrder" onsubmit="return adrCheckSubmit();">
 
-	<div>
-		<div><%= order.getRenamedFilename() %></div>
-		<div>상품명 : <%= order.getProductName() %></div>
-		<div>수량 : <%= order.getProductQuantity() %></div>
-		<div>가격 : <%= order.getProductPrice() * order.getProductQuantity() %></div>
+	<div class="displayProductHeader">
+		<div class="orderHeaderImg">상품 이미지</div>
+		<div class="orderHeaderName">상품명</div>
+		<div class="orderHeaderCnt">주문 수량</div>
+		<div class="orderHeaderPrice">주문 금액</div>
+	</div>
+	<div class="displayProduct">
+		<div class="displayProductImg">
+		<% if(productRenamedFilename != null){ %>
+		<img class="orderProductThumbnail" src="<%= request.getContextPath() %>/upload/product/<%= productRenamedFilename %>" alt="" />
+		<% }else{ %>
+		<img class="orderProductThumbnail" src="<%= request.getContextPath() %>/upload/product/20211027_134914715_460.gif" alt="" />
+		<% } %>
+		</div>
+		<div class="displayProductName"><%= order.getProductName() %></div>
+		<div class="displayProductQuantity"><%= productQuantity %> 개</div>
+		<div class="displayProductPrice"><%= (productPrice * productQuantity) %> 원</div>
 	</div>
 	<div>
 		<h2>배송 주소를 선택해 주세요.</h2>

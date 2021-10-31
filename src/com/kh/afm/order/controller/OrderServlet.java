@@ -43,7 +43,6 @@ public class OrderServlet extends HttpServlet {
 		int adrNo = Integer.parseInt(request.getParameter("address"));
 		int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
 		int totalQuantity = Integer.parseInt(request.getParameter("totalQuantity"));
-		System.out.println(list.size());
 		Order order = new Order(userId, 0, null, totalPrice, adrNo);
 		int orderNo = orderService.cartOrderInsert(order);
 		if(orderNo != 0) {

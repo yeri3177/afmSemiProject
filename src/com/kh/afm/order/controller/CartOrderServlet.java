@@ -41,8 +41,16 @@ public class CartOrderServlet extends HttpServlet {
 		String userId = loginUser.getUserId();
 		
 		List<Cart> list = orderService.cartOrder(userId);
+//		int[] pNoCheck = {};
+//		int i = 0;
+//		for(Cart cart : list) {
+//			 int pNo = cart.getProductNo();
+//			 pNoCheck[i] = orderService.cartOrderProductCntCheck(pNo);
+//			 i++;
+//		}
 		List<OrderAddress> adrList = orderService.adrList(userId);
 		
+//		request.setAttribute("pNoCheck", pNoCheck);
 		request.setAttribute("list", list);
 		request.setAttribute("adrList", adrList);
 		request.getRequestDispatcher("/WEB-INF/views/order/cartOrder.jsp").forward(request, response);

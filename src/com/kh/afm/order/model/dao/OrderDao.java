@@ -104,6 +104,7 @@ private Properties prop = new Properties();
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
+			close(rset);
 		}
 		return orderNo;
 	}
@@ -168,4 +169,27 @@ private Properties prop = new Properties();
 		}
 		return result;
 	}
+
+//	public int cartOrderProductCntCheck(Connection conn, int pNo) {
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		String sql = prop.getProperty("cartOrderProductCntCheck");
+//		int orderNo = 0;
+//		
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setInt(1, pNo);
+//			
+//			rset = pstmt.executeQuery();
+//			if(rset.next()) {
+//				orderNo = rset.getInt(1);
+//			}
+//		}catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(pstmt);
+//			close(rset);
+//		}
+//		return orderNo;
+//	}
 }
