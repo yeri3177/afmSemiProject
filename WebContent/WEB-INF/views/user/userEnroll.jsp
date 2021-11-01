@@ -119,13 +119,13 @@ https://tyrannocoding.tistory.com/48
 			<tr>
 				<td>
 					이메일<sup>*</sup> <br /> 
-					<input type="text" name="emailId" id="emailId" class="inputText text2" required> @ 
-					<input type="text" name="emailAddress" id="emailAddress" class="text2"> 
-					<select name="emailSelect" id="emailSelect" onchange="emailSelect();">
-							<option value="self">직접입력</option>
-							<option value="naver.com">naver.com</option>
-							<option value="daum.net">daum.net</option>
-							<option value="gmail.com">gmail.com</option>
+					<input type="text" name="emailId" id="emailId" required> @ 
+					<input type="text" name="emailAddress" id="emailAddress" disabled> 
+					
+					<select name="emailSelect" id="emailSelect">
+						<option value="naver.com">naver.com</option>
+						<option value="daum.net">daum.net</option>
+						<option value="gmail.com">gmail.com</option>
 					</select>
 					</td>
 			</tr>
@@ -179,22 +179,26 @@ https://tyrannocoding.tistory.com/48
 
 <script>
 /*  이메일주소 자동완성 */
-function emailSelect() {
-    var emailAddress = document.getElementById("emailAddress");
-    var emailSelect = document.getElementById("emailSelect");
-
-    var idx = emailSelect.options.selectedIndex;
+$("#emailSelect").change((e) => {
+	
+	/* input타입의 이메일주소*/
+    var emailAddress = document.getElementById("emailAddress"); 
+    /* select타입의 이메일주소 */
+    var emailSelect = document.getElementById("emailSelect"); 
+    
+    /* 선택한이메일주소option의 인덱스넘버 */
+    var idx = emailSelect.options.selectedIndex; 
+    /* 선택한이메일주소option의 값 */
     var val = emailSelect.options[idx].value;
 
+    console.log("idx = " + idx);
+    console.log("val = " + val);
+    
+    //이메일주소 덮어씌우기(select값 -> input값)
     emailAddress.value = val;
+    console.log("emailAddress.value = " + emailAddress.value);
 
-    if(idx>=1 && idx <=4){
-      emailAddress.disabled = true;
-    }else {
-      emailAddress.disabled = false;
-      emailAddress.focus();
-    }
-  }
+});
 
  
 /**
@@ -229,7 +233,9 @@ const checkIdDuplicate = () => {
 
 
 
-//주소api
+/**
+ * 카카오 주소 api
+ */
 function findAddr(){
 	new daum.Postcode({
         oncomplete: function(data) {
