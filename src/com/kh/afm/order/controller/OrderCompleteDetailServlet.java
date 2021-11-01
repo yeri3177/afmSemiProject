@@ -32,7 +32,7 @@ public class OrderCompleteDetailServlet extends HttpServlet {
 		
 		// view단 연결
 		request.setAttribute("orderDetailList", orderDetailList);
-		request.getRequestDispatcher("/WEB-INF/views/order/OrderCompleteDetail.jsp")				
+		request.getRequestDispatcher("/WEB-INF/views/order/orderCompleteDetail.jsp")				
 			.forward(request, response);
 		
 	}

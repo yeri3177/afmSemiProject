@@ -212,24 +212,5 @@ public class ProductService {
 		}
 		return result;
 	}
-
-	public static int productLike(int pNo, int like) {
-		Connection conn = getConnection();
-		int result = 0;
-		int likeCount = 0;
-		try {
-			result = productDao.productLike(conn, pNo, like);
-			if(result == 0)
-				throw new IllegalArgumentException("좋아요 실패 : " + pNo );
-			
-			likeCount = productDao.productLikeSelect(conn, pNo);
-			
-			commit(conn);
-		} catch(Exception e) {
-			rollback(conn);
-			throw e;
-		}
-		return likeCount;
-	}
 	
 }
