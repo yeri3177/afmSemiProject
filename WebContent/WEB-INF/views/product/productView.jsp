@@ -15,6 +15,7 @@
 	List<ProductComment> commentList = (List<ProductComment>) request.getAttribute("commentList");
 %>
 
+
 <section id="product-container">
 	<h2></h2>
 	<br />
@@ -27,7 +28,7 @@
 	<input type="hidden" name="productPrice" value="<%= product.getpPrice() %>"/>
 	<table>
 		<tr>
-		    <td colspan="2" rowspan="7"><img src="<%= request.getContextPath() %>/upload/product/<%= product.getAttach1().getRenamedFileName() %>" alt="대표이미지" width="300px" height="300px"/></td>
+		    <td colspan="2" rowspan="7"><img src="<%= request.getContextPath() %>/upload/product/<%= product.getAttach1().getRenamedFileName() %>" alt="대표이미지" width="500px" height="500px"/></td>
 		    <td colspan="5"> 상품명 : <%= product.getpTitle() %></td>
 	    </tr>
 	    <tr>
@@ -40,14 +41,19 @@
 		    <td colspan="5"> 남은 수량 : <%= product.getpCnt() %></td>
 	    </tr>
 	    <tr>
-		    <td colspan="5"><input type="number" name="productQuantity" value="" placeholder="최소 1개 이상"/></td>
+		    <td colspan="5" class="test"> 좋아요 : <%= product.getpRecommend() %></td>
+	    </tr>
+	    
+	    <tr>
+		    <td colspan="5">구매할 수량 : <input type="number" name="productQuantity" value="" placeholder="최소 1개 이상"/></td>
 	    </tr>
 	    	
 	    <tr>
 	    	<td>
 	    		<input 
 	    			type="button"
-	    			value="추천!"/>
+	    			id="like"
+	    			value="좋아요!"/>
 <% 
 if(editable){ 
 %>	
@@ -93,9 +99,7 @@ if(editable){
 	<br />
 	
 	<div>
-	판매자의 말
-	<br /><br />
-	<%= product.getpContent() %>
+	<img src="<%= request.getContextPath() %>/upload/product/<%= product.getAttach2().getRenamedFileName() %>" alt="상세이미지" />
 	</div>
 	
 	<br />
@@ -103,12 +107,10 @@ if(editable){
 	<br />
 	
 	<div>
-	<img src="<%= request.getContextPath() %>/upload/product/<%= product.getAttach2().getRenamedFileName() %>" alt="상세이미지" />
-	</div>
-	
-	<br />
-	<hr />
-	<br />
+	판매자의 말
+	<br /><br />
+	<%= product.getpContent() %>
+	</div>	
 		
 	
 	<hr style="margin-top:30px"/>
@@ -120,7 +122,7 @@ if(editable){
 				name="productCommentFrm"
 				method="POST">
 				<div>댓글!</div>
-				<textarea name="content"  cols="60" rows="3"></textarea>
+				<textarea name="content" cols="60" rows="3"></textarea>
 				<button id="btn-insert">등록</button>
 				
 				<input type="hidden" name="commentLevel" value="1"/>
@@ -184,6 +186,27 @@ if(commentList != null && !commentList.isEmpty()){
 	</table>
 	</div>
 
+<script>
+$(like).click((e) => {
+	$.ajax({
+		url: "<%= request.getContextPath() %>/product/productLike",
+		data: {
+			pNo: <%= product.getpNo() %>,
+			like: <%= product.getpRecommend() %>
+		},
+		success(data){
+			console.log(data);
+			const test1 = data;
+			$(".test").html(test1);
+		},
+		error(xhr,textStatus,data){
+			console.log(xhr,textStatus,data);
+		}
+	});
+});
+
+</script>
+
 <form 
 	action="<%= request.getContextPath() %>/product/productCommentDelete"
 	name="productCommentDelFrm"
@@ -235,7 +258,7 @@ $(".btn-reply").click((e) => {
 		<form 
 			action="<%= request.getContextPath() %>/product/productCommentEnroll"
 			method="POST">
-			<textarea name="content" id="" cols="60" rows="2"></textarea>
+			<textarea name="content" cols="60" rows="2"></textarea>
 			<button class="btn-insert2">등록</button>
 			
 			<input type="hidden" name="commentLevel" value="2"/>
@@ -299,8 +322,10 @@ $(document.ProductCommentFrm).submit((e) => {
 
 const loginAlert = () => {
 	alert("로그인후 이용할 수 있습니다.");
-	$("#memberId").focus();
+	$("#userId").focus();
 };
+
+
 
 
 </script>
