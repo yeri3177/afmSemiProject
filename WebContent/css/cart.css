@@ -1,5 +1,6 @@
 @CHARSET "UTF-8";
 
+.cartheaderh2{text-align: center;}
 .cartisEmpty{text-align: center;font-size:300px;margin:0;}
 .cartisEmptyh3{text-align: center;color: #FC5230;text-shadow: 1px 1px #FFCD4A, 2px 2px #284D8E;}
 .basketdiv {width: 100%;border-top: 1px solid #e0e0e0;float: left;font-size: 0.9375em;margin-bottom: 20px;}
