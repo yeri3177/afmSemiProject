@@ -70,7 +70,7 @@
 						 	 <!-- <a href="javascript:orderCheck();">주문 확인</a> -->
 						 	 <a href="<%= request.getContextPath() %>/order/orderCheck">주문 확인</a>
 					 	 <% if("S".equals(loginUser.getUserRole())){ %>
-						 	 <a href="#">판매 내역</a>
+						 	 <a href="<%= request.getContextPath() %>/order/sellerProductList">판매 내역</a>
 						 	 <% } %>
 					 	 </div>
 					</div>

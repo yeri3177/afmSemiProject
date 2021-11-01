@@ -1,35 +1,192 @@
 @charset "UTF-8";
-.infobox {
-	height: 1600px;
+
+/*********************************************************
+ * 소개메뉴 전체 
+ ********************************************************/
+#info-container {
+	height: 2900px;
 }
 
-.topbox {
+.info-container-box {
+	margin-bottom: 100px;
+}
+
+/*********************************************************
+ * afm 소개 박스 
+ ********************************************************/
+/* afm 소개 컨테이너 */
+#introbox {
 	width: 100%;
-	height: 600px;
+	height: 550px;
+	background-color: white;
+	position: relative;
+	border-bottom: 1px solid black;
+	text-align: center;
+	padding-top: 65px;
+}
+.introbox-img {
+	text-align: center;
+	position: relative;
+	
+}
+#intro-text {
+	width: 700px;
+}
+
+#afmfullname {
+	width: 450px;
+}
+
+/*********************************************************
+ * 상단 박스 
+ ********************************************************/
+/* 최상단 컨테이너 */
+#topbox {
+	width: 100%;
+	height: 550px;
 	background-color: #ffe8a4;
+	position: relative;
+}
+/* 이미지박스 */
+.topbox-img {
 	text-align: center;
 }
-.topimg {
-	display: inline-block;
-	padding-top: 40px;
+
+/* 과일바구니 이미지 */
+#img1 {
+	width: 630px;
+	position: relative;
+	top: 2px;
+	left: 130px;
+}
+
+/* 캐릭터 이미지 */
+#img2 {
+	width: 190px;
+	position: relative;
+	top: 20px;
+	left: -10px;
+}
+
+/* 말풍선 이미지 */
+#img3 {
+	width: 550px;
+	position: relative;
+	top: -80px;
+	left: -10px;
 }
 
 
-.topbox img {
-	width: 550px;
+/*********************************************************
+ * 중간 박스 
+ ********************************************************/
+#middlebox {
+ 	background-color: white;
+ 	border: 1px solid black;
+ 	width: 100%;
+ 	height: 650px;
+ 	text-align: center;
+ 	position: relative;
+ 	margin: 0 auto;
+}
+/* 이미지전체 묶음 */
+.middlebox-img {
+	text-align: center;
+	margin: 0 auto;
+	position: relative;
+}
+
+/* 제목 텍스트 */
+#maptext {
+	width: 300px;
+	position: absolute;
+	top: 10px;
+	left: 60px;
+}
+
+
+/* 지도 이미지 */
+#mapimg {
+	width: 650px;
+}
+
+/* 특산물 설명 텍스트 공통 클래스 */
+.mapinfo {
+	width: 360px;
+}
+
+/* 경기 특산물 텍스트 */
+#map-spec-gg {
+	position: absolute;
+	top: 25px;
+	left : 550px;
+}
+
+/* 호서 특산물 텍스트 */
+#map-spec-hs {
+	position: absolute;
+	top: 220px;
+	left : 550px;
+}
+
+/* 호남 특산물 텍스트 */
+#map-spec-hn {
+	position: absolute;
+	top: 410px;
+	left : 520px;
+}
+
+/* 관동 특산물 텍스트 */
+#map-spec-gd {
+	position: absolute;
+	top: 55px;
+	right : 470px;
+}
+
+/* 영남 특산물 텍스트 */
+#map-spec-yn {
+	position: absolute;
+	top: 300px;
+	right : 470px;
+}
+
+
+/*********************************************************
+ * 하단 박스 
+ ********************************************************/
+#bottombox {
+ 	background-color: #dcebc9;
+ 	width: 100%;
+ 	height: 650px;
+ 	text-align: center;
+ 	position: relative;
+ 	
+ 	margin: 100px auto;
+ 	text-align: center;
+}
+
+.bottombox-img {
+	position: relative;
+	text-align: center;
+	margin: 0 auto;
+}
+
+/* 팀명 이미지 */
+#teamname {
+	width: 520px;
+	position: relative;
+	top: -30px;
+	left: 600px;
 	
 }
 
-.infotext {
-	display: inline-block;
-	margin-bottom: 200px;
+/* 프로필 이미지 */
+#teamone {
+	width: 1100px;
+	position: relative;
+	top: 280px;
+	left: -185px;
 }
-
-.infotext .text1 {
-	font-size: 40px;
-}
-
-.infotext .text2 {
-	font-size: 25px;
-	color: #276029;
-}
+ 
+ 
+ 

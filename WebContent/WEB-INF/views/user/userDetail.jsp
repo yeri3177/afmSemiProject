@@ -92,7 +92,8 @@
 		<input type="hidden" name="userId"
 			value="<%=loginUser.getUserId()%>" />
 	</form>
-	<script type="text/javascript">
+	
+<script type="text/javascript">
 		function deleteUser() {
 			if (confirm("정말로 탈퇴하시겠습니까?")) {
 				$(document.userDelFrm).submit();

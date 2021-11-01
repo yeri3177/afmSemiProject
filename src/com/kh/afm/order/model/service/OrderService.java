@@ -11,6 +11,7 @@ import com.kh.afm.order.model.dao.OrderDao;
 import com.kh.afm.order.model.vo.Order;
 import com.kh.afm.order.model.vo.OrderAddress;
 import com.kh.afm.order.model.vo.OrderDetail;
+import com.kh.afm.product.model.vo.Product;
 
 public class OrderService {
 	OrderDao orderDao = new OrderDao();
@@ -98,6 +99,18 @@ public class OrderService {
 		String str = orderDao.productNameCheck(conn, productNo);
 		close(conn);
 		return str;
+	}
+	
+	/**
+	 * 로그인한 판매자의 상품내역 찾기 (product 테이블)
+	 * @param userId : 로그인한 판매자 아이디
+	 * @return List<Product> : 상품 리스트
+	 */
+	public List<Product> selectSellerProductList(String userId) {
+		Connection conn = getConnection();
+		List<Product> list = orderDao.selectSellerProductList(conn, userId);
+		close(conn);
+		return list;
 	}
 
 //	public int cartOrderProductCntCheck(int pNo) {

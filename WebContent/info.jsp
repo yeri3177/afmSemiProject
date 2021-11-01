@@ -7,28 +7,48 @@
 
 <section id="info-container">
 
-<!-- 전체박스 -->
-<div class="infobox">
-	
-	<!-- 상단박스 -->
-	<div class="topbox">
-		<div class="topimg">
-			<img src="<%=request.getContextPath()%>/images/info/vegetable.png" alt="" />
-		</div>
-		<div class="infotext">
-			<div class="text1">
-				맛도 좋고 건강에도 좋은 <br>
-				우리 농산물 afm과 함께 하세요.
-			</div>
-			<div class="text2">
-				못난이 농산물로 맛과 가격까지 알뜰하게 <br>
-				장보기 완료하세요.
-			</div>
-		</div>
+<!-- 소개박스 -->
+<div id="introbox" class="info-container-box">
+	<div class="introbox-img">
+		<img id="intro-text" src="<%=request.getContextPath()%>/images/info/introduce.png" /><br>
+		<img id="afmfullname" src="<%=request.getContextPath()%>/images/info/afm_full_name.png" />
 	</div>
-
-
 </div>
+
+	
+<!-- 상단박스 -->
+<div id="topbox" class="info-container-box">
+	<div class="topbox-img">
+		<img id="img1" src="<%=request.getContextPath()%>/images/info/vegetable.png" />
+		<img id="img2" src="<%=request.getContextPath()%>/images/info/afmboy2.png" />
+		<img id="img3" src="<%=request.getContextPath()%>/images/info/text1.png" />
+	</div>
+</div>
+
+<!-- 중간박스 -->
+<div id="middlebox" class="info-container">
+	<div class="middlebox-img">
+		<img id="maptext" src="<%=request.getContextPath()%>/images/info/maptext.png" />
+		<img id="mapimg" src="<%=request.getContextPath()%>/images/info/map.PNG" />
+		<img id="map-spec-gg" class="mapinfo" src="<%=request.getContextPath()%>/images/info/map_info_1.PNG" />
+		<img id="map-spec-hs" class="mapinfo" src="<%=request.getContextPath()%>/images/info/map_info_2.PNG" />
+		<img id="map-spec-hn" class="mapinfo" src="<%=request.getContextPath()%>/images/info/map_info_3.PNG" />
+		<img id="map-spec-gd" class="mapinfo" src="<%=request.getContextPath()%>/images/info/map_info_4.PNG" />
+		<img id="map-spec-yn" class="mapinfo" src="<%=request.getContextPath()%>/images/info/map_info_5.PNG" />
+	</div>
+</div>
+
+
+<!-- 하단박스 -->
+<div id="bottombox" class="info-container">
+	<div class="bottombox-img">
+		<img id="teamname" src="<%=request.getContextPath()%>/images/info/team_name.png" />
+		<img id="teamone" src="<%=request.getContextPath()%>/images/info/codefarmer_profile.png" />
+
+	</div>
+</div>
+
+
 
 </section>
 
