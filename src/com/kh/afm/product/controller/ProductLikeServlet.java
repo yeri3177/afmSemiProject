@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,11 +23,49 @@ public class ProductLikeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		//1. 사용자입력값 처리
 		int pNo = Integer.parseInt(request.getParameter("pNo"));
 		int like = Integer.parseInt(request.getParameter("like"));
-		like++;
 		
+//		//좋아요 누름 확인(cookie)
+//		Cookie[] cookies = request.getCookies();
+//		boolean hasClick = false;
+//		String productValue = "";
+//		
+//		if(cookies != null) {
+//			for(Cookie c : cookies) {
+//				String name = c.getName();
+//				String value = c.getValue();
+//				System.out.println(name + " : " + value);
+//				
+//				if("product".equals(name)) {
+//					productValue = value;
+//					//좋아요 누름 여부
+//					if(value.contains("|" + pNo + "|")) {
+//						hasClick = true;
+//					}
+//					break;
+//					
+//				}
+//			}
+//		}
+//		
+//		System.out.printf("hasClick = %b, productValue = %s%n", hasClick, productValue);
+//		
+//		// 처음 좋아요 누르는 경우
+//		if(!hasClick) {
+//			// 좋아요 cookie
+//			Cookie cookie = new Cookie("product", productValue + "|" + pNo +"|");
+//			cookie.setMaxAge(365 * 24 * 60 * 60);
+//			cookie.setPath(request.getContextPath() + "/product/productLike"); // 해당 요청시만 cookie전송
+//			response.addCookie(cookie);
+//		
+//			//좋아요 증가
+//			like++;
+//		}
+		
+		like++;
 		//2. 업무로직
 		int result = ProductService.productLike(pNo, like);
 		String msg = result > 0 ? "좋아요 성공" : "좋아요 실패";
