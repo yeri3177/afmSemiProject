@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.afm.order.model.service.OrderService;
-import com.kh.afm.order.model.vo.OrderDetail;
 
 /**
  * Servlet implementation class OrderDetailCheckServlet

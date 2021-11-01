@@ -93,6 +93,13 @@ public class OrderService {
 		return list;
 	}
 
+	public String productNameCheck(int productNo) {
+		Connection conn = getConnection();
+		String str = orderDao.productNameCheck(conn, productNo);
+		close(conn);
+		return str;
+	}
+
 //	public int cartOrderProductCntCheck(int pNo) {
 //		Connection conn = getConnection();
 //		int pCnt = orderDao.cartOrderProductCntCheck(conn, pNo);

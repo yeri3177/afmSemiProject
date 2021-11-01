@@ -66,7 +66,7 @@
 					 	 <span class="buttonImgName"><%= loginUser.getUserName() %>님</span></div>
 					 	 <div class="headerDropDownMenu">
 						 	 <a href="<%= request.getContextPath() %>/user/userDetail">내 정보 보기</a>
-						 	 <a href="#">구매 내역</a>
+						 	 <a href="<%= request.getContextPath() %>/order/orderComplete">구매 내역</a>
 						 	 <!-- <a href="javascript:orderCheck();">주문 확인</a> -->
 						 	 <a href="<%= request.getContextPath() %>/order/orderCheck">주문 확인</a>
 					 	 <% if("S".equals(loginUser.getUserRole())){ %>
