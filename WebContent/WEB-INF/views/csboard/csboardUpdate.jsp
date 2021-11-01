@@ -46,7 +46,7 @@
 	</tr>
 	<tr>
 		<th colspan="2">
-			<input type="submit" value="수정하기" />
+			<input type="submit" value="수정하기"/>
 			<input type="button" value="취소" onclick="history.go(-1);" />
 		</th>
 	</tr>

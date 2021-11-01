@@ -70,7 +70,8 @@ $(() => {
 	<tr>
 		<th>비밀번호</th>
 		<td>
-			<input type="password" name="board_password" /> * 필수 (게시물 삭제시 필요합니다.)
+			<input type="password" name="board_password" /> <input type="checkbox" name="boardLock_yn" value="Y" /> 비밀글 여부
+			
 		</td>  
 	</tr>
 	<tr>
