@@ -46,18 +46,15 @@ public class AdminUserSortServlet extends HttpServlet {
 		param.put("sortKeyword", sortKeyword);
 		param.put("start", start);
 		param.put("end", end);
-		System.out.println("param@sortservlet = " + param);
 		
 		// 검색결과 리스트 
 		List<User> list = adminService.sortUser(param);
-		System.out.println("정렬결과 sortlist" + list);
 		
 		// 페이지바
-		int totalContents = adminService.selectTotalContents();
+		int totalContents = adminService.selectUserTotalContents();
 		String queryString = String.format("?sortType=%s&sortKeyword=%s", sortType, sortKeyword);
 		String url = request.getRequestURI() + queryString; 
 		String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
-		System.out.println("pagebar@SortServlet = " + pagebar);
 		
 		// view단처리
 		request.setAttribute("list", list);

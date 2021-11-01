@@ -103,7 +103,7 @@ public class AdminDao {
 	/**
 	 * 페이징 - 전체회원수
 	 */
-	public int selectTotalContents(Connection conn) {
+	public int selectUserTotalContents(Connection conn) {
 		String sql = prop.getProperty("selectTotalContents");
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -285,7 +285,7 @@ public class AdminDao {
 	}
 
 	/**
-	 * 회원 정렬하기
+	 * 회원 목록 정렬하기
 	 */
 	public List<User> sortUser(Connection conn, Map<String, Object> param) {
 		PreparedStatement pstmt = null;
@@ -296,17 +296,17 @@ public class AdminDao {
 		String sortKeyword = (String) param.get("sortKeyword");
 
 		if ("asc".equals(sortType) && "userId".equals(sortKeyword)) {
-			sql = prop.getProperty("sortUserByUserIdOrderAsc");
+			sql = prop.getProperty("sortUserOrderByUserIdAsc");
 		} else if ("asc".equals(sortType) && "userName".equals(sortKeyword)) {
-			sql = prop.getProperty("sortUserByUserNameOrderAsc");
+			sql = prop.getProperty("sortUserOrderByUserNameAsc");
 		} else if ("asc".equals(sortType) && "userRole".equals(sortKeyword)) {
-			sql = prop.getProperty("sortUserByUserRoleOrderAsc");
+			sql = prop.getProperty("sortUserOrderByUserRoleAsc");
 		} else if ("desc".equals(sortType) && "userId".equals(sortKeyword)) {
-			sql = prop.getProperty("sortUserByUserIdOrderDesc");
+			sql = prop.getProperty("sortUserOrderByUserIdDesc");
 		} else if ("desc".equals(sortType) && "userName".equals(sortKeyword)) {
-			sql = prop.getProperty("sortUserByUserNameOrderDesc");
+			sql = prop.getProperty("sortUserOrderByUserNameDesc");
 		} else if ("desc".equals(sortType) && "userRole".equals(sortKeyword)) {
-			sql = prop.getProperty("sortUserByUserRoleOrderDesc");
+			sql = prop.getProperty("sortUserOrderByUserRoleDesc");
 		}
 
 		try {
@@ -347,6 +347,69 @@ public class AdminDao {
 				}
 				
 				list.add(user);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	/**
+	 * 상품 목록 정렬하기
+	 */
+	public List<Product> sortProduct(Connection conn, Map<String, Object> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Product> list = new ArrayList<>();
+		String sql = null;
+		String sortType = (String) param.get("sortType");
+		String sortKeyword = (String) param.get("sortKeyword");
+
+		
+		if ("asc".equals(sortType) && "pNo".equals(sortKeyword)) {
+			sql = prop.getProperty("sortProductOrderByProductNoAsc");
+		} else if ("asc".equals(sortType) && "userId".equals(sortKeyword)) {
+			sql = prop.getProperty("sortProductOrderByUserIdAsc");
+		} else if ("asc".equals(sortType) && "pExpose".equals(sortKeyword)) {
+			sql = prop.getProperty("sortProductOrderByProductExposeAsc");
+			
+			
+		} else if ("desc".equals(sortType) && "pNo".equals(sortKeyword)) {
+			sql = prop.getProperty("sortProductOrderByProductNoDesc");
+		} else if ("desc".equals(sortType) && "userId".equals(sortKeyword)) {
+			sql = prop.getProperty("sortProductOrderByUserIdDesc");
+		} else if ("desc".equals(sortType) && "pExpose".equals(sortKeyword)) {
+			sql = prop.getProperty("sortProductOrderByProductExposeDesc");
+		}
+
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int) param.get("start"));
+			pstmt.setInt(2, (int) param.get("end"));
+
+			// 2. 쿼리실행 및 ResultSet처리
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				Product product = new Product();
+				product.setpNo(rset.getInt("p_no"));
+				product.setUserId(rset.getString("p_user_id"));
+				product.setpRegDate(rset.getDate("p_reg_date"));
+				product.setpTitle(rset.getString("p_title"));
+				product.setpContent(rset.getString("p_content"));
+				product.setpPost(rset.getString("p_post"));
+				product.setpPrice(rset.getInt("p_price"));
+				product.setpCnt(rset.getInt("p_cnt"));
+				product.setpCategory(rset.getString("p_category"));
+				product.setpExpose(rset.getString("p_expose"));
+				product.setpReport(rset.getString("p_report"));
+				product.setpRecommend(rset.getInt("p_recommend"));
+				
+				list.add(product);
 			}
 
 		} catch (SQLException e) {
@@ -583,7 +646,7 @@ public class AdminDao {
 	/**
 	 * 상품 노출여부 변경
 	 */
-	public int updateProductExpose(Connection conn, String pNo, String pExpose) {
+	public int updateProductExpose(Connection conn, int pNo, String pExpose) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateProductExpose"); 
@@ -594,7 +657,7 @@ public class AdminDao {
 			
 			// 쿼리문 셋팅
 			pstmt.setString(1, pExpose);
-			pstmt.setString(2, pNo);
+			pstmt.setInt(2, pNo);
 			
 			// 쿼리실행 
 			result = pstmt.executeUpdate();
@@ -722,7 +785,6 @@ public class AdminDao {
 		switch (searchType) {
 		case "pNo": 
 			sql = prop.getProperty("searchProductByProductNo");
-			param.put("searchKeyword", "%" + param.get("searchKeyword") + "%");
 			break;
 		case "userId":
 			sql = prop.getProperty("searchProductByUserId");
@@ -813,6 +875,33 @@ public class AdminDao {
 			close(pstmt);
 		}
 		return totalContents;
+	}
+
+	/**
+	 * 상품신고테이블의 처리상태 변경
+	 */
+	public int processReport(Connection conn, int reportNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("processReport"); 
+		
+		try {
+			// 미완성쿼리문 객체생성
+			pstmt = conn.prepareStatement(sql);
+			
+			// 쿼리문 셋팅
+			pstmt.setInt(1, reportNo);
+			
+			// 쿼리실행 
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 }

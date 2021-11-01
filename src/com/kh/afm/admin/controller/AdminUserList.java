@@ -38,7 +38,7 @@ public class AdminUserList extends HttpServlet {
 		List<User> list = adminService.selectAllUser(startRownum, endRownum);
 		
 		// 페이징영역
-		int totalContents = adminService.selectTotalContents(); 
+		int totalContents = adminService.selectUserTotalContents(); 
 		String url = request.getRequestURI();
 		String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
 		
