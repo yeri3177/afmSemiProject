@@ -6,11 +6,47 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
 	List<Csboard> list = (List<Csboard>) request.getAttribute("list");
+	String searchType = request.getParameter("searchType");
+	String searchKeyword = request.getParameter("searchKeyword");
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/csboard.css" />
-
+<style>
+div#search-container {margin:0 0 10px 0; padding:3px; background: #568A35;}
+div#search-userId {display: <%= searchType == null || "userId".equals(searchType) ? "inline-block" : "none" %>;}
+div#search-userName {display: <%= "userBoard".equals(searchType) ? "inline-block" : "none" %>;}
+div#search-boardTitle {display: <%= "boardTitle".equals(searchType) ? "inline-block" : "none" %>;}
+</style>
 <section id="csboardList-container" class="csboard-container">
 	<h2>고객센터</h2>
+	<div id="search-container">
+		검색타입 : 
+		<select name="" id="searchType">
+			<option value="userId" <%= "userId".equals(searchType) ? "selected" : "" %>>아이디</option>
+			<option value="userName" <%= "userName".equals(searchType) ? "selected" : "" %>>회원명</option>
+			<option value="boardTitle" <%= "boardTitle".equals(searchType) ? "selected" : "" %>>제목</option>
+		</select>
+		<div id="search-userId" class="search-type">
+			<form action="<%= request.getContextPath() %>/csboard/boardFinder">
+				<input type="hidden" name="searchType" value="userId" />
+				<input type="text" name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요." value="<%= "userId".equals(searchType) ? searchKeyword : "" %>" />
+				<button type="submit">검색</button>
+			</form>
+		</div>
+		<div id="search-userName" class="search-type">
+			<form action="<%= request.getContextPath() %>/csboard/boardFinder">
+				<input type="hidden" name="searchType" value="boardNo" />
+				<input type="text" name="searchKeyword" size="25" placeholder="검색할 번호를 입력하세요." value="<%= "userName".equals(searchType) ? searchKeyword : "" %>" />
+				<button type="submit">검색</button>
+			</form>
+		</div>
+		<div id="search-boardTitle" class="search-type">
+			<form action="<%= request.getContextPath() %>/csboard/boardFinder">
+				<input type="hidden" name="searchType" value="boardTitle" />
+				<input type="text" name="searchKeyword" size="25" placeholder="검색할 제목을 입력하세요." value="<%= "boardTitle".equals(searchType) ? searchKeyword : ""  %>" />
+				<button type="submit">검색</button>
+			</form>
+		</div>
+	</div>
 	
 	<table id="tbl-csboard">
 		<tr>
@@ -43,7 +79,6 @@
 		<td><%=csboard2.getRowNum()%></td>
 		<% if(csboard2.getBoardLock().equals("Y")){ %>
 			<td>
-				<img src=""/>
 				<a href="<%= request.getContextPath() %>/csboard/csboardView?boardNo=<%= csboard2.getBoardNo() %>">
 					<%= csboard2.getBoardTitle() %>
 					이건 Y입니다.
@@ -77,8 +112,21 @@
 		<%= request.getAttribute("pagebar")%>
 	</div>
 	
-	
 </section>
+<script>
+$("#searchType").change((e) => {
+	// e.target : 이벤트 발생 객체 -> #searchType
+	const type = $(e.target).val();
+	console.log(type);
+	
+	// 1. .search-type 감추기
+	$(".search-type").hide();
+	
+	// 2. #search-${type} 보여주기(diplay:inline-block)
+	// \$ : $를 escaping
+	$(`#search-\${type}`).css("display", "inline-block");
+});
+</script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
