@@ -671,53 +671,6 @@ public class ProductDao {
 		
 	}
 
-	public int productLike(Connection conn, int pNo, int like) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		String sql = prop.getProperty("productLike");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, like);
-			pstmt.setInt(2, pNo);
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			throw new ProductException("좋아요 업데이트 오류", e);
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
-
-	public int productLikeSelect(Connection conn, int pNo) {
-		Attachment attach = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String query = prop.getProperty("productLikeSelect");
-		int likeCount = 0;
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, pNo);
-			
-			rset = pstmt.executeQuery();
-			
-			
-			if(rset.next()) {
-				likeCount = rset.getInt(1);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return likeCount;
-	}
 
 	
 }
