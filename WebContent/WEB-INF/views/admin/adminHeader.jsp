@@ -69,7 +69,7 @@
 	            </li>
 	            <!-------- 소메뉴 1-2 -------->
 	            <li>
-	              <a href="<%=request.getContextPath()%>/admin/delUserList">탈퇴회원 목록</a>
+	              <a href="<%=request.getContextPath()%>/admin/delUserList">회원탈퇴 목록</a>
 	            </li>
 	          </ul>
 	        </li>

@@ -209,7 +209,7 @@ div#search-userRole {
 	return true;
 }); */
  
-$("[name=searchFrm]").submit((e) => {
+/* $("[name=searchFrm]").submit((e) => {
 	const $searchKeyword = $("[name=searchKeyword]");
 	const $searchType = $("[name=searchType]");
 	console.log($searchType.val());
@@ -222,7 +222,7 @@ $("[name=searchFrm]").submit((e) => {
 		} 
 		return true;
 	}
-});
+}); */
 
 /* 검색유형 체인지 이벤트 */
 $("#searchType").change((e) => {
