@@ -376,6 +376,74 @@ private Properties prop = new Properties();
 		return list;
 	}
 
+	/**
+	 * 클릭한 해당 상품의 결제상세내역 찾기 (order_detail 테이블)
+	 * @param productNo : 클릭한 해당 상품번호
+	 * @return List<OrderDetail> : 해당 상품의 주문내역 리스트
+	 */
+	public List<OrderDetail> selectSellerOrderDetailList(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectSellerOrderDetailList");
+		List<OrderDetail> list = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, productNo);
+			
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				OrderDetail orderDetail = new OrderDetail();
+				orderDetail.setOrderDetailNo(rset.getInt("order_detail_no"));
+				orderDetail.setProductNo(rset.getInt("p_no"));
+				orderDetail.setOrderNo(rset.getInt("order_no"));
+				orderDetail.setpCnt(rset.getInt("p_cnt"));
+				orderDetail.setpPrice(rset.getInt("p_price"));
+				orderDetail.setPayStatus(rset.getString("order_status"));
+				
+				list.add(orderDetail);
+			}
+			
+		}catch (SQLException e) {
+				e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	/**
+	 * 판매자의 결제처리상태 확인 처리
+	 * @param orderDetailNo : 해당 주문상세번호
+	 * @param orderStatus : 결제처리상태
+	 * @return 메소드성공여부 
+	 */
+	public int updateOrderStatus(Connection conn, int orderDetailNo, String orderStatus) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateOrderStatus"); 
+		
+		try {
+			// 미완성쿼리문 객체생성
+			pstmt = conn.prepareStatement(sql);
+			
+			// 쿼리문 셋팅
+			pstmt.setString(1, orderStatus);
+			pstmt.setInt(2, orderDetailNo);
+			
+			// 쿼리실행 
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 //	public int cartOrderProductCntCheck(Connection conn, int pNo) {
 //		PreparedStatement pstmt = null;
 //		ResultSet rset = null;
