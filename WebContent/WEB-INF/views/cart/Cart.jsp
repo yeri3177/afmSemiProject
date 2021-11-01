@@ -158,7 +158,8 @@ List<Cart> list = (List<Cart>)request.getAttribute("list");
 	<%
 	int sum = 0;
 	int sumcount = 0;
-	int i = 0;
+	int i = 1;
+	System.out.println(list);
 		for(Cart _cart : list){
 			sum += (_cart.getProductPrice() * _cart.getProductQuantity());
 			sumcount += _cart.getProductQuantity();
