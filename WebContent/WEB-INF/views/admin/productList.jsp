@@ -74,15 +74,15 @@ div#search-pExpose {
 					<input type="hidden" name="searchType" value="pCategory"/>
 			    <label>
 			        <input type="radio" name="searchKeyword" value="채소류" checked
-			        	<%= "pCategory".equals(searchType) && "A".equals(searchKeyword) ? "checked" : "" %>> 채소류
+			        	<%= "pCategory".equals(searchType) && "채소류".equals(searchKeyword) ? "checked" : "" %>> 채소류
 			    </label>
 			    <label> 
 			        <input type="radio" name="searchKeyword" value="과실류" 
-			        	<%= "pCategory".equals(searchType) && "U".equals(searchKeyword) ? "checked" : "" %>> 곡류
+			        	<%= "pCategory".equals(searchType) && "과실류".equals(searchKeyword) ? "checked" : "" %>> 과실류
 			    </label>
 			    <label>
 			        <input type="radio" name="searchKeyword" value="곡류" 
-			        	<%= "pCategory".equals(searchType) && "S".equals(searchKeyword) ? "checked" : "" %>> 과실류
+			        	<%= "pCategory".equals(searchType) && "곡류".equals(searchKeyword) ? "checked" : "" %>> 곡류
 			    </label>    	
 					<button type="submit" class="search-btn">검색</button>
 			</form>

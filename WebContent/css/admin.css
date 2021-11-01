@@ -259,7 +259,7 @@ div#pageBar a:hover {
 }
 
 #logoutbtn img {
-	width: 55px;
+	width: 50px;
 }
 
 #homebtn img {
@@ -539,6 +539,7 @@ div#pageBar a:hover {
 	margin : 15px auto;
 	width: 350px;
 	height: 35px;
+	line-height: 35px;
 	font-size: 20px;
 	background-color: #d7d7d7;
 }

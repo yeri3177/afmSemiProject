@@ -31,9 +31,9 @@ public class AdminService {
 	/**
 	 * 페이징 - 전체회원수 
 	 */
-	public int selectTotalContents() {
+	public int selectUserTotalContents() {
 		Connection conn = getConnection();
-		int totalContent = adminDao.selectTotalContents(conn);
+		int totalContent = adminDao.selectUserTotalContents(conn);
 		close(conn);
 		return totalContent;
 	}
@@ -70,11 +70,21 @@ public class AdminService {
 	}
 
 	/**
-	 * 회원 정렬하기
+	 * 회원 목록 정렬하기
 	 */
 	public List<User> sortUser(Map<String, Object> param) {
 		Connection conn = getConnection();
 		List<User> list = adminDao.sortUser(conn, param);
+		close(conn);
+		return list;
+	}
+	
+	/**
+	 * 상품 목록 정렬하기
+	 */
+	public List<Product> sortProduct(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Product> list = adminDao.sortProduct(conn, param);
 		close(conn);
 		return list;
 	}
@@ -153,7 +163,7 @@ public class AdminService {
 	/**
 	 * 상품 노출여부 변경
 	 */
-	public int updateProductExpose(String pNo, String pExpose) {
+	public int updateProductExpose(int pNo, String pExpose) {
 		Connection conn = getConnection();
 		int result = adminDao.updateProductExpose(conn, pNo, pExpose);
 		
@@ -215,4 +225,19 @@ public class AdminService {
 		close(conn);
 		return totalContent;
 	}
+
+	/**
+	 * 상품신고테이블의 처리상태 변경
+	 */
+	public int processReport(int reportNo) {
+		Connection conn = getConnection();
+		int result = adminDao.processReport(conn, reportNo);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+	
 }

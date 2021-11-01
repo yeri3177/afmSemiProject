@@ -4,6 +4,9 @@
 <!-- css -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/info.css" />
 
+
+<section id="info-container">
+
 <!-- 전체박스 -->
 <div class="infobox">
 	
@@ -24,6 +27,9 @@
 		</div>
 	</div>
 
+
 </div>
+
+</section>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
