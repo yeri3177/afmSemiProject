@@ -45,9 +45,9 @@
     <div class="mainHeader">
           <h2 class="nickName"><a class="homepageName" href="<%= request.getContextPath() %>/index.jsp"><img src="<%= request.getContextPath() %>/images/common/logo.png" class="logoImg"/><img class="logofont" src="<%= request.getContextPath() %>/images/common/logofont.png"></a></h2>
       <div class="search">
-	      <form class="searchform" action="">
+	      <form class="searchform" action="<%= request.getContextPath() %>/index/indexSearch">
 	      <label for="search">검색 : </label>
-	      <input type="text" id="search" name="search" class="searchinput" placeholder="검색어를 입력하세요."/>
+	      <input type="text" id="search" name="search" class="searchinput" placeholder="상품명을 입력하세요."/>
 	      <button class="btnSearch" type="submit"><img class="searchImg" src="<%= request.getContextPath() %>/images/common/search.png"></button>
 	      </form>
       </div>

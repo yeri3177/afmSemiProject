@@ -25,11 +25,9 @@ public class OrderDetailCheckServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		int orderNo = Integer.parseInt(request.getParameter("orderNo"));
-		System.out.println(orderNo);
 		//List<Order> orderList = orderService.orderCheckList(userId);
 		String csv = orderService.orderDetailCheckList(orderNo);
 
-		System.out.println(csv);
 		response.setContentType("text/orderDetailList; charset=utf-8");
 		response.getWriter().append(csv);
 	}
