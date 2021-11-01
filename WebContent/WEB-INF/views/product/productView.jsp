@@ -81,7 +81,7 @@ if(editable){
 		    	<input 
 					type="submit" 
 					value="결제하기" 
-					formaction="<%= request.getContextPath() %>/order/orderProduct" />
+					formaction="<%= request.getContextPath() %>/product/productOrder" />
 		    </td>
 	    </tr>
 	</table>
