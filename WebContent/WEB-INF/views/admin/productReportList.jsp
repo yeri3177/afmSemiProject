@@ -80,14 +80,11 @@
 </form>
 
 <script>
-$processStatusTd = $("#processStatusTd:contains('미처리')");
+/* 처리상태칸 미처리일경우 글자색 빨간색으로 설정 */
+/* $processStatusTd = $("#processStatusTd:contains('미처리')");
 if($processStatusTd){
 	$processStatusTd.css('color','red');	
 	$processStatusTd.css('font-weight','bold');	
-}
-
-/* if($("#processStatusTd:contains('미처리')")){
-	$processStatusTd.css('color','red');	
 } */
 
 /* 상품노출여부 변경시 체인지 이벤트 */

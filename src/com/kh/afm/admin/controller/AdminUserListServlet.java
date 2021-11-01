@@ -17,7 +17,7 @@ import com.kh.afm.user.model.vo.User;
  * 관리자페이지 - 사용자관리 - 회원 목록 
  */
 @WebServlet("/admin/userList")
-public class AdminUserList extends HttpServlet {
+public class AdminUserListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AdminService adminService = new AdminService(); 
     

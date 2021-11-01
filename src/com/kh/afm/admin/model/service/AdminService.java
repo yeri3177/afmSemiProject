@@ -9,6 +9,7 @@ import java.util.Map;
 import com.kh.afm.admin.model.dao.AdminDao;
 import com.kh.afm.product.model.vo.Product;
 import com.kh.afm.product.model.vo.Report;
+import com.kh.afm.user.model.vo.Address;
 import com.kh.afm.user.model.vo.DelUser;
 import com.kh.afm.user.model.vo.User;
 
@@ -239,5 +240,15 @@ public class AdminService {
 		
 		return result;
 	}
-	
+
+	/**
+	 * 회원별 주소목록 찾기 
+	 */
+	public List<Address> selectUserAddress(String userId) {
+		Connection conn = getConnection();
+		List<Address> list = adminDao.selectUserAddress(conn, userId);
+		close(conn);		
+		
+		return list;
+	}
 }
