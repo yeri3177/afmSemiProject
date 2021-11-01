@@ -36,5 +36,7 @@ public class SellerOrderStatusUpdateServlet extends HttpServlet {
 		// 5. 리다이렉트
 		String location = request.getHeader("Referer");
 		response.sendRedirect(location);
+		
+		//response.sendRedirect(request.getContextPath() + "/admin/memberList");
 	}
 }
