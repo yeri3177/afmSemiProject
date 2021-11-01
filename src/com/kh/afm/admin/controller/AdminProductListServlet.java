@@ -11,17 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.afm.admin.model.service.AdminService;
 import com.kh.afm.common.MvcUtils;
-import com.kh.afm.user.model.vo.DelUser;
+import com.kh.afm.product.model.vo.Product;
 
 /**
- * 탈퇴한 회원 목록 보기 
+ * 관리자 - 상품목록 페이지 
  */
-@WebServlet("/admin/delUserList")
-public class AdminDelUserList extends HttpServlet {
+@WebServlet("/admin/productList")
+public class AdminProductListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AdminService adminService = new AdminService(); 
-       
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		// 페이징처리
 		int cPage = 1;
 		int numPerPage = 10;
@@ -34,20 +35,20 @@ public class AdminDelUserList extends HttpServlet {
 		int endRownum = cPage * numPerPage;
 		
 		// 업무로직
-		List<DelUser> list = adminService.selectAllDelUser(startRownum, endRownum);
-		//System.out.println("list@adminUserListServlet = " + list);
+		List<Product> list = adminService.selectAllProduct(startRownum, endRownum);
+		System.out.println("list@adminproductlist = " + list);
 		
 		// 페이징영역
-		int totalContents = adminService.selectDelUserTotalContents(); 
+		int totalContents = adminService.selectProductTotalContents(); 
 		String url = request.getRequestURI();
 		String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
-		
 		
 		// view단 처리
 		request.setAttribute("pagebar", pagebar);
 		request.setAttribute("list", list);
 		request
-			.getRequestDispatcher("/WEB-INF/views/admin/delUserList.jsp")
+			.getRequestDispatcher("/WEB-INF/views/admin/productList.jsp")
 			.forward(request, response);
+		
 	}
 }

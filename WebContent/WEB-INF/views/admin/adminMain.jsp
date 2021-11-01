@@ -5,7 +5,7 @@
 	Map<String, Integer> param = (Map<String, Integer>) request.getAttribute("param");
 %>
 
-<section id="adminmain-container" class="admin-container">
+<section id="adminmain-container">
 
 	<table id="main-tbl">
 		<tr>

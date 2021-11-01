@@ -903,5 +903,42 @@ public class AdminDao {
 		
 		return result;
 	}
+
+	/**
+	 * 회원별 주소목록 찾기 
+	 */
+	public List<Address> selectUserAddress(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectUserAddress");
+		ResultSet rset = null;
+		List<Address> list = new ArrayList<>();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, userId);
+
+			rset = pstmt.executeQuery();
+
+
+			while (rset.next()) {
+				Address address = new Address();
+				address.setAdrNo(rset.getInt("adr_no"));
+				address.setUserId(rset.getString("user_id"));
+				address.setAdrName(rset.getString("adr_name"));
+				address.setAdrRoad(rset.getString("adr_road"));
+				address.setAdrDetail(rset.getString("adr_detail"));
+
+				list.add(address);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 	
 }
