@@ -21,14 +21,14 @@ public class CartInsertServlet extends HttpServlet {
 	private CartService cartService = new CartService();
 	private Cart cart = new Cart();
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
 		HttpSession session = request.getSession(false);
 		User loginUser = (User)session.getAttribute("loginUser");
 		String userId = loginUser.getUserId();
 		
-		int productNo = Integer.parseInt(request.getParameter("pNo"));
+		int productNo = Integer.parseInt(request.getParameter("productNo"));
 		int productQuantity = Integer.parseInt(request.getParameter("productQuantity"));
 		
 		cart = new Cart(userId, 0, productNo, null,null, 0, productQuantity);
@@ -44,11 +44,6 @@ public class CartInsertServlet extends HttpServlet {
 			session.setAttribute("msg", "장바구니 담기에 실패했습니다.");
 			response.sendRedirect(request.getContextPath() + "/");
 		}
-	}
-
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 	}
 
 }

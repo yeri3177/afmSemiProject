@@ -19,7 +19,7 @@
 	<h2></h2>
 	<br />
 <form 
-	action="<%= request.getContextPath() %>/product/productOrder" 
+	 
 	name="productOrderFrm"
 	method="POST">
 	<input type="hidden" name="productNo" value="<%= product.getpNo() %>"/>
@@ -75,13 +75,13 @@ if(editable){
 		    	<input 
 					type="submit" 
 					value="장바구니" 
-					onclick="javascript: form.action:'/cart/cartProduct';" />
+					formaction="<%= request.getContextPath() %>/cart/cartInsert" />
 		    </td>
 		    <td>
 		    	<input 
 					type="submit" 
 					value="결제하기" 
-					onclick="javascript: form.action:'/order/orderProduct';" />
+					formaction="<%= request.getContextPath() %>/order/orderProduct" />
 		    </td>
 	    </tr>
 	</table>
