@@ -159,12 +159,12 @@ div#search-userRole {
 		<!-- 회원공개여부 select-option태그 -->	
 		<td> 
 			<select class="user_expose" data-user-id="<%= user.getUserId() %>" id="userExposeSelect">
-				<option value="Y"
-					<%= "Y".equals(user.getUserExpose()) ? "selected" : "" %>>공개
+				<option value="Y" <%= "Y".equals(user.getUserExpose()) ? "selected" : "" %>>
+					공개
 				</option>
 				
-				<option value="N"
-					<%= "N".equals(user.getUserExpose()) ? "selected" : "" %>>차단
+				<option value="N" <%= "N".equals(user.getUserExpose()) ? "selected" : "" %>>
+					차단
 				</option>
 			</select>
 		</td>
