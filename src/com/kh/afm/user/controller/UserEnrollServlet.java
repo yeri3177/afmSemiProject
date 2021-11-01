@@ -45,7 +45,10 @@ public class UserEnrollServlet extends HttpServlet {
 		// 2.사용자입력값 -> User객체
 		String userId = request.getParameter("userId");
 		String password = MvcUtils.getEncryptedPassword(request.getParameter("password"));
-		String email = request.getParameter("email");
+		
+		String emailId = request.getParameter("emailId");
+		String emailAddress = request.getParameter("emailAddress");
+		
 		String userName = request.getParameter("userName");	
 		String phone = request.getParameter("phone");
 		String birthyear = request.getParameter("birthyear");
@@ -53,6 +56,12 @@ public class UserEnrollServlet extends HttpServlet {
 		String birthday = request.getParameter("birthday");
 		String address1 = request.getParameter("address1");
 		String address2 = request.getParameter("address2");
+		
+		//이메일값 2개 합치기 (아이디+주소)
+		System.out.println("emailId = " + emailId);
+		System.out.println("emailAddress = " + emailAddress);
+		String email = emailId+"@"+emailAddress;
+		
 		
 		//생일 월 1자리이면 -> 2자리
 		if(birthmonth.length()==1) {
