@@ -7,6 +7,7 @@ import static com.kh.afm.common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import com.kh.afm.csboard.model.dao.CsboardDao;
 import com.kh.afm.csboard.model.vo.Csboard;
@@ -97,6 +98,16 @@ public class CsboardService {
 		}
 		return result;
 	}
+
+	// 게시물 찾기
+	// DQL
+	public List<Csboard> searchCsboard(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Csboard> list = csboardDao.searchCsboard(conn, param);
+		return list;
+	}
+
+
 
 
 }

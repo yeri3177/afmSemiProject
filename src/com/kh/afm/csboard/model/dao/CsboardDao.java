@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import com.kh.afm.csboard.model.exception.CsboardException;
@@ -246,6 +247,67 @@ public class CsboardDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	// 게시글 조회
+	// DQL
+	public List<Csboard> searchCsboard(Connection conn, Map<String, Object> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		// 0행이 조회되도 ArrayList<>() 객체는 returen되어야 한다.
+		List<Csboard> list = new ArrayList<>();
+		String sql = null;
+		// Object는 switch 계산식 안에 들어올 수 없으므로 밖으로 빼서 가져온다.
+		String searchType = (String) param.get("searchType");
+		switch(searchType) {
+		case "userId":
+			sql = prop.getProperty("searchCsboardByUserId");
+			param.put("searchKeyword", "%" + param.get("searchKeyword") + "%");
+			break;
+		case "boardNo":
+			sql = prop.getProperty("searchCsboardByBoardNo");
+			param.put("searchKeyword", "%" + param.get("searchKeyword") + "%");
+			break;
+		case "boardTitle":
+			sql = prop.getProperty("searchCsboardByBoardTitle");
+			param.put("searchKeyword", "%" + param.get("searchKeyword") + "%");
+			break;
+		}
+		System.out.println("sql@dao = " + sql);
+		
+		try {
+			// 1. PreparedStatement 객체 생성 & 미완성쿼리 값대입
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, (String) param.get("searchKeyword"));
+			
+			// 2. 쿼리실행 및 ResultSet 처리
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Csboard csboard = new Csboard();
+				csboard.setBoardNo(rset.getInt("board_no"));
+				csboard.setUserId(rset.getString("user_id"));
+				csboard.setBoardTitle(rset.getString("board_title"));
+				csboard.setBoardContent(rset.getString("board_content"));
+				csboard.setBoardRegDate(rset.getDate("board_reg_date"));
+				csboard.setBoardReadcount(rset.getInt("board_readcount"));
+				csboard.setBoardStatus(rset.getString("board_status"));
+				csboard.setBoardNotice(rset.getString("board_noticeYN"));
+				csboard.setBoardPassword(rset.getString("board_password"));
+				csboard.setBoardLock(rset.getString("board_lockYN"));
+				csboard.setBoardFamily(rset.getInt("board_family"));
+				csboard.setBoardOrderby(rset.getInt("board_orderby"));
+				csboard.setBoardStep(rset.getInt("board_step"));
+				list.add(csboard);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// 3. 자원반납
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 
 
