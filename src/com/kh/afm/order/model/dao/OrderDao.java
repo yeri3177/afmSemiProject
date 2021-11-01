@@ -17,6 +17,7 @@ import com.kh.afm.order.model.vo.Order;
 import com.kh.afm.order.model.vo.OrderAddress;
 import com.kh.afm.order.model.vo.OrderDetail;
 import com.kh.afm.order.model.vo.OrderJoinAll;
+import com.kh.afm.product.model.vo.Product;
 
 public class OrderDao {
 	
@@ -330,6 +331,49 @@ private Properties prop = new Properties();
 			close(rset);
 		}
 		return str;
+	}
+
+	/**
+	 * 로그인한 판매자의 상품내역 찾기 (product 테이블)
+	 * @param userId : 로그인한 판매자 아이디
+	 * @return List<Product> : 상품 리스트
+	 */
+	public List<Product> selectSellerProductList(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectSellerProductList");
+		List<Product> list = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				Product product = new Product();
+				product.setpNo(rset.getInt("p_no"));
+				product.setUserId(rset.getString("p_user_id"));
+				product.setpRegDate(rset.getDate("p_reg_date"));
+				product.setpTitle(rset.getString("p_title"));
+				product.setpContent(rset.getString("p_content"));
+				product.setpPost(rset.getString("p_post"));
+				product.setpPrice(rset.getInt("p_price"));
+				product.setpCnt(rset.getInt("p_cnt"));
+				product.setpCategory(rset.getString("p_category"));
+				product.setpExpose(rset.getString("p_expose"));
+				product.setpReport(rset.getString("p_report"));
+				product.setpRecommend(rset.getInt("p_recommend"));
+
+				list.add(product);
+			}
+			
+		}catch (SQLException e) {
+				e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 
 //	public int cartOrderProductCntCheck(Connection conn, int pNo) {
