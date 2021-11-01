@@ -167,7 +167,7 @@ List<Cart> list = (List<Cart>)request.getAttribute("list");
                     <div class="subdiv">
                         <div class="check"><input type="checkbox" name="buy" value="260" checked onclick="javascript:basket.checkItem(<%= i %>);">&nbsp;</div>
                     	<input type="hidden" value="<%= _cart.getCartNo() %>" name="cartNo<%= i %>"/>
-                        <div class="img"><img src="<%= request.getContextPath() %>/images/<%= _cart.getRenamedFilename() %>.png" width="60"></div>
+                        <div class="img"><img src="<%= request.getContextPath() %>/upload/product/<%= _cart.getRenamedFilename() %>" width="60"></div>
                         <div class="pname"><span><%= _cart.getProductName() %></span></div>
                     </div>
                     <div class="subdiv">

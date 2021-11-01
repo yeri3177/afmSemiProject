@@ -4,7 +4,8 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <%
-	List<OrderDetail> list = (List<OrderDetail>) request.getAttribute("list");
+	List<OrderDetail> orderDetailList = (List<OrderDetail>) request.getAttribute("orderDetailList");
+	//List<Product> productList = (List<Product>) request.getAttribute("productList");
 %>
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/user.css" />
@@ -23,7 +24,7 @@
 	</tr>
 
 <%
-	for(OrderDetail orderDetail : list) {
+	for(OrderDetail orderDetail : orderDetailList) {
 %>
 	<tr>
 		<td><%= orderDetail.getOrderDetailNo()%></td>
