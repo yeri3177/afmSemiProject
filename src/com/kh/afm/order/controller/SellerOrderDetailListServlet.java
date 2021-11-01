@@ -13,27 +13,27 @@ import com.kh.afm.order.model.service.OrderService;
 import com.kh.afm.order.model.vo.OrderDetail;
 
 /**
- * 구매내역 (order_detail 테이블 조회)
+ * 해당상품의 결제내역 리스트 상세조회 
  */
-@WebServlet("/order/orderCompleteDetail")
-public class OrderCompleteServletDetail extends HttpServlet {
+@WebServlet("/order/sellerOrderDetailList")
+public class SellerOrderDetailListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private OrderService orderService = new OrderService();
-	
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 구매번호 
-		int orderNo  = Integer.parseInt(request.getParameter("orderNo"));
-		System.out.println("orderNo = " + orderNo);
+		// 상품번호
+		int productNo  = Integer.parseInt(request.getParameter("productNo"));
+		System.out.println("productNo = " + productNo);
 		
 		// 업무로직
-		List<OrderDetail> orderDetailList = orderService.selectOrderCompleteDetail(orderNo);
-		System.out.println("orderDetailList@servlet = " + orderDetailList);
+		List<OrderDetail> list = orderService.selectSellerOrderDetailList(productNo);
+		System.out.println("list@servlet = " + list);
 		
 		
 		// view단 연결
-		request.setAttribute("orderDetailList", orderDetailList);
-		request.getRequestDispatcher("/WEB-INF/views/order/OrderCompleteDetail.jsp")				
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("/WEB-INF/views/order/sellerOrderDetailList.jsp")				
 			.forward(request, response);
-		
 	}
+
 }

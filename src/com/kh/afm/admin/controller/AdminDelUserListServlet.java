@@ -17,7 +17,7 @@ import com.kh.afm.user.model.vo.DelUser;
  * 탈퇴한 회원 목록 보기 
  */
 @WebServlet("/admin/delUserList")
-public class AdminDelUserList extends HttpServlet {
+public class AdminDelUserListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AdminService adminService = new AdminService(); 
        

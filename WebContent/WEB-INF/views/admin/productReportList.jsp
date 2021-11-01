@@ -6,6 +6,7 @@
 	List<Report> list = (List<Report>) request.getAttribute("list");
 	int rcnt = (int) request.getAttribute("rcnt");
 %>
+
 <section id="productReportList-container" class="admin-container">
 
 <!-- 신고내역 건수 영역 -->
@@ -40,11 +41,18 @@
 		<td><%= report.getReportContent() %></td>
 		<td><%= report.getUserId() %></td>
 		<td><%= report.getReportRegDate() %></td>
-		<td><a href="<%=request.getContextPath()%>/product/productView?pNo=<%= report.getpNo() %>"><%= report.getpNo() %></a></td>
-		<td><%= "N".equals(report.getReportStatus()) ? "미처리" : "처리완료" %></td>
+		<td>
+			<a href="<%=request.getContextPath()%>/product/productView?pNo=<%= report.getpNo() %>">
+				<%= report.getpNo() %>
+			</a>
+		</td>
+		
+		<td id="processStatusTd">
+			<%= "N".equals(report.getReportStatus()) ? "미처리" : "처리완료" %>
+		</td>
 		
 		<td> <!-- 상품노출수정 select-option태그 -->	
-			<select>
+			<select class="p_report_expose" data-report-no="<%= report.getReportNo() %>" data-p-no="<%= report.getpNo() %>">
 				<option value="none" disabled selected>-노출변경-</option>
 				<option value="Y">노출</option>
 				<option value="N">비공개</option>
@@ -62,11 +70,44 @@
 	<%= request.getAttribute("pagebar") %>
 </div>	
 
-
 </section>
 
-<script>
+<!-- 상품노출수정칸 변경시 폼전송 -->
+<form action="<%=request.getContextPath()%>/admin/processReport" method="POST" name="processReportFrm">
+	<input type="hidden" name="reportNo" />
+	<input type="hidden" name="pNo" />
+	<input type="hidden" name="pExpose" />
+</form>
 
+<script>
+/* 처리상태칸 미처리일경우 글자색 빨간색으로 설정 */
+/* $processStatusTd = $("#processStatusTd:contains('미처리')");
+if($processStatusTd){
+	$processStatusTd.css('color','red');	
+	$processStatusTd.css('font-weight','bold');	
+} */
+
+/* 상품노출여부 변경시 체인지 이벤트 */
+$(".p_report_expose").change((e) => {
+	const $this = $(e.target);
+	const reportNo = $this.data("reportNo");
+	const pNo = $this.data("pNo");
+	const pExpose = $this.val();
+	const pExpose_kr = pExpose=="Y"?"노출":"비공개";
+	
+	const msg = `신고번호[\${reportNo}]의 상품노출설정을 [\${pExpose_kr}]로 하시겠습니까?`;
+	
+	if(confirm(msg)){
+		const $frm = $(document.processReportFrm);
+		$frm.find("[name=reportNo]").val(reportNo);
+		$frm.find("[name=pNo]").val(pNo);
+		$frm.find("[name=pExpose]").val(pExpose);
+		$frm.submit();
+	}
+	else{
+		$this.find("[selected]").prop("selected", true);
+	}
+});
 
 </script>
 

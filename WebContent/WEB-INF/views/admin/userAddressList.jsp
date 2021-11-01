@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>orderDetail</h1>
+<h1>주소상세보기JSP</h1>
 </body>
 </html>

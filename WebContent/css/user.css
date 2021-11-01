@@ -14,14 +14,22 @@
 	padding: 30px;
 	background-color: #fffacf;
 }
+
 #loginFrm table {
-	/* margin: 0 545px; */
 	margin: 0 auto;
+	text-align: center;
+	border-collapse:collapse;
+}
+
+#loginFrm label {
+	font-size:small; 
 }
 /* 로그인, 회원가입 버튼 */
 .login-con-btn {
 	width: 210px;
 	height:30px;
+	background-color: #568A35;
+	color:white;
 }
 
 /* 로고 이미지 */
@@ -69,43 +77,66 @@
  * userEnroll.jsp (일반회원 회원가입폼)
  **************************************************/
 #user-enroll-container {
-	
 	text-align: center;
 	position: relative;
 	top: 30px;
 	padding: 30px;
 }
 
-
 #user-enroll-container .logo-img {
 	margin: 60px 0;
 }
  
+#userEnrollFrm {
+	border: 3px solid black;
+	margin: 0 auto;
+	/* background-color:silver;  */
+	border-radius: 20px;
+	width: 750px;
+}
+
+#sellerEnrollFrm {
+	border: 3px solid black;
+	margin: 0 auto;
+	/* background-color:silver;  */
+	border-radius: 20px;
+	width: 750px;
+}
+ 
 #user-enroll-container table {
-	border: 1px solid black;
 	border-collapse: collapse;
 	margin: 0 auto;
-	width: 650px;
 }
  
 #user-enroll-container tr, th, td {
-	border: 1px solid black;
+	border: 1px solid silver;
 	border-collapse: collapse;
 	text-align: left;
+	border-left: none;
+	border-right: none;
 }
  
  
-#blank {
+#blank{
 	height: 50px;
+	border-top:none;
 }
 
  
 .enrollinfo {
 	width: 100%; 
-	height: 80px; 
+	height: 120px; 
 	overflow: scroll;
 }
 
+.submitbtn input {
+	background-color:red;
+	width: 50%;	
+	height:30px;
+	margin: 0 150px;
+	color:white;
+	
+}
 
 /*************************************************
  * updatePassword.jsp (일반회원 회원가입폼)
@@ -140,22 +171,71 @@ section#enroll-container input[readonly]{
 }
 
 /*************************************************
- * PurchaseDetail.jsp (결제내역 페이지)
+ * OrderComplete.jsp (결제내역 페이지)  
  **************************************************/
-#PurchaseDetail-container {
+#OrderComplete-container {
 	margin: 100px auto;
 	text-align: center;
 }
  
-#PurchaseDetail-container table {
+#OrderComplete-container table {
 	margin: 0 auto;
-	border-collapse: collapse;
+	text-align: center;
+	border-collapse:collapse;
 }
 
-#PurchaseDetail-container table td,th {
+#OrderComplete-container table th {
+	height: 40px;
+	background-color: #ffebb5;
+	text-align: center;
+	padding: 15px;
+}
+
+#OrderComplete-container table td{
+	text-align: center;
 	padding: 15px;
 }
  
+#tbl-orderComplete {
+	width : 80%;
+	height: 70%;
+}
+
+.orderbtn {
+	width : 80px;
+}
+
+#tbl-orderComplete button {
+	background-color: #568A35;
+	color:white;
+}
+/*************************************************
+ * OrderComplete.jsp (구매상세내역 페이지) 
+ **************************************************/
+ #OrderCompleteDeatil-container {
+	margin: 100px auto;
+	text-align: center;
+}
  
- 
+#OrderCompleteDeatil-container table {
+	margin: 0 auto;
+	text-align: center;
+	border-collapse:collapse;
+}
+
+#OrderCompleteDeatil-container th {
+	height: 40px;
+	background-color: #ffebb5;
+	text-align: center;
+	padding: 15px;
+}
+#OrderCompleteDeatil-container table td{
+	text-align: center;
+	padding: 15px;
+}
+
+#tbl-orderCompleteDetail {
+	width : 80%;
+	height: 70%;
+}
  

@@ -46,8 +46,8 @@ section.csboard-container {
 /**************************************************************
  * @csboardList.jsp
  *************************************************************/
-
-
+section#csboardList-container div#search-container {margin:0 0 10px 0; padding:3px;}
+section#csboardList-container {text-align:center;}
 
 /**************************************************************
  * @csboardForm.jsp

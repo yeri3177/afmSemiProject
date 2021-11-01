@@ -33,13 +33,15 @@ public class ProductOrderServlet extends HttpServlet {
 		String userId = loginUser.getUserId();
 		
 		// 1. 사용자 입력값 처리
-		int productNo = (int)request.getAttribute("productNo");
-		String productRenamedFilename = (String)request.getAttribute("productRenamedFilename");
-		int productPrice = Integer.parseInt(request.getAttribute("productPrice"));
-		int productQuantity = (request.getAttribute("productQuantity"));
+		int productNo = Integer.parseInt(request.getParameter("productNo"));
+		String productName = orderService.productNameCheck(productNo);
+		String productRenamedFilename = request.getParameter("productRenamedFilename");
+		int productPrice = Integer.parseInt(request.getParameter("productPrice"));
+		int productQuantity = Integer.parseInt(request.getParameter("productQuantity"));
 		List<OrderAddress> adrList = orderService.adrList(userId);
 		// 2. 응답 처리
 		request.setAttribute("adrList", adrList);
+		request.setAttribute("productName", productName);
 		request.setAttribute("productNo", productNo);
 		request.setAttribute("productRenamedFilename", productRenamedFilename);
 		request.setAttribute("productPrice", productPrice);

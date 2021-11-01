@@ -16,6 +16,8 @@ import com.kh.afm.cart.model.vo.Cart;
 import com.kh.afm.order.model.vo.Order;
 import com.kh.afm.order.model.vo.OrderAddress;
 import com.kh.afm.order.model.vo.OrderDetail;
+import com.kh.afm.order.model.vo.OrderJoinAll;
+import com.kh.afm.product.model.vo.Product;
 
 public class OrderDao {
 	
@@ -176,21 +178,24 @@ private Properties prop = new Properties();
 		String csvStr = null;
 		StringBuilder csv = new StringBuilder();
 		String sql = prop.getProperty("orderDetailCheckList");
-		List<OrderDetail> orderDetailList = new ArrayList<>();
+		List<OrderJoinAll> orderDetailList = new ArrayList<>();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, orderNo);
 			
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				OrderDetail orderDetail = new OrderDetail();
-				orderDetail.setOrderDetailNo(rset.getInt("order_detail_no"));
-				orderDetail.setOrderNo(rset.getInt("order_no"));
-				orderDetail.setProductNo(rset.getInt("p_no"));
-				orderDetail.setpCnt(rset.getInt("p_cnt"));
-				orderDetail.setpPrice(rset.getInt("p_price"));
-				orderDetail.setPayStatus(rset.getString("order_status"));
-				orderDetailList.add(orderDetail);
+				OrderJoinAll orderJoinAll = new OrderJoinAll();
+				orderJoinAll.setOrderId(rset.getString("user_id"));
+				orderJoinAll.setSellerId(rset.getString("p_user_id"));
+				orderJoinAll.setpNo(rset.getInt("p_no"));
+				orderJoinAll.setpTitle(rset.getString("p_title"));
+				orderJoinAll.setOrderCnt(rset.getInt("p_cnt"));
+				orderJoinAll.setOrderPrice(rset.getInt("p_price"));
+				orderJoinAll.setOrderNo(rset.getInt("order_no"));
+				orderJoinAll.setAccountNo(rset.getInt("account_number"));
+				orderJoinAll.setBankName(rset.getString("bank_name"));
+				orderDetailList.add(orderJoinAll);
 				}
 			for(int i = 0; i < orderDetailList.size(); i++){
 				csv.append(orderDetailList.get(i));
@@ -305,6 +310,138 @@ private Properties prop = new Properties();
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public String productNameCheck(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String str = null;
+		String sql = prop.getProperty("productNameCheck");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, productNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				str = rset.getString("p_title");
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return str;
+	}
+
+	/**
+	 * 로그인한 판매자의 상품내역 찾기 (product 테이블)
+	 * @param userId : 로그인한 판매자 아이디
+	 * @return List<Product> : 상품 리스트
+	 */
+	public List<Product> selectSellerProductList(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectSellerProductList");
+		List<Product> list = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				Product product = new Product();
+				product.setpNo(rset.getInt("p_no"));
+				product.setUserId(rset.getString("p_user_id"));
+				product.setpRegDate(rset.getDate("p_reg_date"));
+				product.setpTitle(rset.getString("p_title"));
+				product.setpContent(rset.getString("p_content"));
+				product.setpPost(rset.getString("p_post"));
+				product.setpPrice(rset.getInt("p_price"));
+				product.setpCnt(rset.getInt("p_cnt"));
+				product.setpCategory(rset.getString("p_category"));
+				product.setpExpose(rset.getString("p_expose"));
+				product.setpReport(rset.getString("p_report"));
+				product.setpRecommend(rset.getInt("p_recommend"));
+
+				list.add(product);
+			}
+			
+		}catch (SQLException e) {
+				e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	/**
+	 * 클릭한 해당 상품의 결제상세내역 찾기 (order_detail 테이블)
+	 * @param productNo : 클릭한 해당 상품번호
+	 * @return List<OrderDetail> : 해당 상품의 주문내역 리스트
+	 */
+	public List<OrderDetail> selectSellerOrderDetailList(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectSellerOrderDetailList");
+		List<OrderDetail> list = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, productNo);
+			
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				OrderDetail orderDetail = new OrderDetail();
+				orderDetail.setOrderDetailNo(rset.getInt("order_detail_no"));
+				orderDetail.setProductNo(rset.getInt("p_no"));
+				orderDetail.setOrderNo(rset.getInt("order_no"));
+				orderDetail.setpCnt(rset.getInt("p_cnt"));
+				orderDetail.setpPrice(rset.getInt("p_price"));
+				orderDetail.setPayStatus(rset.getString("order_status"));
+				
+				list.add(orderDetail);
+			}
+			
+		}catch (SQLException e) {
+				e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	/**
+	 * 판매자의 결제처리상태 확인 처리
+	 * @param orderDetailNo : 해당 주문상세번호
+	 * @param orderStatus : 결제처리상태
+	 * @return 메소드성공여부 
+	 */
+	public int updateOrderStatus(Connection conn, int orderDetailNo, String orderStatus) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateOrderStatus"); 
+		
+		try {
+			// 미완성쿼리문 객체생성
+			pstmt = conn.prepareStatement(sql);
+			
+			// 쿼리문 셋팅
+			pstmt.setString(1, orderStatus);
+			pstmt.setInt(2, orderDetailNo);
+			
+			// 쿼리실행 
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 //	public int cartOrderProductCntCheck(Connection conn, int pNo) {

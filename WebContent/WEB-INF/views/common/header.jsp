@@ -45,9 +45,9 @@
     <div class="mainHeader">
           <h2 class="nickName"><a class="homepageName" href="<%= request.getContextPath() %>/index.jsp"><img src="<%= request.getContextPath() %>/images/common/logo.png" class="logoImg"/><img class="logofont" src="<%= request.getContextPath() %>/images/common/logofont.png"></a></h2>
       <div class="search">
-	      <form class="searchform" action="">
+	      <form class="searchform" action="<%= request.getContextPath() %>/index/indexSearch">
 	      <label for="search">검색 : </label>
-	      <input type="text" id="search" name="search" class="searchinput" placeholder="검색어를 입력하세요."/>
+	      <input type="text" id="search" name="search" class="searchinput" placeholder="상품명을 입력하세요."/>
 	      <button class="btnSearch" type="submit"><img class="searchImg" src="<%= request.getContextPath() %>/images/common/search.png"></button>
 	      </form>
       </div>
@@ -66,11 +66,11 @@
 					 	 <span class="buttonImgName"><%= loginUser.getUserName() %>님</span></div>
 					 	 <div class="headerDropDownMenu">
 						 	 <a href="<%= request.getContextPath() %>/user/userDetail">내 정보 보기</a>
-						 	 <a href="#">구매 내역</a>
+						 	 <a href="<%= request.getContextPath() %>/order/orderComplete">구매 내역</a>
 						 	 <!-- <a href="javascript:orderCheck();">주문 확인</a> -->
 						 	 <a href="<%= request.getContextPath() %>/order/orderCheck">주문 확인</a>
 					 	 <% if("S".equals(loginUser.getUserRole())){ %>
-						 	 <a href="#">판매 내역</a>
+						 	 <a href="<%= request.getContextPath() %>/order/sellerProductList">판매 내역</a>
 						 	 <% } %>
 					 	 </div>
 					</div>
