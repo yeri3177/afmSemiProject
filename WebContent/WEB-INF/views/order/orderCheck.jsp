@@ -74,12 +74,12 @@ int i = 0;
 						var bName = bank.replace(']','');
 						
 						var html<%= i %> = `<div class="orderDetailListData<%=i%>" style="border-bottom: 1px dashed black;display:flex;justify-content: space-evenly;align-items: center;width:100%;">
-										<a href="<%= request.getContextPath() %>/product/productView?pNo=\${no}" class="orderDetailListDataA">\${title}</a>
-										<p class="orderDetailListDataP">ID : \${seller}</p>
-										<p class="orderDetailListDataP">\${count} 개</p>
-										<p class="orderDetailListDataP">\${price} 원</p>
-										<p class="orderDetailListDataP">\${bName}</p>
-										<p class="orderDetailListDataP">\${account}</p>
+										<a href="<%= request.getContextPath() %>/product/productView?pNo=\${no}" class="orderDetailListDataA1">\${title}</a>
+										<p class="orderDetailListDataP2">ID : \${seller}</p>
+										<p class="orderDetailListDataP3">\${count} 개</p>
+										<p class="orderDetailListDataP4">\${price} 원</p>
+										<p class="orderDetailListDataP5">\${bName}</p>
+										<p class="orderDetailListDataP6">\${account}</p>
 									</div>`;
 						$RDdiv<%= i %>.append(html<%= i %>);
 					});
@@ -93,15 +93,15 @@ int i = 0;
 		});
 		</script>
 			<div class="orderListHeaderName">
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품명&nbsp;&nbsp;&nbsp;</div>
-				<div>&nbsp;&nbsp;판매자 아이디</div>
-				<div>주문 수량</div>
-				<div>입금 금액</div>
-				<div>입금 은행</div>
-				<div>입금 계좌 번호</div>
+				<div class="subdiv">상품명</div>
+				<div class="subdiv">판매자 아이디</div>
+				<div class="subdiv">주문 수량</div>
+				<div class="subdiv">입금 금액</div>
+				<div class="subdiv">입금 은행</div>
+				<div class="subdiv">입금 계좌 번호</div>
 			</div>
 			<div class="orderDetailListBody<%=i%>">
-			</div>
+			</div><br />
 <%
 		i++;}
 	}
