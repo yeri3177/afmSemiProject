@@ -11,7 +11,6 @@ public class Csboard implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	// field 생성
-	private int rowNum;
 	private int boardNo;
 	private String userId;
 	private String boardTitle;
@@ -162,20 +161,5 @@ public class Csboard implements Serializable {
 				+ ", boardLock=" + boardLock + ", boardFamily=" + boardFamily + ", boardOrderby=" + boardOrderby
 				+ ", boardStep=" + boardStep + "]";
 	}
-
-	public int getRowNum() {
-		return rowNum;
-	}
-
-	public void setRowNum(int rowNum) {
-		this.rowNum = rowNum;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	
-	
 
 }

@@ -39,9 +39,8 @@ public class CsboardListServlet extends HttpServlet {
 		// a. content 영역 - paging query
 		int start = cPage * numPerPage - (numPerPage - 1);
 		int end = cPage * numPerPage;
-		List<Csboard> list = csboardService.selectCsboardList(start, end);
 		
-		System.out.println("list@servlet = " + list);
+		List<Csboard> list = csboardService.selectCsboardList(start, end);
 		
 		// b. pagebar 영역
 		// totalContents, url 준비

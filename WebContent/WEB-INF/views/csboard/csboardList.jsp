@@ -16,6 +16,24 @@ div#search-userId {display: <%= searchType == null || "userId".equals(searchType
 div#search-userName {display: <%= "userBoard".equals(searchType) ? "inline-block" : "none" %>;}
 div#search-boardTitle {display: <%= "boardTitle".equals(searchType) ? "inline-block" : "none" %>;}
 </style>
+<script type="text/javascript">
+function pswdChk(url,password){
+	var pswdChk = prompt("비밀번호를 입력해주세요.");// 사용자가 입력한 비밀번호
+	var origin = password // 게시글의 비밀번호
+	if(pswdChk != origin){
+		alert("비밀번호가 틀렸습니다. 확인주세요.");
+		return false;
+	} else {
+		
+		location.href=url;
+		
+		
+	}
+	
+}
+
+</script>
+
 <section id="csboardList-container" class="csboard-container">
 	<h2>고객센터</h2>
 	<div id="search-container">
@@ -57,15 +75,15 @@ div#search-boardTitle {display: <%= "boardTitle".equals(searchType) ? "inline-bl
 			<th>조회</th>
 		</tr>
 		<%
-			for (Csboard csboard : list){
+			for (Csboard csboard2 : list){
 		%>
-			<% if(csboard.getBoardNotice().equals("Y")){ %>
+			<% if(csboard2.getBoardNotice().equals("Y")){ %>
 			<tr>
 				<td>공지사항</td>
-				<td><a href="<%= request.getContextPath() %>/csboard/csboardView?boardNo=<%= csboard.getBoardNo() %>"><%= csboard.getBoardTitle() %></a></td>
-				<td><%= csboard.getUserId() %></td>
-				<td><%= csboard.getBoardRegDate() %></td>
-				<td><%= csboard.getBoardReadcount() %></td>
+				<td><a href="<%= request.getContextPath() %>/csboard/csboardView?boardNo=<%= csboard2.getBoardNo() %>"><%= csboard2.getBoardTitle()%></a></td>
+				<td><%= csboard2.getUserId() %></td>
+				<td><%= csboard2.getBoardRegDate() %></td>
+				<td><%= csboard2.getBoardReadcount() %></td>
 			</tr>
 			<% } %>
 		
@@ -73,31 +91,29 @@ div#search-boardTitle {display: <%= "boardTitle".equals(searchType) ? "inline-bl
 			}
 		%>
 <%
-	for(Csboard csboard2 : list){
+	for(Csboard csboard : list){
 %>
 	<tr>
-		<td><%=csboard2.getRowNum()%></td>
-		<% if(csboard2.getBoardLock().equals("Y")){ %>
+		<td><%=csboard.getBoardNo()%></td>
+		<% if(csboard.getBoardLock().equals("Y")){ %>
 			<td>
-				<a href="<%= request.getContextPath() %>/csboard/csboardView?boardNo=<%= csboard2.getBoardNo() %>">
-					<%= csboard2.getBoardTitle() %>
-					이건 Y입니다.
+				<a href="javascript:pswdChk('<%= request.getContextPath() %>/csboard/csboardView?boardNo=<%= csboard.getBoardNo() %>','<%=csboard.getBoardPassword()%>');">
+					<img src="<%= request.getContextPath() %>/images/common/lock.png" alt="" style="width:16px;height:16px;"/><%= csboard.getBoardTitle() %>
 				</a>
 			</td>
 		<% } %>
-		<% if(csboard2.getBoardLock().equals("N")) { %>
+		<% if(csboard.getBoardLock().equals("N")) { %>
 			<td>
-				<a href="<%= request.getContextPath() %>/csboard/csboardView?boardNo=<%= csboard2.getBoardNo() %>">
-					<%= csboard2.getBoardTitle() %>
-					이건 N입니다.
+				<a href="<%= request.getContextPath() %>/csboard/csboardView?boardNo=<%= csboard.getBoardNo() %>">
+					<%= csboard.getBoardTitle() %>
 				</a>
 			</td>
 		<% } %>
-		<td><%= csboard2.getUserId() %></td>
-		<td><%= csboard2.getBoardRegDate() %></td>
-		<td><%= csboard2.getBoardReadcount() %></td>
+		<td><%= csboard.getUserId() %></td>
+		<td><%= csboard.getBoardRegDate() %></td>
+		<td><%= csboard.getBoardReadcount() %></td>
 	</tr>
-	<input type="hidden" name="board_password" value="<%=csboard2.getBoardPassword()%>"/>
+	
 <%	
 	}
 %>			

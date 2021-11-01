@@ -16,6 +16,7 @@ import java.util.Properties;
 import com.kh.afm.csboard.model.exception.CsboardException;
 import com.kh.afm.csboard.model.vo.Csboard;
 
+
 public class CsboardDao {
 	
 	private Properties prop = new Properties();
@@ -56,7 +57,6 @@ public class CsboardDao {
 				// 한 행씩 vo로 담아낸다.
 				// 테이블 record 1개가 VO 객체 1개로 변환이 된다.
 				Csboard csboard = new Csboard();
-				csboard.setRowNum(rset.getInt("rnum"));
 				csboard.setBoardNo(rset.getInt("board_no"));
 				csboard.setUserId(rset.getString("user_id"));
 				csboard.setBoardTitle(rset.getString("board_title"));
@@ -124,7 +124,7 @@ public class CsboardDao {
 			pstmt.setString(3, csboard.getBoardContent());
 			pstmt.setString(4, csboard.getBoardNotice());
 			pstmt.setString(5, csboard.getBoardPassword());
-//			pstmt.setString(5, csboard.getBoardLock());
+			pstmt.setString(6, csboard.getBoardLock());
 			
 			// DML
 			result = pstmt.executeUpdate();

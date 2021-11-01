@@ -31,9 +31,9 @@ public class CsboardEnrollServlet extends HttpServlet {
 		String boardPassword = request.getParameter("board_password");
 		String boardTitle = request.getParameter("board_title");
 		String boardContent = request.getParameter("board_content");
-//		String boardLock = request.getParameter("board_lockYN");
 		String boardNotice = request.getParameter("boardNotice_yn");
-		Csboard csboard = new Csboard(0, userId, boardTitle, boardContent, null, 0, null, boardNotice, boardPassword, null, 0, 0, 0);
+		String boardLock = request.getParameter("boardLock_yn");
+		Csboard csboard = new Csboard(0, userId, boardTitle, boardContent, null, 0, null, boardNotice, boardPassword, boardLock, 0, 0, 0);
 		
 		System.out.println("CsboardEnrollServlet@servlet = " + csboard);
 		

@@ -9,7 +9,8 @@
 	// 일관된 흐름을 위해 editable을 따로 선언하고 곳곳에 적용시킨다.
 	// loginUser가 null이 아니고 loginUser의 userId와 csboard의 UserId가 같거나 또는 관리자 아이디일 때 적용
 	boolean editable = loginUser != null && (
-				     UserService.ADMIN_ROLE.equals(loginUser.getUserRole())
+					  loginUser.getUserId().equals(csboard.getUserId())
+					  || UserService.ADMIN_ROLE.equals(loginUser.getUserRole())
 					);
 	System.out.println("editable@csboardView.jsp = " + editable);
 %>
