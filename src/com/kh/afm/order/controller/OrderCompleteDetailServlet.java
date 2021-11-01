@@ -16,7 +16,7 @@ import com.kh.afm.order.model.vo.OrderDetail;
  * 구매내역 (order_detail 테이블 조회)
  */
 @WebServlet("/order/orderCompleteDetail")
-public class OrderCompleteServletDetail extends HttpServlet {
+public class OrderCompleteDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private OrderService orderService = new OrderService();
 	
