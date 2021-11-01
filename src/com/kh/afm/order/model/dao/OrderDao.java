@@ -16,6 +16,7 @@ import com.kh.afm.cart.model.vo.Cart;
 import com.kh.afm.order.model.vo.Order;
 import com.kh.afm.order.model.vo.OrderAddress;
 import com.kh.afm.order.model.vo.OrderDetail;
+import com.kh.afm.order.model.vo.OrderJoinAll;
 
 public class OrderDao {
 	
@@ -176,21 +177,24 @@ private Properties prop = new Properties();
 		String csvStr = null;
 		StringBuilder csv = new StringBuilder();
 		String sql = prop.getProperty("orderDetailCheckList");
-		List<OrderDetail> orderDetailList = new ArrayList<>();
+		List<OrderJoinAll> orderDetailList = new ArrayList<>();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, orderNo);
 			
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				OrderDetail orderDetail = new OrderDetail();
-				orderDetail.setOrderDetailNo(rset.getInt("order_detail_no"));
-				orderDetail.setOrderNo(rset.getInt("order_no"));
-				orderDetail.setProductNo(rset.getInt("p_no"));
-				orderDetail.setpCnt(rset.getInt("p_cnt"));
-				orderDetail.setpPrice(rset.getInt("p_price"));
-				orderDetail.setPayStatus(rset.getString("order_status"));
-				orderDetailList.add(orderDetail);
+				OrderJoinAll orderJoinAll = new OrderJoinAll();
+				orderJoinAll.setOrderId(rset.getString("user_id"));
+				orderJoinAll.setSellerId(rset.getString("p_user_id"));
+				orderJoinAll.setpNo(rset.getInt("p_no"));
+				orderJoinAll.setpTitle(rset.getString("p_title"));
+				orderJoinAll.setOrderCnt(rset.getInt("p_cnt"));
+				orderJoinAll.setOrderPrice(rset.getInt("p_price"));
+				orderJoinAll.setOrderNo(rset.getInt("order_no"));
+				orderJoinAll.setAccountNo(rset.getInt("account_number"));
+				orderJoinAll.setBankName(rset.getString("bank_name"));
+				orderDetailList.add(orderJoinAll);
 				}
 			for(int i = 0; i < orderDetailList.size(); i++){
 				csv.append(orderDetailList.get(i));
@@ -305,6 +309,27 @@ private Properties prop = new Properties();
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public String productNameCheck(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String str = null;
+		String sql = prop.getProperty("productNameCheck");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, productNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				str = rset.getString("p_title");
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return str;
 	}
 
 //	public int cartOrderProductCntCheck(Connection conn, int pNo) {

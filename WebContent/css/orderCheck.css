@@ -1,0 +1,7 @@
+@CHARSET "UTF-8";
+.orderDetailListData{border-bottom: 1px dashed black;display:flex;justify-content: space-evenly;align-items: center;width:100%;}
+.orderDetailListDataA{text-decoration:none;curser:pointer;}
+.orderListHeaderName{border-top: 1px solid #e0e0e0;float: left;font-size: 1.5em;width:100%;border-bottom: 2px solid #888;background-color: #f4f4f4;font-weight: 500;display:flex;justify-content: space-evenly;align-items: center;}
+.orderListSimpleInfo{display:flex;justify-content: center;font-size:1.5em;}
+.orderCheckH21{text-align: center;}
+.orderCheckDiv{text-align:center;color:red;}
