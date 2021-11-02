@@ -73,9 +73,9 @@ private Properties prop = new Properties();
 		String sql = prop.getProperty("selectOneUser");
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		
 		User user = null;
 		Account account = null;
-		Address address = null;
 		
 		try {
 			// 1.PreparedStatment객체 생성 및 미완성쿼리 값대입
@@ -102,20 +102,11 @@ private Properties prop = new Properties();
 				String account_number = rset.getString("account_number");
 				String bank_name = rset.getString("bank_name");
 				
-				//address 정보
-				int adr_no = rset.getInt("adr_no");
-				String adr_name = rset.getString("adr_name");
-				String adr_road = rset.getString("adr_road");
-				String adr_detail = rset.getString("adr_detail");
-				
 				// 계좌정보 셋팅 
 				account = new Account(account_no, account_number, bank_name, userId);
 				
-				// 주소정보 셋팅
-				address = new Address(adr_no, adr_name, adr_road, adr_detail, userId);
-				
 				// 회원정보 셋팅 
-				user = new User(userId, userName, email, password, birthday, phone, enrollDate, userRole, userExpose, account, address);
+				user = new User(userId, userName, email, password, birthday, phone, enrollDate, userRole, userExpose, account, null);
 				System.out.println("user@selectOneUser@dao" + user);
 			}
 		} catch (SQLException e) {
