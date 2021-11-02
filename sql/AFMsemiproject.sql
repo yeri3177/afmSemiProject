@@ -176,8 +176,10 @@ CREATE TABLE tb_account (
 	account_number VARCHAR2(30) NOT NULL,
 	bank_name VARCHAR2(30) NOT NULL,
     CONSTRAINTS pk_tb_account_no PRIMARY KEY (account_no),
-    CONSTRAINTS fk_tb_account_user_id FOREIGN KEY (user_id)REFERENCES tb_user (user_id)
+    CONSTRAINTS fk_tb_account_user_id FOREIGN KEY (user_id)REFERENCES tb_user (user_id) on delete cascade
 );
+ALTER TABLE tb_account DROP FOREIGN KEY fk_tb_account_user_id;
+ALTER TABLE tb_account ADD CONSTRAINTS fk_tb_account_user_id FOREIGN KEY (user_id)REFERENCES tb_user (user_id) on delete cascade;
 
 --drop table address;
 create sequence seq_tb_address_no;
@@ -188,8 +190,9 @@ CREATE TABLE address (
 	adr_road VARCHAR2(300) NOT NULL,
 	adr_detail VARCHAR2(200) NOT NULL,
     CONSTRAINT pk_address_no PRIMARY KEY (adr_no),
-    CONSTRAINT fk_address_user_id FOREIGN KEY (user_id)REFERENCES tb_user (user_id)
+    CONSTRAINT fk_address_user_id FOREIGN KEY (user_id)REFERENCES tb_user (user_id) on delete cascade
 );
+ALTER TABLE address ADD CONSTRAINTS fk_address_user_id FOREIGN KEY (user_id)REFERENCES tb_user (user_id) on delete cascade;
 
 --drop table product_delete;
 CREATE TABLE product_delete (
@@ -899,7 +902,7 @@ values (seq_tb_address_no.nextval, 'minv0526', '우리집', '서울 강동구 �
 
 --minv0526 계좌 tb_account
 insert into tb_account
-values (seq_tb_account_no.nextval, 'minv0526', '110111686868', '신한은행');
+values (seq_tb_account_no.nextval, 'admin', '110111686868', '신한은행');
 
 
 

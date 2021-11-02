@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kh.afm.cart.model.vo.Cart;
 import com.kh.afm.order.model.service.OrderService;
 import com.kh.afm.order.model.vo.Order;
 import com.kh.afm.order.model.vo.OrderDetail;
@@ -49,7 +48,7 @@ public class OrderProductServlet extends HttpServlet {
 			result = orderService.cartOrderDetailInsert(orderDetail);
 			String msg = result != 0 ? "주문 성공!" : "주문 실패!";
 			session.setAttribute("msg", msg);
-			String location = request.getContextPath() + "/index.jsp";
+			String location = request.getContextPath() + "/order/orderCheck";
 			response.sendRedirect(location);
 		}
 	}

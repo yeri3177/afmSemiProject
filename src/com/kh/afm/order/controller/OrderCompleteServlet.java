@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.afm.order.model.service.OrderService;
 import com.kh.afm.order.model.vo.Order;
-import com.kh.afm.order.model.vo.OrderDetail;
 import com.kh.afm.user.model.vo.User;
 
 /**
