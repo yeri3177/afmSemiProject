@@ -232,4 +232,12 @@ public class ProductService {
 		return likeCount;
 	}
 
+
+	public String selectProductCategory(int start, int end, String pCategory) {
+		Connection conn = getConnection();
+		String csvStr = productDao.selectProductCategory(conn, start, end, pCategory);
+		close(conn);
+		return csvStr;
+	}
+
 }
