@@ -240,4 +240,11 @@ public class ProductService {
 		return csvStr;
 	}
 
+	public String selectProductAllCategory(int start, int end, String pCategory) {
+		Connection conn = getConnection();
+		String csvStr = productDao.selectProductAllCategory(conn, start, end, pCategory);
+		close(conn);
+		return csvStr;
+	}
+
 }
