@@ -48,6 +48,7 @@ public class UserEnrollServlet extends HttpServlet {
 		
 		String emailId = request.getParameter("emailId");
 		String emailAddress = request.getParameter("emailAddress");
+		//String emailAddressSelect = request.getParameter("emailAddressSelect");
 		
 		String userName = request.getParameter("userName");	
 		String phone = request.getParameter("phone");

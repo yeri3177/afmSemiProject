@@ -5,12 +5,18 @@
 <%@ include file="/WEB-INF/views/admin/adminHeader.jsp" %>
 
 <%
+	/* 회원 객체 리스트 (user+account) */
 	List<User> list = (List<User>) request.getAttribute("list");
+	
+	/* 검색타입, 검색키워드 */
 	String searchType = request.getParameter("searchType");
 	String searchKeyword = request.getParameter("searchKeyword");
+	
+	/* 정렬타입, 정렬키워드 */
 	String sortType = request.getParameter("sortType");
 	String sortKeyword = request.getParameter("sortKeyword");
 %>
+
 <style>
 div#search-userId {
 	display: <%= searchType == null || "userId".equals(searchType) ? "inline-block" : "none" %>;
@@ -22,11 +28,12 @@ div#search-userRole {
 	display: <%= "userRole".equals(searchType) ? "inline-block" : "none" %>;
 }
 </style>
+
 <section id="userList-container" class="admin-container">
 
 <div class="data-box">
 	
-	<!-- 데이터 검색 -->
+	<!---------------------------------- 데이터 검색 ---------------------------------->
 	<div class="serarchbox">
 		
 		<!-- 검색타입 -->
@@ -91,7 +98,7 @@ div#search-userRole {
 		
 	</div>
 	
-	<!-- 데이터 정렬 -->
+	<!---------------------------------- 데이터 정렬 ---------------------------------->
 	<div class="sortbox">
 		
 		<form action="<%=request.getContextPath()%>/admin/userSort">
@@ -220,37 +227,6 @@ $("#addressBtn").click((e) => {
 	$adrfrm.attr("target", "주소상세보기").submit();
 });
 
-
-/* 검색할때 값 입력 유효성검사 ★★보류★★ */
-/* $("[name=searchFrm]").submit((e) => {
-	const $searchInput = $("#searchInput");
-	const $searchType = $("[name=searchType]");
-	console.log($searchType.val());
-	
-	if($searchType.val() == "userId") {
-		if($searchInput.val() == ""){
-			alert("검색키워드를 입력하십시오.");
-			$searchInput.select();
-			return false;
-		} 
-	}
-	return true;
-}); */
- 
-/* $("[name=searchFrm]").submit((e) => {
-	const $searchKeyword = $("[name=searchKeyword]");
-	const $searchType = $("[name=searchType]");
-	console.log($searchType.val());
-	
-	if($searchType.val() == "userId") {
-		if($searchKeyword.val() == ""){
-			alert("검색키워드를 입력하십시오.");
-			$searchKeyword.select();
-			return false;
-		} 
-		return true;
-	}
-}); */
 
 /* 검색유형 체인지 이벤트 */
 $("#searchType").change((e) => {
