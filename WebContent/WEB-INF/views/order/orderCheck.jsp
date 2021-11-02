@@ -73,7 +73,7 @@ int i = 0;
 						var bank = Name[1];
 						var bName = bank.replace(']','');
 						
-						var html<%= i %> = `<div class="orderDetailListData<%=i%>" style="border-bottom: 1px dashed black;display:flex;justify-content: space-evenly;align-items: center;width:100%;">
+						var html<%= i %> = `<div class="orderDetailListData" style="border-bottom: 1px dashed black;display:flex;justify-content: space-evenly;align-items: center;width:100%;">
 										<a href="<%= request.getContextPath() %>/product/productView?pNo=\${no}" class="orderDetailListDataA1">\${title}</a>
 										<p class="orderDetailListDataP2">ID : \${seller}</p>
 										<p class="orderDetailListDataP3">\${count} 개</p>

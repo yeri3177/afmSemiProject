@@ -14,12 +14,17 @@
 .RDData{display:flex;float: left;flex-direction: column;width:30%;}
 .indexRDproducts{width:100%;background-color:#E9E3D5;display:flex;justify-content: space-evenly;text-align:left;}
 .RDproductsh2{background-color:#E9E3D5;}
-.RDDateImg{width:100%;hieght:100%;}
+.RDDateImg{width:400px;height: 400px;}
 .RDDataP{font-size:1.5vw;}
 .RDDataA{font-size:1.5vw;}
 .BEproducts{display:flex;width:100%;justify-content: space-evenly;}
 .BEData{display:flex;float: left;flex-direction: column;width:30%;}
 .indexBEproducts{width:100%;display:flex;justify-content: space-evenly;text-align:left;}
-.BEDateImg{width:100%;hieght:100%;}
+.BEDateImg{width:400px;height: 400px;}
 .BEDataP{font-size:1.5vw;}
 .BEDataA{font-size:1.5vw;}
+
+.BEproductsh2{font-size:1.5vw;border-bottom: 1px solid black;}
+.RDproductsh2{font-size:1.5vw;border-bottom: 1px solid black;}
+.BEproductsh2H2{margin:0;}
+.RDproductsh2H2{margin:0;}

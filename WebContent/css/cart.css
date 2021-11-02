@@ -1,11 +1,11 @@
 @CHARSET "UTF-8";
 
-.cartheaderh2{text-align: center;}
+.cartheaderh2{text-align: center;font-size:2em;padding-top:5px;}
 .cartisEmpty{text-align: center;font-size:300px;margin:0;}
 .cartisEmptyh3{text-align: center;color: #FC5230;text-shadow: 1px 1px #FFCD4A, 2px 2px #284D8E;}
-.basketdiv {width: 100%;border-top: 1px solid #e0e0e0;float: left;font-size: 0.9375em;margin-bottom: 20px;}
-.basketdiv .row.head {border-bottom: 2px solid #888;box-sizing: border-box;background-color: #f4f4f4;font-weight: 500;}
-.basketdiv .data {border-bottom: 1px dashed #888;box-sizing: border-box;float: left;width: 100%;}
+.basketdiv {width: 100%;float: left;font-size: 0.9375em;margin-bottom: 20px;}
+.basketdiv .row.head {font-weight: 500;}
+.basketdiv .data {border-bottom: 1px dashed #888;float: left;width: 100%;}
 .basketdiv .data .empty{text-align: center;padding: 12px 0;}
 .basketdiv .row.head .subdiv {background-color: #E9E3D5;}
 .basketdiv .row > .subdiv {display: block;float: left;}
@@ -41,12 +41,12 @@
 .buttongroup button, .buttongroup a {margin-right: 5px;}
 .buttongroup button:last-child, .buttongroup a:last-child {margin-right: 0;}
 .abutton, .abutton:link, .abutton:visited, .abutton:active, input[type=button] {background-color: #383838;border: 1px solid #888888;color: #ffffff;cursor: pointer;letter-spacing: -1px;padding: 3px 5px;margin: 2px 3px;width: auto;word-break: keep-all;border-radius: 5px;text-decoration: none;font-size: 0.9375em;}
-.abutton-alt {background-color: #d3e2c6;}
+/* .abutton-alt {background-color: #d3e2c6;} */
 .basketrowcmd, .sumcount, .summoney{text-align: right;margin-bottom: 10px;}
 .sumcount, .summoney{font-size: 1.25em;font-weight: bold;}
 .buttongroup{text-align: center;}
 .buttongroup a{text-decoration: none;}
-.cmd button, .cmd span {cursor:pointer;padding: 12px 30px;box-sizing: border-box;margin-top: 10px;font-size: 1.2em;color: #000;background: linear-gradient(125deg,#FFCD4A,#FC5230);border: 1px solid #e0e0e0;text-align: center;border-radius: 12px;}
+.cmd button, .cmd span {cursor:pointer;padding: 12px 30px;margin-top: 10px;font-size: 1.2em;color: #000;background: linear-gradient(125deg,#FFCD4A,#FC5230);border: 1px solid #e0e0e0;text-align: center;border-radius: 12px;}
 .cmd.small button, .cmd.small span {padding: 6px 20px;font-size: 0.8125em;}
 .orderform .p_num {text-align: right;width: 40px;font-size: 1em;}
 .cartInfo{text-align: right;margin: 20px 0 0 0;}
