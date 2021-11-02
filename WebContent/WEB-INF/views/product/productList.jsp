@@ -28,7 +28,8 @@
 			<th>작성일</th>
 			<th>추천수</th>
 		</tr>
-<%
+		
+<%-- <%
 	for(Product _product : list){
 %>
 		<tr>
@@ -42,8 +43,11 @@
 		</tr>
 <%
 	}
-%>
+%> --%>
 	</table>
+
+		<div class="test">
+		</div>
 
 <% 
 	if(loginUser != null){ 
@@ -57,19 +61,86 @@
 	} 
 %>
 <script>
+window.addEventListener('load', function(){
+	const value = "모두보기";
+	console.log(value);
+	$.ajax({
+		url: "<%= request.getContextPath() %>/product/selectCategory",
+		data: {pValue : value},
+		dataType: "text",
+		success(data){
+			const $RDdiv = $(`<div class='productList'></div>`);
+			const arr = data.split("\n");
+			
+			 $(arr).each((i, str)=> {
+             	console.log(str);
+             	let temp = str.split(", ");
+             	
+            	var productNo = temp[0];
+            	var product = productNo.split("=");
+            	var pNo = product[1];
+            	
+            	var pUserId = temp[1];
+            	console.log(pUserId);
+            	var user = pUserId.split("=");
+            	var userId = user[1];
+            	
+            	var RegDate = temp[2];
+            	var reg = RegDate.split("=");
+            	var pRegDate = reg[1];
+            	
+            	var productTitle = temp[3];
+            	var title = productTitle.split("=");
+            	var pTitle = title[1];
+            	
+            	var productPrice = temp[6];
+            	var price = productPrice.split("=");
+            	var pPrice = price[1];
+            	
+            	var productRecommend = temp[11];
+            	var Recommend = productRecommend.split("=");
+            	var pRecommend = Recommend[1];
+            	
+            	var renamedName = temp[15];
+            	var rename = renamedName.split("=");
+            	var renamedFileName = rename[1];
+
+            	var html =
+                	`
+                	<tr>
+        			<th>\${pNo}</th>
+        			<th><img alt="" src="<%= request.getContextPath() %>/upload/product/\${renamedFileName}" width="300px" height="300px"></th>
+        			<th><a href="<%= request.getContextPath() %>/product/productView?pNo=\${pNo}">\${pTitle}</a></th>
+        			<th>\${pPrice}</th>
+        			<th>\${userId}</th>
+        			<th>\${pRegDate}</th>
+        			<th>\${pRecommend}</th>
+        			</tr>
+        			`;
+        			$RDdiv.append(html);
+				})
+					$(".test").html($RDdiv);
+			},
+			error : console.log 
+	
+	});
+});
+
 $(document).ready(function () { 
     $("#category").change((e) => {
         const {value} = e.target;
         $.ajax({
             url: "<%= request.getContextPath() %>/product/selectCategory",
             data: {pValue : value},
+            dataType:"text",
             success(data){
-                const {pValue} = data;
-
-                const $RDdiv = data;
+/*                 const {pValue} = data; */
+				console.log(data);
+                const $RDdiv = $(`<div class='productList'></div>`);
                 const arr = data.split("\n");
-                
+                console.log(arr);
                 $(arr).each((i, str)=> {
+                	console.log(str);
                 	let temp = str.split(", ");
                 	
                 	var productNo = temp[0];
@@ -77,6 +148,7 @@ $(document).ready(function () {
                 	var pNo = product[1];
                 	
                 	var pUserId = temp[1];
+                	console.log(pUserId);
                 	var user = pUserId.split("=");
                 	var userId = user[1];
                 	
@@ -94,29 +166,33 @@ $(document).ready(function () {
                 	
                 	var productRecommend = temp[11];
                 	var Recommend = productRecommend.split("=");
-                	var pPrice = Recommend[1];
+                	var pRecommend = Recommend[1];
                 	
                 	var renamedName = temp[15];
                 	var rename = renamedName.split("=");
                 	var renamedFileName = rename[1];
-<%--                	
-                	var html = 	<tr>
-			        			<th>\${pNo}</th>
-			        			<th>사진</th>
-			        			<th>상품</th>
-			        			<th>가격</th>
-			        			<th>판매자</th>
-			        			<th>작성일</th>
-			        			<th>추천수</th>
-        		</tr>
---%>
+                	
+                	var html =
+                	`
+                	<tr>
+        			<th>\${pNo}</th>
+        			<th><img alt="" src="<%= request.getContextPath() %>/upload/product/\${renamedFileName}" width="300px" height="300px"></th>
+        			<th><a href="<%= request.getContextPath() %>/product/productView?pNo=\${pNo}">\${pTitle}</a></th>
+        			<th>\${pPrice}</th>
+        			<th>\${userId}</th>
+        			<th>\${pRegDate}</th>
+        			<th>\${pRecommend}</th>
+        			</tr>
+        			`;
+        			$RDdiv.append(html);
                 })
-
+                $(".test").html($RDdiv);
             },
             error: console.log
         });
     });
 });
+
 <%--
 $(category).change((e) => {
 	let pValue = this.value;

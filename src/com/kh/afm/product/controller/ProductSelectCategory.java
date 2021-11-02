@@ -45,8 +45,8 @@ public class ProductSelectCategory extends HttpServlet {
 			// a.content영역 - paging query
 			int start = cPage * numPerPage - (numPerPage -1);
 			int end = cPage * numPerPage;
-			List<Product> list = productService.selectProductList(start, end);
-			System.out.println("list@servlet = " + list);
+			String csvStr = productService.selectProductAllCategory(start, end, pCategory);
+			System.out.println("csvStr@servlet = " + csvStr);
 			
 			// b.pagebar영역
 			// totalContents, url 준비
@@ -56,11 +56,13 @@ public class ProductSelectCategory extends HttpServlet {
 			System.out.println("pagebar@servlet = " + pagebar);
 			
 			// 3.view단 forwarding
-			request.setAttribute("list", list);
-			request.setAttribute("pagebar", pagebar);
-			request
-			.getRequestDispatcher("/WEB-INF/views/product/productList.jsp")
-			.forward(request, response);
+//			request.setAttribute("csvStr", csvStr);
+//			request.setAttribute("pagebar", pagebar);
+//			request
+//			.getRequestDispatcher("/WEB-INF/views/product/productList.jsp")
+//			.forward(request, response);
+			response.setContentType("text/orderDetailList; charset=utf-8");
+			response.getWriter().append(csvStr);
 			
 			
 		}
@@ -93,12 +95,13 @@ public class ProductSelectCategory extends HttpServlet {
 			System.out.println("pagebar@servlet = " + pagebar);
 			
 			// 3.view단 forwarding
-			request.setAttribute("csvStr", csvStr);
-			request.setAttribute("pagebar", pagebar);
-			request
-			.getRequestDispatcher("/WEB-INF/views/product/productList.jsp")
-			.forward(request, response);
-			
+//			request.setAttribute("csvStr", csvStr);
+//			request.setAttribute("pagebar", pagebar);
+//			request
+//			.getRequestDispatcher("/WEB-INF/views/product/productList.jsp")
+//			.forward(request, response);
+			response.setContentType("text/orderDetailList; charset=utf-8");
+			response.getWriter().append(csvStr);
 			
 		}
 		
