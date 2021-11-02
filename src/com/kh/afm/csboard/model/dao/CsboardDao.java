@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import com.kh.afm.csboard.model.exception.CsboardException;
 import com.kh.afm.csboard.model.vo.Csboard;
+import com.kh.afm.csboard.model.vo.CsboardComment;
 
 
 public class CsboardDao {
@@ -337,6 +338,106 @@ public class CsboardDao {
 		}
 		
 		return result;
+	}
+
+	public List<CsboardComment> selectCsboardList(Connection conn, int boardNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectCommentList");
+		List<CsboardComment> commentList = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			// 미완성 쿼리 값 대입
+			pstmt.setInt(1, boardNo);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				CsboardComment cbc = new CsboardComment();
+				cbc.setCbNo(rset.getInt("cb_no"));
+				cbc.setCbLevel(rset.getInt("cb_level"));
+				cbc.setUserId(rset.getString("user_id"));
+				cbc.setCbContent(rset.getString("cb_content"));
+				cbc.setCbBoardNo(rset.getInt("cb_board_no"));
+				cbc.setCbCommentRef(rset.getInt("cb_comment_ref"));
+				cbc.setRegDate(rset.getDate("reg_date"));
+				// 객체가 하나 만들어진 것을 commentList에다 하나씩 더해준다.
+				commentList.add(cbc);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return commentList;
+	}
+
+	// DML
+	public int insertCsboardComment(Connection conn, CsboardComment cbc) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertCsboardComment");
+		
+		try {
+			// 미완성 쿼리문을 가지고 객체 생성.
+			pstmt = conn.prepareStatement(query);
+			// 쿼리문 미완성
+			pstmt.setInt(1, cbNo);
+			
+			//
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+
+	public List<Csboard> selectNoticeList(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectNoticeList");
+		List<Csboard> noticeList = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			rset = pstmt.executeQuery();
+			
+			// 여러행이기때문에 while 반복문 필수
+			while(rset.next()) {
+				// 한 행씩 vo로 담아낸다.
+				// 테이블 record 1개가 VO 객체 1개로 변환이 된다.
+				Csboard csboard = new Csboard();
+				csboard.setBoardNo(rset.getInt("board_no"));
+				csboard.setUserId(rset.getString("user_id"));
+				csboard.setBoardTitle(rset.getString("board_title"));
+				csboard.setBoardContent(rset.getString("board_content"));
+				csboard.setBoardRegDate(rset.getDate("board_reg_date"));
+				csboard.setBoardReadcount(rset.getInt("board_readcount"));
+				csboard.setBoardStatus(rset.getString("board_status"));
+				csboard.setBoardNotice(rset.getString("board_noticeYN"));
+				csboard.setBoardPassword(rset.getString("board_password"));
+				csboard.setBoardLock(rset.getString("board_lockYN"));
+				csboard.setBoardFamily(rset.getInt("board_family"));
+				csboard.setBoardOrderby(rset.getInt("board_orderby"));
+				csboard.setBoardStep(rset.getInt("board_step"));
+				
+				// 그리고 이 csboard를 list에 추가
+				noticeList.add(csboard);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// 자원 반납
+			close(rset);
+			close(pstmt);
+		}
+		
+		return noticeList;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.kh.afm.csboard.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.afm.common.MvcUtils;
 import com.kh.afm.csboard.model.service.CsboardService;
 import com.kh.afm.csboard.model.vo.Csboard;
+import com.kh.afm.csboard.model.vo.CsboardComment;
 
 /**
  * Servlet implementation class CsboardViewServlet
@@ -107,15 +109,27 @@ public class CsboardViewServlet extends HttpServlet {
 		// replaceAll() : 원본을 바꾸는 것은 아니다.
 		// MvcUtils로 보관
 		BoardContent = MvcUtils.convertLineFeedToBr(BoardContent);
-		
 		csboard.setBoardContent(BoardContent);
 		
+		// 댓글 목록 가져오기
+		List<CsboardComment> commentList = csboardService.selectCommentList(boardNo);
+		System.out.println("commentList@servlet = " + commentList);
 		
 		// 3. view단 처리 위임
+		// view단에 전달하기 위해 속성으로 저장
 		request.setAttribute("csboard", csboard);
+		request.setAttribute("commentList", commentList);
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/csboard/csboardView.jsp");
 		System.out.println("CsboardViewSerlvet");
 		reqDispatcher.forward(request, response);
+	}
+	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
