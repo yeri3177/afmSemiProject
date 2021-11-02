@@ -50,7 +50,7 @@ window.addEventListener('load', function(){
 				let tempRename = pRename.split("=");
 				const rename = tempRename[1];
 				
-				let html = `<div class="RDData"><img class="RDDateImg" src="<%= request.getContextPath() %>/upload/product/\${rename}"/><p class="RDDataP">등록일 : \${regDate}</p><a href="#" class="RDDataA">상품명 : \${title}</a><p class="RDDataP">가격 : \${price}</p></div>`;
+				let html = `<div class="RDData"><img class="RDDateImg" src="<%= request.getContextPath() %>/upload/product/\${rename}"/><p class="RDDataP">등록일 : \${regDate}</p><a href="#" class="RDDataA">상품명 : \${title}</a><p class="RDDataP">가격 : \${price} 원</p></div>`;
 				$RDdiv.append(html);
 			});
 			$(".RDproducts").html($RDdiv);
@@ -99,7 +99,7 @@ window.addEventListener('load', function(){
 				let tempRename = pRename.split("=");
 				const rename = tempRename[1];
 				
-				let html = `<div class="BEData"><img class="BEDateImg" src="<%= request.getContextPath() %>/upload/product/\${rename}"/><p class="BEDataP">추천수 : \${recommend}</p><a href="#" class="BEDataA">상품명 : \${title}</a><p class="BEDataP">가격 : \${price}</p></div>`;
+				let html = `<div class="BEData"><img class="BEDateImg" src="<%= request.getContextPath() %>/upload/product/\${rename}"/><p class="BEDataP">추천수 : \${recommend}</p><a href="#" class="BEDataA">상품명 : \${title}</a><p class="BEDataP">가격 : \${price} 원</p></div>`;
 				$BEdiv.append(html);
 			});
 			$(".BEproducts").html($BEdiv);
