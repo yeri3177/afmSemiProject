@@ -17,15 +17,10 @@
 	<title>afm 관리자 페이지</title>
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css" />
 	
-	<!--------------- font --------------->
+	<!-- font : Alfa Slab One + Abril Fatface + Black Han Sans + Ubuntu -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	
-	<!-- font : Alfa Slab One -->
-	<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
-	
-	<!-- font : Abril Fatface -->
-	<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alfa+Slab+One&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alfa+Slab+One&family=Black+Han+Sans&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
 	
 	<!--------------- favicon --------------->
 	<link rel="icon" href="<%= request.getContextPath() %>/images/admin/setting_icon.png">

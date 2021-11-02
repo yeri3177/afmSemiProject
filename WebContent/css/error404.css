@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+/********************************************************
+ * 404.jsp
+ *******************************************************/
+body {
+	background-color: #ffe9c2;
+} 
+
+/************************ 왼쪽영역 ************************/
+.leftbox {
+	
+	/* 
+	background-color: pink;
+	 */
+	
+	display: inline-block;
+	width:850px;
+	height:600px;
+	position: relative;
+	top: 10px;
+	left: 180px;
+	
+	text-align: center;
+	margin: 0 auto;
+
+}
+
+/* 404 텍스트 이미지 */
+.leftbox img {
+	width: 480px;
+}
+
+/* not found 텍스트 */
+#text1 {
+	font-family: 'Alfa Slab One', cursive;
+	font-size: 60px;
+}
+
+/* 밑에 텍스트 */
+#text2 {
+	font-size: 30px;
+}
+
+/* 홈으로가기 버튼 */
+#homeBtn {
+	width: 200px;
+	height: 60px;
+	
+	font-family: 'Balsamiq Sans', cursive;
+	font-size: 33px;
+	
+	position: relative;
+	top: 80px;
+	
+	background-color: #ffaf36;
+	border-radius: 20px;
+}
+
+
+
+
+/************************ 오른쪽 영역 ************************/
+.rightbox {
+	
+	display: inline-block;
+	position: relative;
+	width: 500px;
+	right: 20px;
+	top: 30px;
+	
+}
+/* 소녀 이미지 */
+#girlimg {
+	position: relative;
+	width: 250px;
+	height:520px;
+	top: 120px;
+	left: 95px;
+}
+/* 화난 이미지1 */
+#angry1 {
+	position: relative;
+	width: 100px;
+	top: -250px;
+	left: -270px;
+}
+
+/* 화난 이미지2 */
+#angry2 {
+	position: relative;
+	width: 100px;
+	top: -270px;
+	right: 55px;
+	
+}
+
+
+

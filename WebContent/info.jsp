@@ -16,12 +16,12 @@
 </div>
 
 	
-<!-- 상단박스 -->
+<!-- 노랑색 상단박스 -->
 <div id="topbox" class="info-container-box">
 	<div class="topbox-img">
 		<img id="img1" src="<%=request.getContextPath()%>/images/info/vegetable.png" />
 		<img id="img2" src="<%=request.getContextPath()%>/images/info/afmboy2.png" />
-		<img id="img3" src="<%=request.getContextPath()%>/images/info/text1.png" />
+		<img id="img3" src="<%=request.getContextPath()%>/images/info/bubble_text.png" />
 	</div>
 </div>
 
@@ -42,7 +42,7 @@
 <!-- 하단박스 -->
 <div id="bottombox" class="info-container">
 	<div class="bottombox-img">
-		<img id="teamname" src="<%=request.getContextPath()%>/images/info/team_name.png" />
+		<img id="teamname" src="<%=request.getContextPath()%>/images/info/team_name.png" /><br />
 		<img id="teamone" src="<%=request.getContextPath()%>/images/info/codefarmer_profile.png" />
 
 	</div>
