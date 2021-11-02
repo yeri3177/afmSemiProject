@@ -42,7 +42,7 @@ public class CartInsertServlet extends HttpServlet {
 		}
 		else {
 			session.setAttribute("msg", "장바구니 담기에 실패했습니다.");
-			response.sendRedirect(request.getContextPath() + "/product/productList");
+			response.sendRedirect(request.getContextPath() + "/cart/cartList");
 		}
 	}
 

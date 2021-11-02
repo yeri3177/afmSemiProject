@@ -38,6 +38,7 @@ int i = 0;
 				data:{'orderNo':orderNo},
 				dataType: "text",
 				success(data){
+					console.log(data);
 					const $RDdiv<%= i %> = $(`<div class='orderDetailList'></div>`);
 					
 					const arr = data.split("\n");

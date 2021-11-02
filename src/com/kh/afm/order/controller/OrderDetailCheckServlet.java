@@ -26,7 +26,7 @@ public class OrderDetailCheckServlet extends HttpServlet {
 		int orderNo = Integer.parseInt(request.getParameter("orderNo"));
 		//List<Order> orderList = orderService.orderCheckList(userId);
 		String csv = orderService.orderDetailCheckList(orderNo);
-
+		
 		response.setContentType("text/orderDetailList; charset=utf-8");
 		response.getWriter().append(csv);
 	}
