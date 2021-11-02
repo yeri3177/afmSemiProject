@@ -34,12 +34,13 @@ public class APIServlet extends HttpServlet {
 			String urlstr = "https://www.kamis.or.kr/service/price/xml.do?action=dailyPriceByCategoryList"
 					+ "&p_product_cls_code=02"
 					+ "&p_country_code=1101"
-					+ "&p_regday=2021-10-26"
+					+ "&p_regday=2021-11-01"
 					+ "&p_convert_kg_yn=Y"
 					+ "&p_item_category_code=100"
 					+ "&p_cert_key=e079b288-97e8-4b06-82ad-f5312bf146b4"
 					+ "&p_cert_id=2109"
 					+ "&p_returntype=xml";
+			//https://www.kamis.or.kr/service/price/xml.do?action=dailyPriceByCategoryList&p_product_cls_code=02&p_country_code=1101&p_regday=2021-11-01&p_convert_kg_yn=Y&p_item_category_code=100&p_cert_key=e079b288-97e8-4b06-82ad-f5312bf146b4&p_cert_id=2109&p_returntype=xml
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			urlconnection.setRequestMethod("GET");

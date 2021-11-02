@@ -1,3 +1,4 @@
+<%@page import="com.kh.afm.csboard.model.vo.CsboardComment"%>
 <%@page import="com.kh.afm.user.model.service.UserService"%>
 <%@page import="com.kh.afm.csboard.model.vo.Csboard"%>
 <%@page import="java.util.List"%>
@@ -13,6 +14,8 @@
 					  || UserService.ADMIN_ROLE.equals(loginUser.getUserRole())
 					);
 	System.out.println("editable@csboardView.jsp = " + editable);
+	
+	List<CsboardComment> commentList = (List<CsboardComment>) request.getAttribute("commentList");
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/csboard.css" />
 <section id="csboardView-container" class="csboard-container">
@@ -52,6 +55,74 @@
 		</tr> 
 <% } %> 
 	</table>
+	
+	<hr style="margin-top:30px"/>
+	
+	<div class="comment-container">
+		<div class="comment-editor">
+			<form 
+			action="<%= request.getContextPath() %>/csboard/csboardCommentEnroll"
+			name="csboardCommentFrm"
+			method="POST">
+			<textarea name="cbContent" id="" cols="60" rows="10"></textarea>
+			<button id="btn-insert">등록</button>
+			
+			<input type="hidden" name="cbLevel" value="1" />
+			<input type="hidden" name="userId" value="<%= loginUser != null ? loginUser.getUserId() : "" %>" />
+			<input type="hidden" name="cbBoardNo" value="<%= csboard.getBoardNo() %>" />
+			<input type="hidden" name="cbCommentRef" value="0" />
+			</form>
+		</div>
+		
+		<table id="tbl-comment">
+<%
+// .isEmpty()는 비어있을 때 true를 반환한다.
+if(commentList != null && !commentList.isEmpty()){
+	for(CsboardComment cbc : commentList){
+		// 댓글 
+		if(cbc.getCbLevel() == 1){
+%>
+<%-- 댓글 --%>
+		<tr class="level1">
+			<td>
+				<sub class="comment-writer"><%= cbc.getUserId() %></sub>
+				<sub class="comment-date"><%= cbc.getRegDate() %></sub>
+				<br />
+				<%-- 댓글 내용 --%>
+				<%= cbc.getCbContent() %>
+			</td>
+			<td>
+				<button class="btn-reply" value="<%=cbc.getCbNo() %>">답글</button>
+			</td>
+		</tr>
+
+<%
+		}
+		// 대댓글
+		else {
+%>
+		<%-- 대댓글(답글) --%>
+		<tr class="level2">
+			<td>
+				<sub class="comment-writer"><%= cbc.getUserId() %></sub>
+				<sub class="comment-date"><%= cbc.getRegDate() %></sub>
+				<br />
+				<%-- 댓글 내용 --%>
+				<%= cbc.getCbContent() %>
+			</td>
+			<td></td>
+		</tr>
+
+
+<%		
+		}
+	}
+}
+%>
+				
+		</table>
+		
+	</div>
 </section>
 <%-- editable 함수로 감싸므로써, 글쓴이 해당 아이디거나 관리자일 때만 deleteCsboard 권한이 생기도록 한다. --%>
 <% if(editable){%>
@@ -70,5 +141,40 @@ const deleteCsboard = () => {
 };
 </script>
 <% } %>
+<script>
+$("[name=cbContent]", document.csboardCommentFrm).focus((e) => {
+	<%-- console.log("focus!"); --%>
+<% if(loginUser == null){%>
+	loginAlert();
+<% } %>
+});
+
+$(document.csboardCommentFrm).submit((e) => {
+<% if(loginUser == null){%>
+	loginAlert();
+	// return false가 없으면 loginAlert 띄우고 제출이 될 것이다.
+	return false;
+<% } %>	
+	
+	// 내용검사
+	// const textarea = $("[name=content]", document.csboardCommentFrm);
+	// submit 이벤트의 주체가 document.csboardCommentFrm이므로
+	const $textarea = $("[name=cbContent]", e.target);
+	
+	if(!/^(.|\n)+$/.test($textarea.val())){
+		alert("댓글 내용을 작성해주세요.");
+		$textarea.focus();
+		return false;
+	}
+});	
+
+const loginAlert = () => {
+	alert("로그인 후 이용할 수 있습니다.");
+	<%-- $(location.href="<%= request.getContextPath() %>/user/userLogin").focus(); --%>
+	<%-- 다른 페이지로 이동 하게 focus 줄 수 없나. --%>
+};
+
+
+</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 

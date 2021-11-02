@@ -11,6 +11,7 @@ import java.util.Map;
 
 import com.kh.afm.csboard.model.dao.CsboardDao;
 import com.kh.afm.csboard.model.vo.Csboard;
+import com.kh.afm.csboard.model.vo.CsboardComment;
 
 public class CsboardService {
 	
@@ -128,6 +129,36 @@ public class CsboardService {
 		return result;
 	}
 
+	public List<CsboardComment> selectCommentList(int boardNo) {
+		Connection conn = getConnection();
+		List<CsboardComment> commentList = csboardDao.selectCsboardList(conn, boardNo);
+		close(conn);
+		return commentList;
+	}
+
+	public int insertCsboardComment(CsboardComment cbc) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = csboardDao.insertCsboardComment(conn, cbc);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+
+
+	public List<Csboard> selectNoticeList() {
+		Connection conn = getConnection();
+		List<Csboard> noticeList = csboardDao.selectNoticeList(conn);
+		close(conn);
+		return noticeList;
+	}
 
 
 

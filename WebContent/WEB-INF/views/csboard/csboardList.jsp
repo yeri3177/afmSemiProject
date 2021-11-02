@@ -5,6 +5,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
+	List<Csboard> noticeList = (List<Csboard>) request.getAttribute("noticeList");
 	List<Csboard> list = (List<Csboard>) request.getAttribute("list");
 	String searchType = request.getParameter("searchType");
 	String searchKeyword = request.getParameter("searchKeyword");
@@ -75,7 +76,7 @@ function pswdChk(url,password){
 			<th>조회</th>
 		</tr>
 		<%
-			for (Csboard csboard2 : list){
+			for (Csboard csboard2 : noticeList){
 		%>
 			<% if(csboard2.getBoardNotice().equals("Y")){ %>
 			<tr>
