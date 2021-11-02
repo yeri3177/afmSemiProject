@@ -22,19 +22,12 @@
 <script>
 <%
 	String msg = (String)session.getAttribute("msg");
-	//System.out.println("msg@header.jsp = " + msg);
 	if(msg != null) session.removeAttribute("msg");
 
 %>
 <% if(msg != null) {%>
 	alert("<%= msg %>");
 <% } %>
-<%-- function orderCheck(){
-	var popupWidth = 800;
-	var popupHeight = 600;
-	var x = (window.screen.width / 2) - (popupWidth / 2);
-	var y = (window.screen.height / 2) - (popupHeight / 2);
-	open("<%= request.getContextPath() %>/order/orderCheck", "", 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ x + ', top='+ y);}; --%>
 </script>
 <title>a farmer's market</title>
 
@@ -111,7 +104,7 @@
       </nav>
 	</div>
           <div>
-				<div class="main-nav">
+				<div class="mainNav">
 					<div class="home"><a href="<%= request.getContextPath() %>">Home</a></div>
 					<div class="info"><a href="<%= request.getContextPath() %>/info.jsp">소개</a></div>
 					<div class="product"><a href="<%= request.getContextPath() %>/product/productList">상품</a></div>

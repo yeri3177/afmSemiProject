@@ -9,32 +9,33 @@
 	String searchKeyword = (String)request.getAttribute("searchKeyword");
 %>
 <title>검색 목록</title>
-<h2>[<%= searchKeyword %>] 검색목록</h1>
-	<table id="tbl-board">
-		<tr>
-			<th>번호</th>
-			<th>사진</th>
-			<th>상품</th>
-			<th>가격</th>
-			<th>판매자</th>
-			<th>작성일</th>
-			<th>추천수</th>
-		</tr>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/indexSearch.css"/>
+<h2 class="searchListH2">[<%= searchKeyword %>] 검색목록</h1>
+	<div>
+		<div class="searchListHeader">
+			<div class="searchListHeaderDiv">번호</div>
+			<div class="searchListHeaderDiv">사진</div>
+			<div class="searchListHeaderDiv">상품</div>
+			<div class="searchListHeaderDiv">가격</div>
+			<div class="searchListHeaderDiv">판매자</div>
+			<div class="searchListHeaderDiv">작성일</div>
+			<div class="searchListHeaderDiv">추천수</div>
+		</div>
 <%
 	for(Product _product : list){
 %>
-		<tr>
-			<th><%= _product.getpNo() %></th>
-			<th><img alt="" src="<%= request.getContextPath() %>/upload/product/<%= _product.getAttach1().getRenamedFileName() %>" width="300px" height="300px"></th>
-			<th><a href="<%= request.getContextPath() %>/product/productView?pNo=<%= _product.getpNo() %>"><%= _product.getpTitle() %></a></th>
-			<th><%= _product.getpPrice() %></th>
-			<th><%= _product.getUserId() %></th>
-			<th><%= (Date)_product.getpRegDate() %></th>
-			<th><%= _product.getpRecommend() %></th>
-		</tr>
+		<div class="searchListData">
+			<div class="searchListDataDiv"><%= _product.getpNo() %></div>
+			<div class="searchListDataDiv"><img class="searchListDataImg" alt="" src="<%= request.getContextPath() %>/upload/product/<%= _product.getAttach1().getRenamedFileName() %>" widdiv="300px" height="300px"></div>
+			<div class="searchListDataDiv"><a href="<%= request.getContextPath() %>/product/productView?pNo=<%= _product.getpNo() %>"><%= _product.getpTitle() %></a></div>
+			<div class="searchListDataDiv"><%= _product.getpPrice() %></div>
+			<div class="searchListDataDiv"><%= _product.getUserId() %></div>
+			<div class="searchListDataDiv"><%= (Date)_product.getpRegDate() %></div>
+			<div class="searchListDataDiv"><%= _product.getpRecommend() %></div>
+		</div>
 <%
 	}
 %>
-	</table>
+	</div>
 <div id='pageBar'><%= request.getAttribute("pagebar") %></div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

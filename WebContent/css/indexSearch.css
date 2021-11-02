@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+
+.searchListHeader{display:flex;justify-content: space-evenly;text-align: center;align-items: center;background-color: #f4f4f4;font-weight: 500;border-bottom: 2px solid #888;}
+.searchListHeaderDiv:nth-child(1){width:10%;}
+.searchListHeaderDiv:nth-child(2){width:15%;}
+.searchListHeaderDiv:nth-child(3){width:25%;}
+.searchListHeaderDiv:nth-child(4){width:10%;}
+.searchListHeaderDiv:nth-child(5){width:10%;}
+.searchListHeaderDiv:nth-child(6){width:20%;}
+.searchListHeaderDiv:nth-child(7){width:10%;}
+.searchListData{display:flex;justify-content: space-evenly;text-align: center;align-items: center;}
+.searchListDataDiv:nth-child(1){width:10%;}
+.searchListDataDiv:nth-child(2){width:15%;}
+.searchListDataDiv:nth-child(3){width:25%;}
+.searchListDataDiv:nth-child(4){width:10%;}
+.searchListDataDiv:nth-child(5){width:10%;}
+.searchListDataDiv:nth-child(6){width:20%;}
+.searchListDataDiv:nth-child(7){width:10%;}
+.searchListDataImg{width:100px;height: 100px;}
+.searchListH2{text-align: center;}
