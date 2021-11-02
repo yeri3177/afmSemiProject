@@ -80,13 +80,13 @@ if(editable){
 		    	<input 
 					type="submit" 
 					value="장바구니" 
-					onclick="javascript: form.action:'/cart/cartInsert';" />
+					formaction="<%= request.getContextPath() %>/cart/cartInsert" />
 		    </td>
 		    <td>
 		    	<input 
 					type="submit" 
 					value="결제하기" 
-					onclick="javascript: form.action:'/order/orderProduct';" />
+					formaction="<%= request.getContextPath() %>/order/orderProduct" />
 		    </td>
 	    </tr>
 	</table>
