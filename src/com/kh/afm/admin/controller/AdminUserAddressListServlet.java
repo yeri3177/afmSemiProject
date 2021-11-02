@@ -24,10 +24,11 @@ public class AdminUserAddressListServlet extends HttpServlet {
 		
 		// 찾으려는 회원아이디 
 		String userId = request.getParameter("userId");
+		System.out.println("주소userId = " + userId);
 		
 		// 업무로직
 		List<Address> addressList = adminService.selectUserAddress(userId);
-		System.out.println(addressList);
+		System.out.println("addressList = "+addressList);
 		
 		// view단 처리
 		request.setAttribute("addressList", addressList);

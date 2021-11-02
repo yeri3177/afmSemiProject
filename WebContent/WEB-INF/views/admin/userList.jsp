@@ -115,7 +115,7 @@ div#search-userRole {
 <table id="tbl-user">
     <thead>
         <tr>
-        	<!---- user ---->
+        	<!---- tb_user th---->
 			<th class="user-th">아이디</th>
 			<th class="user-th">이름</th>
 			<th class="user-th">이메일</th>
@@ -124,14 +124,10 @@ div#search-userRole {
 			<th class="user-th">공개여부</th>
 			<th class="user-th">가입일</th>
 			
-			<!---- address ---->
-			<!-- 
-			<th class="address-th">주소NO</th>
-			<th class="address-th" id="adr-th">주소지</th> 
-			-->
+			<!---- address th ---->
 			<th class="address-th">주소</th>
 			
-			<!---- account ---->
+			<!---- tb_account th---->
 			<th class="account-th">계좌no</th>
 			<th class="account-th">은행명</th>
 			<th class="account-th">계좌번호</th>
@@ -144,7 +140,7 @@ div#search-userRole {
 	for(User user : list){
 %>
 	<tr>
-		<!---- user ---->
+		<!---- tb_user td---->
 		<td>
 			<%= user.getUserId() %>
 			<input type="hidden" value="<%= user.getUserId() %>" id="userId" />
@@ -155,9 +151,9 @@ div#search-userRole {
 		<td>
 			<%= "U".equals(user.getUserRole()) ? "일반회원" : "S".equals(user.getUserRole()) ? "판매자" : "관리자" %>
 		</td>
-		
-		<!-- 회원공개여부 select-option태그 -->	
+			
 		<td> 
+			<!-- 회원공개여부 select-option태그 -->
 			<select class="user_expose" data-user-id="<%= user.getUserId() %>" id="userExposeSelect">
 				<option value="Y" <%= "Y".equals(user.getUserExpose()) ? "selected" : "" %>>
 					공개
@@ -172,21 +168,16 @@ div#search-userRole {
 		<td><%= user.getUserEnrollDate() %></td>
 		
 		
-		<!---- address ---->
+		<!---- address td ---->
 		<td>
-			<%-- <button id="addressBtn" onclick="location.href='<%= request.getContextPath() %>/admin/UserAddress?userId=<%= user.getUserId() %>';">상세보기</button> --%>
-			<!-- <button onclick="addressPopup();">상세보기</button> -->
-			<button id="addressBtn" value="<%= user.getUserId() %>">상세보기</button>
+			<button id="addressBtn" data-user-id="<%= user.getUserId() %>">상세보기</button>
 		</td>
 		
-		
-		
-		<!---- account ---->
+
+		<!---- tb_account td ---->
 		<td><%= user.getAccount().getAccountNo() != 0 ? user.getAccount().getAccountNo() : "" %></td>
 		<td><%= user.getAccount().getBankName() != null ? user.getAccount().getBankName() : "" %></td>
 		<td><%= user.getAccount().getAccountNumber() != null ? user.getAccount().getAccountNumber() : "" %></td>
-		
-		
 		
 	</tr>
 <%
@@ -209,29 +200,28 @@ div#search-userRole {
 </form>
 
 <!-- 회원별 주소상세보기 폼전송 -->
-<form name="userAddressDetailFrm" action="<%= request.getContextPath() %>/admin/userAddressList" method="POST">
-	<input type="hidden" name="adar_userId" />
+<form name="userAddressDetailFrm" action="<%= request.getContextPath() %>/admin/userAddressList" method="GET">
+	<input type="hidden" name="userId" />
 </form>
 
 <script>
 /* 주소 상세보기 팝업 */
 $("#addressBtn").click((e) => {
-	const test = $(e.target).val();
-	console.log("test = " + test);
+	const $this = $(e.target);
+	const userId = $this.data("userId");
+	console.log("userId = " + userId);
 	
-	const spec = "left=500px, top=300px, width=800px, height=600px";
-	<%-- const popup = open("<%= request.getContextPath() %>/admin/userAddressList", "주소상세보기", spec); --%>
+	/* 팝업 위치 및 사이즈 */
+	const spec = "left=550px, top=250px, width=800px, height=600px";
 	const popup = open("", "주소상세보기", spec);
 	
-	console.log($("#userId").val());
-	
-	const $frm = $(document.userAddressDetailFrm);
-	$frm.find("[name=adar_userId]").val($("#userId").val());
-	$frm.attr("target", "주소상세보기").submit();
+	const $adrfrm = $(document.userAddressDetailFrm);
+	$adrfrm.find("[name=userId]").val(userId);
+	$adrfrm.attr("target", "주소상세보기").submit();
 });
 
 
-/* 검색할때 값 입력 유효성검사 ★★★★★★★★★★★★★★★★★★★★★★★★★보류*/
+/* 검색할때 값 입력 유효성검사 ★★보류★★ */
 /* $("[name=searchFrm]").submit((e) => {
 	const $searchInput = $("#searchInput");
 	const $searchType = $("[name=searchType]");
