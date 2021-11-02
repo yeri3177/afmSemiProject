@@ -325,7 +325,9 @@ public class CsboardDao {
 			// 쿼리문 미완성
 			pstmt.setString(1, csboard.getBoardTitle());
 			pstmt.setString(2, csboard.getBoardContent());
-			pstmt.setInt(3, csboard.getBoardNo());
+			pstmt.setString(3, csboard.getBoardPassword());
+			pstmt.setString(4, csboard.getBoardLock());
+			pstmt.setInt(5, csboard.getBoardNo());
 			
 			// 쿼리문 실행 : 완성된 쿼리를 가지고 있는 pstmt 실행(파라미터 없음)
 			// DML은 executeUpdate()

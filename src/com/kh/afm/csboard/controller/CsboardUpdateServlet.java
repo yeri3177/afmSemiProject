@@ -50,13 +50,15 @@ public class CsboardUpdateServlet extends HttpServlet {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		String boardTitle = request.getParameter("boardTitle");
 		String boardContent = request.getParameter("boardContent");
+		String boardPassword = request.getParameter("boardPassword");
+		String boardLock = request.getParameter("boardLockYN");
 		
-		Csboard csboard = new Csboard(boardNo, null, boardTitle, boardContent, null, 0, "N", "N", null, "N", 0, 0, 0);
+		Csboard csboard = new Csboard(boardNo, null, boardTitle, boardContent, null, 0, "N", "N", boardPassword, boardLock, 0, 0, 0);
 		
-		System.out.println("CsboardUpdateServlet@update = " + csboard);
 		
 		// 2. 업무로직 db 저장 update csboard set board_title = ?, board_content = ? where board_no = ?
 		int result = csboardService.updateCsboard(csboard);
+		System.out.println("CsboardUpdateServlet@update = " + result);
 		String msg = result > 0 ? "게시물 수정 성공!" : "게시물 수정 실패!";
 		
 		// 3. redirect
