@@ -78,15 +78,17 @@ public class AdminDao {
 					account.setBankName(rset.getString("bank_name"));
 					account.setAccountNumber(rset.getString("account_number"));
 					
-					// 주소
-					Address address = new Address();
-					address.setAdrNo(rset.getInt("adr_no"));
-					address.setAdrName(rset.getString("adr_name"));
-					address.setAdrRoad(rset.getString("adr_road"));
-					address.setAdrDetail(rset.getString("adr_detail"));
+					user.setAccount(account); 
 					
-					user.setAccount(account);
-					user.setAddress(address);
+					// 주소
+					/*
+					 * Address address = new Address(); address.setAdrNo(rset.getInt("adr_no"));
+					 * address.setAdrName(rset.getString("adr_name"));
+					 * address.setAdrRoad(rset.getString("adr_road"));
+					 * address.setAdrDetail(rset.getString("adr_detail"));
+					 * 
+					 * user.setAddress(address);
+					 */
 				}
 				
 				list.add(user);
