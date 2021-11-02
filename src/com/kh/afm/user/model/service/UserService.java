@@ -6,6 +6,7 @@ import static com.kh.afm.common.JdbcTemplate.getConnection;
 import static com.kh.afm.common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.kh.afm.user.model.dao.UserDao;
 import com.kh.afm.user.model.vo.Account;
@@ -142,6 +143,19 @@ public class UserService {
 				rollback(conn);
 			close(conn);
 			return result;
+		}
+
+		/**
+		 * 회원의 주소목록 조회
+		 * @param userId : 회원아이디
+		 * @return List<Address> : 주소 리스트
+		 */
+		public List<Address> selectUserAddress(String userId) {
+			Connection conn = getConnection();
+			List<Address> list = userDao.selectUserAddress(conn, userId);
+			close(conn);		
+			
+			return list;
 		}
 
 		

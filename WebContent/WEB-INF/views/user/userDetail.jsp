@@ -57,12 +57,11 @@
 			<tr>
 				<th>주소<sup>*</sup></th>
 				<td>
-					<input type="text" class="detailInput" name="adrName" id="adrName" value="<%= loginUser.getAddress().getAdrName() != null ? loginUser.getAddress().getAdrName() : "" %>"><br>
-					<input id="member_post" type="text" class="detailInput" placeholder="우편번호" readonly onclick="findAddr()"><br>		
-					<input id="member_addr" type="text" class="detailInput" name="address1" id="address1" placeholder="도로명 주소" value="<%= loginUser.getAddress() != null ? loginUser.getAddress().getAdrRoad() : "" %>" readonly> <br>
-					<input type="text" name="address2" class="detailInput" id="address2" placeholder="상세 주소" value="<%= loginUser.getAddress() != null ? loginUser.getAddress().getAdrDetail() : "" %>" > 
+					<button onclick="location.href='<%= request.getContextPath() %>/user/userAddressList';">상세보기</button>
+			 
 				</td>
 			</tr>
+			
 <!-- 로그인한 사람이 판매자일 경우에만 계좌정보 나오게 하기 -->
 <%
 	if(UserService.SELLER_ROLE.equals(loginUser.getUserRole())) {
@@ -94,6 +93,7 @@
 	</form>
 	
 <script type="text/javascript">
+
 		function deleteUser() {
 			if (confirm("정말로 탈퇴하시겠습니까?")) {
 				$(document.userDelFrm).submit();
@@ -130,7 +130,7 @@
 		});
 		
 		//주소api
-		function findAddr(){
+		/* function findAddr(){
 			new daum.Postcode({
 		        oncomplete: function(data) {
 		        	
@@ -155,7 +155,7 @@
 		        }
 		    }).open();
 		}
-		
+		 */
 
 		</script>
 		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

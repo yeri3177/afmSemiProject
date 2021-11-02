@@ -130,13 +130,13 @@ private Properties prop = new Properties();
 	}
 
 	/**
-	 * 회원 정보 수정하기 (address 테이블)
+	 * 회원 정보 수정하기 (tb_user 테이블)
 	 */
 	public int updateUser(Connection conn, User user) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateUser"); 
-		System.out.println(sql);
+		
 		try {
 			//미완성쿼리문을 가지고 객체생성.
 			pstmt = conn.prepareStatement(sql);
@@ -165,7 +165,7 @@ private Properties prop = new Properties();
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateAddress"); 
-		System.out.println(sql);
+		
 		try {
 			//미완성쿼리문을 가지고 객체생성.
 			pstmt = conn.prepareStatement(sql);
@@ -195,7 +195,7 @@ private Properties prop = new Properties();
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateAccount"); 
-		System.out.println(sql);
+		
 		try {
 			//미완성쿼리문을 가지고 객체생성.
 			pstmt = conn.prepareStatement(sql);
@@ -216,20 +216,20 @@ private Properties prop = new Properties();
 		
 		return result;
 	}
-  
+  /**
+   * 탈퇴하기
+   * @param conn
+   * @param userId
+   * @return
+   */
     public int deleteUser(Connection conn, String userId) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("deleteUser"); 
 
 		try {
-			//미완성쿼리문을 가지고 객체생성.
 			pstmt = conn.prepareStatement(query);
-			//쿼리문미완성
 			pstmt.setString(1, userId);
-			
-			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
-			//DML은 executeUpdate()
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -349,6 +349,45 @@ private Properties prop = new Properties();
 			close(pstmt);
 		}
 		return result;
+	}
+
+	/**
+	 * 회원의 주소목록 조회
+	 * @param userId : 회원아이디
+	 * @return List<Address> : 주소 리스트
+	 */
+	public List<Address> selectUserAddress(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectUserAddress");
+		ResultSet rset = null;
+		List<Address> list = new ArrayList<>();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, userId);
+
+			rset = pstmt.executeQuery();
+
+
+			while (rset.next()) {
+				Address address = new Address();
+				address.setAdrNo(rset.getInt("adr_no"));
+				address.setUserId(rset.getString("user_id"));
+				address.setAdrName(rset.getString("adr_name"));
+				address.setAdrRoad(rset.getString("adr_road"));
+				address.setAdrDetail(rset.getString("adr_detail"));
+
+				list.add(address);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 
 	
