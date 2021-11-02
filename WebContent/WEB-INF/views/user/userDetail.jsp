@@ -9,47 +9,47 @@
 <section id=enroll-container>
 	
 	<h2>내 정보 보기</h2>
-	<form name="userUpdateFrm" action="<%=request.getContextPath()%>/user/userUpdate" method="POST">
+	<form id="detailFrm" name="userUpdateFrm" action="<%=request.getContextPath()%>/user/userUpdate" method="POST">
 		<table>
 			
 			<tr>
 				<th>아이디<sup>*</sup></th>
 				<td>
-					<input type="text" placeholder="3글자이상" name="userId" id="_userId" value="<%= loginUser.getUserId() %>" readonly required>
+					<input type="text" class="detailInput" placeholder="3글자이상" name="userId" id="_userId" value="<%= loginUser.getUserId() %>" readonly required>
 				</td>
 			</tr>
 
 			<tr>
 				<th>이름<sup>*</sup></th>
 				<td>	
-				<input type="text"  name="userName" id="userName" value="<%= loginUser.getUserName() %>" readonly="readonly"><br>
+				<input type="text" class="detailInput" name="userName" id="userName" value="<%= loginUser.getUserName() %>" readonly="readonly"><br>
 				</td>
 			</tr>
 			
 			<tr>
 				<th>회원권한<sup>*</sup></th>
 				<td>	
-				<input type="text"  name="userRole" id="userRole" value="<%= "U".equals(loginUser.getUserRole()) ? "일반회원" : "S".equals(loginUser.getUserRole()) ? "판매자" : "관리자" %>" readonly="readonly"><br>
+				<input type="text" class="detailInput" name="userRole" id="userRole" value="<%= "U".equals(loginUser.getUserRole()) ? "일반회원" : "S".equals(loginUser.getUserRole()) ? "판매자" : "관리자" %>" readonly="readonly"><br>
 				</td>
 			</tr>
 			
 			<tr>
 				<th>이메일<sup>*</sup></th>
 				<td>	
-					<input type="email" placeholder="abc@xyz.com" name="email" id="email" value="<%= loginUser.getUserEmail() != null ? loginUser.getUserEmail() : "" %>"><br>
+					<input type="email" class="detailInput" placeholder="abc@xyz.com" name="email" id="email" value="<%= loginUser.getUserEmail() != null ? loginUser.getUserEmail() : "" %>"><br>
 				</td>
 			</tr>
 			
 			<tr>
 				<th>생년월일</th>
 				<td>	
-				<input type="date" name="birthday" id="birthday" value="<%= loginUser.getBirthday() != null ? loginUser.getBirthday() : "" %>" readonly="readonly" ><br />
+				<input type="date" class="detailInput" name="birthday" id="birthday" value="<%= loginUser.getBirthday() != null ? loginUser.getBirthday() : "" %>" readonly="readonly" ><br />
 				</td>
 			</tr> 
 			<tr>
 				<th>휴대폰<sup>*</sup></th>
 				<td>	
-					<input type="tel" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" value="<%= loginUser.getPhone() %>" required><br>
+					<input type="tel" class="detailInput" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" value="<%= loginUser.getPhone() %>" required><br>
 				</td>
 			</tr>
 			
@@ -57,10 +57,10 @@
 			<tr>
 				<th>주소<sup>*</sup></th>
 				<td>
-					<input type="text" name="adrName" id="adrName" value="<%= loginUser.getAddress().getAdrName() != null ? loginUser.getAddress().getAdrName() : "" %>"><br>
-					<input id="member_post"  type="text" placeholder="우편번호" readonly onclick="findAddr()"><br>		
-					<input id="member_addr" type="text" name="address1" id="address1" placeholder="도로명 주소" value="<%= loginUser.getAddress() != null ? loginUser.getAddress().getAdrRoad() : "" %>" readonly> <br>
-					<input type="text" name="address2" id="address2" placeholder="상세 주소" value="<%= loginUser.getAddress() != null ? loginUser.getAddress().getAdrDetail() : "" %>" > 
+					<input type="text" class="detailInput" name="adrName" id="adrName" value="<%= loginUser.getAddress().getAdrName() != null ? loginUser.getAddress().getAdrName() : "" %>"><br>
+					<input id="member_post" type="text" class="detailInput" placeholder="우편번호" readonly onclick="findAddr()"><br>		
+					<input id="member_addr" type="text" class="detailInput" name="address1" id="address1" placeholder="도로명 주소" value="<%= loginUser.getAddress() != null ? loginUser.getAddress().getAdrRoad() : "" %>" readonly> <br>
+					<input type="text" name="address2" class="detailInput" id="address2" placeholder="상세 주소" value="<%= loginUser.getAddress() != null ? loginUser.getAddress().getAdrDetail() : "" %>" > 
 				</td>
 			</tr>
 <!-- 로그인한 사람이 판매자일 경우에만 계좌정보 나오게 하기 -->
@@ -70,8 +70,8 @@
 			<tr>
 				<th>계좌<sup>*</sup></th>
 				<td>
-					<input type="text" placeholder="계좌은행" name="bankname" id="bankname" maxlength="11" value="<%= loginUser.getAccount().getBankName() %>" required><br>
-					<input type="text" placeholder="계좌번호" name="banknumer" id="banknumer" maxlength="11" value="<%= loginUser.getAccount().getAccountNumber() %>" required><br>
+					<input type="text" class="detailInput" placeholder="계좌은행" name="bankname" id="bankname" maxlength="11" value="<%= loginUser.getAccount().getBankName() %>" required><br>
+					<input type="text" class="detailInput" placeholder="계좌번호" name="banknumer" id="banknumer" maxlength="11" value="<%= loginUser.getAccount().getAccountNumber() %>" required><br>
 				</td>
 			</tr>
 <%
@@ -79,9 +79,9 @@
 %>		 
 		</table>
 		
-		<input type="submit" value="저장" >
-		<input type="button" onclick="location.href='<%= request.getContextPath() %>/user/updatePassword';" value="비밀번호변경" />
-		<input type="button" onclick="deleteUser();" value="탈퇴">
+		<input class="detailBtn" type="submit" value="저장" >
+		<input class="detailBtn" type="button" onclick="location.href='<%= request.getContextPath() %>/user/updatePassword';" value="비밀번호변경" />
+		<input class="detailBtn" type="button" onclick="deleteUser();" value="탈퇴">
 	</form>
 </section>	
 	

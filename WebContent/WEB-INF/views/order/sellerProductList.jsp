@@ -9,6 +9,12 @@
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/user.css" />
 
+<% if(list.isEmpty()){ %>
+	<h1 class="sellProductListisEmpty">텅</h1>
+    <h3 class="sellProductListisEmptyh3">판매하신 내역이 없습니다.</h3>
+<% 
+}else{
+%>
 
 <section id="sellerProductList-container">
 <h1>판매하는 상품</h1>
@@ -49,5 +55,8 @@
 
 </section>
 
+<%
+	}
+%>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

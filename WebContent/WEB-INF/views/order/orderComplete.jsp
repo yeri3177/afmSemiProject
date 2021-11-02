@@ -1,18 +1,25 @@
 <%@page import="com.kh.afm.order.model.vo.Order"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/user.css" />
 <%
 	List<Order> list = (List<Order>) request.getAttribute("orderList");
 %>
 
-
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/user.css" />
+<% if(list.isEmpty()){ %>
+	<h1 class="orderCompleteisEmpty">텅</h1>
+    <h3 class="orderCompleteisEmptyh3">구매하신 내역이 없습니다.</h3>
+<% 
+}else{
+%>
 
 
 <section id="OrderComplete-container">
-<h1>order</h1>
+<h1 class="orderCompleteisEmptyh1">order</h1>
+
 
 <table id="tbl-orderComplete">
 	<tr>
@@ -37,5 +44,8 @@
 
 </section>
 
+<%
+	}
+%>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

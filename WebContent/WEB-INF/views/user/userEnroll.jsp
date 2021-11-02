@@ -163,8 +163,8 @@ https://tyrannocoding.tistory.com/48
 			</tr>
 
 			<tr>
-				<td class="submitbtn">
-					<input type="submit"  value="가입하기" >
+				<td id="submitbtn">
+					<input type="submit" value="가입하기" >
 				</td>
 			</tr>
 		</table>
