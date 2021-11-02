@@ -107,6 +107,27 @@ public class CsboardService {
 		return list;
 	}
 
+	public int updateCsboard(Csboard csboard) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			// 1. 게시글 수정 update board문
+			result = csboardDao.updateCsboard(conn, csboard);
+			
+			// 문제없이 코드가 진행되었다면
+			commit(conn);
+		} catch (Exception e) {
+			// 오류가 발생했다면
+			rollback(conn);
+			// 예외 발생했을 때 던져주기
+			throw e;
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
 
 
 

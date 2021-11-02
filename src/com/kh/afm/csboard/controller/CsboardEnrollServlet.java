@@ -46,7 +46,8 @@ public class CsboardEnrollServlet extends HttpServlet {
 		// 3. 응답 처리 : redirect(DML이기 때문에)
 		HttpSession session = request.getSession();
 //		session.setAttribute("msg", msg);
-		String location = request.getContextPath() + "/csboard/csboardView?boardNo=" + csboard.getBoardNo();
+		String location = request.getContextPath() + "/csboard/csboardList";
+		// "/csboard/csboardView?boardNo=" + csboard.getBoardNo()
 		response.sendRedirect(location);
 	}
 

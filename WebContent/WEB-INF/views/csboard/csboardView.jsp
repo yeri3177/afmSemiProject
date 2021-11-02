@@ -59,6 +59,7 @@
 	<input type="hidden" name="boardNo" value="<%= csboard.getBoardNo() %>" />
 </form>
 <script>
+// 실행코드가 한줄인 경우 화살표 함수 안에서 중괄호를 생략할 수 있다.
 const updateCsboard = () => location.href = "<%= request.getContextPath() %>/csboard/csboardUpdate?boardNo=<%= csboard.getBoardNo() %>";
 // POST 형식 : DB 상태가 바뀌므로. --> 무조건 form 태그
 const deleteCsboard = () => {

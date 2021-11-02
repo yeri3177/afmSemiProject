@@ -33,7 +33,7 @@ public class CsboardUpdateServlet extends HttpServlet {
 		// csboard 하나를 요청.
 		Csboard csboard = csboardService.selectOneCsboard(boardNo);
 		// csboard가 잘 넘어왔는지 확인.
-		System.out.println("csboard@servlet = " + csboard);
+		System.out.println("CsboardUpdateServlet@requestToForm = " + csboard);
 		
 		// 3. view단 위임
 		request.setAttribute("csboard", csboard);
@@ -46,7 +46,23 @@ public class CsboardUpdateServlet extends HttpServlet {
 	 * db update 요청!
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 1. 사용자 입력
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		String boardTitle = request.getParameter("boardTitle");
+		String boardContent = request.getParameter("boardContent");
 		
+		Csboard csboard = new Csboard(boardNo, null, boardTitle, boardContent, null, 0, "N", "N", null, "N", 0, 0, 0);
+		
+		System.out.println("CsboardUpdateServlet@update = " + csboard);
+		
+		// 2. 업무로직 db 저장 update csboard set board_title = ?, board_content = ? where board_no = ?
+		int result = csboardService.updateCsboard(csboard);
+		String msg = result > 0 ? "게시물 수정 성공!" : "게시물 수정 실패!";
+		
+		// 3. redirect
+		request.getSession().setAttribute("msg", msg);
+		String location = request.getContextPath() + "/csboard/csboardView?boardNo=" + boardNo;
+		response.sendRedirect(location);
 	}
 
 }

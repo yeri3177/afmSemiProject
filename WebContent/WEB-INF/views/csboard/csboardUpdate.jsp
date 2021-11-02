@@ -5,6 +5,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
 	Csboard csboard = (Csboard) request.getAttribute("csboard");
+
 	boolean editable = loginUser != null && (
 	     UserService.ADMIN_ROLE.equals(loginUser.getUserRole())
 		);
@@ -16,6 +17,10 @@
 	name="csboardUpdateFrm" 
 	action="<%= request.getContextPath() %>/csboard/csboardUpdate" 
 	method="POST">
+	<%-- hidden 처리로 화면에 보이진 않지만 form 전송 시 같이 날아가게 된다. --%>
+	<%-- PK 없이 update(delete) 할 수 없다. --%>
+	<input type="hidden" name="boardNo" value="<%= csboard.getBoardNo() %>" />
+	
 	<table id="tbl-csboard-view">
 	<tr>
 		<th>작성자</th>
@@ -29,19 +34,19 @@
 	<tr>
 		<th>비밀번호</th>
 		<td>
-			<input type="password" name="board_password" /> * 필수 (게시물 삭제시 필요합니다.)
+			<input type="password" name="boardPassword" /> *
 		</td>
 	</tr>
 	<tr>
 		<th>제 목</th>
 		<td>
-			<input type="text" name="board_title" value="<%= csboard.getBoardTitle() %>" required />
+			<input type="text" name="boardTitle" value="<%= csboard.getBoardTitle() %>" required />
 		</td>
 	</tr>
 	<tr>
 		<th>내 용</th>
 		<td>
-			<textarea name="board_content" id="" cols="40" rows="5"><%= csboard.getBoardContent() %></textarea>
+			<textarea name="boardContent" id="" cols="40" rows="5"><%= csboard.getBoardContent() %></textarea>
 		</td>
 	</tr>
 	<tr>
@@ -55,8 +60,18 @@
 </section>
 <script>
 $(document.csboardUpdateFrm).submit(function (){
-	var $content = $("[name=content]");
-	if(/^(.|\n)+$/.test($content.val()) == false){
+	const $title = $("[name=title]");
+	const $content = $("[name=content]");
+	// 제목을 작성하지 않은 경우 폼제출을 할 수 없다.
+	if(!/^.+$/.test($title.val())){
+		alert("제목을 입력하세요.")
+		return false;
+	}
+	
+	// 내용을 작성하지 않은 경우 폼제출을 할 수 없다.
+	// .(임의의 문자)에는 \n(개행문자)가 포함되지 않는다.
+	if(!/^(.|\n)+$/.test($content.val())){
+		alert("내용을 입력하세요.");
 		return false;
 	}
 	return true;

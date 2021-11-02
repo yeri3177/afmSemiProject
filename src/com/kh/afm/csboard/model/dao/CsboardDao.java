@@ -310,5 +310,33 @@ public class CsboardDao {
 		return list;
 	}
 
+	
+	// 게시판 수정하기
+	// DML
+	public int updateCsboard(Connection conn, Csboard csboard) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("updateCsboard");
+		
+		try {
+			// 미완성 쿼리문을 가지고 객체 생성.
+			pstmt = conn.prepareStatement(query);
+			// 쿼리문 미완성
+			pstmt.setString(1, csboard.getBoardTitle());
+			pstmt.setString(2, csboard.getBoardContent());
+			pstmt.setInt(3, csboard.getBoardNo());
+			
+			// 쿼리문 실행 : 완성된 쿼리를 가지고 있는 pstmt 실행(파라미터 없음)
+			// DML은 executeUpdate()
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 }
