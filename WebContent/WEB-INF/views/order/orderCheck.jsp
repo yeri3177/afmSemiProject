@@ -24,7 +24,7 @@ int i = 0;
 %>
 	<div class="orderListInfo<%= i %>">
 		<div class="orderListSimpleInfo">
-			<div>주문 일자 : <%= (Date)order.getOrderDate() %></div>
+			<div>주문 일자 : <%= (Date)order.getOrderDate() %>/</div>
 			<div>총 주문 금액 : <%= order.getTotalPrice() %> 원</div>
 		</div>
 		<input type="hidden" name="orderNo<%=i%>" value="<%= order.getOrderNo() %>"/>
