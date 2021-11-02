@@ -65,8 +65,8 @@ function adrCheckSubmit(){
 	<% j++;} %>
 	</div>
 	<div class="hiddenProduct1">
-		<p class="orderSumcount">주문 상품 갯수 : <%= productQuantity %></p>
-		<p class="orderSum">주문 금액 : <%= (productPrice * productQuantity) %></p>
+		<p class="orderSumcount">주문 상품 갯수 : <%= productQuantity %> 개</p>
+		<p class="orderSum">주문 금액 : <%= (productPrice * productQuantity) %> 원</p>
 	</div>
 	<div class="hiddenProduct2">
 		<input type="hidden" name="totalQuantity" value="<%= productQuantity %>" readonly/>

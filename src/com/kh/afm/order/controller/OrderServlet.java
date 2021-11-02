@@ -42,7 +42,6 @@ public class OrderServlet extends HttpServlet {
 		List<Cart> list = orderService.cartOrder(userId);
 		int adrNo = Integer.parseInt(request.getParameter("address"));
 		int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
-		int totalQuantity = Integer.parseInt(request.getParameter("totalQuantity"));
 		Order order = new Order(userId, 0, null, totalPrice, adrNo);
 		int orderNo = orderService.cartOrderInsert(order);
 		if(orderNo != 0) {
@@ -59,7 +58,7 @@ public class OrderServlet extends HttpServlet {
 			}
 			String msg = result == list.size() ? "주문 성공!" : "주문 실패!";
 			session.setAttribute("msg", msg);
-			String location = request.getContextPath() + "/index.jsp";
+			String location = request.getContextPath() + "/order/orderCheck";
 			response.sendRedirect(location);
 			
 		}
