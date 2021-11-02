@@ -6,7 +6,7 @@
 <%@page import="com.kh.afm.user.model.service.UserService"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/user.css" />
 
-<section id=enroll-container>
+<section id="enroll-container">
 	
 	<h2>내 정보 보기</h2>
 	<form id="detailFrm" name="userUpdateFrm" action="<%=request.getContextPath()%>/user/userUpdate" method="POST">
@@ -57,7 +57,9 @@
 			<tr>
 				<th>주소<sup>*</sup></th>
 				<td>
-					<button onclick="location.href='<%= request.getContextPath() %>/user/userAddressList';">상세보기</button>
+					<%-- <button onclick="location.href='<%= request.getContextPath() %>/user/userAddressList';">상세보기</button> --%>
+					
+					<input type="button" onclick="location.href='<%= request.getContextPath() %>/user/userAddressList';" value="주소상세보기" />
 			 
 				</td>
 			</tr>
