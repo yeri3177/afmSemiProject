@@ -22,8 +22,12 @@ function pswdChk(url,password){
 	var pswdChk = prompt("비밀번호를 입력해주세요.");// 사용자가 입력한 비밀번호
 	var origin = password // 게시글의 비밀번호
 	if(pswdChk != origin){
-		alert("비밀번호가 틀렸습니다. 확인주세요.");
-		return false;
+		if(pswdChk == null || pswdChk == ''){
+			return false;
+		} else{
+			alert("비밀번호가 틀렸습니다. 확인주세요.");
+			return false;
+		}
 	} else {
 		
 		location.href=url;

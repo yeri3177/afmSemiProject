@@ -32,10 +32,12 @@
 		</td>
 	</tr>
 	<tr>
+		<% if(!editable) { %>
 		<th>비밀번호</th>
 		<td>
-			<input type="password" name="boardPassword" /> *
+			<input type="password" name="boardPassword" /> <input type="checkbox" name="boardLockYN" value="Y" /> 비밀글 여부
 		</td>
+		<% } %>  
 	</tr>
 	<tr>
 		<th>제 목</th>

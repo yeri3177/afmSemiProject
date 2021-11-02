@@ -142,7 +142,7 @@ const deleteCsboard = () => {
 </script>
 <% } %>
 <script>
-$("[name=cbContent]", document.csboardCommentFrm).focus((e) => {
+$("[name=cbContent]", document.csboardCommentFrm).onmousedown((e) => {
 	<%-- console.log("focus!"); --%>
 <% if(loginUser == null){%>
 	loginAlert();
@@ -170,8 +170,7 @@ $(document.csboardCommentFrm).submit((e) => {
 
 const loginAlert = () => {
 	alert("로그인 후 이용할 수 있습니다.");
-	<%-- $(location.href="<%= request.getContextPath() %>/user/userLogin").focus(); --%>
-	<%-- 다른 페이지로 이동 하게 focus 줄 수 없나. --%>
+	location.href="<%= request.getContextPath() %>/user/userLogin";
 };
 
 
