@@ -39,8 +39,11 @@ public class CsboardListServlet extends HttpServlet {
 		// a. content 영역 - paging query
 		int start = cPage * numPerPage - (numPerPage - 1);
 		int end = cPage * numPerPage;
-		
 		List<Csboard> list = csboardService.selectCsboardList(start, end);
+		
+		// 공지사항 여부용
+		List<Csboard> noticeList = csboardService.selectNoticeList();
+		System.out.println("noticeList = " + noticeList);
 		
 		// b. pagebar 영역
 		// totalContents, url 준비
@@ -54,9 +57,14 @@ public class CsboardListServlet extends HttpServlet {
 		// 3. view단 forwarding
 		request.setAttribute("list", list);
 		request.setAttribute("pagebar", pagebar);
+		
+		// 공지사항 여부용
+		request.setAttribute("noticeList", noticeList);
 		request
 			.getRequestDispatcher("/WEB-INF/views/csboard/csboardList.jsp")
 			.forward(request, response);
+		
+		
 		
 	}
 
