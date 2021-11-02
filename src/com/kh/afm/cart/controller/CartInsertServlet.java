@@ -37,7 +37,7 @@ public class CartInsertServlet extends HttpServlet {
 		
 
 		if(result>0) {
-			session.setAttribute("msg", "성공적으로 장바구니애 담았습니다.");
+			session.setAttribute("msg", "성공적으로 장바구니에 담았습니다.");
 			response.sendRedirect(request.getContextPath() + "/product/productList");
 		}
 		else {

@@ -719,5 +719,62 @@ public class ProductDao {
 		return likeCount;
 	}
 
+	public String selectProductCategory(Connection conn, int start, int end, String pCategory) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String csvStr = null;
+		StringBuilder csv = new StringBuilder();
+		String sql = prop.getProperty("selectProductCategory");
+		List<Product> list = new ArrayList<>();
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pCategory);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Product product = new Product();
+				
+				product.setpNo(rset.getInt("p_no"));
+				product.setpTitle(rset.getString("p_title"));
+				product.setpPrice(rset.getInt("p_price"));
+				product.setUserId(rset.getString("p_user_id"));
+				product.setpRegDate(rset.getDate("p_reg_date"));
+				product.setpRecommend(rset.getInt("p_recommend"));
+				
+				if(rset.getString("img_flag").equals("Y")) {
+					Attachment attach = new Attachment();
+					attach.setAttachNo(rset.getInt("attach_no"));
+					attach.setpNo(rset.getInt("p_no"));
+					attach.setOriginalFileName(rset.getString("original_filename"));
+					attach.setRenamedFileName(rset.getString("renamed_filename"));
+					attach.setRegDate(rset.getDate("reg_date"));
+					attach.setImgFlag(rset.getString("img_flag"));
+					
+					product.setAttach1(attach);
+				
+				list.add(product);
+				}
+			}
+			for(int i = 0; i < list.size(); i++) {
+				csv.append(list.get(i));
+				if(i != list.size() -1)
+					csv.append("\n");
+			}
+			
+			csvStr = csv.toString();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return csvStr;
+	}
+
 	
 }
