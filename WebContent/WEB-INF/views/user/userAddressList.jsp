@@ -157,7 +157,7 @@ $("#enrollAddressBtn").click((e) => {
  */
 
 <%
-	for(int j = 0; j < 3; j++) {
+	for(int j = 0; j < list.size(); j++) {
 %>
 /* 수정 버튼 클릭 이벤트 */
 $("#updateAddressBtn-<%=j%>").click((e) => {

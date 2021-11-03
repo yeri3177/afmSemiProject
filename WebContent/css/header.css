@@ -3,7 +3,7 @@ body{font-family: 'Noto Sans KR', sans-serif; overflow-x: hidden;padding:0;margi
 a{text-decoration:none;}
 header{position: fixed;z-index:5;}
 .mainHeader{background-color:#FBF6F0;top: 0;left: 0;font-weight: bold;justify-content: space-between;width: 100%;height: 16%;display: flex;position: fixed;z-index: 9999;}
-.homepageName{padding:1vw;color:green;display: flex;top: 0;width: 100%;}
+.homepageName{padding-left:1vw;padding-top:1vw;color:green;display: flex;top: 0;width: 100%;}
 .profileImg{background-color:#FBF6F0;padding: 0.1vw;border: none;z-index: 9999;position:relative;}
 .profileImg a{background-color:#FBF6F0;font-size:1.2vw;}
 .cartImg{background-color:#FBF6F0;padding: 0.1vw;border: none;}
@@ -17,8 +17,8 @@ header{position: fixed;z-index:5;}
 .profile{padding-top:1.5vw;padding-left:0.5vw;width:4vw;}
 .cart{padding-top:1.5vw;padding-left:0.5vw;width:4vw;}
 .setting{padding-top:1.5vw;padding-left:0.5vw;width:4vw;}
-.logoImg{width:30%;height:30%}
-.nickName{font-size:4.5vw;padding:0;margin:0;padding-top:1vh;}
+.logoImg{width:40%;height:40%}
+.nickName{font-size:4.5vw;padding:0;margin:0;padding-top:1vh;width:20%;}
 .mainNav{background-color:#FFA45B;padding:0px;margin:auto;display:flex;position:fixed;top:18%;left:50%;transform:translate(-50%,-50%);width:100%;height:6%;font-size:1.2vw;z-index:3;}
 .mainNav div{width: 100%;float: left;text-align: center;border-left: 1px #47C83E solid;height:100%;z-index:3;display:flex;justify-content: center;align-items: center;}
 .mainNav div:first-of-type{border-left:none;z-index:3;}
