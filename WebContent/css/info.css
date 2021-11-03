@@ -15,27 +15,119 @@
  * afm 소개 박스 
  ********************************************************/
 /* afm 소개 컨테이너 */
-#introbox {
+.info-container-box {
 	width: 100%;
-	height: 550px;
+	height: 430px;
 	background-color: white;
 	position: relative;
 	border-bottom: 1px solid black;
 	text-align: center;
 	padding-top: 65px;
-}
-.introbox-img {
-	text-align: center;
-	position: relative;
+	overflow: hidden;
 	
 }
-#intro-text {
-	width: 700px;
+#what-is-afm {
+	z-index: 999;
 }
 
-#afmfullname {
-	width: 450px;
+
+/* afm 소개글 */
+#intro-text {
+	font-size: 25px;
+	z-index: 999;
 }
+
+/* 작은 채소 이미지 요소들 */
+.mini-imgs {
+	width: 70px;
+	position: absolute;
+	z-index: 1;
+	/* overflow: hidden; */
+}
+
+
+/************************************************************/
+/* 토마토 */
+#mini1 {
+	top: 40px;
+	left: 220px;
+}
+/* 블루베리 */
+#mini2 {
+	top: 100px;
+	left: 490px;
+}
+/* 도토리 */
+#mini3 {
+	top: 200px;
+	left: 120px;
+}
+/* 옥수수 */
+#mini4 {
+	top: 300px;
+	left: 120px;
+}
+/* 양상추 */
+#mini5 {
+	top: 40px;
+	left: 320px;
+}
+/* 망고 */
+#mini6 {
+	top: 140px;
+	left: 420px;
+}
+/* 딸기 */
+#mini7 {
+	top: 240px;
+	right: 120px;
+}
+/* 당근 */
+#mini8 {
+	top: 340px;
+	right: 20px;
+}
+/* 밤 */
+#mini9 {
+	top: 140px;
+	right: 120px;
+}
+/* 단호박 */
+#mini10 {
+	top: 140px;
+	right: 320px;
+}
+/* 수박 */
+#mini11 {
+	top: 240px;
+	right: 220px;
+}
+/* 귤 */
+#mini12 {
+	top: 340px;
+	right: 320px;
+}
+/* 복숭아 */
+#mini13 {
+	top: 240px;
+	right: 120px;
+}
+/* 파인애플 */
+#mini14 {
+	top: 140px;
+	right: 620px;
+	z-index: 1;
+}
+/* 브로콜리 */
+#mini15 {
+	top: 420px;
+	right: 520px;
+}
+
+
+
+
+
 
 /*********************************************************
  * 상단 박스 
@@ -46,6 +138,7 @@
 	height: 550px;
 	background-color: #ffefbe;
 	position: relative;
+	border: none;
 }
 /* 이미지박스 */
 .topbox-img {
