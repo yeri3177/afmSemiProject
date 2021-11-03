@@ -12,7 +12,6 @@
 	position: relative;
 	top: 100px;
 	padding: 30px;
-	/* background-color: #fffacf; */
 }
 
 /* 화면 1.3배 확대 */
@@ -27,6 +26,11 @@
 	border-collapse:collapse;
 	
 }
+
+/* 로고이미지랑 폼 사이 띄우기 */
+#loginFrm {
+	margin-top: 50px;
+} 
 
 #loginFrm label {
 	font-size:small; 
@@ -55,15 +59,15 @@
 	border-radius: 5px
 }
 
+/* input들 사이 조정 */
 #login-container td {
 	padding: 5px;
 }
 
-
-
 /*************************************************
  * userTypeEnroll.jsp (회원가입시 회원유형 페이지)
  **************************************************/
+/* 전체 영역 */
 #enrolltype-container {
 	margin: 0 auto;
 	text-align: center;
@@ -73,7 +77,7 @@
 	zoom: 1.2;
 }
 
- 
+ /* 로고 이미지 */
 #enrolltype-container .logo-img {
 	margin: 60px 0;
 }
@@ -82,64 +86,94 @@
 	margin : 20px;
 }
 
+
 /*************************************************
  * userEnroll.jsp (일반회원 회원가입폼)
  **************************************************/
-#user-enroll-container {
-	text-align: center;
+/* 전체 영역 */
+#user1enroll-container {
+	margin: 0 auto;
 	position: relative;
-	top: 30px;
-	padding: 20px;
+	
 }
 
 
+/* 타이틀 글자들 */
+#user-enroll-container h4 {
+	/* text-align: left; */
+	/* padding-left: 80px; */
+}
 
+sup {
+	color: red;
+}
+/* 로고 이미지 */
 #user-enroll-container .logo-img {
-	margin: 60px 0;
+	margin: 0 auto;
+	position: relative;
+	text-align: center;
 }
  
+/* 회원가입 폼 */
 #userEnrollFrm {
-	border: 3px solid black;
+	border: 1px solid black;
 	margin: 0 auto;
 	/* background-color:silver;  */
 	border-radius: 20px;
 	width: 750px;
 }
 
-#sellerEnrollFrm {
-	border: 3px solid black;
-	margin: 0 auto;
-	/* background-color:silver;  */
-	border-radius: 20px;
-	width: 750px;
-}
- 
-#user-enroll-container table {
-	border-collapse: collapse;
-	margin: 0 auto;
-}
- 
-#user-enroll-container tr, th, td {
-	border: 1px solid silver;
-	border-collapse: collapse;
+/* 약관동의 공간 */ 
+.enrollinfo {
+	width: 90%; 
+	height: 130px; 
+	overflow: scroll;
 	text-align: left;
-	border-left: none;
-	border-right: none;
+	padding: 35px;
 }
+
  
- 
+/* 여백 */
 #blank{
 	height: 50px;
-	border-top:none;
+	/* border-top:none; */
 }
 
- 
-.enrollinfo {
-	width: 100%; 
-	height: 120px; 
-	overflow: scroll;
+#enrollarea {
+	text-align: center;
 }
 
+/* 테이블 */
+#user-enroll-container tr {
+	margin: 20px;
+}
+
+/* input 태그들 */
+.enrollInput {
+	width: 450px;
+	height: 45px;
+} 
+
+.enrollIdInput {
+	width: 400px;
+	height: 45px;
+}
+.enrollmail {
+	width: 140px;
+	height: 45px;
+}
+.enrollday{
+	width: 150px;
+	height: 45px;
+}
+
+/* 중복검사 버튼 */
+.checkInput {
+	width: 70px;
+	height: 35px;	
+}
+
+/* 가입하기 버튼 */
 #submitbtn input {
 	background-color:#568A35;
 	width: 80%;	
@@ -153,8 +187,17 @@
 	
 }
 
+/* 판매자 회원 회원가입 페이지 폼 */
+#sellerEnrollFrm {
+	border: 3px solid black;
+	margin: 0 auto;
+	/* background-color:silver;  */
+	border-radius: 20px;
+	width: 750px;
+}
+
 /*************************************************
- * updatePassword.jsp (일반회원 회원가입폼)
+ * updatePassword.jsp (비밀번호 수정 페이지)
  **************************************************/
  #enroll-container updatePswBtn {
   text-align: center;
@@ -168,27 +211,24 @@
 #enroll-container {
  	margin: 80px auto;
  	text-align: center;
- 	
 	border: 3px solid black;
-	
 	/* background-color:silver;  */
 	border-radius: 20px;
 	width: 550px;
 
 }
 
-#enroll-container table {
+#enroll-container > table {
  	border : 1px solid black;
  	border-collapse: collapse;
  	margin: 0 auto;
  	border-left: none;
  	border-right: none;
- 	border-top: none;
- 	border-bottom: none;
 } 
  
+/* 회원가입 페이도 적용되니까 잘 보고 하기 */
 #enroll-container table th,td {
-  padding: 40px;
+  /* padding: 40px; */
 }
 
 #enroll-container input {
@@ -197,12 +237,9 @@
 }
 
 
-
 section#enroll-container input[readonly]{
 	background: lightgray;
 }
-
-
 
 /*************************************************
  * OrderComplete.jsp (결제내역 페이지)  

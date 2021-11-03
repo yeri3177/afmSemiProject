@@ -28,15 +28,16 @@
 		<a href="<%= request.getContextPath() %>/index.jsp"><img class="logo-img" src="<%=request.getContextPath()%>/images/common/logofont.png" /></a>
 		
 		<!-- 로그인 텍스트 -->
-		<h1 class="loginFrm-headline">Login</h1>
+		<!-- <h1 class="loginFrm-headline">Login</h1> -->
+		
 		
 		<!-- 로그인 폼 -->
 		<form id="loginFrm" name="loginFrm" action="<%=request.getContextPath() %>/user/userLogin" method="POST">
-			<table>
+			<table class="loginFrmTable">
 				<!-- 1행 : 아이디 -->
 				<tr>
 					<td>
-						<input type="text" name="userId" id="userId" placeholder="아이디" value="<%= saveId != null ? saveId : "" %>">
+						<input type="text" name="userId" id="userId" placeholder="아이디" tabindex="1"  value="<%= saveId != null ? saveId : "" %>">
 					</td>
 				</tr>
 				
@@ -48,15 +49,15 @@
 				<!-- 3행 : 아이디저장 -->
 				<tr>
 					<td>
-						<input type="checkbox" name="saveId" id="saveId" <%= saveId != null? "checked" : "" %> />
+						<input type="checkbox" name="saveId" id="saveId" <%= saveId != null? "checked" : "" %> tabindex="3"/>
 						<label for="saveId">아이디저장</label>
 					</td>
 				</tr>
 				
 				<!-- 4행 : 로그인버튼 -->
 				<tr>
-					<td  id="loginbtn1">
-						<input type="submit" value="로그인" class="login-con-btn">
+					<td>
+						<input type="submit" value="로그인" class="login-con-btn" tabindex="4">
 					</td>
 				</tr>
 				
