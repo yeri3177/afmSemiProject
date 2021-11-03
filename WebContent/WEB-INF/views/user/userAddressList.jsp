@@ -10,6 +10,8 @@
 %>
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/user.css" />
+<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
+
 <style>
 /* 주소추가폼 안보이게하기 */
 .addressEnroll {
@@ -59,7 +61,7 @@
 		</td>
 		
 		<td> <!-- 도로명주소 -->
-			<input id="user_addr-<%= i %>" type="text" name="address1-<%= i %>" id="address1" 
+			<input id="user_addr-<%= i %>" type="text" name="address1-<%= i %>" 
 				placeholder="도로명 주소" value="<%= address.getAdrRoad() %>" readonly> <br>
 		</td>
 		
@@ -104,22 +106,22 @@
 			<tr>
 				<td>새주소</td>
 				<td> <!-- 주소명칭 -->
-					<input type="text" name="adr_name" placeholder="주소명칭" />
+					<input type="text" name="adr_name" id="_adrname"placeholder="주소명칭" />
 				</td> 
 				<td> <!-- 주소검색(우편번호) -->
 					<input type="text" id="user_post" onclick="findAddr()" placeholder="주소검색" readonly/>
 				</td>
 				<td> <!-- 도로명주소 -->
-					<input type="text" id="user_addr" name="adr_road" placeholder="도로명주소" />
+					<input type="text" id="user_addr" name="adr_road" placeholder="도로명주소"/>
 				</td>
 				<td> <!-- 상세주소 -->
-					<input type="text" name="adr_detail" placeholder="상세검색" />
+					<input type="text" name="adr_detail" id="user_addrdetail" placeholder="상세주소" required />
 				</td>
 				<td>
 					<input type="button" value="추가" id="enrollBtn" />
 				</td>
 					<!-- 아이디 -->
-					<input type="hidden" name="userId" value="<%= list.get(0).getUserId() %>"/>
+					<input type="hidden" name="userId" id="_userId" value="<%= list.get(0).getUserId() %>"/>
 			</tr>
 		</table>
 	</form>
@@ -131,10 +133,10 @@
 	action="<%=request.getContextPath()%>/user/addressUpdate" method="POST">
 	
 	<input type="hidden" name="userId" value="<%= list.get(0).getUserId() %>"/>
-	<input type="hidden" name="addressNo" />
-	<input type="hidden" name="addressName" />
-	<input type="hidden" name="address1" />
-	<input type="hidden" name="address2" />
+	<input type="hidden" name="addressNo"/>
+	<input type="hidden" name="addressName"/>
+	<input type="hidden" name="address1" id="_address1"/>
+	<input type="hidden" name="address2" id="_address2"/>
 </form>
 
 <!-- 주소 삭제 폼 -->
@@ -158,22 +160,36 @@ $("#enrollAddressBtn").click((e) => {
 		$(".addressEnroll").css('display','block');
 		
 		$("#enrollBtn").click((e) => {
-			
-			// 주소입력값 유효성검사
+	
+			// 주소입력값 유효성검사 
 			// (1) 주소명칭 입력 했는지
-			
+				const $addressName = $("#_adrname");
+				const $_address1 = $("#user_addr")
+				const $_address2 = $("#adr_detail");
+				
+				if(/^[가-힣]{1,}$/.test($addressName.val()) == false){
+					alert("주소 명칭을 입력해주세요.");
+					$addressName.select();
+					return false;
+				}
 			// (2) 도로명주소 입력 했는지
-			
+				/* const $address1 = $("#user_addr"); */
+				if(/^[가-힣-9]{4,}$/.test($_address1.val()) == false){
+					alert("도로명 주소를 입력해주세요.");
+					$_address1.select();
+					return false;
+				}
 			// (3) 상세주소 입력 했는지 
-			
-			
-			
+				/* const $address2 = $("#adr_detail"); */
+				if(/^[가-힣-9]{3,}$/.test($_address2.val()) == false){
+					alert("상세 주소를 입력해주세요.");
+					$_address2.select();
+					return false;
+				}
 			// 폼전송
 			const $frm = $(document.addressEnrollFrm);
 			$frm.submit();
-		
 		});
-		
 	}else{
 		// 주소추가 불가능
 		alert("주소는 최대 3개까지만 가능합니다.");
@@ -181,6 +197,8 @@ $("#enrollAddressBtn").click((e) => {
 });
 
 
+	
+	
 /**
  * 카카오 주소 api (주소추가폼)
  */
