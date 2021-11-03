@@ -342,7 +342,7 @@ public class CsboardDao {
 		return result;
 	}
 
-	public List<CsboardComment> selectCsboardList(Connection conn, int boardNo) {
+	public List<CsboardComment> selectCommentList(Connection conn, int boardNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectCommentList");
@@ -449,6 +449,24 @@ public class CsboardDao {
 		}
 		
 		return noticeList;
+	}
+
+	public int deleteCsboardComment(Connection conn, int cbNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("deleteCsboardComment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cbNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// RuntimeException 오류처리를 쉽게, 현재 업무상황을 잘 설명 가능한 커스텀 예외로 전환해서 throw
+			throw new CsboardException("댓글 삭제 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }
