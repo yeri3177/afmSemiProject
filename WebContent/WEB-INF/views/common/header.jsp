@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css"/>
 
 <!-- favicon -->
-<link rel="icon" href="<%= request.getContextPath() %>/images/common/logofont.png">
+<link rel="icon" href="<%= request.getContextPath() %>/images/common/logo_favicon.png">
 
 <%
 	User loginUser = (User)session.getAttribute("loginUser");
@@ -22,6 +22,7 @@
 <script>
 <%
 	String msg = (String)session.getAttribute("msg");
+System.out.println("msg = " + msg);
 	if(msg != null) session.removeAttribute("msg");
 
 %>

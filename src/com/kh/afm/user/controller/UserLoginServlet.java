@@ -41,33 +41,46 @@ public class UserLoginServlet extends HttpServlet {
 		User user = userService.selectOneUser(userId);	
 		HttpSession session = request.getSession();
 		
-		// b. 리턴된 회원객체에서 비밀번호 일치여부 검사 
-		if(user != null && password.equals(user.getPassword())) {
-			
-			// 로그인 성공 session객체에 로그인 정보 기록
-			session.setAttribute("loginUser", user);
-			session.setAttribute("msg", "로그인 성공했습니다.");
-			
-			// 아이디저장 쿠키
-			Cookie cookie = new Cookie("saveId", userId);
-			cookie.setPath(request.getContextPath()); 
-			if(saveId != null) {
-				// 체크한 경우
-				cookie.setMaxAge(7*24*60*60); // 7일
+		// 차단된 회원인지 조회하기
+		User blcokUser = userService.selectBlockUser(userId);
+		System.out.println("blcokUser = " + blcokUser);
+		
+		/*
+		 * if(blcokUser == null) {
+		 */
+		
+			// b. 리턴된 회원객체에서 비밀번호 일치여부 검사 
+			if(user != null && password.equals(user.getPassword())) {
+				
+				// 로그인 성공 session객체에 로그인 정보 기록
+				session.setAttribute("loginUser", user);
+				session.setAttribute("msg", "로그인 성공했습니다.");
+				
+				// 아이디저장 쿠키
+				Cookie cookie = new Cookie("saveId", userId);
+				cookie.setPath(request.getContextPath()); 
+				if(saveId != null) {
+					// 체크한 경우
+					cookie.setMaxAge(7*24*60*60); // 7일
+				}
+				else {
+					// 체크하지 않은 경우
+					cookie.setMaxAge(0); // 즉시삭제 
+				}
+				response.addCookie(cookie);
+			}else {
+				// 로그인 실패 
+				request.setAttribute("msg", "로그인 실패했습니다.");
 			}
-			else {
-				// 체크하지 않은 경우
-				cookie.setMaxAge(0); // 즉시삭제 
-			}
-			response.addCookie(cookie);
-		} 
-		else {
+/*		}else {
 			// 로그인 실패 
-			request.setAttribute("msg", "로그인 실패했습니다.");
-		}
+			request.setAttribute("msg", "차단된 회원은 로그인 하실 수 없습니다.");
+		}*/
+		
 		
 		// 4. 응답메세지 작성 :redirect302
 		String location = request.getContextPath() + "/";
+		//String location = request.getHeader("Referer");
 		response.sendRedirect(location);
 	}
 }

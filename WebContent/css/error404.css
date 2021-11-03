@@ -5,21 +5,19 @@
  *******************************************************/
 body {
 	background-color: #ffe9c2;
+	margin: 0 auto;
+	text-align:center;
 } 
 
 /************************ 왼쪽영역 ************************/
 .leftbox {
 	
-	/* 
-	background-color: pink;
-	 */
-	
 	display: inline-block;
 	width:850px;
 	height:600px;
 	position: relative;
-	top: 10px;
-	left: 180px;
+	top: 40px;
+	left: 120px;
 	
 	text-align: center;
 	margin: 0 auto;
@@ -55,6 +53,8 @@ body {
 	
 	background-color: #ffaf36;
 	border-radius: 20px;
+	
+	cursor: pointer;
 }
 
 
@@ -66,8 +66,8 @@ body {
 	display: inline-block;
 	position: relative;
 	width: 500px;
-	right: 20px;
-	top: 30px;
+	right: 40px;
+	top: 60px;
 	
 }
 /* 소녀 이미지 */
@@ -84,16 +84,24 @@ body {
 	width: 100px;
 	top: -250px;
 	left: -270px;
+	
+	animation: moveAngry 1s infinite steps(2); 
 }
 
 /* 화난 이미지2 */
 #angry2 {
 	position: relative;
 	width: 100px;
-	top: -270px;
-	right: 55px;
+	top: -260px;
+	right: 45px;
 	
+	animation: moveAngry 1s infinite steps(2); 
 }
 
-
+/* 애니메이션 효과 **/
+@keyframes moveAngry {
+	100% {
+		transform: scale(1.4);
+	}
+}
 
