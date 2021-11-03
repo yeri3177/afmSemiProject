@@ -208,17 +208,18 @@ sup {
 /*************************************************
  * userDetail.jsp (내정보보기 페이지)
  **************************************************/
-#enroll-container {
+/* 전체영역 */
+#enrolldetail-container {
  	margin: 80px auto;
  	text-align: center;
-	border: 3px solid black;
-	/* background-color:silver;  */
+	border: 2px solid black;
 	border-radius: 20px;
 	width: 550px;
-
+	height: 700px;
 }
 
-#enroll-container > table {
+/* 테이블 */
+#enrolldetail-container > table {
  	border : 1px solid black;
  	border-collapse: collapse;
  	margin: 0 auto;
@@ -226,35 +227,57 @@ sup {
  	border-right: none;
 } 
  
-/* 회원가입 페이도 적용되니까 잘 보고 하기 */
-#enroll-container table th,td {
-  /* padding: 40px; */
+/* 회원가입 페이지도 적용되니까 잘 보고 하기 */
+#enrolldetail-container th{
+	padding: 10px;
+	width:800px;
 }
 
-#enroll-container input {
-	width:200px;
+#enrolldetail-container td{
+	width:800px;
+	height: 30px;	
+	padding-bottom: 20px;
+}
+
+.detailbtn {
+	width:100px;
+	height: 30px;
+	background-color: #568A35;
+	border-color: white;
+	color: white;
+}
+
+input#_userId, #userName, #userRole, #email, #birthday, #phone {
+	width: 300px;
 	height: 30px;
 }
 
+input#bankname, #banknumer {
+	width:300px;
+	height: 30px;
+}
 
-section#enroll-container input[readonly]{
+section#enrolldetail-container input[readonly]{
 	background: lightgray;
 }
 
 /*************************************************
  * OrderComplete.jsp (결제내역 페이지)  
  **************************************************/
+/* 전체영역 */
 #OrderComplete-container {
 	margin: 100px auto;
 	text-align: center;
 }
  
+/* 테이블영역 */ 
 #OrderComplete-container table {
 	margin: 0 auto;
 	text-align: center;
 	border-collapse:collapse;
 }
 
+/* 표 상단 부분 */
 #OrderComplete-container table th {
 	height: 40px;
 	background-color: #ffebb5;
@@ -262,6 +285,7 @@ section#enroll-container input[readonly]{
 	padding: 15px;
 }
 
+/* 표 내용 부분 */
 #OrderComplete-container table td{
 	text-align: center;
 	padding: 15px;
@@ -272,6 +296,7 @@ section#enroll-container input[readonly]{
 	height: 70%;
 }
 
+/* 버튼 */
 .orderbtn {
 	width : 80px;
 }
@@ -362,6 +387,7 @@ section#enroll-container input[readonly]{
 	color: #FC5230;
 	/* text-shadow: 1px 1px #FFCD4A, 2px 2px #284D8E; */
 }
+
 /*************************************************
  * sellerOrderDetailList.jsp  
  **************************************************/
@@ -390,4 +416,48 @@ section#enroll-container input[readonly]{
 #tbl-sellerOrderDetailList {
 	width : 80%;
 	height: 70%;
+}
+
+/*************************************************
+ * userAddressList.jsp  
+ **************************************************/
+/* 전체영역 */
+#userAddressList-container {
+ 	margin: 0 auto;
+ 	text-align: center;
+}
+
+/* 테이블 영역 */
+#userAddressList-container table {
+ 	margin: 0 auto;
+ 	text-align: center;
+ 	border: 1px solid black;
+}
+
+#userAddressList-container th {
+	background-color: #ffdfaf
+}
+
+#userAddressList-container input {
+	width: 150px;
+	height: 20px;
+	
+}
+
+#user_post {
+	background-color: #e7e7e7;
+	text-align: center;
+	font-weight: bold;
+	border: 2px solid gray;
+}
+
+#enrollAddressBtn {
+	margin: 30px auto;
+	height: 35px;
+}
+
+#addressEnrollFrm table {
+	 	margin: 0 auto;
+ 	text-align: center;
+ 	border: 1px solid black;
 }

@@ -6,7 +6,7 @@
 <%@page import="com.kh.afm.user.model.service.UserService"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/user.css" />
 
-<section id="enroll-container">
+<section id="enrolldetail-container">
 	
 	<h2>내 정보 보기</h2>
 	<form id="detailFrm" name="userUpdateFrm" action="<%=request.getContextPath()%>/user/userUpdate" method="POST">
@@ -59,7 +59,7 @@
 				<td>
 					<%-- <button onclick="location.href='<%= request.getContextPath() %>/user/userAddressList';">상세보기</button> --%>
 					
-					<input type="button" onclick="location.href='<%= request.getContextPath() %>/user/userAddressList';" value="주소상세보기" />
+					<input type="button" onclick="location.href='<%= request.getContextPath() %>/user/userAddressList';" value="주소상세보기" id="adrdetailbtn"/>
 			 
 				</td>
 			</tr>
@@ -80,9 +80,9 @@
 %>		 
 		</table>
 		
-		<input class="detailBtn" type="submit" value="저장" >
-		<input class="detailBtn" type="button" onclick="location.href='<%= request.getContextPath() %>/user/updatePassword';" value="비밀번호변경" />
-		<input class="detailBtn" type="button" onclick="deleteUser();" value="탈퇴">
+		<input type="submit" class="detailbtn" value="저장" >
+		<input type="button" class="detailbtn" onclick="location.href='<%= request.getContextPath() %>/user/updatePassword';" value="비밀번호변경" />
+		<input type="button" class="detailbtn" onclick="deleteUser();" value="탈퇴">
 	</form>
 </section>	
 	
