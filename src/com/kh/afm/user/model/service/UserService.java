@@ -47,6 +47,8 @@ public class UserService {
 	
 	/**
 	 * 회원 정보 수정하기 (address 테이블)
+	 * @param address : 수정하려는 새 주소 객체
+	 * @return int : 수정성공여부 
 	 */
 	public int updateAddress(Address address) {
 		Connection conn = getConnection();
@@ -119,7 +121,7 @@ public class UserService {
 		}
 
 		/**
-		 * 회원가입 (Address 테이블 행 추가)
+		 * 회원가입 (address 테이블 행 추가)
 		 */
 		public int insertAddress(Address address) {
 			Connection conn = getConnection();
@@ -132,7 +134,7 @@ public class UserService {
 			return result;
 		}
 		/**
-		 * 회원가입 (Account 테이블 행 추가)
+		 * 회원가입 (tb_account 테이블 행 추가)
 		 */
 		public int insertAccount(Account tb_account) {
 			Connection conn = getConnection();
@@ -158,6 +160,19 @@ public class UserService {
 			return list;
 		}
 
-		
-
+		/**
+		 * 주소 삭제하기
+		 * @param addressNo : 삭제할 주소번호
+		 * @return int : 삭제성공여부
+		 */
+		public int deleteAddress(int addressNo) {
+			Connection conn = getConnection();
+			int result = userDao.deleteAddress(conn, addressNo);
+			if(result>0)
+				commit(conn);
+			else 
+				rollback(conn);
+			close(conn);
+			return result;
+		}
 }

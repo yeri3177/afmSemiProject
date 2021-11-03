@@ -43,8 +43,7 @@ public class UserUpdateServlet extends HttpServlet {
 		// 업무로직
 		int result_user = userService.updateUser(user);
 		
-		
-		//계좌수정 성공여부
+		// 계좌수정 성공여부
 		int result_account = 0;
 		
 		// 판매자일 때에만 tb_account 수정 업무로직 실행
@@ -65,7 +64,7 @@ public class UserUpdateServlet extends HttpServlet {
 		
 		
 		// 업데이트 성공 메세지 (tb_user테이블만 해당함)
-		String msg = (result_user >0) ? "회원정보를 성공적으로 수정했습니다." : "회원정보 수정실패했습니다.";
+		String msg = (result_user > 0) ? "회원정보를 성공적으로 수정했습니다." : "회원정보 수정실패했습니다.";
 		System.out.println("result_user = " + result_user);
 		
 		

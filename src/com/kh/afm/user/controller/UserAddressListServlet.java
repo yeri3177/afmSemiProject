@@ -36,7 +36,5 @@ public class UserAddressListServlet extends HttpServlet {
 		request.setAttribute("addressList", addressList);
 		request.getRequestDispatcher("/WEB-INF/views/user/userAddressList.jsp")				
 				.forward(request, response);
-
 	}
-
 }
