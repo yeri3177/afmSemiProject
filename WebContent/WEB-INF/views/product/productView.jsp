@@ -74,7 +74,9 @@ if(editable){
 %>
 		    <td>
 		    	<input type="button"
-		    		   value="신고하기" />
+		    		   value="신고하기" 
+		    		   onclick="location.href='<%= request.getContextPath() %>/csboard/productReport'"/>
+		    		   
 		    </td>
 		    <td>
 		    	<input 

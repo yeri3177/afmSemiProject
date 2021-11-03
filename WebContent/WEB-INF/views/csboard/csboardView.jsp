@@ -56,6 +56,7 @@
 <% } %> 
 	</table>
 	
+	<%-- 댓글 --%>
 	<hr style="margin-top:30px"/>
 	
 	<div class="comment-container">
@@ -64,7 +65,7 @@
 			action="<%= request.getContextPath() %>/csboard/csboardCommentEnroll"
 			name="csboardCommentFrm"
 			method="POST">
-			<textarea name="cbContent" id="" cols="60" rows="10"></textarea>
+			<textarea name="cbContent" id="" cols="30" rows="3"></textarea>
 			<button id="btn-insert">등록</button>
 			
 			<input type="hidden" name="cbLevel" value="1" />
@@ -79,6 +80,14 @@
 // .isEmpty()는 비어있을 때 true를 반환한다.
 if(commentList != null && !commentList.isEmpty()){
 	for(CsboardComment cbc : commentList){
+		boolean removable = 
+				loginUser != null &&
+				(
+					loginUser.getUserId().equals(cbc.getUserId())
+				|| UserService.ADMIN_ROLE.equals(loginUser.getUserRole())
+				);
+				
+		System.out.println(cbc);
 		// 댓글 
 		if(cbc.getCbLevel() == 1){
 %>
@@ -92,7 +101,8 @@ if(commentList != null && !commentList.isEmpty()){
 				<%= cbc.getCbContent() %>
 			</td>
 			<td>
-				<button class="btn-reply" value="<%=cbc.getCbNo() %>">답글</button>
+				    <button class="btn-reply" value="<%= cbc.getCbNo() %>">답글</button>
+<% if(removable){ %><button class="btn-delete" value="<%= cbc.getCbNo()  %>">삭제</button><% } %>
 			</td>
 		</tr>
 
@@ -110,7 +120,9 @@ if(commentList != null && !commentList.isEmpty()){
 				<%-- 댓글 내용 --%>
 				<%= cbc.getCbContent() %>
 			</td>
-			<td></td>
+			<td>
+<% if(removable){ %> <button class="btn-delete" value="<%= cbc.getCbNo() %>">삭제</button><% } %>
+			</td>
 		</tr>
 <%		
 		}
@@ -121,6 +133,25 @@ if(commentList != null && !commentList.isEmpty()){
 		</table>
 		
 	</div>
+<form 
+	action="<%= request.getContextPath() %>/csboard/csboardCommentDelete"
+	name="csboardCommentDelFrm"
+	method="POST">
+	<input type="hidden" name="cbNo" />
+	<input type="hidden" name="cbBoardNo" value="<%= csboard.getBoardNo() %>" />
+</form>
+
+<script>
+$(".btn-delete").click(function(e){
+	if(confirm("해당 댓글을 삭제하시겠습니까?")){
+		var $frm = $(document.csboardCommentDelFrm);
+		var cbNo = $(this).val();
+		$frm.find("[name=cbNo]").val(cbNo);
+		$frm.submit();
+	}
+});
+</script>
+
 </section>
 <%-- editable 함수로 감싸므로써, 글쓴이 해당 아이디거나 관리자일 때만 deleteCsboard 권한이 생기도록 한다. --%>
 <% if(editable){%>
@@ -139,8 +170,65 @@ const deleteCsboard = () => {
 };
 </script>
 <% } %>
+
+
 <script>
-$("[name=cbContent]", document.csboardCommentFrm).onmousedown((e) => {
+$(".btn-reply").click((e) => {
+	//console.log($(e.target).val());
+	const commentRef = $(e.target).val();
+	const tr = `<tr>
+	<td colspan="2" style="text-align: left;">
+		<form 
+			action="<%= request.getContextPath() %>/csboard/csboardCommentEnroll"
+			method="POST">
+			<textarea name="cbContent" id="" cols="30" rows="1"></textarea>
+			<button class="btn-insert2">등록</button>
+			
+			<input type="hidden" name="cbLevel" value="2" />
+			<input type="hidden" name="userId" value="<%= loginUser != null ? loginUser.getUserId() : "" %>" />
+			<input type="hidden" name="cbBoardNo" value="<%= csboard.getBoardNo() %>" />
+			<input type="hidden" name="cbCommentRef" value="\${commentRef}" />
+		</form>
+	</td>
+</tr>`;
+	console.log(tr);
+	
+	const $trOfBtn = $(e.target).parent().parent();
+	//$trOfBtn.after(tr);
+	$(tr)
+		.insertAfter($trOfBtn)
+		.find("form")
+		.submit((e) => {
+<% if(loginUser == null){%>
+			loginAlert();
+			// return false가 없으면 loginAlert 띄우고 제출이 될 것이다.
+			return false;
+<% } %>	
+			
+			// 내용검사
+			// const textarea = $("[name=content]", document.csboardCommentFrm);
+			// submit 이벤트의 주체가 document.csboardCommentFrm이므로
+			// e.target : form
+			const $textarea = $("[name=cbContent]", e.target);
+			
+			if(!/^(.|\n)+$/.test($textarea.val())){
+				alert("댓글 내용을 작성해주세요.");
+				$textarea.focus();
+				return false;
+			}
+		})
+		// focusing이 글로 바로 다시 가게끔 설정
+		.find("[name=cbContent]")
+		.focus();
+	
+	// 현재버튼의 handler 제거
+	// e.target : button
+	$(e.target).off('click');
+});
+
+
+
+$("[name=cbContent]", document.csboardCommentFrm).focus((e) => {
 	<%-- console.log("focus!"); --%>
 <% if(loginUser == null){%>
 	loginAlert();
@@ -166,7 +254,7 @@ $(document.csboardCommentFrm).submit((e) => {
 	}
 });	
 
-const loginAlert = () => {
+const loginAlert = (e) => {
 	alert("로그인 후 이용할 수 있습니다.");
 	location.href="<%= request.getContextPath() %>/user/userLogin";
 };

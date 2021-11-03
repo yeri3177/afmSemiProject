@@ -145,6 +145,9 @@ CREATE TABLE product_report (
     CONSTRAINTS ck_report_status check(report_status in ('Y','N'))
 );
 
+select * from user_sequences;
+
+
 --drop table csboard;
 create sequence seq_csboard_no;
 CREATE TABLE csboard (
@@ -1645,4 +1648,65 @@ insert into tb_account values (seq_tb_account_no.nextval, 'mina_111', '110352058
 insert into tb_account values (seq_tb_account_no.nextval, 'leesu_11', '330352058572', '카카오뱅크');
 insert into tb_account values (seq_tb_account_no.nextval, 'ho123', '130852558333', 'NH농협은행');
 insert into tb_account values (seq_tb_account_no.nextval, 'qwerty123', '110352258824', '신한은행');
+
+-- 122번 게시글에 대한 샘플 댓글 생성
+insert into csboard_comment
+values(
+    seq_csboard_comment_cb_no.nextval,
+    default,
+    'jisoo123',
+    '글 잘 읽었습니다',
+    122,
+    null,
+    default
+);
+
+insert into csboard_comment
+values(
+    seq_csboard_comment_cb_no.nextval,
+    default,
+    'admin',
+    '좋은 글 감사합니다.',
+    122,
+    null,
+    default
+);
+
+insert into csboard_comment
+values(
+    seq_csboard_comment_cb_no.nextval,
+    default,
+    'han123',
+    '이번달 베스트 게시글에 선정되셨습니다. 축하드려요~',
+    122,
+    null,
+    default
+);
+
+-- 122번 게시글의 샘플 대댓글
+-- 18번 댓글
+insert into csboard_comment
+values(
+    seq_csboard_comment_cb_no.nextval,
+    2, -- cb_level
+    'aaaaa',
+    '대댓글입니다..',
+    122,
+    18, -- cb_no
+    default
+);
+
+-- 19번 댓글
+insert into csboard_comment
+values(
+    seq_csboard_comment_cb_no.nextval,
+    2, -- cb_level
+    'nayeon',
+    '좋은 글 감사합니다.',
+    122,
+    19,
+    default
+);
+select * from csboard_comment order by cb_no;
+    
 

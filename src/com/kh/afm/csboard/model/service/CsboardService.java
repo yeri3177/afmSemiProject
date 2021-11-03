@@ -131,7 +131,7 @@ public class CsboardService {
 
 	public List<CsboardComment> selectCommentList(int boardNo) {
 		Connection conn = getConnection();
-		List<CsboardComment> commentList = csboardDao.selectCsboardList(conn, boardNo);
+		List<CsboardComment> commentList = csboardDao.selectCommentList(conn, boardNo);
 		close(conn);
 		return commentList;
 	}
@@ -158,6 +158,20 @@ public class CsboardService {
 		List<Csboard> noticeList = csboardDao.selectNoticeList(conn);
 		close(conn);
 		return noticeList;
+	}
+
+	public int deleteCsboardComment(int cbNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = csboardDao.deleteCsboardComment(conn, cbNo);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		}
+		
+		return result;
 	}
 
 
