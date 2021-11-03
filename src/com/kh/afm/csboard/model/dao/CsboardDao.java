@@ -16,6 +16,7 @@ import java.util.Properties;
 import com.kh.afm.csboard.model.exception.CsboardException;
 import com.kh.afm.csboard.model.vo.Csboard;
 import com.kh.afm.csboard.model.vo.CsboardComment;
+import com.kh.afm.product.model.vo.Report;
 
 
 public class CsboardDao {
@@ -466,6 +467,31 @@ public class CsboardDao {
 		} finally {
 			close(pstmt);
 		}
+		return result;
+	}
+
+	public int insertReport(Connection conn, Report report) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertReport");
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (report.getpNo()));
+			pstmt.setString(2, report.getReportTitle());
+			pstmt.setString(3, report.getReportType());
+			pstmt.setString(4, report.getReportContent());
+			pstmt.setString(5, report.getUserId());
+			pstmt.setString(6, report.getReportStatus());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
 		return result;
 	}
 

@@ -27,7 +27,8 @@ import com.kh.afm.user.model.vo.User;
 	"/cart/cartList",
 	"/cart/cartDeleteAll",
 	"/cart/cartUpdate",
-	"/cart/deleteOneItem"
+	"/cart/deleteOneItem",
+	"/csboard/productReportForm"
 	
 	
 })
