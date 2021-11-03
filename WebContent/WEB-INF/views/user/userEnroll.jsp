@@ -120,7 +120,7 @@ https://tyrannocoding.tistory.com/48
 				<td>
 					이메일<sup>*</sup> <br /> 
 					<input type="text" name="emailId" id="emailId" required> @ 
-					<input type="text" name="emailAddress" id="emailAddress" disabled> 
+					<input type="text" name="emailAddress" id="emailAddress" readonly> 
 					
 					<select name="emailSelect" id="emailSelect">
 						<option value="naver.com">naver.com</option>
@@ -178,26 +178,10 @@ https://tyrannocoding.tistory.com/48
 
 
 <script>
-/*  이메일주소 자동완성 */
-$("#emailSelect").change((e) => {
-	
-	/* input타입의 이메일주소*/
-    var emailAddress = document.getElementById("emailAddress"); 
-    /* select타입의 이메일주소 */
-    var emailSelect = document.getElementById("emailSelect"); 
-    
-    /* 선택한이메일주소option의 인덱스넘버 */
-    var idx = emailSelect.options.selectedIndex; 
-    /* 선택한이메일주소option의 값 */
-    var val = emailSelect.options[idx].value;
-
-    console.log("idx = " + idx);
-    console.log("val = " + val);
-    
-    //이메일주소 덮어씌우기(select값 -> input값)
-    emailAddress.value = val;
-    console.log("emailAddress.value = " + emailAddress.value);
-
+$(document).ready(function(){
+	$("#emailSelect").change(function(){
+		$("#emailAddress").val($(this).val());
+	});
 });
 
  
