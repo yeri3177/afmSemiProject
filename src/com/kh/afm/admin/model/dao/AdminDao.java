@@ -548,6 +548,7 @@ public class AdminDao {
 		String id_str = "";
 		for(int i=0; i<userId_arr.length; i++) {
 			id_str += (i != userId_arr.length-1) ? (id_str = "'" + userId_arr[i] + "',") : (id_str = "'" + userId_arr[i] + "'");
+			//id_str += (i != userId_arr.length-1) ? (id_str = userId_arr[i] + ",") : (id_str =  userId_arr[i] );
 		}
 		System.out.println("id_str = "+id_str);
 		
@@ -555,7 +556,7 @@ public class AdminDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			//pstmt.setString(1, id_str);
+			pstmt.setString(1, id_str);
 			result = pstmt.executeUpdate();			
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -165,7 +165,7 @@ private Properties prop = new Properties();
 			pstmt.setString(1, address.getAdrName());
 			pstmt.setString(2, address.getAdrRoad());
 			pstmt.setString(3, address.getAdrDetail());
-			pstmt.setString(4, address.getUserId());
+			pstmt.setInt(4, address.getAdrNo());
 			
 			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
 			result = pstmt.executeUpdate();
@@ -209,9 +209,6 @@ private Properties prop = new Properties();
 	}
   /**
    * 탈퇴하기
-   * @param conn
-   * @param userId
-   * @return
    */
     public int deleteUser(Connection conn, String userId) {
 		int result = 0;
@@ -381,5 +378,26 @@ private Properties prop = new Properties();
 		return list;
 	}
 
+	/**
+	 * 주소 삭제하기
+	 */
+	public int deleteAddress(Connection conn, int addressNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("deleteAddress"); 
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, addressNo);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 }

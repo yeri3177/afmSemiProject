@@ -144,6 +144,7 @@ div#search-userRole {
     
     <tbody>
 <%
+	int i = 0;
 	for(User user : list){
 %>
 	<tr>
@@ -177,7 +178,7 @@ div#search-userRole {
 		
 		<!---- address td ---->
 		<td>
-			<button id="addressBtn" data-user-id="<%= user.getUserId() %>">상세보기</button>
+			<button id="addressBtn-<%=i %>" data-user-id="<%= user.getUserId() %>">상세보기</button>
 		</td>
 		
 
@@ -188,7 +189,9 @@ div#search-userRole {
 		
 	</tr>
 <%
+	i++;
     }
+	
 %>
 	</tbody>	
 </table>	
@@ -213,7 +216,11 @@ div#search-userRole {
 
 <script>
 /* 주소 상세보기 팝업 */
-$("#addressBtn").click((e) => {
+
+<%
+	for(int j=0; j<10; j++) {
+%>
+$("#addressBtn-<%=j%>").click((e) => {
 	const $this = $(e.target);
 	const userId = $this.data("userId");
 	console.log("userId = " + userId);
@@ -226,7 +233,9 @@ $("#addressBtn").click((e) => {
 	$adrfrm.find("[name=userId]").val(userId);
 	$adrfrm.attr("target", "주소상세보기").submit();
 });
-
+<%
+	}
+%>
 
 /* 검색유형 체인지 이벤트 */
 $("#searchType").change((e) => {
@@ -261,4 +270,6 @@ $(".user_expose").change((e) => {
 });
 
 </script>
+
+
 <%@ include file="/WEB-INF/views/admin/adminFooter.jsp" %>		
