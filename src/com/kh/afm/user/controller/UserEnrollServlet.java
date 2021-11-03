@@ -48,13 +48,14 @@ public class UserEnrollServlet extends HttpServlet {
 		
 		String emailId = request.getParameter("emailId");
 		String emailAddress = request.getParameter("emailAddress");
-		//String emailAddressSelect = request.getParameter("emailAddressSelect");
 		
 		String userName = request.getParameter("userName");	
 		String phone = request.getParameter("phone");
+		
 		String birthyear = request.getParameter("birthyear");
 		String birthmonth = request.getParameter("birthmonth");
 		String birthday = request.getParameter("birthday");
+		
 		String address1 = request.getParameter("address1");
 		String address2 = request.getParameter("address2");
 		
@@ -63,28 +64,35 @@ public class UserEnrollServlet extends HttpServlet {
 		System.out.println("emailAddress = " + emailAddress);
 		String email = emailId+"@"+emailAddress;
 		
-		
-		//생일 월 1자리이면 -> 2자리
-		if(birthmonth.length()==1) {
-			birthmonth = "0"+birthmonth;
-		}
-		//생일 일 1자리이면 -> 2자리
-		if(birthday.length()==1) {
-			birthday = "0"+birthday;
-		}
-		
-		// 생일값 3개 -> 1개
-		String s_birth = birthyear+"-"+birthmonth+"-"+birthday; // 생일 8자리 
-		
-		// 생일 String타입 -> Date타입 
-		Date d_birth = null;
-		if(s_birth != null && !"".equals(s_birth)) {
-			d_birth = Date.valueOf(s_birth);
+		if(birthyear!=null && birthyear!=null && birthyear!=null) {
+			//생일 월 1자리이면 -> 2자리
+			if(birthmonth.length()==1) {
+				birthmonth = "0"+birthmonth;
+			}
+			//생일 일 1자리이면 -> 2자리
+			if(birthday.length()==1) {
+				birthday = "0"+birthday;
+			}
+			
+			// 생일값 3개 -> 1개
+			String s_birth = birthyear+"-"+birthmonth+"-"+birthday; // 생일 8자리 
+			
+			// 생일 String타입 -> Date타입 
+			Date d_birth = null;
+			if(s_birth != null && !"".equals(s_birth)) {
+				d_birth = Date.valueOf(s_birth);
+			}
+			
+			// User 객체 생성
+			User user = new User(userId, userName, email, password, d_birth, phone, null, UserService.USER_ROLE, null);
+			System.out.println("user : " + user);
+			
 		}
 		
 		// User 객체 생성
-		User user = new User(userId, userName, email, password, d_birth, phone, null, UserService.USER_ROLE, null);
+		User user = new User(userId, userName, email, password, null, phone, null, UserService.USER_ROLE, null);
 		System.out.println("user : " + user);
+		
 		
 		// Address 객체 생성
 		Address address = new Address(0, "기본주소", address1, address2, userId);
