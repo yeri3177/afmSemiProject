@@ -226,7 +226,7 @@ $("#addressBtn-<%=j%>").click((e) => {
 	console.log("userId = " + userId);
 	
 	/* 팝업 위치 및 사이즈 */
-	const spec = "left=550px, top=250px, width=800px, height=600px";
+	const spec = "left=550px, top=250px, width=800px, height=460px";
 	const popup = open("", "주소상세보기", spec);
 	
 	const $adrfrm = $(document.userAddressDetailFrm);
