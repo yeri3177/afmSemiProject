@@ -29,7 +29,6 @@ private Properties prop = new Properties();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	/**
@@ -107,7 +106,6 @@ private Properties prop = new Properties();
 				
 				// 회원정보 셋팅 
 				user = new User(userId, userName, email, password, birthday, phone, enrollDate, userRole, userExpose, account, null);
-				System.out.println("user@selectOneUser@dao" + user);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -399,5 +397,39 @@ private Properties prop = new Properties();
 		
 		return result;
 	}
-	
+
+	/**
+	 * 차단 회원인지 조회하기
+	 */
+	public User selectBlockUser(Connection conn, String userId) {
+		String sql = prop.getProperty("selectBlockUser");
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		User user = null;
+		
+		try {
+			// 1.PreparedStatment객체 생성 및 미완성쿼리 값대입
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			// 2.실행 & ResultSet객체 리턴
+			rset = pstmt.executeQuery();
+			
+			// 3.ResultSet -> User
+			if(rset.next()) {
+				
+				// 회원정보 셋팅 
+				user = new User();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// 4.자원 반납
+			close(rset);
+			close(pstmt);
+		}
+		
+		return user;
+	}
 }
