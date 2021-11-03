@@ -28,6 +28,7 @@
 }
 #what-is-afm {
 	z-index: 999;
+	position:relative;
 }
 
 
@@ -35,6 +36,7 @@
 #intro-text {
 	font-size: 25px;
 	z-index: 999;
+	position:relative;
 }
 
 /* 작은 채소 이미지 요소들 */
