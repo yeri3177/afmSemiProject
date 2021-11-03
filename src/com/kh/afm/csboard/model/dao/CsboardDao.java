@@ -387,14 +387,23 @@ public class CsboardDao {
 			// 미완성 쿼리문을 가지고 객체 생성.
 			pstmt = conn.prepareStatement(query);
 			// 쿼리문 미완성
-			pstmt.setInt(1, cbNo);
+			pstmt.setInt(1, cbc.getCbLevel());
+			pstmt.setString(2, cbc.getUserId());
+			pstmt.setString(3, cbc.getCbContent());
+			pstmt.setInt(4, cbc.getCbBoardNo());
+			pstmt.setObject(5, cbc.getCbCommentRef() == 0 ? null : cbc.getCbCommentRef());
 			
-			//
+			// 쿼리문 실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
+			// DML은 executeUpdate()
+			result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new CsboardException("댓글 등록 오류!", e);
+		} finally {
+			close(pstmt);
 		}
-		
-		return 0;
+		return result;
 	}
 
 

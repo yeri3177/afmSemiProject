@@ -29,13 +29,13 @@ public class CsboardCommentEnrollServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 사용자 입력 -> CsboardComment 객체
-		int cbNo = Integer.parseInt(request.getParameter("cbBoardNo"));
+		int cbBoardNo = Integer.parseInt(request.getParameter("cbBoardNo"));
 		int cbLevel = Integer.parseInt(request.getParameter("cbLevel"));
 		int cbCommentRef = Integer.parseInt(request.getParameter("cbCommentRef"));
 		String userId = request.getParameter("userId");
-		String cbContent = request.getParameter("cbConent");
+		String cbContent = request.getParameter("cbContent");
 		
-		CsboardComment cbc = new CsboardComment(0, cbLevel, userId, cbContent, cbLevel, cbCommentRef, null);
+		CsboardComment cbc = new CsboardComment(0, cbLevel, userId, cbContent, cbBoardNo, cbCommentRef, null);
 		System.out.println("CsboardCommentEnrollServlet = " + cbc);
 		
 		// 2. 업무로직
@@ -44,7 +44,7 @@ public class CsboardCommentEnrollServlet extends HttpServlet {
 		
 		// 3. redirect
 		request.getSession().setAttribute("msg", msg);
-		String location = request.getContextPath() + "/csboard/csboardView?no=" + cbNo;
+		String location = request.getContextPath() + "/csboard/csboardView?no=" + cbBoardNo;
 		response.sendRedirect(location);
 		
 	}
