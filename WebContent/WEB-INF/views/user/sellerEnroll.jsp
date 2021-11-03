@@ -20,15 +20,16 @@ https://tyrannocoding.tistory.com/48
 	<input type="hidden" name="userId" />
 </form>
 
-<section id=user-enroll-container>
+<section id="user-enroll-container">
 
 	
 	<!-- 로고이미지 -->
 	<a href="<%= request.getContextPath() %>/index.jsp"><img class="logo-img" src="<%=request.getContextPath()%>/images/common/logofont.png" /></a>
 		
 	
-	<form id="sellerEnrollFrm" name="sellerEnrollFrm" action="<%= request.getContextPath() %>/user/sellerEnroll" method="POST">
+	<form id="userEnrollFrm" name="userEnrollFrm" action="<%= request.getContextPath() %>/user/userEnroll" method="POST">
 	
+
 		<table>
 			<tr>
 				<td>
@@ -39,22 +40,22 @@ https://tyrannocoding.tistory.com/48
 			<tr>
 				<td>
 					<span class="chk">
-						<input type="checkbox"/>
+						<input type="checkbox" name="agree1" class="chk"/>
 					</span>
 					<span class="enrollchk">
-						AFM의 이용약관, 개인정보 수집 및 이용, 위치정보 이용약관(선택),<br> 
+						<strong>AFM</strong>의 이용약관, 개인정보 수집 및 이용, 위치정보 이용약관(선택),<br> 
 						프로모션 정보 수신(선택)에 모두 동의합니다.
 					</span>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<div style="width:100%; height:80px; overflow:auto">
+					<div class="enrollinfo">
 						<span class="chk">
-							<input type="checkbox"/>
+							<input type="checkbox" name="agree2" class="chk"/>
 						</span>
 						<span class="enrollchk">
-							AFM 방문을 환영합니다.
+							<strong>AFM</strong> 방문을 환영합니다.<br>
 							AFM 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 AFM 서비스의 이용과 관련하여 AFM서비스를 제공하는 AFM 주식회사(이하 ‘AFM’)와 이를 이용하는 AFM 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 AFM 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
 							여러분이 무심코 게재한 게시물로 인해 타인의 저작권이 침해되거나 명예훼손 등 권리 침해가 발생할 수 있습니다. 네이버는 이에 대한 문제 해결을 위해 ‘정보통신망 이용촉진 및 정보보호 등에 관한 법률’ 및 ‘저작권법’ 등을 근거로 권리침해 주장자의 요청에 따른 게시물 게시중단, 
 							원 게시자의 이의신청에 따른 해당 게시물 게시 재개 등을 내용으로 하는 게시중단요청서비스를 운영하고 있습니다. 보다 상세한 내용 및 절차는 고객센터 내 게시중단요청서비스 소개를 참고해 주세요
@@ -65,12 +66,12 @@ https://tyrannocoding.tistory.com/48
 			
 			<tr>
 				<td>
-					<div style="width:100%; height:80px; overflow:auto">
+					<div class="enrollinfo">
 						<span class="chk">
-							<input type="checkbox"/>
+							<input type="checkbox" name="agree3" id="agree3"/>
 						</span>
 						<span class="enrollchk">
-						개인정보보호법에 따라 네이버에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
+						개인정보보호법에 따라 <strong>AFM</strong>에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
 	
 						1. 수집하는 개인정보
 						이용자는 회원가입을 하지 않아도 정보 검색, 뉴스 보기 등 대부분의 AFM 서비스를 회원과 동일하게 이용할 수 있습니다. 이용자가 메일, 캘린더, 카페, 블로그 등과 같이 개인화 혹은 회원제 서비스를 이용하기 위해 회원가입을 할 경우, 네이버는 서비스 이용을 위해 필요한 최소한의 개인정보를 수집합니다.
@@ -82,11 +83,13 @@ https://tyrannocoding.tistory.com/48
 					</div>
 				</td>
 			</tr>
-			
+	
+		
 			<tr >
 				<td id="blank"></td>
 			</tr>
-				
+			
+		<div id="enrollarea">		
 			<tr>
 				<td>
 					일반회원 회원가입
@@ -94,54 +97,63 @@ https://tyrannocoding.tistory.com/48
 			</tr>
 			<tr>
 				<td>
-					아이디<sup>*</sup> <br />
-					<input type="text" name="userId" id="_userId" required/>
+					<h4>아이디<sup>*</sup> <br /></h4>
+					<input type="text" name="userId" id="_userId" class="enrollIdInput" required/>
 					
-					<input type="button" value="중복검사" id="btnCheckId" onclick="checkIdDuplicate();" />
+					<input type="button" value="중복확인" id="btnCheckId" class="checkInput" onclick="checkIdDuplicate();" />
 					<input type="hidden" id="idValid" value="0" />
 				</td>
 			</tr>
 			<tr>
 				<td>
-					비밀번호<sup>*</sup> <br />
-					<input type="password" name="password" id="_password" required />
+					<h4>비밀번호<sup>*</sup></h4>
+					<input type="password" name="password" id="_password" class="enrollInput" required />
 				</td>
 			</tr>
 			<tr>
 				<td>
-					비밀번호 확인<sup>*</sup> <br />
-					<input type="password" id="password2" required />
+					<h4>비밀번호 확인<sup>*</sup></h4>
+					<input type="password" id="password2" class="enrollInput" required />
 				</td>
 			</tr>
 			<tr>
 				<td>
-					이메일<sup>*</sup> <br />
-					<input type="text" placeholder="abc@xyz.com" name="email" id="email" />
+					<h4>이메일<sup>*</sup></h4> 
+					<input type="text" name="emailId" id="emailId" class="enrollmail" required> @ 
+					<input type="text" name="emailAddress" id="emailAddress" class="enrollmail" disabled> 
+					
+					<select name="emailSelect" id="emailSelect" class="enrollmail">
+						<option value="naver.com">naver.com</option>
+						<option value="daum.net">daum.net</option>
+						<option value="gmail.com">gmail.com</option>
+					</select>
+					</td>
+			</tr>
+			
+			
+			<tr>
+				<td>
+					<h4>이름<sup>*</sup></h4>
+					<input type="text" name="userName" id="userName" required class="enrollInput" />
 				</td>
 			</tr>
 			
 			<tr>
 				<td>
-					이름<sup>*</sup> <br />
-					<input type="text" name="userName" id="userName" required />
-				</td>
-			</tr>
-			
-			<tr>
-				<td>
-					전화번호<sup>*</sup> <br />
-					<input type="text" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" required />
+					<h4>전화번호<sup>*</sup></h4>
+					<input type="text" placeholder="(-없이)01012345678" name="phone" id="phone" class="enrollInput" maxlength="11" required />
 				</td>
 			</tr>
 		
 			<tr>
 				<td>
-					생일 <br />
-					<input type="text" placeholder="년(4자)" name="birthyear" id="birthyear" maxlength="4" />
-					<input type="number" placeholder="월" name="birthmonth" id="birthmonth" maxlength="2" />
-					<input type="text" placeholder="일" name="birthday" id="birthday" maxlength="2" />
+					<h4>생일</h4>
+					<input type="text" placeholder="년(4자)" name="birthyear" id="birthyear" class="enrollday" maxlength="4" />
+					<input type="number" placeholder="월" name="birthmonth" id="birthmonth" class="enrollday" maxlength="2" />
+					<input type="text" placeholder="일" name="birthday" id="birthday" class="enrollday" maxlength="2" />
 				</td>
 			</tr>
+			
 			
 			<tr>
 				<td>
