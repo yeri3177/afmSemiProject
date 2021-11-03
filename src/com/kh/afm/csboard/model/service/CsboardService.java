@@ -12,6 +12,7 @@ import java.util.Map;
 import com.kh.afm.csboard.model.dao.CsboardDao;
 import com.kh.afm.csboard.model.vo.Csboard;
 import com.kh.afm.csboard.model.vo.CsboardComment;
+import com.kh.afm.product.model.vo.Report;
 
 public class CsboardService {
 	
@@ -171,6 +172,16 @@ public class CsboardService {
 			throw e;
 		}
 		
+		return result;
+	}
+
+	public int insertReport(Report report) {
+		Connection conn = getConnection();
+		int result = csboardDao.insertReport(conn, report);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
 		return result;
 	}
 

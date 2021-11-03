@@ -10,15 +10,21 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ProductReportFormServlet
  */
-@WebServlet("/csboard/productReport")
+@WebServlet("/csboard/productReportForm")
 public class ProductReportFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		int productNo = Integer.parseInt(request.getParameter("productNo"));
+		
+		request.setAttribute("productNo", productNo);
+		request
+			.getRequestDispatcher("/WEB-INF/views/csboard/productReportForm.jsp")
+			.forward(request, response);
 	}
 
 }
