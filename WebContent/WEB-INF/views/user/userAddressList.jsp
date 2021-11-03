@@ -103,17 +103,33 @@
 			
 			<tr>
 				<td>새주소</td>
-				<td><input type="text" /></td>
-				<td><input type="text" /></td>
-				<td><input type="text" /></td>
-				<td><input type="text" /></td>
-				<td><input type="button" value="추가" /></td>
+				<td> <!-- 주소명칭 -->
+					<input type="text" name="adr_name" placeholder="주소명칭" />
+				</td> 
+				<td> <!-- 주소검색(우편번호) -->
+					<input type="text" id="user_post" onclick="findAddr()" placeholder="주소검색" readonly/>
+				</td>
+				<td> <!-- 도로명주소 -->
+					<input type="text" id="user_addr" name="adr_road" placeholder="도로명주소" />
+				</td>
+				<td> <!-- 상세주소 -->
+					<input type="text" name="adr_detail" placeholder="상세검색" />
+				</td>
+				<td>
+					<input type="button" value="추가" id="enrollBtn" />
+				</td>
+					<!-- 아이디 -->
+					<input type="hidden" name="userId" value="<%= list.get(0).getUserId() %>"/>
 			</tr>
 		</table>
 	</form>
 </div>
+
+
 <!-- 주소 수정 폼 -->
-<form id="addressUpdateFrm" name="addressUpdateFrm" action="<%=request.getContextPath()%>/user/addressUpdate" method="POST">
+<form id="addressUpdateFrm" name="addressUpdateFrm" 
+	action="<%=request.getContextPath()%>/user/addressUpdate" method="POST">
+	
 	<input type="hidden" name="userId" value="<%= list.get(0).getUserId() %>"/>
 	<input type="hidden" name="addressNo" />
 	<input type="hidden" name="addressName" />
@@ -122,24 +138,41 @@
 </form>
 
 <!-- 주소 삭제 폼 -->
-<form id="addressDeleteFrm" name="addressDeleteFrm" action="<%=request.getContextPath()%>/user/addressDelete" method="POST">
+<form id="addressDeleteFrm" name="addressDeleteFrm" 
+	action="<%=request.getContextPath()%>/user/addressDelete" method="POST">
+	
 	<input type="hidden" name="addressNo" />
 </form>
 
 
 <script>
-
 /* 주소 리스트 개수 */
 const listSize = $("#listSize").val();
-console.log("listSize = " + listSize);
+
 
 /* 추가 버튼 클릭 이벤트 */
 $("#enrollAddressBtn").click((e) => {
 	
 	if(listSize < 3){
 		// 주소추가 가능
+		$(".addressEnroll").css('display','block');
 		
+		$("#enrollBtn").click((e) => {
+			
+			// 주소입력값 유효성검사
+			// (1) 주소명칭 입력 했는지
+			
+			// (2) 도로명주소 입력 했는지
+			
+			// (3) 상세주소 입력 했는지 
+			
+			
+			
+			// 폼전송
+			const $frm = $(document.addressEnrollFrm);
+			$frm.submit();
 		
+		});
 		
 	}else{
 		// 주소추가 불가능
@@ -148,13 +181,35 @@ $("#enrollAddressBtn").click((e) => {
 });
 
 
-
-
 /**
- * 96번줄에 반복문 횟수를 3 지정이 아니라 리스트사이즈값을 주고 싶음!!!!!!
- * <%= list.size() %>
- * <input type="hidden" id="listSize" value="<%= list.size() %>" />
+ * 카카오 주소 api (주소추가폼)
  */
+function findAddr(){
+	new daum.Postcode({
+        oncomplete: function(data) {
+        	
+	       	console.log(data);
+	       	
+           // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+           // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+           // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+           var roadAddr = data.roadAddress; // 도로명 주소 변수
+           
+           var jibunAddr = data.jibunAddress; // 지번 주소 변수
+           
+           
+           // 우편번호와 주소 정보를 해당 필드에 넣는다.
+           document.getElementById('user_post').value = data.zonecode;
+           if(roadAddr !== ''){
+               document.getElementById("user_addr").value = roadAddr;
+           } 
+           else if(jibunAddr !== ''){
+               document.getElementById("user_addr").value = jibunAddr;
+           }
+        }
+    }).open();
+}
+
 
 <%
 	for(int j = 0; j < list.size(); j++) {
@@ -201,9 +256,7 @@ $("#deleteAddressBtn-<%=j%>").click((e) => {
 });
 
 
-/**
- * 카카오 주소 api
- */
+/* 카카오 주소 api (주소 수정폼) */
 $("#user_post-<%=j%>").click((e) => {
 /* function findAddr() { */
 	new daum.Postcode({
