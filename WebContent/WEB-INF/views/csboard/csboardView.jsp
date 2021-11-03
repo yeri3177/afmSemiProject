@@ -112,8 +112,6 @@ if(commentList != null && !commentList.isEmpty()){
 			</td>
 			<td></td>
 		</tr>
-
-
 <%		
 		}
 	}
