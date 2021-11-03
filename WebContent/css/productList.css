@@ -1,0 +1,64 @@
+@charset "UTF-8";
+.productHeading{
+	font-size: 64px;
+	font-weight: bold;
+	text-align: center;
+	margin: 120px 120px;
+}
+.thead{
+	font-size: 32px;
+}
+.tbody{
+	font-size: 20px;
+}
+.search-type{
+	font-size: 20px;
+	margin: 60px 20px;
+	margin-left: 80px;
+}
+.search-btn{
+	margin-left: 10px;
+	border: 0;
+	vertical-align: middle;
+	background-color: rgba(255,255,255,0.75);
+}
+.search-img{
+	width: 50px;
+	height: 50px;
+}
+.product-board{
+	margin: auto;
+	width: 80%;
+}
+.wtite-btn{
+	width:100px;
+    background-color: #FFA45B;
+    border: none;
+    color:black;
+    padding: 15px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline;
+    font-size: 1.2vw;
+    margin: 4px;
+    cursor: pointer;
+    text-weight: bold;
+    margin-right: 100px;
+    float: right;
+}
+.wtite-btn:hover {
+    background-color: #00C652;
+    color: #FFCD12;
+    
+}
+.pagebar{
+	margin: 100px 100px;
+	font-size: 30px;
+	padding: 5px;
+	font-family: 'Abril Fatface', cursive;
+	display: inline-block;
+	text-align: center;
+	border-radius: 10px;
+	display: block;
+	justify-content: space-evenly;
+}
