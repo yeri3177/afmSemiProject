@@ -6,17 +6,36 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
 	List<Product> list = (List<Product>)request.getAttribute("list");
+	String searchKeyword = request.getParameter("searchKeyword");
 %>
 
 <section id="board-container">
-
-<h2>Category</h1>
-<select name="category" id="category" class="category" value="category" data-type="모두보기">
+<br />
+<br />
+<%--
+<select name="category" id="category" class="category" value="category" style="width:100px;height:50px;">
 	<option id="모두보기" value="모두보기" selected>모두보기</option>
 	<option id="곡류" value="곡류">곡류</option>
 	<option id="과실류" value="과실류">과실류</option>
 	<option id="채소류" value="채소류">채소류</option>
 </select>
+ --%>
+
+<!-- 카테고리 검색 -->
+<div id="seearch-pCategory" class="search-type">
+	<form action="<%= request.getContextPath() %>/product/productFinder" name = "searchFrm">
+			<input type="hidden" name="searchType" value="pCategory"/>
+			
+			<input type="radio" name="searchKeyword" value="모두보기"> 모두보기
+			<input type="radio" name="searchKeyword" value="곡류"> 곡류
+			<input type="radio" name="searchKeyword" value="과실류"> 과실류
+			<input type="radio" name="searchKeyword" value="채소류"> 채소류 
+
+		
+			<button type="submit" class="search-btn">검색</button>
+	</form>
+</div>
+
 <h2>상품 목록</h1>
 	<table id="tbl-board">
 		<tr>
@@ -29,7 +48,7 @@
 			<th>추천수</th>
 		</tr>
 		
-<%-- <%
+<%
 	for(Product _product : list){
 %>
 		<tr>
@@ -43,7 +62,7 @@
 		</tr>
 <%
 	}
-%> --%>
+%>
 	</table>
 
 		<div class="test">
@@ -60,6 +79,7 @@
 <%
 	} 
 %>
+<%--
 <script>
 window.addEventListener('load', function(){
 	const value = "모두보기";
@@ -223,7 +243,7 @@ $(document).ready(function(){
 		console.log(this.value);
 	});
 
-	$.ajax({ㄴ
+	$.ajax({
 		url: "<%= request.getContextPath() %>/product/selectCategory",
 		data: {
 			con: pValue
@@ -233,10 +253,12 @@ $(document).ready(function(){
 		}
 	});
 });
---%>
+
 
 </script>
-
+--%>
+<script>
+</script>
 <div id='pageBar'><%= request.getAttribute("pagebar") %></div>
 </section>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
