@@ -247,4 +247,11 @@ public class ProductService {
 		return csvStr;
 	}
 
+	public List<Product> selectProductSearchList(int start, int end, String searchKeyword) {
+		Connection conn = getConnection();
+		List<Product> list = productDao.selectProductSearchList(conn, start, end, searchKeyword);
+		close(conn);
+		return list;
+	}
+
 }

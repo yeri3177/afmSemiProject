@@ -12,6 +12,7 @@ import java.util.Map;
 import com.kh.afm.csboard.model.dao.CsboardDao;
 import com.kh.afm.csboard.model.vo.Csboard;
 import com.kh.afm.csboard.model.vo.CsboardComment;
+import com.kh.afm.product.model.vo.Report;
 
 public class CsboardService {
 	
@@ -131,7 +132,7 @@ public class CsboardService {
 
 	public List<CsboardComment> selectCommentList(int boardNo) {
 		Connection conn = getConnection();
-		List<CsboardComment> commentList = csboardDao.selectCsboardList(conn, boardNo);
+		List<CsboardComment> commentList = csboardDao.selectCommentList(conn, boardNo);
 		close(conn);
 		return commentList;
 	}
@@ -158,6 +159,30 @@ public class CsboardService {
 		List<Csboard> noticeList = csboardDao.selectNoticeList(conn);
 		close(conn);
 		return noticeList;
+	}
+
+	public int deleteCsboardComment(int cbNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = csboardDao.deleteCsboardComment(conn, cbNo);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		}
+		
+		return result;
+	}
+
+	public int insertReport(Report report) {
+		Connection conn = getConnection();
+		int result = csboardDao.insertReport(conn, report);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		return result;
 	}
 
 

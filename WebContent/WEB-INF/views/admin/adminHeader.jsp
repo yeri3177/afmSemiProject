@@ -15,6 +15,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>afm 관리자 페이지</title>
+	
+	<!-- css -->
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css" />
 	
 	<!-- font : Alfa Slab One + Abril Fatface + Black Han Sans + Ubuntu -->
@@ -22,7 +24,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alfa+Slab+One&family=Black+Han+Sans&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
 	
-	<!--------------- favicon --------------->
+	<!-- favicon -->
 	<link rel="icon" href="<%= request.getContextPath() %>/images/admin/setting_icon.png">
 
 	<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>

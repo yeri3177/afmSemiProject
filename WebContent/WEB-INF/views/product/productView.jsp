@@ -73,8 +73,10 @@ if(editable){
 }
 %>
 		    <td>
-		    	<input type="button"
-		    		   value="신고하기" />
+		    	<input type="submit"
+		    		   value="신고하기" 
+		    		   formaction="<%= request.getContextPath() %>/csboard/productReportForm"/>
+		    		   
 		    </td>
 		    <td>
 		    	<input 

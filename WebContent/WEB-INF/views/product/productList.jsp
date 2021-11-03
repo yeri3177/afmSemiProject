@@ -4,23 +4,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/productList.css"/>
 <%
 	List<Product> list = (List<Product>)request.getAttribute("list");
+	String searchKeyword = request.getParameter("searchKeyword");
 %>
-
+<style>
+</style>
 <section id="board-container">
-
-<h2>Category</h1>
-<select name="category" id="category" class="category" value="category" data-type="모두보기">
+<br />
+<br />
+<%--
+<select name="category" id="category" class="category" value="category" style="width:100px;height:50px;">
 	<option id="모두보기" value="모두보기" selected>모두보기</option>
 	<option id="곡류" value="곡류">곡류</option>
 	<option id="과실류" value="과실류">과실류</option>
 	<option id="채소류" value="채소류">채소류</option>
 </select>
-<h2>상품 목록</h1>
-	<table id="tbl-board">
+ --%>
+
+<!-- 카테고리 검색 -->
+<div class="productHeading">
+<p>상품 목록</p>
+</div>
+
+<div id="seearch-pCategory" class="search-type">
+	<form action="<%= request.getContextPath() %>/product/productFinder" name = "searchFrm">
+			<input type="hidden" name="searchType" value="pCategory"/>
+			
+			<input type="radio" name="searchKeyword" value="모두보기"> 모두보기
+			<input type="radio" name="searchKeyword" value="곡류"> 곡류
+			<input type="radio" name="searchKeyword" value="과실류"> 과실류
+			<input type="radio" name="searchKeyword" value="채소류"> 채소류 
+
+			<button type="submit" class="search-btn"><img class="search-img" src="<%= request.getContextPath() %>/images/product/search-icon-64.png" alt=""></button>
+	</form>
+</div>
+
+	<table id="product-board" class="product-board">
+	<thead class="thead">
 		<tr>
-			<th>번호</th>
 			<th>사진</th>
 			<th>상품</th>
 			<th>가격</th>
@@ -28,12 +51,12 @@
 			<th>작성일</th>
 			<th>추천수</th>
 		</tr>
-		
-<%-- <%
+	</thead>
+	<tbody class="tbody">
+<%
 	for(Product _product : list){
 %>
 		<tr>
-			<th><%= _product.getpNo() %></th>
 			<th><img alt="" src="<%= request.getContextPath() %>/upload/product/<%= _product.getAttach1().getRenamedFileName() %>" width="300px" height="300px"></th>
 			<th><a href="<%= request.getContextPath() %>/product/productView?pNo=<%= _product.getpNo() %>"><%= _product.getpTitle() %></a></th>
 			<th><%= _product.getpPrice() %></th>
@@ -43,7 +66,8 @@
 		</tr>
 <%
 	}
-%> --%>
+%>
+	</tbody>
 	</table>
 
 		<div class="test">
@@ -52,14 +76,18 @@
 <% 
 	if(loginUser != null){ 
 %>	
+<div>
 <input 
 		type="button" 
 		value="글쓰기" 
-		id="btn-add" 
+		id="btn-add"
+		class="wtite-btn" 
 		onclick="location.href='<%= request.getContextPath() %>/product/productForm';" />
+</div>
 <%
 	} 
 %>
+<%--
 <script>
 window.addEventListener('load', function(){
 	const value = "모두보기";
@@ -223,7 +251,7 @@ $(document).ready(function(){
 		console.log(this.value);
 	});
 
-	$.ajax({ㄴ
+	$.ajax({
 		url: "<%= request.getContextPath() %>/product/selectCategory",
 		data: {
 			con: pValue
@@ -233,10 +261,10 @@ $(document).ready(function(){
 		}
 	});
 });
---%>
+
 
 </script>
-
-<div id='pageBar'><%= request.getAttribute("pagebar") %></div>
+--%>
+<div id='pageBar' class="pagebar"><%= request.getAttribute("pagebar") %></div>
 </section>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

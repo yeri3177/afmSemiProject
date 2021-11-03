@@ -44,7 +44,7 @@ public class CsboardCommentEnrollServlet extends HttpServlet {
 		
 		// 3. redirect
 		request.getSession().setAttribute("msg", msg);
-		String location = request.getContextPath() + "/csboard/csboardView?no=" + cbBoardNo;
+		String location = request.getContextPath() + "/csboard/csboardView?boardNo=" + cbBoardNo;
 		response.sendRedirect(location);
 		
 	}

@@ -74,7 +74,4 @@ public class Cart implements Serializable {
 				+ renamedFilename + ", productName=" + productName + ", productPrice=" + productPrice
 				+ ", productQuantity=" + productQuantity + "]";
 	}
-	
-	
-	
 }
