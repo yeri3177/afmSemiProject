@@ -25,7 +25,10 @@ public class ProductFinderServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String searchType = request.getParameter("searchType");
 		String searchKeyword = request.getParameter("searchKeyword");
+		System.out.println(searchType);
 		System.out.println(searchKeyword);
 		
 		if(searchKeyword.equals("모두보기")) {
@@ -51,7 +54,8 @@ public class ProductFinderServlet extends HttpServlet {
 			// b.pagebar영역
 			// totalContents, url 준비
 			int totalContents = productService.selectTotalContent(start, end);
-			String url = request.getRequestURI();
+			String queryString = String.format("?searchType=%s&searchKeyword=%s", searchType, searchKeyword);
+			String url = request.getRequestURI() + queryString;
 			String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
 			System.out.println("pagebar@servlet = " + pagebar);
 			
@@ -85,7 +89,8 @@ public class ProductFinderServlet extends HttpServlet {
 						// b.pagebar영역
 						// totalContents, url 준비
 						int totalContents = productService.selectTotalContent(start, end);
-						String url = request.getRequestURI();
+						String queryString = String.format("?searchType=%s&searchKeyword=%s", searchType, searchKeyword);
+						String url = request.getRequestURI() + queryString;
 						String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
 						System.out.println("pagebar@servlet = " + pagebar);
 						
