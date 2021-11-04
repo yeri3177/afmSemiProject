@@ -26,29 +26,34 @@ public class ProductOrderServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		
-		HttpSession session = request.getSession(false);
-		User loginUser = (User)session.getAttribute("loginUser");
-		String userId = loginUser.getUserId();
-		
-		// 1. 사용자 입력값 처리
-		int productNo = Integer.parseInt(request.getParameter("productNo"));
-		String productName = orderService.productNameCheck(productNo);
-		String productRenamedFilename = request.getParameter("productRenamedFilename");
-		int productPrice = Integer.parseInt(request.getParameter("productPrice"));
-		int productQuantity = Integer.parseInt(request.getParameter("productQuantity"));
-		List<OrderAddress> adrList = orderService.adrList(userId);
-		// 2. 응답 처리
-		request.setAttribute("adrList", adrList);
-		request.setAttribute("productName", productName);
-		request.setAttribute("productNo", productNo);
-		request.setAttribute("productRenamedFilename", productRenamedFilename);
-		request.setAttribute("productPrice", productPrice);
-		request.setAttribute("productQuantity", productQuantity);
-		request
-			.getRequestDispatcher("/WEB-INF/views/order/Order.jsp")
-			.forward(request, response);
+		try {
+			request.setCharacterEncoding("utf-8");
+			
+			HttpSession session = request.getSession(false);
+			User loginUser = (User)session.getAttribute("loginUser");
+			String userId = loginUser.getUserId();
+			
+			// 1. 사용자 입력값 처리
+			int productNo = Integer.parseInt(request.getParameter("productNo"));
+			String productName = orderService.productNameCheck(productNo);
+			String productRenamedFilename = request.getParameter("productRenamedFilename");
+			int productPrice = Integer.parseInt(request.getParameter("productPrice"));
+			int productQuantity = Integer.parseInt(request.getParameter("productQuantity"));
+			List<OrderAddress> adrList = orderService.adrList(userId);
+			// 2. 응답 처리
+			request.setAttribute("adrList", adrList);
+			request.setAttribute("productName", productName);
+			request.setAttribute("productNo", productNo);
+			request.setAttribute("productRenamedFilename", productRenamedFilename);
+			request.setAttribute("productPrice", productPrice);
+			request.setAttribute("productQuantity", productQuantity);
+			request
+				.getRequestDispatcher("/WEB-INF/views/order/Order.jsp")
+				.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 }

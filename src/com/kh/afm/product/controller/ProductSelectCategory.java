@@ -25,84 +25,84 @@ public class ProductSelectCategory extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String pCategory = request.getParameter("pValue");
-		String all = "모두보기";
-		
-		if(pCategory.equals(all)) {
-			System.out.println("모두보기");
-			System.out.println(pCategory);
-			// 1.사용자입력값 처리 cPage numPerPage = 10
-			int cPage = 1;
-			int numPerPage = 10;
-			try {
-				cPage = Integer.parseInt(request.getParameter("cPage"));
-			} catch (NumberFormatException e) {
+		try {
+			String pCategory = request.getParameter("pValue");
+			String all = "모두보기";
+			
+			if(pCategory.equals(all)) {
+				System.out.println("모두보기");
+				System.out.println(pCategory);
+				// 1.사용자입력값 처리 cPage numPerPage = 10
+				int cPage = 1;
+				int numPerPage = 10;
+				try {
+					cPage = Integer.parseInt(request.getParameter("cPage"));
+				} catch (NumberFormatException e) {
+					
+				}
+				System.out.println("cPage = " + cPage);
 				
-			}
-			System.out.println("cPage = " + cPage);
-			
-			// 2.업무로직
-			// a.content영역 - paging query
-			int start = cPage * numPerPage - (numPerPage -1);
-			int end = cPage * numPerPage;
-			String csvStr = productService.selectProductAllCategory(start, end, pCategory);
-			System.out.println("csvStr@servlet = " + csvStr);
-			
-			// b.pagebar영역
-			// totalContents, url 준비
-			int totalContents = productService.selectTotalContent(start, end);
-			String url = request.getRequestURI();
-			String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
-			System.out.println("pagebar@servlet = " + pagebar);
-			
-			// 3.view단 forwarding
+				// 2.업무로직
+				// a.content영역 - paging query
+				int start = cPage * numPerPage - (numPerPage -1);
+				int end = cPage * numPerPage;
+				String csvStr = productService.selectProductAllCategory(start, end, pCategory);
+				System.out.println("csvStr@servlet = " + csvStr);
+				
+				// b.pagebar영역
+				// totalContents, url 준비
+				int totalContents = productService.selectTotalContent(start, end);
+				String url = request.getRequestURI();
+				String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
+				System.out.println("pagebar@servlet = " + pagebar);
+				
+				// 3.view단 forwarding
 //			request.setAttribute("csvStr", csvStr);
 //			request.setAttribute("pagebar", pagebar);
 //			request
 //			.getRequestDispatcher("/WEB-INF/views/product/productList.jsp")
 //			.forward(request, response);
-			response.setContentType("text/orderDetailList; charset=utf-8");
-			response.getWriter().append(csvStr);
-			
-			
-		}
-		else {
-			System.out.println("다른거");
-			
-			System.out.println(pCategory);
-			// 1.사용자입력값 처리 cPage numPerPage = 10
-			int cPage = 1;
-			int numPerPage = 10;
-			try {
-				cPage = Integer.parseInt(request.getParameter("cPage"));
-			} catch (NumberFormatException e) {
+				response.setContentType("text/orderDetailList; charset=utf-8");
+				response.getWriter().append(csvStr);
+				
 				
 			}
-			System.out.println("cPage = " + cPage);
-			
-			// 2.업무로직
-			// a.content영역 - paging query
-			int start = cPage * numPerPage - (numPerPage -1);
-			int end = cPage * numPerPage;
-			String csvStr = productService.selectProductCategory(start, end, pCategory);
-			System.out.println("csvStr@servlet = " + csvStr);
-			
-			// b.pagebar영역
-			// totalContents, url 준비
-			int totalContents = productService.selectTotalContent(start, end);
-			String url = request.getRequestURI();
-			String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
-			System.out.println("pagebar@servlet = " + pagebar);
-			
-			// 3.view단 forwarding
-//			request.setAttribute("csvStr", csvStr);
-//			request.setAttribute("pagebar", pagebar);
-//			request
-//			.getRequestDispatcher("/WEB-INF/views/product/productList.jsp")
-//			.forward(request, response);
-			response.setContentType("text/orderDetailList; charset=utf-8");
-			response.getWriter().append(csvStr);
-			
+			else {
+				System.out.println("다른거");
+				
+				System.out.println(pCategory);
+				// 1.사용자입력값 처리 cPage numPerPage = 10
+				int cPage = 1;
+				int numPerPage = 10;
+				try {
+					cPage = Integer.parseInt(request.getParameter("cPage"));
+				} catch (NumberFormatException e) {
+					
+				}
+				System.out.println("cPage = " + cPage);
+				
+				// 2.업무로직
+				// a.content영역 - paging query
+				int start = cPage * numPerPage - (numPerPage -1);
+				int end = cPage * numPerPage;
+				String csvStr = productService.selectProductCategory(start, end, pCategory);
+				System.out.println("csvStr@servlet = " + csvStr);
+				
+				// b.pagebar영역
+				// totalContents, url 준비
+				int totalContents = productService.selectTotalContent(start, end);
+				String url = request.getRequestURI();
+				String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
+				System.out.println("pagebar@servlet = " + pagebar);
+				
+				// 3.view단 forwarding
+				response.setContentType("text/orderDetailList; charset=utf-8");
+				response.getWriter().append(csvStr);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		}
 		
 		

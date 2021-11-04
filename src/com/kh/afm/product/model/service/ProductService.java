@@ -17,15 +17,27 @@ public class ProductService {
 	public List<Product> selectProductList(int start, int end) {
 		
 		Connection conn = getConnection();
-		List<Product> list = productDao.selectProductList(conn, start, end);
-		close(conn);
+		
+		List<Product> list = null;
+		try {
+			list = productDao.selectProductList(conn, start, end);
+		} catch (Exception e) {
+			throw e;
+		} finally{
+			close(conn);			
+		}
 		return list;
 	}
 
 	public int selectTotalContent(int start, int end) {
 		Connection conn = getConnection();
-		int totalContents = productDao.selectTotalContents(conn);
-		close(conn);
+		int totalContents = 0;
+		try {
+			totalContents = productDao.selectTotalContents(conn);
+		} catch (Exception e) {
+			close(conn);
+			throw e;
+		}
 		return totalContents;
 	}
 
@@ -67,18 +79,26 @@ public class ProductService {
 
 	public Product selectOneProduct(int no) {
 		Connection conn = getConnection();
-//		List<Attachment> list = productDao.selectAttachment(conn, no);
-		//대표이미지 attach1에 담기
-		Attachment attach1 = productDao.selectAttachmentY(conn, no);
-		System.out.println(attach1);
-		//상세이미지 attach2에 담기
-		Attachment attach2 = productDao.selectAttachmentN(conn, no);
-		System.out.println(attach2);
-		Product product = productDao.selectOneProduct(conn, no, attach1, attach2);
 		
-		close(conn);
+		Product product = null;
+		try {
+			//대표이미지 attach1에 담기
+			Attachment attach1 = productDao.selectAttachmentY(conn, no);
+			System.out.println(attach1);
+			//상세이미지 attach2에 담기
+			Attachment attach2 = productDao.selectAttachmentN(conn, no);
+			System.out.println(attach2);
+			product = productDao.selectOneProduct(conn, no, attach1, attach2);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		} finally {
+			close(conn);
+		}
 		
 		return product;
+		
 		
 	}
 
@@ -87,16 +107,8 @@ public class ProductService {
 		int result = 0;
 		
 		try {
-			// 1. 첨부파일1,2 업데이트 하기
-
 			//product업데이트
 			result = productDao.updateProduct(conn, product);
-			
-			//pNo 가져오기
-//			int pNo = product.getpNo();
-			
-			//product객체에 set -> servlet에서 참조
-//			product.setpNo(pNo);
 			
 			//attachment테이블 행 추가
 			Attachment attach1 = product.getAttach1();
@@ -149,8 +161,8 @@ public class ProductService {
 				throw new IllegalArgumentException("해당 첨부파일이 존재하지 않습니다. : " + no );
 			commit(conn);
 		} catch (Exception e) {
-			e.printStackTrace();
 			rollback(conn);
+			throw e;
 		} finally {
 			close(conn);
 		}
@@ -168,8 +180,8 @@ public class ProductService {
 				throw new IllegalArgumentException("해당 첨부파일이 존재하지 않습니다. : " + no );
 			commit(conn);
 		} catch (Exception e) {
-			e.printStackTrace();
 			rollback(conn);
+			throw e;
 		} finally {
 			close(conn);
 		}
@@ -195,8 +207,14 @@ public class ProductService {
 
 	public List<ProductComment> selectCommentList(int no) {
 		Connection conn = getConnection();
-		List<ProductComment> commentList = productDao.selectCommentList(conn, no);
-		close(conn);
+		List<ProductComment> commentList = null;
+		try {
+			commentList = productDao.selectCommentList(conn, no);
+		} catch (Exception e) {
+			throw e;
+		} finally {			
+			close(conn);
+		}
 		return commentList;
 	}
 
@@ -235,22 +253,45 @@ public class ProductService {
 
 	public String selectProductCategory(int start, int end, String pCategory) {
 		Connection conn = getConnection();
-		String csvStr = productDao.selectProductCategory(conn, start, end, pCategory);
-		close(conn);
+		
+		String csvStr = null;
+		try {
+			csvStr = productDao.selectProductCategory(conn, start, end, pCategory);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			close(conn);			
+		}
 		return csvStr;
 	}
 
 	public String selectProductAllCategory(int start, int end, String pCategory) {
 		Connection conn = getConnection();
-		String csvStr = productDao.selectProductAllCategory(conn, start, end, pCategory);
-		close(conn);
+		
+		String csvStr = null;
+		try {
+			csvStr = productDao.selectProductAllCategory(conn, start, end, pCategory);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			close(conn);
+		}
 		return csvStr;
 	}
 
 	public List<Product> selectProductSearchList(int start, int end, String searchKeyword) {
 		Connection conn = getConnection();
-		List<Product> list = productDao.selectProductSearchList(conn, start, end, searchKeyword);
-		close(conn);
+		List<Product> list;
+		try {
+			list = productDao.selectProductSearchList(conn, start, end, searchKeyword);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			close(conn);			
+		}
 		return list;
 	}
 

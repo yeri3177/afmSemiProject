@@ -24,10 +24,11 @@ public class ProductLikeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//1. 사용자입력값 처리
-		int pNo = Integer.parseInt(request.getParameter("pNo"));
-		int like = Integer.parseInt(request.getParameter("like"));
-		
+		try {
+			//1. 사용자입력값 처리
+			int pNo = Integer.parseInt(request.getParameter("pNo"));
+			int like = Integer.parseInt(request.getParameter("like"));
+			
 //		//좋아요 누름 확인(cookie)
 //		Cookie[] cookies = request.getCookies();
 //		boolean hasClick = false;
@@ -64,16 +65,20 @@ public class ProductLikeServlet extends HttpServlet {
 //			//좋아요 증가
 //			like++;
 //		}
-		
-		like++;
-		//2. 업무로직
-		int result = ProductService.productLike(pNo, like);
-		String msg = result > 0 ? "좋아요 성공" : "좋아요 실패";
-		
-		//3. 응답처리
-		request.getSession().setAttribute("Msg", msg);
-		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out = response.getWriter().append("<span>" + "좋아요 : " + result + "</span>");
+			
+			like++;
+			//2. 업무로직
+			int result = ProductService.productLike(pNo, like);
+			String msg = result > 0 ? "좋아요 성공" : "좋아요 실패";
+			
+			//3. 응답처리
+			request.getSession().setAttribute("Msg", msg);
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter().append("<span>" + "좋아요 : " + result + "</span>");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 }

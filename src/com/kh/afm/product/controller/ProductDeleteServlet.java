@@ -25,12 +25,13 @@ public class ProductDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. 사용자 입력값
-		int no = Integer.parseInt(request.getParameter("pNo"));
-		
-		// 2. 업무로직
-		Product product = productService.selectOneProduct(no);
-		//첨부파일 삭제
+		try {
+			// 1. 사용자 입력값
+			int no = Integer.parseInt(request.getParameter("pNo"));
+			
+			// 2. 업무로직
+			Product product = productService.selectOneProduct(no);
+			//첨부파일 삭제
 //		if(product != null && product.getAttach1() != null); {
 //			ServletContext application = getServletContext();
 //			String saveDirectory = application.getRealPath("/upload/product");
@@ -50,19 +51,23 @@ public class ProductDeleteServlet extends HttpServlet {
 //			System.out.printf("첨부파일1[%s] 삭제여부 : %b%n", filename, result);
 //			
 //		}
-		//attachment삭제
-		int result1 = productService.deleteAttachmentY(no);
-		System.out.println(result1);
-		int result2 = productService.deleteAttachmentN(no);
-		System.out.println(result2);
-		
-		//product삭제
-		int result = productService.deleteProduct(no);
-		String msg = result > 0 ? "게시물 삭제 성공!" : "게시물 삭제 실패!";
-		
-		// 3. 사용자메세지 및 redirect처리
-		request.getSession().setAttribute("msg", msg);
-		response.sendRedirect(request.getContextPath() + "/product/productList");
+			//attachment삭제
+			int result1 = productService.deleteAttachmentY(no);
+			System.out.println(result1);
+			int result2 = productService.deleteAttachmentN(no);
+			System.out.println(result2);
+			
+			//product삭제
+			int result = productService.deleteProduct(no);
+			String msg = result > 0 ? "게시물 삭제 성공!" : "게시물 삭제 실패!";
+			
+			// 3. 사용자메세지 및 redirect처리
+			request.getSession().setAttribute("msg", msg);
+			response.sendRedirect(request.getContextPath() + "/product/productList");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	/**
