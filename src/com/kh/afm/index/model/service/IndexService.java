@@ -14,30 +14,54 @@ public class IndexService {
 	private IndexDao indexDao = new IndexDao();
 
 	public String selectNewProduct() {
-		Connection conn = getConnection();
-		String csv = indexDao.selectNewProduct(conn);
-		close(conn);
+		String csv = "";
+		try {
+			Connection conn = getConnection();
+			csv = indexDao.selectNewProduct(conn);
+			close(conn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return csv;
 	}
 
 	public String selectBestProduct() {
-		Connection conn = getConnection();
-		String csv = indexDao.selectBestProduct(conn);
-		close(conn);
+		String csv ="";
+		try {
+			Connection conn = getConnection();
+			csv = indexDao.selectBestProduct(conn);
+			close(conn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return csv;
 	}
 
 	public List<Product> indexSearch(Map<String, Object> param) {
-		Connection conn = getConnection();
-		List<Product> list = indexDao.indexSearch(conn, param);
-		close(conn);
+		List<Product> list = null;
+		try {
+			Connection conn = getConnection();
+			list = indexDao.indexSearch(conn, param);
+			close(conn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return list;
 	}
 
 	public int selectSearchContent(Map<String, Object> param) {
-		Connection conn = getConnection();
-		int totalContent = indexDao.selectSearchContent(conn, param);
-		close(conn);
+		int totalContent = 0;
+		try {
+			Connection conn = getConnection();
+			totalContent = indexDao.selectSearchContent(conn, param);
+			close(conn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return totalContent;
 	}
 	

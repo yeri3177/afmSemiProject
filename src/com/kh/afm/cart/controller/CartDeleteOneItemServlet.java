@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.afm.cart.model.exception.CartException;
 import com.kh.afm.cart.model.service.CartService;
 
 /**
@@ -23,19 +24,25 @@ public class CartDeleteOneItemServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession(false);
-		String cartNo = request.getParameter("cartNo");
-		
-		int result = cartService.deleteOneItem(cartNo);
-		
+		try {
+			HttpSession session = request.getSession(false);
+			String cartNo = request.getParameter("cartNo");
+			
+			int result = cartService.deleteOneItem(cartNo);
+			
 
-		if(result>0) {
-			session.setAttribute("msg", "성공적으로 삭제했습니다.");
-			response.sendRedirect(request.getContextPath() + "/");
-		}
-		else {
-			session.setAttribute("msg", "삭제에 실패했습니다.");
-			response.sendRedirect(request.getContextPath() + "/");
+			if(result>0) {
+				session.setAttribute("msg", "성공적으로 삭제했습니다.");
+				response.sendRedirect(request.getContextPath() + "/");
+			}
+			else {
+				session.setAttribute("msg", "삭제에 실패했습니다.");
+				response.sendRedirect(request.getContextPath() + "/");
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new CartException("장바구니 상품삭제 servlet 오류", e);
 		}
 	}
 

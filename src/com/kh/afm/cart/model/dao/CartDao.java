@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.kh.afm.cart.model.exception.CartException;
 import com.kh.afm.cart.model.vo.Cart;
 
 
@@ -25,6 +26,7 @@ private Properties prop = new Properties();
 			prop.load(new FileReader(filepath));
 		} catch (IOException e) {
 			e.printStackTrace();
+			throw new CartException("장바구니 쿼리 오류", e);
 		}
 	}
 
@@ -51,6 +53,7 @@ private Properties prop = new Properties();
 				}
 			}catch (SQLException e) {
 					e.printStackTrace();
+					throw new CartException("장바구니 조회 오류", e);
 			}finally {
 				close(rset);
 				close(pstmt);
@@ -68,6 +71,7 @@ private Properties prop = new Properties();
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new CartException("장바구니 전체삭제 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -85,6 +89,7 @@ private Properties prop = new Properties();
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new CartException("장바구니 수정 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -101,6 +106,7 @@ private Properties prop = new Properties();
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new CartException("장바구니 상품삭제 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -121,6 +127,7 @@ private Properties prop = new Properties();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new CartException("장바구니 등록 오류", e);
 		} finally {
 			close(pstmt);
 		}
