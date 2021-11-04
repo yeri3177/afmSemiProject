@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.kh.afm.user.model.exception.UserException;
 import com.kh.afm.user.model.vo.Account;
 import com.kh.afm.user.model.vo.Address;
 import com.kh.afm.user.model.vo.User;
@@ -58,7 +59,7 @@ private Properties prop = new Properties();
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new UserException("회원가입 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -108,7 +109,7 @@ private Properties prop = new Properties();
 				user = new User(userId, userName, email, password, birthday, phone, enrollDate, userRole, userExpose, account, null);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new UserException("로그인 오류", e);
 		} finally {
 			// 4.자원 반납
 			close(rset);
@@ -139,7 +140,7 @@ private Properties prop = new Properties();
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new UserException("회원정보 수정 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -169,7 +170,7 @@ private Properties prop = new Properties();
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new UserException("주소 수정 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -198,7 +199,7 @@ private Properties prop = new Properties();
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new UserException("계좌 수정 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -219,7 +220,7 @@ private Properties prop = new Properties();
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new UserException("회원 탈퇴 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -248,7 +249,7 @@ private Properties prop = new Properties();
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new UserException("비밀번호 수정 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -272,7 +273,7 @@ private Properties prop = new Properties();
 			if(rset.next())
 				totalContents = rset.getInt(1);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new UserException("페이징 처리 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -302,7 +303,7 @@ private Properties prop = new Properties();
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new UserException("주소 테이블 추가 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -330,7 +331,7 @@ private Properties prop = new Properties();
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new UserException("계좌 테이블 추가 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -368,7 +369,7 @@ private Properties prop = new Properties();
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new UserException("회원 주소 목록 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -390,7 +391,7 @@ private Properties prop = new Properties();
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new UserException("주소 삭제 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -423,7 +424,7 @@ private Properties prop = new Properties();
 				user = new User();
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new UserException("차단 회원 조회 오류", e);
 		} finally {
 			// 4.자원 반납
 			close(rset);

@@ -1,7 +1,18 @@
 @charset "UTF-8";
 @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
 
-
+/* .user-page html, body, div, span, applet, object, iframe, 
+h1, h2, h3, h4, h5, h6, p, a, img, 
+sub, sup, tt, var, b, u, i, center, form, label,
+caption, tbody, tfoot, thead, tr, th, td, input {
+  margin: 0;
+  padding: 0;
+  border:0;
+  font-size:100%;
+  vertical-align:baseline;
+  outline:0;
+  line-height:auto;
+} */
 /*************************************************
  * userLogin.jsp (로그인 페이지)
  **************************************************/
@@ -44,6 +55,9 @@
 	color:white;
 	border-width: 1px;
 	border-radius: 5px
+}
+.login-con-btn:hover {
+	box-shadow: inset 0px 0px 15px white;
 }
 
 /* 로고 이미지 */
@@ -91,27 +105,50 @@
  * userEnroll.jsp (일반회원 회원가입폼)
  **************************************************/
 /* 전체 영역 */
-#user1enroll-container {
-	margin: 0 auto;
-	position: relative;
-	
-}
-
-
-/* 타이틀 글자들 */
-#user-enroll-container h4 {
-	/* text-align: left; */
-	/* padding-left: 80px; */
-}
-
-sup {
-	color: red;
-}
-/* 로고 이미지 */
-#user-enroll-container .logo-img {
+#user-enroll-container {
 	margin: 0 auto;
 	position: relative;
 	text-align: center;
+}
+
+#user-enroll-container img{
+	width: 200px;
+	text-align: center;
+}
+
+/* 타이틀 글자들 */
+#user-enroll-container h4 {
+	text-align: left;
+	padding-left: 80px;
+}
+
+/* 약관동의, 일반회원 가입 텍스트 */
+.enrollTitle{
+	font-weight: bold;
+	font-size: large;	
+	padding: 30px;
+}
+sup {
+	color: red;
+}
+
+/* input 글자들 (아이디 비밀번호 이메일 이름 전화번호 생일 주소 */
+.enrollLeft{
+	text-align: left;
+	margin-left: 130px;
+}
+
+/* 가운데 정렬 */
+/* #user-enroll-container {
+	display : block ;
+	text-align : center ;	
+} */
+/* 로고 이미지 */
+#logo-img {
+	margin: 0 auto;
+	position: relative;
+	text-align: center;
+	/* display : inline; */
 }
  
 /* 회원가입 폼 */
@@ -121,26 +158,49 @@ sup {
 	/* background-color:silver;  */
 	border-radius: 20px;
 	width: 750px;
+	background-color: #f8ffc7;
 }
 
-/* 약관동의 공간 */ 
-.enrollinfo {
-	width: 90%; 
-	height: 130px; 
-	overflow: scroll;
+/* 전체선택 약관동의 부분 */
+.enrollall {
+	width: 660px; 
 	text-align: left;
 	padding: 35px;
 }
+/* 약관동의 */
+.enrollinfo {
+	width: 620px; 
+	height: 140px;
+	overflow: auto;
+	text-align: left;
+	padding: 23px 39px;
+}
 
- 
+.enrollinfo::-webkit-scrollbar {
+	width: 10px;
+}
+
+.enrollinfo::-webkit-scrollbar-thumb {
+	background-color: #ffebb5;
+	border-radius: 10px;
+	background-clip: padding-box;
+	border: 2px solid transparent;
+}
+
+.enrollinfo::-webkit-scrollbar-track {
+	background-color: #9c9b9a;
+	border-radius: 10px;
+	box-shadow: inset 0px 0px 5px white;
+}
+
+.enrollchk {
+	text-align: center;
+}
+
 /* 여백 */
 #blank{
 	height: 50px;
 	/* border-top:none; */
-}
-
-#enrollarea {
-	text-align: center;
 }
 
 /* 테이블 */
@@ -148,11 +208,48 @@ sup {
 	margin: 20px;
 }
 
-/* input 태그들 */
+
+/* 아이디 입력 받는 input 태그들 */
 .enrollInput {
-	width: 450px;
-	height: 45px;
+	width: 400px;
+	height: 30px;
 } 
+
+/* 비밀본호, 이름 입력값 받는 input 태그 */
+.enrollInput1 {
+	width: 470px;
+	height: 30px;
+}
+
+/* 이메일 입력 값 받는 input 태그 */
+.enrollInput2 {
+	width: 170px;
+	height: 30px;
+}
+
+/* 생일 입력 값 받는 input 태그 */
+.enrollInput3 {
+	width: 150px;
+	height: 30px;
+}
+
+/* 주소 입력 값 받는 input 태그 */
+.enrollInput4 {
+	width: 465px;
+	height: 30px;
+	margin-top: 8px;
+	background-color: gray;
+	box-shadow: inset 0px 0px 5px white;
+	border-radius: 5px;
+}
+.enrollInput4:hover {
+	box-shadow: inset 0px 0px 20px white;
+}
+.enrollInput5 {
+	width: 465px;
+	height: 30px;
+	margin-top: 8px;
+}
 
 .enrollIdInput {
 	width: 400px;
@@ -173,27 +270,41 @@ sup {
 	height: 35px;	
 }
 
+/* 중복확인 버튼 */
+#btnCheckId {
+	background-color: #568A35;
+	color: white;
+    border-radius: 5px;
+    box-shadow: inset 0px 0px 3px white;
+}
+#btnCheckId:hover {
+	box-shadow: inset 0px 0px 20px white;
+}
+
 /* 가입하기 버튼 */
 #submitbtn input {
 	background-color:#568A35;
-	width: 80%;	
+	width: 65%;	
 	height:40px;
-	margin: 0 80px;
+	margin: 30px 80px;
 	color:white;
 	border-width: 1px;
-	border-radius: 5px;
+	border-radius: 10px;
 	font-size: medium;
 	font-weight: bold;
-	
+	box-shadow: inset 0px 0px 5px white;
 }
 
+#submitbtn input:hover {
+	box-shadow: inset 0px 0px 20px white;
+}
 /* 판매자 회원 회원가입 페이지 폼 */
 #sellerEnrollFrm {
-	border: 3px solid black;
 	margin: 0 auto;
-	/* background-color:silver;  */
-	border-radius: 20px;
-	width: 750px;
+	text-align: center;
+	position: relative;
+	top: 100px;
+	padding: 30px;
 }
 
 /*************************************************
@@ -247,10 +358,11 @@ sup {
 	color: white;
 }
 
-input#_userId, #userName, #userRole, #email, #birthday, #phone {
+/* 클래스 이름 다시 붙여서 해줘야 됨 */
+/* input#_userId, #userName, #userRole, #email, #birthday, #phone {
 	width: 300px;
 	height: 30px;
-}
+} */
 
 input#bankname, #banknumer {
 	width:300px;
@@ -418,31 +530,68 @@ section#enrolldetail-container input[readonly]{
 	height: 70%;
 }
 
+/** 정보가 없을 경우에 **/
+.sellOrderDetailListisEmpty{
+	text-align: center;
+	font-size:300px;
+	margin:0;
+}
+.sellOrderDetailListisEmptyh3{
+	text-align: center;
+	color: #FC5230;
+	/* text-shadow: 1px 1px #FFCD4A, 2px 2px #284D8E; */
+}
 /*************************************************
  * userAddressList.jsp  
  **************************************************/
 /* 전체영역 */
 #userAddressList-container {
- 	margin: 0 auto;
+ 	margin: 50px auto;
  	text-align: center;
 }
 
 /* 테이블 영역 */
-#userAddressList-container table {
- 	margin: 0 auto;
+#userAddressList-container table{
+ 	margin: 100px auto;
  	text-align: center;
  	border: 1px solid black;
+ 	height: 90%;
+
 }
 
-#userAddressList-container th {
-	background-color: #ffdfaf
+
+/* 테이블 명칭 : 주소번호, 주소검색, 도로명주소, 상세주소 */
+.adrArea {
+	background-color: #ffdfaf;
 }
 
-#userAddressList-container input {
-	width: 150px;
+/* 주소수정, 주소삭제 테이블 부분 */
+.btnArea {
+	width:20px;
+	background-color: #ffdfaf;
+}
+
+#enrollAdrBtn, #enrollOkBtn {
+	height: 30px;
+    width: 70px;
+    background-color: #ffb445;
+    font-weight: bold;
+}
+
+/* 수정, 삭제 버튼 */
+.adrUpDelBtn {
+	width: 60px;
+	height: 30px;
+	background-color: #ffb445;
+    font-weight: bold;
+}
+
+/* #userAddressList-container input {
+	width: 30px;
 	height: 20px;
-	
-}
+} */
+
+
 
 #user_post {
 	background-color: #e7e7e7;
@@ -451,9 +600,11 @@ section#enrolldetail-container input[readonly]{
 	border: 2px solid gray;
 }
 
-#enrollAddressBtn {
-	margin: 30px auto;
+/* 주소추가, 확인 버튼 */
+#enrollAddressBtn, #enrollAddressOk {
 	height: 35px;
+	background-color: #ffb445;
+    font-weight: bold;
 }
 
 #addressEnrollFrm table {
@@ -461,3 +612,4 @@ section#enrolldetail-container input[readonly]{
  	text-align: center;
  	border: 1px solid black;
 }
+

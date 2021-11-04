@@ -10,6 +10,13 @@
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/user.css" />
 
+<% if(orderDetailList.isEmpty()){ %>
+	<h1 class="sellOrderDetailListisEmpty">텅</h1>
+    <h3 class="sellOrderDetailListisEmptyh3">판매하신 상품이 없습니다.</h3>
+<% 
+}else{
+%>
+
 <section id="sellerOrderDetailList-container">
 <h1>상품 결제내역</h1>
 
@@ -54,6 +61,11 @@
 </table>
 
 </section>
+
+<%
+	}
+%>
+
 
 <!-- 결제상태 변경시 폼전송 -->
 <form action="<%=request.getContextPath()%>/order/updateOrderStatus" method="POST" name="updateOrderStatusFrm">
