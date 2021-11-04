@@ -178,7 +178,7 @@ div#search-userRole {
 		
 		<!---- address td ---->
 		<td>
-			<button id="addressBtn-<%=i %>" data-user-id="<%= user.getUserId() %>">상세보기</button>
+			<button id="addressBtn-<%=i %>" class="adrBtn" data-user-id="<%= user.getUserId() %>">상세보기</button>
 		</td>
 		
 

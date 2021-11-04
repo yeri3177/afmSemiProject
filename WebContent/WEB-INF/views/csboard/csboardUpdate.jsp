@@ -11,7 +11,7 @@
 		);
 %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/csboard.css" />
-<section id="csboard-container">
+<section id="csboard-container" class="csboard-container">
 <h2>고객센터 게시판 수정</h2>
 <form 
 	name="csboardUpdateFrm" 
@@ -25,7 +25,7 @@
 	<tr>
 		<th>작성자</th>
 		<td>
-			<input type="text" name="user_id" value="<%= csboard.getUserId() %>" readonly />
+			<input type="text" name="user_id" value="<%= csboard.getUserId() %>" style="width: 400px" readonly />
 			<% if(editable){ %>
 			<input type="checkbox" name="boardNotice_yn" value="Y"/>공지사항 여부
 			<% } %>
@@ -42,22 +42,21 @@
 	<tr>
 		<th>제 목</th>
 		<td>
-			<input type="text" name="boardTitle" value="<%= csboard.getBoardTitle() %>" required />
+			<input type="text" name="boardTitle" value="<%= csboard.getBoardTitle() %>" style="width: 400px" required />
 		</td>
 	</tr>
 	<tr>
 		<th>내 용</th>
 		<td>
-			<textarea name="boardContent" id="" cols="40" rows="5"><%= csboard.getBoardContent() %></textarea>
+			<textarea name="boardContent" id="" cols="40" rows="5" style="width:98%;"><%= csboard.getBoardContent() %></textarea>
 		</td>
 	</tr>
-	<tr>
-		<th colspan="2">
-			<input type="submit" value="수정하기"/>
-			<input type="button" value="취소" onclick="history.go(-1);" />
-		</th>
-	</tr>
 	</table>
+	<br />
+	<div style="text-align:center;">
+		<input type="submit" class="modified-btn" value="수정하기"/>
+		<input type="button" class="cancell-btn" value="취소" onclick="history.go(-1);" />
+	</div>
 </form>
 </section>
 <script>

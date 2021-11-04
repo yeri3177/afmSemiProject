@@ -41,7 +41,7 @@ function pswdChk(url,password){
 
 <section id="csboardList-container" class="csboard-container">
 	<h2>고객센터</h2>
-	<div id="search-container">
+	<div class="search-container">
 		검색타입 : 
 		<select name="" id="searchType">
 			<option value="userId" <%= "userId".equals(searchType) ? "selected" : "" %>>아이디</option>
@@ -52,21 +52,21 @@ function pswdChk(url,password){
 			<form action="<%= request.getContextPath() %>/csboard/boardFinder">
 				<input type="hidden" name="searchType" value="userId" />
 				<input type="text" name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요." value="<%= "userId".equals(searchType) ? searchKeyword : "" %>" />
-				<button type="submit">검색</button>
+				<button type="submit" class="search-btn">검색</button>
 			</form>
 		</div>
 		<div id="search-userName" class="search-type">
 			<form action="<%= request.getContextPath() %>/csboard/boardFinder">
 				<input type="hidden" name="searchType" value="boardNo" />
 				<input type="text" name="searchKeyword" size="25" placeholder="검색할 번호를 입력하세요." value="<%= "userName".equals(searchType) ? searchKeyword : "" %>" />
-				<button type="submit">검색</button>
+				<button type="submit" class="search-btn">검색</button>
 			</form>
 		</div>
 		<div id="search-boardTitle" class="search-type">
 			<form action="<%= request.getContextPath() %>/csboard/boardFinder">
 				<input type="hidden" name="searchType" value="boardTitle" />
 				<input type="text" name="searchKeyword" size="25" placeholder="검색할 제목을 입력하세요." value="<%= "boardTitle".equals(searchType) ? searchKeyword : ""  %>" />
-				<button type="submit">검색</button>
+				<button type="submit" class="search-btn">검색</button>
 			</form>
 		</div>
 	</div>
@@ -79,12 +79,14 @@ function pswdChk(url,password){
 			<th>작성일</th>
 			<th>조회</th>
 		</tr>
+		
+		<%-- 공지사항 --%>
 		<%
 			for (Csboard csboard2 : noticeList){
 		%>
 			<% if(csboard2.getBoardNotice().equals("Y")){ %>
 			<tr>
-				<td>공지사항</td>
+				<td id="notice">공지사항</td>
 				<td><a href="<%= request.getContextPath() %>/csboard/csboardView?boardNo=<%= csboard2.getBoardNo() %>"><%= csboard2.getBoardTitle()%></a></td>
 				<td><%= csboard2.getUserId() %></td>
 				<td><%= csboard2.getBoardRegDate() %></td>
@@ -95,6 +97,7 @@ function pswdChk(url,password){
 		<%
 			}
 		%>
+		
 <%
 	for(Csboard csboard : list){
 %>
@@ -126,7 +129,7 @@ function pswdChk(url,password){
 		<%-- 글쓰기 버튼 --%>
 	<div style="float:right;">
 		<% if(loginUser != null){ %>
-			<input type="button" value="글쓰기" id="btn-add" onclick="location.href='<%= request.getContextPath() %>/csboard/csboardForm';" />
+			<input type="button" value="글쓰기" class="write-btn" onclick="location.href='<%= request.getContextPath() %>/csboard/csboardForm';" />
 	    <% } %>
 	</div>
 	<div id='pageBar'>

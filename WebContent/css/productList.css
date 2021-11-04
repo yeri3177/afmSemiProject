@@ -1,34 +1,51 @@
 @charset "UTF-8";
+body{
+	background-color: rgb(255,218,150);
+}
 .productHeading{
 	font-size: 64px;
 	font-weight: bold;
 	text-align: center;
 	margin: 120px 120px;
 }
+.product-board{
+	margin: auto;
+	width: 80%;
+	border-collapse: collapse;
+	padding: 10px;
+}
+table{
+	background-color:white;
+}
 .thead{
 	font-size: 32px;
+	border-top: 3px solid white;
+	/* border-bottom: 3px solid #444444; */
+	padding: 20px;
+	box-shadow: 0 6px 6px -4px black;
 }
 .tbody{
 	font-size: 20px;
+
+}
+th, td {
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 .search-type{
 	font-size: 20px;
-	margin: 60px 20px;
-	margin-left: 80px;
+	margin: 20px 20px;
+	text-align: center;
 }
 .search-btn{
 	margin-left: 10px;
 	border: 0;
 	vertical-align: middle;
-	background-color: rgba(255,255,255,0.75);
 }
 .search-img{
 	width: 50px;
 	height: 50px;
-}
-.product-board{
-	margin: auto;
-	width: 80%;
+	cursor: pointer;
 }
 .wtite-btn{
 	width:100px;
@@ -39,16 +56,17 @@
     text-align: center;
     text-decoration: none;
     display: inline;
-    font-size: 1.2vw;
+    font-size: 24px;
     margin: 4px;
     cursor: pointer;
     text-weight: bold;
-    margin-right: 100px;
+    margin-top: 20px;
+    margin-right: 300px;
     float: right;
 }
 .wtite-btn:hover {
-    background-color: #00C652;
-    color: #FFCD12;
+    background-color: #FFDC37;
+    color: black;
     
 }
 .pagebar{
@@ -56,7 +74,7 @@
 	font-size: 30px;
 	padding: 5px;
 	font-family: 'Abril Fatface', cursive;
-	display: inline-block;
+	display: block;
 	text-align: center;
 	border-radius: 10px;
 	display: block;

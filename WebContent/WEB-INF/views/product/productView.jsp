@@ -14,11 +14,77 @@
 	
 	List<ProductComment> commentList = (List<ProductComment>) request.getAttribute("commentList");
 %>
+<!-- css -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/productView.css" />
+
+<!-- bxslider -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<script>
+/**
+ * 이미지 슬라이드
+ */
+$(document).ready(function(){ 
+
+	var main = $('.bxslider').bxSlider({ 
+	
+	mode: 'fade', 
+	
+	auto: true,	//자동으로 슬라이드 
+	
+	controls : true,	//좌우 화살표	
+	
+	autoControls: true,	//stop,play 
+	
+	pager:true,	//페이징 
+	
+	pause: 3000, 
+	
+	autoDelay: 0,	
+	
+	slideWidth: 800, //이미지 박스 크기설정
+	
+	speed: 500, 
+	
+	stopAutoOnclick:true 
+
+}); 
+
+	   
+
+$(".bx-stop").click(function(){	// 중지버튼 눌렀을때 
+    main.stopAuto(); 
+    $(".bx-stop").hide(); 
+    $(".bx-start").show(); 
+    return false; 
+}); 
 
 
-<section id="product-container">
-	<h2></h2>
-	<br />
+$(".bx-start").click(function(){	//시작버튼 눌렀을때 
+
+    main.startAuto(); 
+    $(".bx-start").hide(); 
+    $(".bx-stop").show(); 
+    return false; 
+}); 
+
+
+
+$(".bx-start").hide();	//onload시 시작버튼 숨김. 
+
+}); 
+
+</script>
+
+<!-- 상품상세보기 페이지 전체 컨테이너 박스 -->
+<section id="productView-page-container">
+
+<!-- 상품글 컨테이너 박스 -->
+<section id="productView-container">
+
+<!-- 상단 영역 박스 -->
+<div id="prod-top-box">
 <form 
 	name="productOrderFrm"
 	method="POST">
@@ -27,112 +93,170 @@
 	<input type="hidden" name="productPrice" value="<%= product.getpPrice() %>"/>
 	<table>
 		<tr>
-		    <td colspan="2" rowspan="7"><img src="<%= request.getContextPath() %>/upload/product/<%= product.getAttach1().getRenamedFileName() %>" alt="대표이미지" width="500px" height="500px"/></td>
-		    <td colspan="5"> 상품명 : <%= product.getpTitle() %></td>
+		
+			<!--------------- 이미지 슬라이드 -------------->
+		    <td colspan="2" rowspan="7" id="img-slide-td">
+		    	<ul class="bxslider">
+		          <li>
+		          	<img src="<%= request.getContextPath() %>/upload/product/<%= product.getAttach1().getRenamedFileName() %>">
+		          </li>
+		          
+		          <li>
+		         	<img src="<%= request.getContextPath() %>/upload/product/<%= product.getAttach2().getRenamedFileName() %>">
+		          </li>
+		    	</ul>
+		    
+		    </td>
+		    
+		    <!-- 상품명 -->
+		    <td colspan="6" id="productName"> 
+		    	<%= product.getpTitle() %>
+		    </td>
+ 
 	    </tr>
+	    
+	    
+	    
 	    <tr>
-		    <td colspan="5"> 가격 : <%= product.getpPrice() %></td>
-	    </tr>
-	    <tr>
-		    <td colspan="5"> 배송 : <%= product.getpPost() %></td>
-	    </tr>
-	    <tr>
-		    <td colspan="5"> 남은 수량 : <%= product.getpCnt() %></td>
-	    </tr>
-	    <tr>
-		    <td colspan="5" class="test"> 좋아요 : <%= product.getpRecommend() %></td>
+	    	<!-- 판매자 -->
+	    	<td colspan="6" class="tags-td"> 
+		    	<img class="top-tags" src="<%=request.getContextPath()%>/images/product/tag1.png" />
+		    	<span><%= product.getUserId() %></span>
+		    </td>
 	    </tr>
 	    
 	    <tr>
-		    <td colspan="5">구매할 수량 : <input type="number" name="productQuantity" value="" placeholder="최소 1개 이상"/></td>
+	    	<!-- 가격 -->
+		    <td colspan="6" class="tags-td"> 
+			    <img class="top-tags" src="<%=request.getContextPath()%>/images/product/tag2.png" />
+			    <span><%= product.getpPrice() %>원</span>
+		    </td>
 	    </tr>
+	    <tr>
+	    	<!-- 배송비 -->
+		    <td colspan="6" class="tags-td"> 
+		    	<img class="top-tags" src="<%=request.getContextPath()%>/images/product/tag3.png" />
+		    	<span><%= "Y".equals(product.getpPost()) ? "3000원" : "무료배송" %></span>
+		    </td>
+	    </tr>
+	    <tr>
+	    	<!-- 재고 -->
+		    <td colspan="6" class="tags-td"> 
+		    	<img class="top-tags" src="<%=request.getContextPath()%>/images/product/tag4.png" />
+		    	<span><%= product.getpCnt() %></span>
+		    </td>
+	    </tr>
+	    <tr>
+	    	<!-- 추천 -->
+		    <td colspan="6" class="test tags-td"> 
+		    	<img class="top-tags" src="<%=request.getContextPath()%>/images/product/tag5.png" /> 
+		    	<span><%= product.getpRecommend() %></span>
+		    </td>
+	    </tr>
+	    
+	    <tr>
+	    	<!-- 구매수량 -->
+		    <td colspan="6" class="last-tags-td">
+			    <img class="top-tags" src="<%=request.getContextPath()%>/images/product/tag6.png" />
+			    <span><input type="number" name="productQuantity" value="" placeholder="최소 1개 이상"/></span>
+		    </td>
+	    </tr>
+	   
 	    	
 	    <tr>
-	    	<td>
-	    		<input 
-	    			type="button"
-	    			id="like"
-	    			value="좋아요!"/>
+	    	
 <% 
 if(editable){ 
-%>	
-	    	</td>
-		    <td>
-		    	<input 
-					type="button" 
-					value="수정하기" 
+%>		
+			<!-- 수정하기 버튼 -->
+		    <td class="sellerControl-td" id="updateBtn-td">
+		    	<input type="button" value="수정하기" class="sellerControlBtn" id="updateBtn"
 					onclick="updateProduct()" />
 		    </td>
-		    <td>
-			    <input 
-					type="button" 
-					value="삭제하기" 
+		    
+		    <!-- 삭제하기 버튼 -->
+		    <td class="sellerControl-td" id="deleteBtn-td">
+			    <input type="button" value="삭제하기" class="sellerControlBtn" id="deleteBtn"
 					onclick="deleteProduct()" />
 		    </td>
 <%
 }
 %>
-		    <td>
-		    	<input type="submit"
-		    		   value="신고하기" 
-		    		   formaction="<%= request.getContextPath() %>/csboard/productReportForm"/>
-		    		   
+			<!-- 바로구매 버튼 -->
+			<td class="user-btn-td">
+		    	<input type="submit" value="바로구매" 
+					formaction="<%= request.getContextPath() %>/order/orderProduct" />
 		    </td>
-		    <td>
-		    	<input 
-					type="submit" 
-					value="장바구니" 
+			
+		    <!-- 장바구니 버튼 -->
+		    <td class="user-btn-td">
+		    	<input type="submit" value="장바구니" 
 					formaction="<%= request.getContextPath() %>/cart/cartInsert" />
 		    </td>
-		    <td>
-		    	<input 
-					type="submit" 
-					value="결제하기" 
-					formaction="<%= request.getContextPath() %>/order/orderProduct" />
+		    
+		    <!-- 추천하기 버튼 -->
+		    <td class="user-btn-td">
+	    		<input type="button" id="like" value="추천하기"/>
+	    	</td>
+		    
+		    <!-- 신고하기 버튼 -->
+		    <td class="user-btn-td">
+		    	<input type="submit" value="신고하기" 
+		    		   formaction="<%= request.getContextPath() %>/csboard/productReportForm"/>   
 		    </td>
 	    </tr>
 	</table>
 </form>	
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	
-	<div>
-	<img src="<%= request.getContextPath() %>/upload/product/<%= product.getAttach2().getRenamedFileName() %>" alt="상세이미지" />
-	</div>
-	
-	<br />
-	<hr />
-	<br />
-	
+</div> <!-- 상단 영역 박스 끝 -->
 
-	<div>
-	판매자의 말
-	<br /><br />
-	<%= product.getpContent() %> 
-	</div>	
-		
+<hr />
+
+<!-- 중간 productContent 영역 시작 -->
+<div id="sellerCommentBox">
+
+	<img src="<%=request.getContextPath()%>/images/product/sellerCommentTag.png" />
+	<br />
 	
-	<hr style="margin-top:30px"/>
+	<div id="seller-text-box">
+		<%= product.getpContent() %> 
+	</div>
+</div>	
+<!-- 중간 productContent 영역 끝-->
 	
-	<div class="comment-container">
-		<div class="comment-editor">
-			<form 
-				action="<%= request.getContextPath() %>/product/productCommentEnroll"
-				name="productCommentFrm"
-				method="POST">
-				<div>댓글!</div>
-				<textarea name="content" cols="60" rows="3"></textarea>
-				<button id="btn-insert">등록</button>
-				
-				<input type="hidden" name="commentLevel" value="1"/>
-				<input type="hidden" name="userId" value="<%= loginUser != null ? loginUser.getUserId() : ""%>"/>
-				<input type="hidden" name="pNo" value="<%= product.getpNo()%>"/>
-				<input type="hidden" name="commentRef" value="0"/>
-			</form>
-		</div>
+<hr />	
+	
+<!-- 댓글 영역 시작 -->
+<div class="comment-container">
+	<div class="comment-editor">
+		<form 
+			action="<%= request.getContextPath() %>/product/productCommentEnroll"
+			name="productCommentFrm" method="POST">
+			
+			<!-- 코멘트 이미지 박스 -->
+			<div class="co-tag-box">
+				<img src="<%=request.getContextPath()%>/images/product/comments.png" />
+			</div>
+			
+			
+			<table id="cmt-top-tbl">
+				<tr>
+					<td>
+						<textarea id="wr-content" name="content" cols="60" rows="3"></textarea>	
+					</td>
+					<td>
+						<button id="btn-insert">등록</button>		
+					</td>
+				</tr>
+			</table>
+			
+			
+			
+			<input type="hidden" name="commentLevel" value="1"/>
+			<input type="hidden" name="userId" value="<%= loginUser != null ? loginUser.getUserId() : ""%>"/>
+			<input type="hidden" name="pNo" value="<%= product.getpNo()%>"/>
+			<input type="hidden" name="commentRef" value="0"/>
+		</form>
+	</div>
 		
 	<table id="tbl-comment">
 <%
@@ -187,6 +311,15 @@ if(commentList != null && !commentList.isEmpty()){
 %>		
 	</table>
 	</div>
+</section>
+</section>
+<form 
+	action="<%= request.getContextPath() %>/product/productCommentDelete"
+	name="productCommentDelFrm"
+	method="POST">
+	<input type="hidden" name="commentNo" />
+	<input type="hidden" name="pNo" value="<%= product.getpNo() %>"/>
+</form>
 
 <script>
 $(like).click((e) => {
@@ -207,17 +340,6 @@ $(like).click((e) => {
 	});
 });
 
-</script>
-
-<form 
-	action="<%= request.getContextPath() %>/product/productCommentDelete"
-	name="productCommentDelFrm"
-	method="POST">
-	<input type="hidden" name="commentNo" />
-	<input type="hidden" name="pNo" value="<%= product.getpNo() %>"/>
-</form>
-
-<script>
 $(".btn-delete").click(function(e){
 	
 	if(confirm("해당 댓글을 삭제하시겠습니까?")){
@@ -230,7 +352,7 @@ $(".btn-delete").click(function(e){
 
 </script>
 
-</section>
+
 <%
 if(editable){
 %>
@@ -331,4 +453,6 @@ const loginAlert = () => {
 
 
 </script>
+
+
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

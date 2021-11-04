@@ -73,6 +73,7 @@ public class ProductDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new ProductException("전체회원 조회 오류",e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -95,6 +96,7 @@ public class ProductDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new ProductException("전체 컨텐츠 조회 오류",e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -219,6 +221,7 @@ public class ProductDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new ProductException("상품 한개 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -228,160 +231,6 @@ public class ProductDao {
 
 	}
 
-	public Product selectOneProduct1(Connection conn, int no, Attachment attach1, Attachment attach2) {
-		Product product = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String query = prop.getProperty("selectOneProduct");
-		
-		try {
-			//미완성쿼리문을 가지고 객체 생성
-			pstmt = conn.prepareStatement(query);
-			//쿼리문미완성
-			pstmt.setInt(1, no);
-			//쿼리문 실행
-			//완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				product = new Product();
-				product.setUserId(rset.getString("p_user_id"));
-				product.setpTitle(rset.getString("p_title"));
-				product.setpRegDate(rset.getDate("p_reg_date"));
-				product.setpContent(rset.getString("p_content"));
-				product.setpPost(rset.getString("p_post"));
-				product.setpPrice(rset.getInt("p_price"));
-				product.setpCnt(rset.getInt("p_cnt"));
-				product.setpCategory(rset.getString("p_category"));
-				product.setpRecommend(rset.getInt("p_recommend"));
-			}
-			
-			
-//				
-//			System.out.println("list@Service = " + list.get(0).toString());
-//			System.out.println("list@Service = " + list.get(1).toString());
-//
-//			if(list.get(0) != null) {
-//				
-//			}
-//			
-//			for(int i = 0; i < list.size(); i++) {
-//				
-//				Attachment attach = new Attachment();
-//				attach.setAttachNo(rset.getInt("attach_no"));
-//				attach.setpNo(rset.getInt("p_no"));
-//				attach.setOriginalFileName(rset.getString("original_filename"));
-//				attach.setRenamedFileName(rset.getString("renamed_filename"));
-//				attach.setRegDate(rset.getDate("reg_date"));
-//				attach.setImgFlag(rset.getString("img_flag"));
-//				
-//				product.setAttach1(attach);
-//
-//			}
-//			
-//			list.size();
-//			
-//			if(rset.getString("img_flag").equals("Y")) {
-//				
-//				for(int i = 0; i < list.size(); i++) {
-//					attach = list[i];
-//					product.setAttach1(attach);
-//					
-////				Attachment attach = new Attachment();
-////				attach.setAttachNo(rset.getInt("attach_no"));
-////				attach.setpNo(rset.getInt("p_no"));
-////				attach.setOriginalFileName(rset.getString("original_filename"));
-////				attach.setRenamedFileName(rset.getString("renamed_filename"));
-////				attach.setRegDate(rset.getDate("reg_date"));
-////				attach.setImgFlag(rset.getString("img_flag"));
-//				
-//					product.setAttach1(attach);
-//			}
-//			
-//			}
-//			
-			
-			
-			product.setAttach1(attach1);
-			product.setAttach2(attach2);
-			
-			
-			
-			
-			
-//			if(rset.getString("img_flag").equals("Y")) {
-//				Attachment attach = new Attachment();
-//				attach.setAttachNo(rset.getInt("attach_no"));
-//				attach.setpNo(rset.getInt("p_no"));
-//				attach.setOriginalFileName(rset.getString("original_filename"));
-//				attach.setRenamedFileName(rset.getString("renamed_filename"));
-//				attach.setRegDate(rset.getDate("reg_date"));
-//				attach.setImgFlag(rset.getString("img_flag"));
-//				
-//				product.setAttach1(attach);
-//				
-//			}
-//			
-//			if(rset.getString("img_flag").equals("N")) {
-//				Attachment attach = new Attachment();
-//				attach.setAttachNo(rset.getInt("attach_no"));
-//				attach.setpNo(rset.getInt("p_no"));
-//				attach.setOriginalFileName(rset.getString("original_filename"));
-//				attach.setRenamedFileName(rset.getString("renamed_filename"));
-//				attach.setRegDate(rset.getDate("reg_date"));
-//				attach.setImgFlag(rset.getString("img_flag"));
-//				
-//				product.setAttach2(attach);
-//				
-//			}
-
-			
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return product;
-	}
-
-	public Attachment selectAttachment(Connection conn, int no) {
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("selectAttachmentList");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, no);
-			
-			rset = pstmt.executeQuery();
-			
-			
-			while(rset.next()) {
-				Attachment attach = new Attachment();
-				attach.setAttachNo(rset.getInt("attach_no"));
-				attach.setpNo(rset.getInt("p_no"));
-				attach.setOriginalFileName(rset.getString("original_filename"));
-				attach.setRenamedFileName(rset.getString("renamed_filename"));
-				attach.setRegDate(rset.getDate("reg_date"));
-				attach.setImgFlag(rset.getString("img_flag"));
-				
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return null;
-	}
 	
 	public Attachment selectAttachmentY(Connection conn, int no) {
 		Attachment attach = null;
@@ -411,6 +260,7 @@ public class ProductDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new ProductException("대표이미지 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -449,6 +299,7 @@ public class ProductDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new ProductException("상세 이미지 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -546,6 +397,7 @@ public class ProductDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new ProductException("상품 삭제 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -568,6 +420,7 @@ public class ProductDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new ProductException("대표이미지 삭제 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -590,6 +443,7 @@ public class ProductDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new ProductException("상세이미지 삭제 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -718,6 +572,7 @@ public class ProductDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new ProductException("상품 좋아요 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -775,6 +630,7 @@ public class ProductDao {
 			csvStr = csv.toString();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new ProductException("카테고리별 상품 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -831,6 +687,7 @@ public class ProductDao {
 			csvStr = csv.toString();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new ProductException("모두보기 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -881,6 +738,7 @@ public class ProductDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new ProductException("카테고리별 상품 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);

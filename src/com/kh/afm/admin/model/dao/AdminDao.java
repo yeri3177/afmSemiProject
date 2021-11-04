@@ -38,7 +38,7 @@ public class AdminDao {
 		try {
 			prop.load(new FileReader(filepath));
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new AdminException("DB조회 오류", e);
 		}
 	}
 
@@ -470,7 +470,7 @@ public class AdminDao {
 				totalContents = rset.getInt(1);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AdminException("회원탈퇴 목록 페이징 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -499,7 +499,7 @@ public class AdminDao {
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AdminException("사용자 공개여부 변경 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -530,7 +530,7 @@ public class AdminDao {
 			pstmt.setString(1, id_str);
 			result = pstmt.executeUpdate();			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AdminException("회원탈퇴 데이터 삭제 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -579,7 +579,7 @@ public class AdminDao {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AdminException("상품 목록 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -914,5 +914,4 @@ public class AdminDao {
 		}
 		return list;
 	}
-	
 }
