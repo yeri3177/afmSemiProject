@@ -23,32 +23,37 @@ public class AdminProductListServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 페이징처리
-		int cPage = 1;
-		int numPerPage = 10;
 		try {
-			cPage = Integer.parseInt(request.getParameter("cPage"));
-		} catch(NumberFormatException e) {
-			// 처리코드없음 
+			// 페이징처리
+			int cPage = 1;
+			int numPerPage = 10;
+			try {
+				cPage = Integer.parseInt(request.getParameter("cPage"));
+			} catch(NumberFormatException e) {
+				// 처리코드없음 
+			}
+			int startRownum = cPage * numPerPage - (numPerPage - 1);
+			int endRownum = cPage * numPerPage;
+			
+			// 업무로직
+			List<Product> list = adminService.selectAllProduct(startRownum, endRownum);
+			System.out.println("list@adminproductlist = " + list);
+			
+			// 페이징영역
+			int totalContents = adminService.selectProductTotalContents(); 
+			String url = request.getRequestURI();
+			String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
+			
+			// view단 처리
+			request.setAttribute("pagebar", pagebar);
+			request.setAttribute("list", list);
+			request
+				.getRequestDispatcher("/WEB-INF/views/admin/productList.jsp")
+				.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		}
-		int startRownum = cPage * numPerPage - (numPerPage - 1);
-		int endRownum = cPage * numPerPage;
-		
-		// 업무로직
-		List<Product> list = adminService.selectAllProduct(startRownum, endRownum);
-		System.out.println("list@adminproductlist = " + list);
-		
-		// 페이징영역
-		int totalContents = adminService.selectProductTotalContents(); 
-		String url = request.getRequestURI();
-		String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
-		
-		// view단 처리
-		request.setAttribute("pagebar", pagebar);
-		request.setAttribute("list", list);
-		request
-			.getRequestDispatcher("/WEB-INF/views/admin/productList.jsp")
-			.forward(request, response);
 		
 	}
 }

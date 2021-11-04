@@ -23,9 +23,15 @@ public class AdminService {
 	 */
 	public List<User> selectAllUser(int startRownum, int endRownum) {
 		Connection conn = getConnection();
-		List<User> list = adminDao.selectAllMember(conn, startRownum, endRownum);
-		close(conn);		
+		List<User> list = null;
 		
+		try {
+			list = adminDao.selectAllMember(conn, startRownum, endRownum);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}		
 		return list;
 	}
 
@@ -34,8 +40,14 @@ public class AdminService {
 	 */
 	public int selectUserTotalContents() {
 		Connection conn = getConnection();
-		int totalContent = adminDao.selectUserTotalContents(conn);
-		close(conn);
+		int totalContent = 0;
+		try {
+			totalContent = adminDao.selectUserTotalContents(conn);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}
 		return totalContent;
 	}
 
@@ -44,8 +56,14 @@ public class AdminService {
 	 */
 	public List<DelUser> selectAllDelUser(int startRownum, int endRownum) {
 		Connection conn = getConnection();
-		List<DelUser> list = adminDao.selectAllDelUser(conn, startRownum, endRownum);
-		close(conn);		
+		List<DelUser> list = null;
+		try {
+			list = adminDao.selectAllDelUser(conn, startRownum, endRownum);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}		
 		
 		return list;
 	}
@@ -55,8 +73,14 @@ public class AdminService {
 	 */
 	public List<User> searchUser(Map<String, Object> param) {
 		Connection conn = getConnection();
-		List<User> list = adminDao.searchUser(conn, param);
-		close(conn);
+		List<User> list = null;
+		try {
+			list = adminDao.searchUser(conn, param);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}
 		return list;
 	}
 
@@ -65,8 +89,14 @@ public class AdminService {
 	 */
 	public int searchUserCount(Map<String, Object> param) {
 		Connection conn = getConnection();
-		int totalContent = adminDao.searchUserCount(conn, param);
-		close(conn);
+		int totalContent;
+		try {
+			totalContent = adminDao.searchUserCount(conn, param);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}
 		return totalContent;
 	}
 
@@ -75,8 +105,14 @@ public class AdminService {
 	 */
 	public List<User> sortUser(Map<String, Object> param) {
 		Connection conn = getConnection();
-		List<User> list = adminDao.sortUser(conn, param);
-		close(conn);
+		List<User> list = null;
+		try {
+			list = adminDao.sortUser(conn, param);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}
 		return list;
 	}
 	
@@ -85,8 +121,14 @@ public class AdminService {
 	 */
 	public List<Product> sortProduct(Map<String, Object> param) {
 		Connection conn = getConnection();
-		List<Product> list = adminDao.sortProduct(conn, param);
-		close(conn);
+		List<Product> list;
+		try {
+			list = adminDao.sortProduct(conn, param);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}
 		return list;
 	}
 	
@@ -95,8 +137,14 @@ public class AdminService {
 	 */
 	public Map<String, Integer> adminMainQuery(Map<String, Integer> param) {
 		Connection conn = getConnection();
-		Map<String, Integer> result = adminDao.adminMainQuery(conn, param);
-		close(conn);
+		Map<String, Integer> result;
+		try {
+			result = adminDao.adminMainQuery(conn, param);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}
 		return result;
 	}
 
@@ -105,8 +153,14 @@ public class AdminService {
 	 */
 	public int selectDelUserTotalContents() {
 		Connection conn = getConnection();
-		int totalContent = adminDao.selectDelUserTotalContents(conn);
-		close(conn);
+		int totalContent;
+		try {
+			totalContent = adminDao.selectDelUserTotalContents(conn);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}
 		return totalContent;
 	}
 
@@ -115,11 +169,19 @@ public class AdminService {
 	 */
 	public int updateUserExpose(String userId, String userExpose) {
 		Connection conn = getConnection();
-		int result = adminDao.updateUserExpose(conn, userId, userExpose);
-		
-		if(result>0) commit(conn);
-		else rollback(conn);
-		close(conn);
+		int result;
+		try {
+			result = adminDao.updateUserExpose(conn, userId, userExpose);
+			
+			if(result>0) 
+				commit(conn);
+			else 
+				rollback(conn);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}
 		
 		return result;
 	}
@@ -129,12 +191,17 @@ public class AdminService {
 	 */
 	public int deleteDelUser(String[] userId_arr) {
 		Connection conn = getConnection();
-		int result = adminDao.deleteDelUser(conn, userId_arr);
-		
-		if(result>0) commit(conn);
-		else rollback(conn);
-		close(conn);
-		
+		int result;
+		try {
+			result = adminDao.deleteDelUser(conn, userId_arr);
+			
+			if(result>0) commit(conn);
+			else rollback(conn);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}
 		return result;
 	}
 
@@ -144,10 +211,14 @@ public class AdminService {
 	public List<Product> selectAllProduct(int startRownum, int endRownum) {
 		Connection conn = getConnection();
 		
-		List<Product> list = adminDao.selectAllProduct(conn, startRownum, endRownum);
-		
-		
-		close(conn);
+		List<Product> list;
+		try {
+			list = adminDao.selectAllProduct(conn, startRownum, endRownum);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}
 		return list;
 	}
 
@@ -156,8 +227,14 @@ public class AdminService {
 	 */
 	public int selectProductTotalContents() {
 		Connection conn = getConnection();
-		int totalContent = adminDao.selectProductTotalContents(conn);
-		close(conn);
+		int totalContent;
+		try {
+			totalContent = adminDao.selectProductTotalContents(conn);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}
 		return totalContent;
 	}
 
@@ -166,11 +243,17 @@ public class AdminService {
 	 */
 	public int updateProductExpose(int pNo, String pExpose) {
 		Connection conn = getConnection();
-		int result = adminDao.updateProductExpose(conn, pNo, pExpose);
-		
-		if(result>0) commit(conn);
-		else rollback(conn);
-		close(conn);
+		int result;
+		try {
+			result = adminDao.updateProductExpose(conn, pNo, pExpose);
+			
+			if(result>0) commit(conn);
+			else rollback(conn);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}
 		
 		return result;
 	}
@@ -180,8 +263,14 @@ public class AdminService {
 	 */
 	public List<Report> selectAllReport(int startRownum, int endRownum) {
 		Connection conn = getConnection();
-		List<Report> list = adminDao.selectAllReport(conn, startRownum, endRownum);
-		close(conn);		
+		List<Report> list;
+		try {
+			list = adminDao.selectAllReport(conn, startRownum, endRownum);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}		
 		
 		return list;
 	}
@@ -191,8 +280,14 @@ public class AdminService {
 	 */
 	public int selectReportTotalContents() {
 		Connection conn = getConnection();
-		int totalContent = adminDao.selectReportTotalContents(conn);
-		close(conn);
+		int totalContent;
+		try {
+			totalContent = adminDao.selectReportTotalContents(conn);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}
 		return totalContent;
 	}
 
@@ -201,8 +296,14 @@ public class AdminService {
 	 */
 	public int selectReportCnt() {
 		Connection conn = getConnection();
-		int cnt = adminDao.selectReportCnt(conn);
-		close(conn);		
+		int cnt;
+		try {
+			cnt = adminDao.selectReportCnt(conn);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}		
 		
 		return cnt;
 	}
@@ -212,8 +313,14 @@ public class AdminService {
 	 */
 	public List<Product> searchProduct(Map<String, Object> param) {
 		Connection conn = getConnection();
-		List<Product> list = adminDao.searchProduct(conn, param);
-		close(conn);
+		List<Product> list;
+		try {
+			list = adminDao.searchProduct(conn, param);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}
 		return list;
 	}
 
@@ -222,8 +329,14 @@ public class AdminService {
 	 */
 	public int searchProductCount(Map<String, Object> param) {
 		Connection conn = getConnection();
-		int totalContent = adminDao.searchProductCount(conn, param);
-		close(conn);
+		int totalContent;
+		try {
+			totalContent = adminDao.searchProductCount(conn, param);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}
 		return totalContent;
 	}
 
@@ -232,12 +345,17 @@ public class AdminService {
 	 */
 	public int processReport(int reportNo) {
 		Connection conn = getConnection();
-		int result = adminDao.processReport(conn, reportNo);
-		
-		if(result>0) commit(conn);
-		else rollback(conn);
-		close(conn);
-		
+		int result;
+		try {
+			result = adminDao.processReport(conn, reportNo);
+			
+			if(result>0) commit(conn);
+			else rollback(conn);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}
 		return result;
 	}
 
@@ -246,8 +364,14 @@ public class AdminService {
 	 */
 	public List<Address> selectUserAddress(String userId) {
 		Connection conn = getConnection();
-		List<Address> list = adminDao.selectUserAddress(conn, userId);
-		close(conn);		
+		List<Address> list;
+		try {
+			list = adminDao.selectUserAddress(conn, userId);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}		
 		
 		return list;
 	}

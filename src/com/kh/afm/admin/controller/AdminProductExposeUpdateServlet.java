@@ -18,23 +18,28 @@ public class AdminProductExposeUpdateServlet extends HttpServlet {
 	private AdminService adminService = new AdminService(); 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// encoding처리
-		request.setCharacterEncoding("UTF-8");
-		
-		// 사용자입력값
-		int pNo = Integer.parseInt(request.getParameter("pNo"));
-		String pExpose = request.getParameter("pExpose");
-		String pExpose_kr = "Y".equals(pExpose) ? "노출" : "비공개";
-		
-		// 업무로직 
-		int result = adminService.updateProductExpose(pNo, pExpose);
-		System.out.println("상품노출여부result = " + result);
-		
-		// 메세지 세션
-		String msg = result > 0 ? "상품노출여부값 ["+pExpose_kr+"]로 변경 성공" : "상품노출여부값 변경 실패";
-		request.getSession().setAttribute("msg", msg);
-		
-		// 리다이렉트
-		response.sendRedirect(request.getHeader("Referer"));
+		try {
+			// encoding처리
+			request.setCharacterEncoding("UTF-8");
+			
+			// 사용자입력값
+			int pNo = Integer.parseInt(request.getParameter("pNo"));
+			String pExpose = request.getParameter("pExpose");
+			String pExpose_kr = "Y".equals(pExpose) ? "노출" : "비공개";
+			
+			// 업무로직 
+			int result = adminService.updateProductExpose(pNo, pExpose);
+			System.out.println("상품노출여부result = " + result);
+			
+			// 메세지 세션
+			String msg = result > 0 ? "상품노출여부값 ["+pExpose_kr+"]로 변경 성공" : "상품노출여부값 변경 실패";
+			request.getSession().setAttribute("msg", msg);
+			
+			// 리다이렉트
+			response.sendRedirect(request.getHeader("Referer"));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 }
