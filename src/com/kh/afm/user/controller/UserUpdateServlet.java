@@ -53,7 +53,7 @@ public class UserUpdateServlet extends HttpServlet {
 			String banknumer = request.getParameter("banknumer");
 			
 			// Account 객체 생성
-			Account account = new Account(0, bankname, banknumer, userId);
+			Account account = new Account(0, banknumer, bankname, userId);
 			System.out.println("account : " + account);
 		
 			// 업무로직
