@@ -167,11 +167,14 @@ $(".bx-start").hide();	//onload시 시작버튼 숨김.
 	    	
 <% 
 if(editable){ 
-%>	
+%>		
+			<!-- 수정하기 버튼 -->
 		    <td class="sellerControl-td" id="updateBtn-td">
 		    	<input type="button" value="수정하기" class="sellerControlBtn" id="updateBtn"
 					onclick="updateProduct()" />
 		    </td>
+		    
+		    <!-- 삭제하기 버튼 -->
 		    <td class="sellerControl-td" id="deleteBtn-td">
 			    <input type="button" value="삭제하기" class="sellerControlBtn" id="deleteBtn"
 					onclick="deleteProduct()" />
@@ -179,22 +182,24 @@ if(editable){
 <%
 }
 %>
+			<!-- 바로구매 버튼 -->
 			<td class="user-btn-td">
 		    	<input type="submit" value="바로구매" 
 					formaction="<%= request.getContextPath() %>/order/orderProduct" />
 		    </td>
 			
-		    
+		    <!-- 장바구니 버튼 -->
 		    <td class="user-btn-td">
 		    	<input type="submit" value="장바구니" 
 					formaction="<%= request.getContextPath() %>/cart/cartInsert" />
 		    </td>
 		    
-		    
+		    <!-- 추천하기 버튼 -->
 		    <td class="user-btn-td">
 	    		<input type="button" id="like" value="추천하기"/>
 	    	</td>
 		    
+		    <!-- 신고하기 버튼 -->
 		    <td class="user-btn-td">
 		    	<input type="submit" value="신고하기" 
 		    		   formaction="<%= request.getContextPath() %>/csboard/productReportForm"/>   
@@ -206,37 +211,52 @@ if(editable){
 
 <hr />
 
-<div>
+<!-- 중간 productContent 영역 시작 -->
+<div id="sellerCommentBox">
 
-	판매자의 말
-	<br /><br />
-	<%= product.getpContent() %> 
-
+	<img src="<%=request.getContextPath()%>/images/product/sellerCommentTag.png" />
+	<br />
+	
+	<div id="seller-text-box">
+		<%= product.getpContent() %> 
+	</div>
 </div>	
+<!-- 중간 productContent 영역 끝-->
 	
-		
+<hr />	
 	
-	<hr style="margin-top:30px"/>
-	
-	<div class="comment-container">
-		<div class="comment-editor">
-			<form 
-				action="<%= request.getContextPath() %>/product/productCommentEnroll"
-				name="productCommentFrm" method="POST">
-				
-				<div class="co-tag-box">
-					<img src="<%=request.getContextPath()%>/images/product/comments.png" />
-				</div>
-				
-				<textarea name="content" cols="60" rows="3"></textarea>
-				<button id="btn-insert">등록</button>
-				
-				<input type="hidden" name="commentLevel" value="1"/>
-				<input type="hidden" name="userId" value="<%= loginUser != null ? loginUser.getUserId() : ""%>"/>
-				<input type="hidden" name="pNo" value="<%= product.getpNo()%>"/>
-				<input type="hidden" name="commentRef" value="0"/>
-			</form>
-		</div>
+<!-- 댓글 영역 시작 -->
+<div class="comment-container">
+	<div class="comment-editor">
+		<form 
+			action="<%= request.getContextPath() %>/product/productCommentEnroll"
+			name="productCommentFrm" method="POST">
+			
+			<!-- 코멘트 이미지 박스 -->
+			<div class="co-tag-box">
+				<img src="<%=request.getContextPath()%>/images/product/comments.png" />
+			</div>
+			
+			
+			<table id="cmt-top-tbl">
+				<tr>
+					<td>
+						<textarea id="wr-content" name="content" cols="60" rows="3"></textarea>	
+					</td>
+					<td>
+						<button id="btn-insert">등록</button>		
+					</td>
+				</tr>
+			</table>
+			
+			
+			
+			<input type="hidden" name="commentLevel" value="1"/>
+			<input type="hidden" name="userId" value="<%= loginUser != null ? loginUser.getUserId() : ""%>"/>
+			<input type="hidden" name="pNo" value="<%= product.getpNo()%>"/>
+			<input type="hidden" name="commentRef" value="0"/>
+		</form>
+	</div>
 		
 	<table id="tbl-comment">
 <%
