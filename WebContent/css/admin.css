@@ -20,6 +20,10 @@ time, mark, audio, video, fieldset {
   line-height:auto;
 }
 
+select,button,input {
+	cursor: pointer;
+}
+
 .admin-page a{
   color:inherit;
   text-decoration:none;
@@ -109,7 +113,7 @@ time, mark, audio, video, fieldset {
 
 
 /**************************************
- * 사이드메뉴 영역
+ * 헤더 - 사이드메뉴 영역
  **************************************/
 /* 사이드메뉴 전체 */
 .side-menu-box{
@@ -320,7 +324,7 @@ time, mark, audio, video, fieldset {
 }  
 
 /**************************************
- * userList.jsp
+ * userList.jsp (회원 목록)
  **************************************/
 .admin-container table td {	
 	padding : 10px;
@@ -350,9 +354,11 @@ time, mark, audio, video, fieldset {
 .data-box {
 	width: 900px;
 	height: 32px;
+	line-height: 32px;
 	background-color: #ffdfaf;
-	margin: 30px auto;
-	padding: 8px;	
+	margin: 40px auto 25px auto;
+	padding: 8px;
+	position: relative;	
 }
 
 .data-box span {
@@ -363,30 +369,39 @@ time, mark, audio, video, fieldset {
 .serarchbox {
 	display : inline-block;
 	margin: 0 10px;
+	position: relative;	
+	top: -4px;
 }
 
 /* 정렬 영역 */
 .sortbox {
 	display : inline-block;
 	margin: 0 10px;
+	position: relative;	
+	top: -4px;
 }
 
 .data-box select {
-	height: 28px;
-	/* border-radius: 7px; */
+	height: 30px;
+	text-align: center;
+	position: relative;	
+	top: -1px;
 }
 
 .data-box input {
-	height: 24px;
+	height: 27px;
 	border: 1px solid black;
+	text-align: center;
+	font-size: 15px;
 }
 
 /* 검색, 정렬 버튼 */
 .search-btn, .sort-btn {
-	height: 30px;
-	width: 70px;
+	height: 33px;
+	width: 73px;
 	background-color: #ffb445;
 	font-weight: bold;	
+	border-radius: 15px;
 }
 
 /* 공개여부칸 select */
@@ -450,7 +465,11 @@ time, mark, audio, video, fieldset {
 	background-color: #d9d9d9;
 }
 
-
+.adrBtn {
+	width:90px;
+	height: 33px;
+	cursor: pointer;
+}
 
 /**************************************
  * delUserList.jsp (회원탈퇴 목록)
@@ -566,7 +585,7 @@ time, mark, audio, video, fieldset {
 	
 }
 /**************************************
- * productList.jsp
+ * productList.jsp (상품 목록)
  **************************************/
 #tbl-product {
 	margin: 0 auto;
