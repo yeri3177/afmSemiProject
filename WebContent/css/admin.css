@@ -73,16 +73,16 @@ select,button,input {
  * 페이징바
  **************************************/
 .admin-container div#pageBar{
-	margin-top:30px; 
 	text-align:center; 
 	padding: 5px;
 	font-family: 'Abril Fatface', cursive;
 	font-size: 20px;
 	
-	background-color: #ffe187;
+	/* background-color: #ffe187; */
 	width: 300px;
 	text-align: center;
-	margin: 50px auto!important;
+	margin: 30px auto!important;
+	margin-bottom: 250px!important;
 	border-radius: 10px;
 	
 	display: flex;
@@ -409,6 +409,11 @@ select,button,input {
 	width: 70px;
 	height: 30px;
 	text-align: center;
+}
+
+#userList-container table,td,th {
+	border-left-color: white!important;
+	border-right-color: white!important;
 }
 
 
