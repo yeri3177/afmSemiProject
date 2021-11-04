@@ -19,42 +19,42 @@
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/csboard.css" />
 <section id="csboardView-container" class="csboard-container">
-	<h2>고객센터 게시판</h2>
+	<h2>게시글 상세보기</h2>
 	<table id="tbl-csboard-view">
 		<tr>
 			<th>글번호</th>
 			<td><%= csboard.getBoardNo() %></td>
-		</tr>
-		<tr>
-			<th>제 목</th>
-			<td><%= csboard.getBoardTitle() %></td>
-		</tr>
-		<tr>
 			<th>작성자</th>
 			<td><%= csboard.getUserId() %></td>
-		</tr>
-		<tr>
 			<th>조회수</th>
 			<td><%= csboard.getBoardReadcount() %></td>
 		</tr>
 		<tr>
+			<th>제 목</th>
+			<td colspan="5"><%= csboard.getBoardTitle() %></td>
+		</tr>
+		<tr>
 			<th>내 용</th>
-			<td>
+			<td colspan="5">
 				<%= csboard.getBoardContent() %>
 			</td>
 		</tr>
-		
+	</table>
+	
 		<%-- 로그인한 유저가 작성자거나 관리자거나 --%>
 <% if(editable){ %>
-		<tr>
-			<%-- 작성자와 관리자만 마지막행 수정/삭제 버튼이 보일 수 있게 할 것 --%>
-			<th colspan="2">
-				<input type="button" value="수정하기" onclick="updateCsboard()"/>
-				<input type="button" value="삭제하기" onclick="deleteCsboard()"/>
-			</th> 
-		</tr> 
+		<br /><br />
+		<div id="wrap" align="center">
+			<tr>
+				<%-- 작성자와 관리자만 마지막행 수정/삭제 버튼이 보일 수 있게 할 것 --%>
+				<th colspan="6">
+					<input type="button" value="수정하기" class="modify-btn" onclick="updateCsboard()"/>
+					<input type="button" value="삭제하기" class="delete-btn" onclick="deleteCsboard()"/>
+				</th> 
+			</tr>
+		</div> 
 <% } %> 
-	</table>
+	
 	
 	<%-- 댓글 --%>
 	<hr style="margin-top:30px"/>
@@ -65,7 +65,7 @@
 			action="<%= request.getContextPath() %>/csboard/csboardCommentEnroll"
 			name="csboardCommentFrm"
 			method="POST">
-			<textarea name="cbContent" id="" cols="30" rows="3"></textarea>
+			<textarea name="cbContent" id="textarea-comment" cols="70" rows="3"></textarea>
 			<button id="btn-insert">등록</button>
 			
 			<input type="hidden" name="cbLevel" value="1" />
