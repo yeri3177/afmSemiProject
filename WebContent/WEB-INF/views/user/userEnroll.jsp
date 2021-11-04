@@ -120,14 +120,15 @@ https://tyrannocoding.tistory.com/48
 				<td>
 					이메일<sup>*</sup> <br /> 
 					<input type="text" name="emailId" id="emailId" required> @ 
-					<input type="text" name="emailAddress" id="emailAddress" readonly> 
+					<input type="text" name="emailAddress" id="emailAddress" required readonly> 
 					
-					<select name="emailSelect" id="emailSelect">
+					<select name="emailSelect" id="emailSelect" required>
+						<option value="" disabled selected>이메일선택</option>
 						<option value="naver.com">naver.com</option>
 						<option value="daum.net">daum.net</option>
 						<option value="gmail.com">gmail.com</option>
 					</select>
-					</td>
+				</td>
 			</tr>
 			
 			<tr>
@@ -178,13 +179,17 @@ https://tyrannocoding.tistory.com/48
 
 
 <script>
-$(document).ready(function(){
-	$("#emailSelect").change(function(){
-		$("#emailAddress").val($(this).val());
-	});
-});
 
 /* 체크박스 유효성 검사 */
+
+
+
+
+/* 이메일주소 자동완성 */
+$("#emailSelect").change(function(){
+	$("#emailAddress").val($(this).val());
+});
+
 
  
 /**
@@ -256,7 +261,7 @@ function findAddr(){
 * 3. 비밀번호 일치 확인
 */
 $("[name=userEnrollFrm]").submit((e) => {
-	//userId
+	// 아이디
 	const $userId = $("#_userId");
 	//아이디는 영문자/숫자  4글자이상만 허용 
 	if(/^[a-zA-Z0-9]{4,}$/.test($userId.val()) == false){
@@ -265,7 +270,7 @@ $("[name=userEnrollFrm]").submit((e) => {
 		return false;
 	}
 	
-	//idValid 중복검사여부
+	// idValid 중복검사여부
 	const $idValid = $("#idValid");
 	if($idValid.val() == "0"){
 		alert("아이디 중복검사 해주세요.");
@@ -273,7 +278,7 @@ $("[name=userEnrollFrm]").submit((e) => {
 		return false;
 	}
 	
-	//password
+	// 비밀번호
 	const $p1 = $("#_password");
 	const $p2 = $("#password2");
 	if(/^[a-zA-Z0-9!@#$$%^&*()]{4,}/.test($p1.val()) == false){
@@ -287,7 +292,7 @@ $("[name=userEnrollFrm]").submit((e) => {
 		return false;
 	}
 	
-	//userName
+	// 이름
 	const $userName = $("#userName");
 	if(/^[가-힣]{2,}$/.test($userName.val()) == false){
 		alert("이름은 한글 2글자 이상이어야 합니다.");
@@ -295,7 +300,7 @@ $("[name=userEnrollFrm]").submit((e) => {
 		return false;
 	}
 	
-	//phone
+	// 전화번호
 	const $phone = $("#phone");
 	//-제거하기
 	$phone.val($phone.val().replace(/[^0-9]/g, ""));//숫자아닌 문자(복수개)제거하기

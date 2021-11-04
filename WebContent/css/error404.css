@@ -42,8 +42,8 @@ body {
 
 /* 홈으로가기 버튼 */
 #homeBtn {
-	width: 200px;
-	height: 60px;
+	width: 250px;
+	height: 66px;
 	
 	font-family: 'Balsamiq Sans', cursive;
 	font-size: 33px;
@@ -53,11 +53,16 @@ body {
 	
 	background-color: #ffaf36;
 	border-radius: 20px;
-	
+	color: #e5e5e5;
 	cursor: pointer;
+	
+	border: 7px outset #f59d1c;
 }
 
-
+#homeBtn:hover {
+	font-size: 34px;
+	color: #fff;
+}
 
 
 /************************ 오른쪽 영역 ************************/
@@ -66,8 +71,8 @@ body {
 	display: inline-block;
 	position: relative;
 	width: 500px;
-	right: 40px;
-	top: 60px;
+	right: 55px;
+	top: 50px;
 	
 }
 /* 소녀 이미지 */
