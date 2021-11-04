@@ -31,7 +31,10 @@ insert into tb_user
 delete from tb_user where user_id = 'admin';
 select * from tb_user;
 select * from user_delete;
-delete from user_delete where delete_u_id = 'admin';
+delete from user_delete where delete_u_id = '이창훈';
+
+
+
 
 create sequence seq_product_no;
 CREATE TABLE product (
@@ -145,9 +148,6 @@ CREATE TABLE product_report (
     CONSTRAINTS ck_report_status check(report_status in ('Y','N'))
 );
 
-select * from user_sequences;
-
-
 --drop table csboard;
 create sequence seq_csboard_no;
 CREATE TABLE csboard (
@@ -179,10 +179,8 @@ CREATE TABLE tb_account (
 	account_number VARCHAR2(30) NOT NULL,
 	bank_name VARCHAR2(30) NOT NULL,
     CONSTRAINTS pk_tb_account_no PRIMARY KEY (account_no),
-    CONSTRAINTS fk_tb_account_user_id FOREIGN KEY (user_id)REFERENCES tb_user (user_id) on delete cascade
+    CONSTRAINTS fk_tb_account_user_id FOREIGN KEY (user_id)REFERENCES tb_user (user_id)
 );
-ALTER TABLE tb_account DROP FOREIGN KEY fk_tb_account_user_id;
-ALTER TABLE tb_account ADD CONSTRAINTS fk_tb_account_user_id FOREIGN KEY (user_id)REFERENCES tb_user (user_id) on delete cascade;
 
 --drop table address;
 create sequence seq_tb_address_no;
@@ -193,9 +191,8 @@ CREATE TABLE address (
 	adr_road VARCHAR2(300) NOT NULL,
 	adr_detail VARCHAR2(200) NOT NULL,
     CONSTRAINT pk_address_no PRIMARY KEY (adr_no),
-    CONSTRAINT fk_address_user_id FOREIGN KEY (user_id)REFERENCES tb_user (user_id) on delete cascade
+    CONSTRAINT fk_address_user_id FOREIGN KEY (user_id)REFERENCES tb_user (user_id)
 );
-ALTER TABLE address ADD CONSTRAINTS fk_address_user_id FOREIGN KEY (user_id)REFERENCES tb_user (user_id) on delete cascade;
 
 --drop table product_delete;
 CREATE TABLE product_delete (
@@ -905,7 +902,7 @@ values (seq_tb_address_no.nextval, 'minv0526', '우리집', '서울 강동구 �
 
 --minv0526 계좌 tb_account
 insert into tb_account
-values (seq_tb_account_no.nextval, 'admin', '110111686868', '신한은행');
+values (seq_tb_account_no.nextval, 'minv0526', '110111686868', '신한은행');
 
 
 
@@ -1649,6 +1646,39 @@ insert into tb_account values (seq_tb_account_no.nextval, 'leesu_11', '330352058
 insert into tb_account values (seq_tb_account_no.nextval, 'ho123', '130852558333', 'NH농협은행');
 insert into tb_account values (seq_tb_account_no.nextval, 'qwerty123', '110352258824', '신한은행');
 
+--강구진
+insert into cart values(seq_cart_no.nextval,9,'honggd',1);
+insert into cart values(seq_cart_no.nextval,8,'honggd',3);
+insert into cart values(seq_cart_no.nextval,10,'honggd',2);
+
+alter table tb_order add(adr_no number);
+
+--박종서
+drop sequence seq_csboard_comment_no;
+create sequence seq_csboard_comment_no;
+create sequence seq_csboard_comment_cb_no;
+create table csboard_comment (
+    CB_NO number, 
+    CB_LEVEL number default 1, 
+    USER_ID varchar2(20),
+    CB_CONTENT varchar2(2000),
+    CB_BOARD_NO number, 
+    CB_COMMENT_REF number,
+    REG_DATE date default sysdate,
+    constraint pk_csboard_comment_cb_no primary key(cb_no),
+    constraint fk_csboard_comment_user_id foreign key(user_id) references tb_user(user_id),
+    constraint fk_csboard_comment_cb_board_no foreign key(cb_board_no) references csboard(board_no) on delete cascade,
+    constraint fk_csboard_comment_ref foreign key(cb_comment_ref) references csboard_comment(cb_no) on delete cascade
+);
+
+comment on column csboard_comment.cb_no is '게시판 댓글 번호';
+comment on column csboard_comment.cb_level is '게시판 댓글 레벨';
+comment on column csboard_comment.user_id is '게시판 댓글 작성자';
+comment on column csboard_comment.cb_content is '게시판 댓글';
+comment on column csboard_comment.cb_board_no is '참조 원글 번호';
+comment on column csboard_comment.cb_comment_ref is '게시판댓글 참조번호';
+comment on column csboard_comment.reg_date is '게시판댓글 작성일';
+
 -- 122번 게시글에 대한 샘플 댓글 생성
 insert into csboard_comment
 values(
@@ -1702,11 +1732,90 @@ values(
     seq_csboard_comment_cb_no.nextval,
     2, -- cb_level
     'nayeon',
-    '좋은 글 감사합니다.',
+    '대댓글입니다요.',
     122,
-    19,
+    19, -- cb_no
     default
 );
-select * from csboard_comment order by cb_no;
-    
 
+insert into csboard_comment
+values(
+    seq_csboard_comment_cb_no.nextval,
+    2, -- cb_level
+    'mina_111',
+    '대대댓글...?.',
+    122,
+    19, -- cb_no
+    default
+);
+
+--
+-- 122번 게시글에 대한 샘플 댓글 생성
+insert into csboard_comment
+values(
+    seq_csboard_comment_cb_no.nextval,
+    default,
+    'jisoo123',
+    '글 잘 읽었습니다',
+    122,
+    null,
+    default
+);
+
+insert into csboard_comment
+values(
+    seq_csboard_comment_cb_no.nextval,
+    default,
+    'admin',
+    '좋은 글 감사합니다.',
+    122,
+    null,
+    default
+);
+
+insert into csboard_comment
+values(
+    seq_csboard_comment_cb_no.nextval,
+    default,
+    'han123',
+    '이번달 베스트 게시글에 선정되셨습니다. 축하드려요~',
+    122,
+    null,
+    default
+);
+
+-- 122번 게시글의 샘플 대댓글
+-- 1번 댓글
+insert into csboard_comment
+values(
+    seq_csboard_comment_cb_no.nextval,
+    2, -- cb_level
+    'aaaaa',
+    '대댓글입니다..',
+    122,
+    39, -- cb_no
+    default
+);
+
+-- 19번 댓글
+insert into csboard_comment
+values(
+    seq_csboard_comment_cb_no.nextval,
+    2, -- cb_level
+    'nayeon',
+    '대댓글입니다요.',
+    122,
+    40, -- cb_no
+    default
+);
+
+insert into csboard_comment
+values(
+    seq_csboard_comment_cb_no.nextval,
+    2, -- cb_level
+    'mina_111',
+    '대대댓글...?.',
+    122,
+    41, -- cb_no
+    default
+);

@@ -1,3 +1,4 @@
+<%@page import="java.text.NumberFormat"%>
 <%@page import="java.sql.Date"%>
 <%@page import="com.kh.afm.product.model.vo.Product"%>
 <%@page import="java.util.List"%>
@@ -9,11 +10,7 @@
 	List<Product> list = (List<Product>)request.getAttribute("list");
 	String searchKeyword = request.getParameter("searchKeyword");
 %>
-<style>
-</style>
 <section id="board-container">
-<br />
-<br />
 <%--
 <select name="category" id="category" class="category" value="category" style="width:100px;height:50px;">
 	<option id="모두보기" value="모두보기" selected>모두보기</option>
@@ -22,13 +19,25 @@
 	<option id="채소류" value="채소류">채소류</option>
 </select>
  --%>
+<style>
+.listTopImage{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
 
+</style>
 <!-- 카테고리 검색 -->
+<div>
+<img class="listTopImage" src="<%= request.getContextPath() %>/images/product/productListGif.gif" alt="" />
+</div>
+<!-- 
 <div class="productHeading">
 <p>상품 목록</p>
 </div>
+ -->
 
-<div id="seearch-pCategory" class="search-type">
+<div id="search-pCategory" class="search-type">
 	<form action="<%= request.getContextPath() %>/product/productFinder" name = "searchFrm">
 			<input type="hidden" name="searchType" value="pCategory"/>
 			
@@ -40,7 +49,6 @@
 			<button type="submit" class="search-btn"><img class="search-img" src="<%= request.getContextPath() %>/images/product/search-icon-64.png" alt=""></button>
 	</form>
 </div>
-
 	<table id="product-board" class="product-board">
 	<thead class="thead">
 		<tr>
@@ -59,7 +67,7 @@
 		<tr>
 			<th><img alt="" src="<%= request.getContextPath() %>/upload/product/<%= _product.getAttach1().getRenamedFileName() %>" width="300px" height="300px"></th>
 			<th><a href="<%= request.getContextPath() %>/product/productView?pNo=<%= _product.getpNo() %>"><%= _product.getpTitle() %></a></th>
-			<th><%= _product.getpPrice() %></th>
+			<th><%= NumberFormat.getInstance().format(_product.getpPrice()) %>(원)</th>
 			<th><%= _product.getUserId() %></th>
 			<th><%= (Date)_product.getpRegDate() %></th>
 			<th><%= _product.getpRecommend() %></th>

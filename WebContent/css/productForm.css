@@ -1,0 +1,91 @@
+@charset "UTF-8";
+body{
+	background-color: rgb(255,218,150);
+}
+.form{
+	margin: auto;
+
+}
+.listTopImage{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+table{
+	background-color:white;
+	margin: 30px;
+}
+.tbl-product-form{
+	margin: auto;
+	font-size: 32px;
+	margin-top: 20px;	
+}
+.input-text-title{
+	width: 600px;
+	height : 32px;
+	font-size : 24px;
+	text-align : center;
+}
+.input-text-price{
+	width: 300px;
+	height : 32px;
+	font-size : 24px;
+	text-align : center;
+}
+.input-number{
+	width: 300px;
+	height : 32px;
+	font-size : 24px;
+	text-align : center;
+}
+.pCategory{
+	width: 300px;
+	height : 32px;
+	font-size : 24px;
+	text-align-last: center;
+	text-align : center;
+	cursor: pointer;
+}
+.pPost{
+	width: 300px;
+	height : 32px;
+	font-size : 24px;
+	text-align-last: center;
+	text-align : center;
+	cursor: pointer;
+}
+.file{
+	margin: 20px;
+	width: 600px;
+	height : 32px;
+	font-size : 24px;
+	text-align : left;
+	cursor: pointer;
+}
+.textarea{
+	width: 600px;
+	height: 600px;
+	font-size : 24px;
+}
+.enroll-btn{
+	width:100px;
+    background-color: #FFA45B;
+    border: none;
+    color:black;
+    padding: 15px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline;
+    font-size: 24px;
+    margin: 4px;
+    cursor: pointer;
+    text-weight: bold;
+    margin-top: 20px;
+    margin-right: 300px;
+    float: right;
+}
+.enroll-btn:hover {
+    background-color: #FFDC37;
+    color: black;
+ 
+}
