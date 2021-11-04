@@ -4,7 +4,7 @@
  * 소개메뉴 전체 
  ********************************************************/
 #info-container {
-	height: 2420px;
+	height: 2500px;
 }
 
 /* .info-container-box {
@@ -198,7 +198,7 @@
 
 
 /*********************************************************
- * 중간 박스 
+ * 중간 박스 (지도영역)
  ********************************************************/
 #middlebox {
  	background-color: white;
@@ -208,6 +208,7 @@
  	text-align: center;
  	position: relative;
  	margin: 0 auto;
+ 	padding: 15px 0;
 }
 /* 이미지전체 묶음 */
 .middlebox-img {
@@ -247,25 +248,25 @@
     }
 }
 
-#mapimg:hover + #map-spec-gg {
-	animation: fadein 3s ease;
+#mapimg:hover +#map-spec-gg {
+	animation: fadein 1s;
 }
 
 #mapimg:hover +#map-spec-hs {
-	animation: fadein 1s ease;
+	animation: fadein 1s;
 	animation-delay: 0.3s;
 }
 #mapimg:hover +#map-spec-hn {
-	animation: fadein 1s ease;
+	animation: fadein 1s;
 	animation-delay: 0.5s;
 }
 #mapimg:hover +#map-spec-gd {
-	animation: fadein 1s ease;
+	animation: fadein 1s;
 	animation-delay: 0.6s;
 }  
 
 #mapimg:hover +#map-spec-yn {
-	animation: fadein 1s ease;
+	animation: fadein 1s;
 	animation-delay: 0.2s;
 }
 

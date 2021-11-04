@@ -118,16 +118,17 @@ https://tyrannocoding.tistory.com/48
 			</tr>
 			<tr>
 				<td>
-					<h4>이메일<sup>*</sup></h4> 
-					<input type="text" name="emailId" id="emailId" class="enrollmail" required> @ 
-					<input type="text" name="emailAddress" id="emailAddress" class="enrollmail" disabled> 
+					이메일<sup>*</sup> <br /> 
+					<input type="text" name="emailId" id="emailId" required> @ 
+					<input type="text" name="emailAddress" id="emailAddress" required readonly> 
 					
-					<select name="emailSelect" id="emailSelect" class="enrollmail">
+					<select name="emailSelect" id="emailSelect" required>
+						<option value="" disabled selected>이메일선택</option>
 						<option value="naver.com">naver.com</option>
 						<option value="daum.net">daum.net</option>
 						<option value="gmail.com">gmail.com</option>
 					</select>
-					</td>
+				</td>
 			</tr>
 			
 			
@@ -190,11 +191,11 @@ https://tyrannocoding.tistory.com/48
 </section>	
 
 <script>
-$(document).ready(function(){
-	$("#emailSelect").change(function(){
-		$("#emailAddress").val($(this).val());
-	});
+/* 이메일주소 자동완성 */
+$("#emailSelect").change(function(){
+	$("#emailAddress").val($(this).val());
 });
+
 
 /**
 * 중복검사 이후 아이디를 수정하는 경우
