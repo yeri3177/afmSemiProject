@@ -3,6 +3,7 @@ package com.kh.afm.order.model.service;
 import static com.kh.afm.common.JdbcTemplate.*;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.kh.afm.cart.model.vo.Cart;
@@ -16,56 +17,96 @@ public class OrderService {
 	OrderDao orderDao = new OrderDao();
 
 	public List<Cart> cartOrder(String userId) {
-		Connection conn = getConnection();
-		List<Cart> list = orderDao.cartOrder(conn, userId);
-		close(conn);
+		List<Cart> list = null;
+		try {
+			Connection conn = getConnection();
+			list = orderDao.cartOrder(conn, userId);
+			close(conn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return list;
 	}
 
 	public List<OrderAddress> adrList(String userId) {
-		Connection conn = getConnection();
-		List<OrderAddress> adrList = orderDao.adrList(conn, userId);
-		close(conn);
+		List<OrderAddress> adrList = null;
+		try {
+			Connection conn = getConnection();
+			adrList = orderDao.adrList(conn, userId);
+			close(conn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return adrList;
 	}
 
 	public int cartOrderInsert(Order order) {
-		Connection conn = getConnection();
 		int orderNo = 0;
-		int result = orderDao.cartOrderInsert(conn, order);
-		if(result != 0) {
-			orderNo = orderDao.lastInsertNo(conn);
+		try {
+			Connection conn = getConnection();
+			int result = orderDao.cartOrderInsert(conn, order);
+			if(result != 0) {
+				orderNo = orderDao.lastInsertNo(conn);
+			}
+			close(conn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		close(conn);
 		return orderNo;
 	}
 
 	public int cartOrderDetailInsert(OrderDetail orderDetail) {
-		Connection conn = getConnection();
-		int result = orderDao.cartOrderDetailInsert(conn, orderDetail);
-		close(conn);
+		int result = 0;
+		try (Connection conn = getConnection()) {
+			result = orderDao.cartOrderDetailInsert(conn, orderDetail);
+			close(conn);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return result;
 	}
 
 	public int orderSuccess(String userId) {
-		Connection conn = getConnection();
-		int result = orderDao.orderSuccess(conn, userId);
-		close(conn);
+		int result = 0;
+		try {
+			Connection conn = getConnection();
+			result = orderDao.orderSuccess(conn, userId);
+			close(conn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return result;
 	}
 
 	public String orderDetailCheckList(int orderNo) {
-		Connection conn = getConnection();
-		String csv = orderDao.orderDetailCheckList(conn, orderNo);
-		close(conn);
+		String csv = "";
+		try {
+			Connection conn = getConnection();
+			csv = orderDao.orderDetailCheckList(conn, orderNo);
+			close(conn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return csv;
 	}
 
 	public List<Order> orderCheckList(String userId) {
-		Connection conn = getConnection();
-		List<Order> orderList = orderDao.orderCheckList(conn, userId);
-		close(conn);
+		List<Order> orderList = null;
+		try {
+			Connection conn = getConnection();
+			orderList = orderDao.orderCheckList(conn, userId);
+			close(conn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return orderList;
 	}
 

@@ -10,9 +10,9 @@
 <section id="delUserList-container" class="admin-container">
 
 <div class="del-box">
-	<button onclick="fnCheckAll();">전체선택</button>
-	<button onclick="fnCheckNotAll();">전체해제</button>
-	<button onclick="fnDeleteUser();">데이터삭제</button>
+	<button class="allbtn" onclick="fnCheckAll();">전체선택</button>
+	<button class="allbtn" onclick="fnCheckNotAll();">전체해제</button>
+	<button class="delbtn" onclick="fnDeleteUser();">데이터삭제</button>
 </div>
 
 

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.kh.afm.cart.model.vo.Cart;
+import com.kh.afm.order.model.exception.OrderException;
 import com.kh.afm.order.model.vo.Order;
 import com.kh.afm.order.model.vo.OrderAddress;
 import com.kh.afm.order.model.vo.OrderDetail;
@@ -29,104 +30,132 @@ private Properties prop = new Properties();
 			prop.load(new FileReader(filepath));
 		} catch (IOException e) {
 			e.printStackTrace();
+			throw new OrderException("주문 쿼리 오류", e);
 		}
 	}
 
 	public List<Cart> cartOrder(Connection conn, String userId) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("cartOrder");
-		List<Cart> list = new ArrayList<>();
+		List<Cart> list = null;
 		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userId);
-			
-			rset = pstmt.executeQuery();
-			while (rset.next()) {
-				Cart cart = new Cart();
-				cart.setUserId(rset.getString("user_id"));
-				cart.setCartNo(rset.getInt("cart_no"));
-				cart.setProductNo(rset.getInt("p_no"));
-				cart.setRenamedFilename(rset.getString("renamed_filename"));
-				cart.setProductName(rset.getString("p_title"));
-				cart.setProductPrice(rset.getInt("p_price"));
-				cart.setProductQuantity(rset.getInt("cart_product_quantity"));
-				list.add(cart);
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = prop.getProperty("cartOrder");
+			list = new ArrayList<>();
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userId);
+				
+				rset = pstmt.executeQuery();
+				while (rset.next()) {
+					Cart cart = new Cart();
+					cart.setUserId(rset.getString("user_id"));
+					cart.setCartNo(rset.getInt("cart_no"));
+					cart.setProductNo(rset.getInt("p_no"));
+					cart.setRenamedFilename(rset.getString("renamed_filename"));
+					cart.setProductName(rset.getString("p_title"));
+					cart.setProductPrice(rset.getInt("p_price"));
+					cart.setProductQuantity(rset.getInt("cart_product_quantity"));
+					list.add(cart);
+					}
+				}catch (SQLException e) {
+						e.printStackTrace();
+				}finally {
+					close(rset);
+					close(pstmt);
 				}
-			}catch (SQLException e) {
-					e.printStackTrace();
-			}finally {
-				close(rset);
-				close(pstmt);
-			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new OrderException("장바구니 주문 오류", e);
+		}
 		return list;
 	}
 
 	public List<OrderAddress> adrList(Connection conn, String userId) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("adrList");
-		List<OrderAddress> adrList = new ArrayList<>();
+		List<OrderAddress> adrList = null;
 		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userId);
-			
-			rset = pstmt.executeQuery();
-			while (rset.next()) {
-				OrderAddress orderAddress = new OrderAddress();
-				orderAddress.setUserId(rset.getString("user_id"));
-				orderAddress.setAddressNo(rset.getInt("adr_no"));
-				orderAddress.setAddressName(rset.getString("adr_name"));
-				orderAddress.setAddressRoad(rset.getString("adr_road"));
-				orderAddress.setAddressDetail(rset.getString("adr_detail"));
-				adrList.add(orderAddress);
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = prop.getProperty("adrList");
+			adrList = new ArrayList<>();
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userId);
+				
+				rset = pstmt.executeQuery();
+				while (rset.next()) {
+					OrderAddress orderAddress = new OrderAddress();
+					orderAddress.setUserId(rset.getString("user_id"));
+					orderAddress.setAddressNo(rset.getInt("adr_no"));
+					orderAddress.setAddressName(rset.getString("adr_name"));
+					orderAddress.setAddressRoad(rset.getString("adr_road"));
+					orderAddress.setAddressDetail(rset.getString("adr_detail"));
+					adrList.add(orderAddress);
+					}
+				}catch (SQLException e) {
+						e.printStackTrace();
+				}finally {
+					close(rset);
+					close(pstmt);
 				}
-			}catch (SQLException e) {
-					e.printStackTrace();
-			}finally {
-				close(rset);
-				close(pstmt);
-			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new OrderException("배송지주소 조회 오류", e);
+		}
 		return adrList;
 	}
 
 	public int lastInsertNo(Connection conn) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("lastInsertNo");
 		int orderNo = 0;
-		
 		try {
-			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery(sql);
-			if(rset.next()) {
-				orderNo = rset.getInt(1);
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = prop.getProperty("lastInsertNo");
+			orderNo = 0;
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				rset = pstmt.executeQuery(sql);
+				if(rset.next()) {
+					orderNo = rset.getInt(1);
+				}
+			}catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+				close(rset);
 			}
-		}catch (SQLException e) {
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			close(pstmt);
-			close(rset);
+			throw new OrderException("주문 last Index 조회 오류", e);
 		}
 		return orderNo;
 	}
 
 	public int cartOrderInsert(Connection conn, Order order) {
 		int result = 0;
-		PreparedStatement pstmt = null;
-		String query = prop.getProperty("cartOrderInsert"); 
 		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, order.getUserId());
-			pstmt.setInt(2, order.getTotalPrice());
-			pstmt.setInt(3, order.getAdrNo());
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
+			PreparedStatement pstmt = null;
+			String query = prop.getProperty("cartOrderInsert"); 
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, order.getUserId());
+				pstmt.setInt(2, order.getTotalPrice());
+				pstmt.setInt(3, order.getAdrNo());
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			close(pstmt);
+			throw new OrderException("주문 처리 오류", e);
 		}
 		
 		return result;
@@ -134,21 +163,27 @@ private Properties prop = new Properties();
 
 	public int cartOrderDetailInsert(Connection conn, OrderDetail orderDetail) {
 		int result = 0;
-		PreparedStatement pstmt = null;
-		String query = prop.getProperty("cartOrderDetailInsert"); 
 		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, orderDetail.getProductNo());
-			pstmt.setInt(2, orderDetail.getOrderNo());
-			pstmt.setInt(3, orderDetail.getpCnt());
-			pstmt.setInt(4, orderDetail.getpPrice());
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
+			PreparedStatement pstmt = null;
+			String query = prop.getProperty("cartOrderDetailInsert"); 
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1, orderDetail.getProductNo());
+				pstmt.setInt(2, orderDetail.getOrderNo());
+				pstmt.setInt(3, orderDetail.getpCnt());
+				pstmt.setInt(4, orderDetail.getpPrice());
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			close(pstmt);
+			throw new OrderException("주문상세 처리 오류", e);
 		}
 		
 		return result;
@@ -156,18 +191,24 @@ private Properties prop = new Properties();
 
 	public int orderSuccess(Connection conn, String userId) {
 		int result = 0;
-		PreparedStatement pstmt = null;
-		String query = prop.getProperty("orderSuccess");
 		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, userId);
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
+			PreparedStatement pstmt = null;
+			String query = prop.getProperty("orderSuccess");
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, userId);
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			close(pstmt);
+			throw new OrderException("주문 성공 조회 오류", e);
 		}
 		return result;
 	}
@@ -176,67 +217,80 @@ private Properties prop = new Properties();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String csvStr = null;
-		StringBuilder csv = new StringBuilder();
-		String sql = prop.getProperty("orderDetailCheckList");
-		List<OrderJoinAll> orderDetailList = new ArrayList<>();
 		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, orderNo);
-			
-			rset = pstmt.executeQuery();
-			while (rset.next()) {
-				OrderJoinAll orderJoinAll = new OrderJoinAll();
-				orderJoinAll.setOrderId(rset.getString("user_id"));
-				orderJoinAll.setSellerId(rset.getString("p_user_id"));
-				orderJoinAll.setpNo(rset.getInt("p_no"));
-				orderJoinAll.setpTitle(rset.getString("p_title"));
-				orderJoinAll.setOrderCnt(rset.getInt("p_cnt"));
-				orderJoinAll.setOrderPrice(rset.getInt("p_price"));
-				orderJoinAll.setOrderNo(rset.getInt("order_no"));
-				orderJoinAll.setAccountNo(rset.getInt("account_number"));
-				orderJoinAll.setBankName(rset.getString("bank_name"));
-				orderDetailList.add(orderJoinAll);
+			StringBuilder csv = new StringBuilder();
+			String sql = prop.getProperty("orderDetailCheckList");
+			List<OrderJoinAll> orderDetailList = new ArrayList<>();
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, orderNo);
+				
+				rset = pstmt.executeQuery();
+				while (rset.next()) {
+					OrderJoinAll orderJoinAll = new OrderJoinAll();
+					orderJoinAll.setOrderId(rset.getString("user_id"));
+					orderJoinAll.setSellerId(rset.getString("p_user_id"));
+					orderJoinAll.setpNo(rset.getInt("p_no"));
+					orderJoinAll.setpTitle(rset.getString("p_title"));
+					orderJoinAll.setOrderCnt(rset.getInt("p_cnt"));
+					orderJoinAll.setOrderPrice(rset.getInt("p_price"));
+					orderJoinAll.setOrderNo(rset.getInt("order_no"));
+					orderJoinAll.setAccountNo(rset.getInt("account_number"));
+					orderJoinAll.setBankName(rset.getString("bank_name"));
+					orderDetailList.add(orderJoinAll);
+					}
+				for(int i = 0; i < orderDetailList.size(); i++){
+					csv.append(orderDetailList.get(i));
+					if(i != orderDetailList.size() -1)
+					csv.append("\n");
 				}
-			for(int i = 0; i < orderDetailList.size(); i++){
-				csv.append(orderDetailList.get(i));
-				if(i != orderDetailList.size() -1)
-				csv.append("\n");
-			}
-			csvStr = csv.toString();
-			}catch (SQLException e) {
-					e.printStackTrace();
-			}finally {
-				close(rset);
-				close(pstmt);
-			}
+				csvStr = csv.toString();
+				}catch (SQLException e) {
+						e.printStackTrace();
+				}finally {
+					close(rset);
+					close(pstmt);
+				}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new OrderException("주문내역 상세조회 오류", e);
+		}
 		return csvStr;
 	}
 
 	public List<Order> orderCheckList(Connection conn, String userId) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("orderCheckList");
-		List<Order> orderList = new ArrayList<>();
+		List<Order> orderList = null;
 		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userId);
-			
-			rset = pstmt.executeQuery();
-			while (rset.next()) {
-				Order order = new Order();
-				order.setUserId(rset.getString("user_id"));
-				order.setOrderNo(rset.getInt("order_no"));
-				order.setOrderDate(rset.getDate("order_date"));
-				order.setTotalPrice(rset.getInt("total_price"));
-				order.setAdrNo(rset.getInt("adr_no"));
-				orderList.add(order);
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = prop.getProperty("orderCheckList");
+			orderList = new ArrayList<>();
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userId);
+				
+				rset = pstmt.executeQuery();
+				while (rset.next()) {
+					Order order = new Order();
+					order.setUserId(rset.getString("user_id"));
+					order.setOrderNo(rset.getInt("order_no"));
+					order.setOrderDate(rset.getDate("order_date"));
+					order.setTotalPrice(rset.getInt("total_price"));
+					order.setAdrNo(rset.getInt("adr_no"));
+					orderList.add(order);
+					}
+				}catch (SQLException e) {
+						e.printStackTrace();
+						throw new OrderException("주문내역 조회 오류", e);
+				}finally {
+					close(rset);
+					close(pstmt);
 				}
-			}catch (SQLException e) {
-					e.printStackTrace();
-			}finally {
-				close(rset);
-				close(pstmt);
-			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return orderList;
 	}
 

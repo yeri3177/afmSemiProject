@@ -19,24 +19,27 @@ public class SellerOrderStatusUpdateServlet extends HttpServlet {
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 1.encoding처리
-		request.setCharacterEncoding("UTF-8");
-		
-		// 2.사용자입력값
-		int orderDetailNo = Integer.parseInt(request.getParameter("orderDetailNo"));
-		String orderStatus = request.getParameter("orderStatus");
-		
-		// 3.업무로직 
-		int result = orderService.updateOrderStatus(orderDetailNo, orderStatus);
-		
-		// 4.사용자피드백 메세지   
-		String msg = result > 0 ? "결제처리상태 변경에 성공 했습니다." : "결제처리상태 변경에 실패하였습니다.";
-		request.getSession().setAttribute("msg", msg);
-		
-		// 5. 리다이렉트
-		String location = request.getHeader("Referer");
-		response.sendRedirect(location);
-		
-		//response.sendRedirect(request.getContextPath() + "/admin/memberList");
+		try {
+			// 1.encoding처리
+			request.setCharacterEncoding("UTF-8");
+			
+			// 2.사용자입력값
+			int orderDetailNo = Integer.parseInt(request.getParameter("orderDetailNo"));
+			String orderStatus = request.getParameter("orderStatus");
+			
+			// 3.업무로직 
+			int result = orderService.updateOrderStatus(orderDetailNo, orderStatus);
+			
+			// 4.사용자피드백 메세지   
+			String msg = result > 0 ? "결제처리상태 변경에 성공 했습니다." : "결제처리상태 변경에 실패하였습니다.";
+			request.getSession().setAttribute("msg", msg);
+			
+			// 5. 리다이렉트
+			String location = request.getHeader("Referer");
+			response.sendRedirect(location);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 }

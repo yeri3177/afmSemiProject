@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.afm.order.model.exception.OrderException;
 import com.kh.afm.order.model.service.OrderService;
 import com.kh.afm.order.model.vo.Order;
 import com.kh.afm.order.model.vo.OrderDetail;
@@ -31,25 +32,31 @@ public class OrderProductServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		HttpSession session = request.getSession(false);
-		User loginUser = (User)session.getAttribute("loginUser");
-		String userId = loginUser.getUserId();
-		
-		int pNo = Integer.parseInt(request.getParameter("ProductNo"));
-		int adrNo = Integer.parseInt(request.getParameter("address"));
-		int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
-		int totalQuantity = Integer.parseInt(request.getParameter("totalQuantity"));
-		Order order = new Order(userId, 0, null, totalPrice, adrNo);
-		int orderNo = orderService.cartOrderInsert(order);
-		if(orderNo != 0) {
-			int result = 0;
-			OrderDetail orderDetail = new OrderDetail(0, orderNo, pNo, totalQuantity, totalPrice, null);
-			result = orderService.cartOrderDetailInsert(orderDetail);
-			String msg = result != 0 ? "주문 성공!" : "주문 실패!";
-			session.setAttribute("msg", msg);
-			String location = request.getContextPath() + "/order/orderCheck";
-			response.sendRedirect(location);
+		try {
+			request.setCharacterEncoding("utf-8");
+			HttpSession session = request.getSession(false);
+			User loginUser = (User)session.getAttribute("loginUser");
+			String userId = loginUser.getUserId();
+			
+			int pNo = Integer.parseInt(request.getParameter("ProductNo"));
+			int adrNo = Integer.parseInt(request.getParameter("address"));
+			int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
+			int totalQuantity = Integer.parseInt(request.getParameter("totalQuantity"));
+			Order order = new Order(userId, 0, null, totalPrice, adrNo);
+			int orderNo = orderService.cartOrderInsert(order);
+			if(orderNo != 0) {
+				int result = 0;
+				OrderDetail orderDetail = new OrderDetail(0, orderNo, pNo, totalQuantity, totalPrice, null);
+				result = orderService.cartOrderDetailInsert(orderDetail);
+				String msg = result != 0 ? "주문 성공!" : "주문 실패!";
+				session.setAttribute("msg", msg);
+				String location = request.getContextPath() + "/order/orderCheck";
+				response.sendRedirect(location);
+			}
+		} catch (NumberFormatException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new OrderException("주문하기 servlet 오류", e);
 		}
 	}
 

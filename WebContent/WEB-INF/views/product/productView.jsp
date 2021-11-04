@@ -107,10 +107,11 @@ if(editable){
 	<hr />
 	<br />
 	
+
 	<div>
 	판매자의 말
 	<br /><br />
-	<%= product.getpContent() %>
+	<%= product.getpContent() %> 
 	</div>	
 		
 	

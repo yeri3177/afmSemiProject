@@ -124,6 +124,7 @@ Number.prototype.formatNumber = function(){
 <%
 List<Cart> list = (List<Cart>)request.getAttribute("list");
 %>
+<body>
 <h2 class="cartheaderh2">장바구니</h2>
 <%
 	if(list.isEmpty()){
@@ -163,7 +164,7 @@ List<Cart> list = (List<Cart>)request.getAttribute("list");
 			sum += (_cart.getProductPrice() * _cart.getProductQuantity());
 			sumcount += _cart.getProductQuantity();
 	%>
-	<div class="row data" <% if(i%2 != 0){%>style="background-color:#f4f4f4;"<% } %>>
+	<div class="row data" <% if(i%2 != 0){%>style="background-color:#FAFAD2;"<% } %>>
                     <div class="subdiv">
                         <div class="check"><input type="checkbox" name="buy" value="260" checked onclick="javascript:basket.checkItem(<%= i %>);">&nbsp;</div>
                     	<input type="hidden" value="<%= _cart.getCartNo() %>" name="cartNo<%= i %>"/>
@@ -203,7 +204,7 @@ List<Cart> list = (List<Cart>)request.getAttribute("list");
     	</div>
         </form>
 <% } %>
-
+</body>
 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

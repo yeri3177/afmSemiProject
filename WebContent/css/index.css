@@ -7,24 +7,26 @@
 .logoImg2{width:20vw;}
 .infoImgText h2{font-size: 2vw;z-index:1;}
 .infoImgTextp{font-size: 2vw;padding: 0;margin:0;z-index:1;}
-.apihead{width: 900px;height: 10%;background: #e9e3d5;padding: 10vw;font-weight: bold;vertical-align: top;color: #427f2f;text-align:right;}
-.apidata{text-align:right;width: 100%;padding: 1vw;font-weight: bold;vertical-align: top;background: #fff;width: 350px;padding: 10px;vertical-align: top;}
-.apitable{font-family: 'Noto Sans KR', sans-serif;width:95%;text-align: left;line-height: 1.5;border: 1px solid #427f2f;margin: 0 auto;margin-top:5px;margin-bottom:5px;}
-.RDproducts{display:flex;width:100%;justify-content: space-evenly;}
-.RDData{display:flex;float: left;flex-direction: column;width:30%;}
-.indexRDproducts{width:100%;background-color:#E9E3D5;display:flex;justify-content: space-evenly;text-align:left;}
+.apihead{width: 95%;height: 10%;background: #e9e3d5;padding: 10vw;font-weight: bold;vertical-align: top;color: #427f2f;text-align:right;}
+.apidata{text-align:right;width: 90%;padding: 1vw;font-weight: bold;vertical-align: top;background: #fff;width: 350px;padding: 10px;vertical-align: top;}
+.apitable{font-family: 'Noto Sans KR', sans-serif;width:85%;text-align: left;line-height: 1.5;border: 1px solid #427f2f;margin: 0 auto;margin-top:5px;margin-bottom:5px;}
+.apimaintableDiv{display:flex;flex-wrap: wrap;align-content: flex-start;justify-content: space-around;}
+.apimaintable{width:90%;}
+.RDproducts{display:flex;width:100%;justify-content: space-evenly;padding-bottom: 10px;}
+.RDData{padding-top:5px;display:flex;float: left;flex-direction: column;width:30%;justify-content: space-between;align-items: center;border: 1px solid lightgray;}
+.indexRDproducts{width:80%;background-color:#E9E3D5;display:flex;justify-content: space-evenly;text-align:left;}
 .RDproductsh2{background-color:#E9E3D5;}
-.RDDateImg{width:400px;height: 400px;}
-.RDDataP{font-size:1.5vw;}
-.RDDataA{font-size:1.5vw;}
-.BEproducts{display:flex;width:100%;justify-content: space-evenly;}
-.BEData{display:flex;float: left;flex-direction: column;width:30%;}
-.indexBEproducts{width:100%;display:flex;justify-content: space-evenly;text-align:left;}
-.BEDateImg{width:400px;height: 400px;}
-.BEDataP{font-size:1.5vw;}
-.BEDataA{font-size:1.5vw;}
+.RDDateImg{width:300px;height:300px;}
+.RDDataP{font-size:1.5vw;margin:2px;}
+.RDDataA{font-size:1.5vw;margin:2px;}
+.BEproducts{display:flex;width:100%;justify-content: space-evenly;padding-bottom: 10px;}
+.BEData{padding-top:5px;display:flex;float: left;flex-direction: column;width:30%;justify-content: space-between;align-items: center;border: 1px solid lightgray;}
+.indexBEproducts{width:80%;display:flex;justify-content: space-evenly;text-align:left;}
+.BEDateImg{width:300px;height:300px;}
+.BEDataP{font-size:1.5vw;margin:2px;}
+.BEDataA{font-size:1.5vw;margin:2px;}
 
-.BEproductsh2{font-size:1.5vw;border-bottom: 1px solid black;}
-.RDproductsh2{font-size:1.5vw;border-bottom: 1px solid black;}
-.BEproductsh2H2{margin:0;}
-.RDproductsh2H2{margin:0;}
+.BEproductsh2{font-size:1.7vw;border-bottom: 1px solid black;}
+.RDproductsh2{font-size:1.7vw;border-bottom: 1px solid black;}
+.BEproductsh2H2{margin:0;padding-top:10px;padding-left:12%;}
+.apimaintableH2{margin:0;padding-top:10px;font-size:1.7vw;}

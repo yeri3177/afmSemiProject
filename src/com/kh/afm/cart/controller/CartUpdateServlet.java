@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.afm.cart.model.exception.CartException;
 import com.kh.afm.cart.model.service.CartService;
 
 /**
@@ -22,22 +23,28 @@ public class CartUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		
-		HttpSession session = request.getSession(false);
-		String cartNo = request.getParameter("cartNo");
-		String productQuantity = request.getParameter("productQuantity");
-		
-		int result = cartService.cartUpdate(cartNo, productQuantity);
-		
+		try {
+			request.setCharacterEncoding("utf-8");
+			
+			HttpSession session = request.getSession(false);
+			String cartNo = request.getParameter("cartNo");
+			String productQuantity = request.getParameter("productQuantity");
+			
+			int result = cartService.cartUpdate(cartNo, productQuantity);
+			
 
-		if(result>0) {
-			session.setAttribute("msg", "성공적으로 장바구니를 수정했습니다.");
-			response.sendRedirect(request.getContextPath() + "/");
-		}
-		else {
-			session.setAttribute("msg", "장바구니 수정에 실패했습니다.");
-			response.sendRedirect(request.getContextPath() + "/");
+			if(result>0) {
+				session.setAttribute("msg", "성공적으로 장바구니를 수정했습니다.");
+				response.sendRedirect(request.getContextPath() + "/");
+			}
+			else {
+				session.setAttribute("msg", "장바구니 수정에 실패했습니다.");
+				response.sendRedirect(request.getContextPath() + "/");
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new CartException("장바구니 수정 servlet 오류", e);
 		}
 	}
 

@@ -453,7 +453,7 @@ time, mark, audio, video, fieldset {
 
 
 /**************************************
- * delUserList.jsp
+ * delUserList.jsp (회원탈퇴 목록)
  **************************************/
 #delUserList-container {
 	margin-top: 30px;
@@ -473,24 +473,47 @@ time, mark, audio, video, fieldset {
 	background-color: #ffd4d0;
 }
 
+/* 버튼영역 */
 .del-box {
-	margin: 30px auto 10px auto;
-	height: 40px;
+	margin: 30px auto 5px auto;
+	height: 45px;
 	text-align: left;
-	width: 70%;
+	width: 80%;
 	
 	/* 영역확인용 */
 	/* background-color: pink; */
 	
 }
-
+/* 버튼3개 전체 */
 .del-box button {
-	width: 100px;
-	height : 35px;
+	font-size: 16px;
+	font-weight: bold;
+	
+	border-radius: 15px;
+	
+	
+	width: 130px;
+	height: 40px;
 }
 
+/* 전체선택, 전체해제 버튼 */
+.allbtn {
+	background-color: #fdca80;
+	border: 3px outset #f9bd65;
+	
+}
+
+/* 데이터삭제버튼 */
+.delbtn {
+	background-color: #ff4e41;
+	border: 3px outset #fc766c;
+	color: #fff;
+}
+
+
+
 /**************************************
- * adminMain.jsp
+ * adminMain.jsp (관리자메인페이지)
  **************************************/
 #adminmain-container {
 	margin: 70px auto;

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.afm.index.model.exception.IndexException;
 import com.kh.afm.index.model.service.IndexService;
 import com.kh.afm.product.model.vo.Product;
 
@@ -30,12 +31,18 @@ public class IndexSelectNewProductServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		
-		String csv = indexService.selectNewProduct();
+		try {
+			request.setCharacterEncoding("utf-8");
+			
+			String csv = indexService.selectNewProduct();
 //		response.getWriter().append(list);
-		response.setContentType("text/csv; charset=utf-8");
-		response.getWriter().append(csv);
+			response.setContentType("text/csv; charset=utf-8");
+			response.getWriter().append(csv);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new IndexException("최신상품조회 servlet 오류", e);
+		}
 	}
 
 }

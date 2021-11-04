@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.afm.index.model.exception.IndexException;
 import com.kh.afm.index.model.service.IndexService;
 
 /**
@@ -20,12 +21,18 @@ public class IndexSelectBestProductServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		
-		String csv = indexService.selectBestProduct();
+		try {
+			request.setCharacterEncoding("utf-8");
+			
+			String csv = indexService.selectBestProduct();
 //		response.getWriter().append(list);
-		response.setContentType("text/csv; charset=utf-8");
-		response.getWriter().append(csv);
+			response.setContentType("text/csv; charset=utf-8");
+			response.getWriter().append(csv);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new IndexException("베스트상품조회 servlet 오류", e);
+		}
 	}
 
 	/**
