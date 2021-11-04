@@ -1,0 +1,111 @@
+@charset "UTF-8";
+
+body {
+	background-color: #ffda96;
+}
+
+#productView-page-container {
+	width: 100%;
+	height: 100%;
+	/* background-color: #ffda96; */
+}
+
+#productView-container {
+	margin: 80px auto;
+	text-align: center;
+	border: 1px solid gray;
+	width: 1200px;
+	background-color: #fff;
+}
+
+#prod-top-box table {
+	margin: 60px auto;
+	position: relative;
+	text-align: left;
+	
+	/* border: 1px solid black; */
+}
+
+#prod-top-box table th, td {
+	border: 1px solid black;
+	padding: 15px;
+}
+
+#productName {
+	width: 575px;
+	height: 80px;
+	font-size: 36px;
+	font-weight: bold;
+}
+
+/*************************************************************
+ * 이미지 영역
+ ************************************************************/
+.bx-wrapper img {
+    width: 450px;
+    height: 450px;
+    border: 1px solid black;
+}
+
+.bx-wrapper ul {
+	width: 450px!important;
+	height: 450px!important;
+}
+
+.bx-wrapper {
+    margin: 0;
+    border: 0!important;
+    box-sizing: border-box;
+}
+
+.bx-controls-direction {
+	/* position: relative; */
+	z-index: 3!important;
+}
+
+
+/*************************************************************
+ * 댓글 영역
+ ************************************************************/
+ 
+.co-tag-box img {
+	width: 150px;
+	position: relative;
+}
+
+.comment-container {
+	/* background-color: pink; */
+	width: 850px;
+	margin: 0 auto;
+}
+ 
+/*************************************************************
+ * 댓글 영역 (03.hello_mvc)
+ ************************************************************/
+ 
+/*댓글등록버튼*/
+div.comment-container button#btn-insert{width:60px; height:50px; color:white; background:#3300ff; position:relative; top:-20px;}
+
+/*댓글테이블*/
+table#tbl-comment{width:580px; margin:0 auto; border-collapse:collapse;} 
+table#tbl-comment tr td{border-bottom:1px solid; border-top:1px solid; padding:5px; text-align:left; line-height:120%;}
+table#tbl-comment tr td:first-of-type{padding: 5px 5px 5px 50px;}
+table#tbl-comment tr td:last-of-type {text-align:right; width: 100px;}
+table#tbl-comment button.btn-reply{display:none;}
+table#tbl-comment tr:hover {background:lightgray;}
+table#tbl-comment tr:hover button.btn-reply{display:inline;}
+table#tbl-comment sub.comment-writer {color:navy; font-size:14px}
+table#tbl-comment sub.comment-date {color:tomato; font-size:10px}
+
+table#tbl-comment tr.level2 {color:gray; font-size: 14px;}
+table#tbl-comment tr.level2 td:first-of-type{padding-left:100px;}
+table#tbl-comment tr.level2 sub.comment-writer {color:#8e8eff; font-size:14px}
+table#tbl-comment tr.level2 sub.comment-date {color:#ff9c8a; font-size:10px}
+
+/*답글관련*/
+table#tbl-comment textarea{margin: 4px 0 0 0;}
+table#tbl-comment button.btn-insert2{width:60px; height:23px; color:white; background:#3300ff; position:relative; top:-5px; left:10px;}
+
+/* 삭제버튼관련 */
+table#tbl-comment button.btn-delete{background:red; color:white; display:none;}
+table#tbl-comment tr:hover button.btn-delete{display:inline;}
