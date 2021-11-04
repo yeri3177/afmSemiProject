@@ -23,16 +23,21 @@ public class AdminMainServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 업무로직
-		Map<String, Integer> param = new HashMap<>();
-		
-		// 검색결과 리스트
-		param = adminService.adminMainQuery(param);
-		
-		// view단 연결 
-		request.setAttribute("param", param);
-		request
-			.getRequestDispatcher("/WEB-INF/views/admin/adminMain.jsp")
-			.forward(request, response);	
+		try {
+			// 업무로직
+			Map<String, Integer> param = new HashMap<>();
+			
+			// 검색결과 리스트
+			param = adminService.adminMainQuery(param);
+			
+			// view단 연결 
+			request.setAttribute("param", param);
+			request
+				.getRequestDispatcher("/WEB-INF/views/admin/adminMain.jsp")
+				.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}	
 	}
 }

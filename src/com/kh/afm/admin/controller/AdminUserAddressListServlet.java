@@ -22,17 +22,22 @@ public class AdminUserAddressListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 찾으려는 회원아이디 
-		String userId = request.getParameter("userId");
-		System.out.println("주소userId = " + userId);
-		
-		// 업무로직
-		List<Address> addressList = adminService.selectUserAddress(userId);
-		System.out.println("addressList = "+addressList);
-		
-		// view단 처리
-		request.setAttribute("addressList", addressList);
-		request.getRequestDispatcher("/WEB-INF/views/admin/userAddressList.jsp")				
-				.forward(request, response);
+		try {
+			// 찾으려는 회원아이디 
+			String userId = request.getParameter("userId");
+			System.out.println("주소userId = " + userId);
+			
+			// 업무로직
+			List<Address> addressList = adminService.selectUserAddress(userId);
+			System.out.println("addressList = "+addressList);
+			
+			// view단 처리
+			request.setAttribute("addressList", addressList);
+			request.getRequestDispatcher("/WEB-INF/views/admin/userAddressList.jsp")				
+					.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 }

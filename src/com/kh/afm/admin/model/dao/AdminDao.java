@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.kh.afm.admin.model.exception.AdminException;
 import com.kh.afm.product.model.vo.Attachment;
 import com.kh.afm.product.model.vo.Product;
 import com.kh.afm.product.model.vo.Report;
@@ -63,13 +64,11 @@ public class AdminDao {
 				user.setUserId(rset.getString("user_id"));
 				user.setUserName(rset.getString("user_name"));
 				user.setUserEmail(rset.getString("user_email"));
-				/* user.setPassword(rset.getString("password")); */
 				/* user.setBirthday(rset.getDate("birthday")); */
 				user.setPhone(rset.getString("phone"));
 				user.setUserEnrollDate(rset.getDate("user_enroll_date"));
 				user.setUserRole(rset.getString("user_role"));
 				user.setUserExpose(rset.getString("user_expose"));
-				
 				
 				if(rset.getString("user_id") != null) {
 					// 계좌
@@ -79,13 +78,12 @@ public class AdminDao {
 					account.setAccountNumber(rset.getString("account_number"));
 					
 					user.setAccount(account); 
-					
 				}
 				
 				list.add(user);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AdminException("회원 목록 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -114,7 +112,7 @@ public class AdminDao {
 				totalContents = rset.getInt(1);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AdminException("전체회원수 페이징 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -155,7 +153,7 @@ public class AdminDao {
 				list.add(delUser);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AdminException("회원탈퇴 목록 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -222,7 +220,7 @@ public class AdminDao {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AdminException("회원 검색 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -261,7 +259,7 @@ public class AdminDao {
 			if (rset.next())
 				totalContents = rset.getInt(1);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AdminException("검색결과 페이징 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -322,12 +320,11 @@ public class AdminDao {
 					
 					user.setAccount(account);
 				}
-				
 				list.add(user);
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AdminException("회원목록 정렬 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -390,7 +387,7 @@ public class AdminDao {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AdminException("상품 목록 정렬 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -442,10 +439,9 @@ public class AdminDao {
 				
 			}
 			catch (SQLException e) {
-				e.printStackTrace();
+				throw new AdminException("메인페이지 쿼리 조회 오류", e);
 			} 
 			finally {
-				
 				close(rset);
 				close(pstmt);
 			}
@@ -612,7 +608,7 @@ public class AdminDao {
 				totalContents = rset.getInt(1);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AdminException("상품목록 페이징 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -641,7 +637,7 @@ public class AdminDao {
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AdminException("상품 노출여부 변경 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -682,7 +678,7 @@ public class AdminDao {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AdminException("상품 신고내역 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -711,7 +707,7 @@ public class AdminDao {
 				totalContents = rset.getInt(1);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AdminException("신고내역 페이징 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -741,7 +737,7 @@ public class AdminDao {
 				cnt = rset.getInt(1);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AdminException("신고내역 미처리 건수 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -804,7 +800,7 @@ public class AdminDao {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AdminException("상품 검색 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -847,7 +843,7 @@ public class AdminDao {
 			if (rset.next())
 				totalContents = rset.getInt(1);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AdminException("상품 검색 페이징 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -874,7 +870,7 @@ public class AdminDao {
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AdminException("상품 신고 처리상태 변경 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -911,7 +907,7 @@ public class AdminDao {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AdminException("회원 주소목록 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);

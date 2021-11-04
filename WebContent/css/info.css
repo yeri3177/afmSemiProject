@@ -26,10 +26,11 @@
 	overflow: hidden;
 	
 }
-#what-is-afm {
-	z-index: 3;
+
+/* 위아래 프로젝트명, 팀명 이미지 */
+.intro-img {
+	z-index: 5;
 	position:relative;
-	overflow: hidden;
 }
 
 
