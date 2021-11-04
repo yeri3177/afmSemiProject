@@ -24,18 +24,28 @@ public class CsboardDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. 사용자 입력값
-		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		
-		// 2. 업무로직
-		Csboard csboard = csboardService.selectOneCsboard(boardNo);
-		
-		int result = csboardService.deleteCsboard(boardNo);
-		String msg = result > 0 ? "게시물 삭제 성공!" : "게시물 삭제 실패!";
-		
-		// 3. 사용자 메세지 및 redirect 처리
-		request.getSession().setAttribute("msg", msg);
-		response.sendRedirect(request.getContextPath() + "/csboard/csboardList");
+		try {
+			// 1. 사용자 입력값
+			int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+			
+			// 2. 업무로직
+			Csboard csboard = csboardService.selectOneCsboard(boardNo);
+			
+			int result = csboardService.deleteCsboard(boardNo);
+			String msg = result > 0 ? "게시물 삭제 성공!" : "게시물 삭제 실패!";
+			
+			// 3. 사용자 메세지 및 redirect 처리
+			request.getSession().setAttribute("msg", msg);
+			response.sendRedirect(request.getContextPath() + "/csboard/csboardList");
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 }

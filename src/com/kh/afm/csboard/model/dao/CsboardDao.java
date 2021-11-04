@@ -38,13 +38,16 @@ public class CsboardDao {
 		}
 	}
 
-	// 게시물 조회
-	// DQL
+	
+	
+	/**
+	 * 게시물 조회
+	 * DQL
+	 */
 	public List<Csboard> selectCsboardList(Connection conn, int start, int end) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectCsboardList");
-//		System.out.println("sql = " + sql);
 		List<Csboard> list = new ArrayList<>();
 		
 		try {
@@ -78,18 +81,20 @@ public class CsboardDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new CsboardException("게시글 조회 오류", e);
 		} finally {
 			// 자원 반납
 			close(rset);
 			close(pstmt);
 		}
-		
-		
 		return list;
 	}
 
-	// 게시물 총 개수 조회
-	// DQL
+	
+	/**
+	 * 게시물 총 개수 조회
+	 * DQL
+	 */
 	public int selectTotalContents(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -105,6 +110,7 @@ public class CsboardDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new CsboardException("게시글 총 개수 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -113,7 +119,12 @@ public class CsboardDao {
 		return totalContents;
 	}
 
-	// DML
+	
+	
+	/**
+	 * 게시물 등록
+	 * DML
+	 */
 	public int insertCsboard(Connection conn, Csboard csboard) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertCsboard");
@@ -140,8 +151,12 @@ public class CsboardDao {
 		return result;
 	}
 
+	
+	/**
+	 * 게시물 상세보기
+	 * DQL
+	 */
 	public Csboard selectOneCsboard(Connection conn, int boardNo) {
-		System.out.println("CsboardDao - selectOneCsboard");
 		Csboard csboard = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -175,6 +190,7 @@ public class CsboardDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new CsboardException("게시글 상세보기 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -182,6 +198,11 @@ public class CsboardDao {
 		return csboard;
 	}
 
+	
+	/**
+	 * 게시물 번호 조회
+	 * DQL 
+	 */
 	public int selectLastCsboardNo(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -190,7 +211,9 @@ public class CsboardDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
 			rset = pstmt.executeQuery();
+			
 			if(rset.next()) {
 				csboardNo = rset.getInt(1);
 			}
@@ -205,8 +228,11 @@ public class CsboardDao {
 		return csboardNo;
 	}
 
-	// DML
-	// 조회수
+	
+	/**
+	 * 게시물 조회수
+	 * DML
+	 */
 	public int updateReadCount(Connection conn, int boardNo) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateReadCount");
@@ -228,6 +254,11 @@ public class CsboardDao {
 		return result;
 	}
 
+	
+	/**
+	 * 게시물 삭제
+	 * DML
+	 */
 	public int deleteCsboard(Connection conn, int boardNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -245,14 +276,18 @@ public class CsboardDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new CsboardException("게시물 삭제 오류", e);
 		} finally {
 			close(pstmt);
 		}
 		return result;
 	}
 
-	// 게시글 조회
-	// DQL
+	
+	/**
+	 * 게시글 검색
+	 * DQL
+	 */
 	public List<Csboard> searchCsboard(Connection conn, Map<String, Object> param) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -304,6 +339,7 @@ public class CsboardDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new CsboardException("게시글 검색 오류", e);
 		} finally {
 			// 3. 자원반납
 			close(rset);
@@ -313,8 +349,10 @@ public class CsboardDao {
 	}
 
 	
-	// 게시판 수정하기
-	// DML
+	/**
+	 * 게시판 수정
+	 * DML
+	 */
 	public int updateCsboard(Connection conn, Csboard csboard) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -336,6 +374,7 @@ public class CsboardDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new CsboardException("게시글 수정 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -343,6 +382,11 @@ public class CsboardDao {
 		return result;
 	}
 
+	
+	/**
+	 * 댓글 조회
+	 * DML
+	 */
 	public List<CsboardComment> selectCommentList(Connection conn, int boardNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -370,6 +414,7 @@ public class CsboardDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new CsboardException("댓글 등록 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -378,7 +423,11 @@ public class CsboardDao {
 		return commentList;
 	}
 
-	// DML
+	
+	/**
+	 *  댓글 등록
+	 *  DML
+	 */
 	public int insertCsboardComment(Connection conn, CsboardComment cbc) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -408,6 +457,11 @@ public class CsboardDao {
 	}
 
 
+	
+	/**
+	 * 공지사항
+	 * DQL
+	 */
 	public List<Csboard> selectNoticeList(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -443,15 +497,20 @@ public class CsboardDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new CsboardException("공지사항 등록 오류", e);
 		} finally {
 			// 자원 반납
 			close(rset);
 			close(pstmt);
 		}
-		
 		return noticeList;
 	}
-
+	
+	
+	/**
+	 * 댓글 삭제
+	 * DML
+	 */
 	public int deleteCsboardComment(Connection conn, int cbNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -470,6 +529,11 @@ public class CsboardDao {
 		return result;
 	}
 
+	
+	/**
+	 * 신고하기
+	 * DML
+	 */
 	public int insertReport(Connection conn, Report report) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertReport");
@@ -488,10 +552,10 @@ public class CsboardDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new CsboardException("신고하기 등록 오류", e);
 		} finally {
 			close(pstmt);
 		}
-		
 		return result;
 	}
 

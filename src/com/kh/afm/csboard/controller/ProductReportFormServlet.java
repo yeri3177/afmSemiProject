@@ -18,13 +18,26 @@ public class ProductReportFormServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int productNo = Integer.parseInt(request.getParameter("productNo"));
-		
-		request.setAttribute("productNo", productNo);
-		request
-			.getRequestDispatcher("/WEB-INF/views/csboard/productReportForm.jsp")
-			.forward(request, response);
+		try {
+			int productNo = Integer.parseInt(request.getParameter("productNo"));
+			
+			request.setAttribute("productNo", productNo);
+			request
+				.getRequestDispatcher("/WEB-INF/views/csboard/productReportForm.jsp")
+				.forward(request, response);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
 	}
-
+	
 }
