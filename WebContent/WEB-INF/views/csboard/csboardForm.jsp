@@ -55,13 +55,13 @@ $(() => {
 	<tr>
 		<th>제 목</th>
 		<td>
-			<input type="text" name="board_title" style="width:100%" required>
+			<input type="text" name="board_title" style="width: 400px" required>
 		</td>
 	</tr>
 	<tr>
 		<th>작성자</th>
 		<td>
-			<input type="text" name="user_id" value="<%= loginUser.getUserId() %>" readonly />
+			<input type="text" name="user_id" value="<%= loginUser.getUserId() %>" style="width: 400px"readonly />
 			<% if(editable){ %>
 			<input type="checkbox" name="boardNotice_yn" value="Y"/>공지사항 여부
 			<% } %>
@@ -78,15 +78,15 @@ $(() => {
 	<tr>
 		<th>내 용</th>
 		<td>
-			<textarea rows="5" cols="40" name="board_content" style="width:100%;"></textarea>
+			<textarea rows="10" cols="40" name="board_content" style="width:98%;"></textarea>
 		</td>
 	</tr>
 </table>
 <br/>
 	<div style="text-align:center;">
-		<input type="submit" value="등록" onclick="return csboardCheck()"/> 
-		<input type="reset" value="다시 작성" />
-		<input type="button" value="목록" onclick="location.href='CsboardServlet?command=csboard_list'"/>
+		<input type="submit" class="insert-btn" value="등록" onclick="return csboardCheck()"/> 
+		<input type="reset" class="reset-btn" value="다시 작성" />
+		<input type="button" class="listback-btn" value="목록" onclick="location.href='CsboardServlet?command=csboard_list'"/>
 	</div>
 </form>
 </section>
