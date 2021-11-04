@@ -25,30 +25,36 @@ public class ProductReportEnrollServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 1. 사용자 입력값 처리
-		String title = request.getParameter("title");
-		String userId = request.getParameter("user_id");
-		String reportType = request.getParameter("reportType");
-		String content = request.getParameter("content");
-		String reportStatus = request.getParameter("reportStatus");
-		int productNo = Integer.parseInt(request.getParameter("productNo"));
-		System.out.println(productNo);
-		Report report = new Report(0, title, reportType, content, userId, null, reportStatus, productNo);
-		
-		System.out.println("ProductReportEnrollServlet = " + report);
-		
-		// 2. 업무로직
-		int result = csboardService.insertReport(report);
-		String msg = result > 0 ? "신고하기 등록 성공!" : "신고하기 등록 실패!";
-		
-		// 3. 응답처리 : redirect
-		
-		String location = request.getContextPath() + "/product/productView?pNo=" + productNo;
-		response.sendRedirect(location);
-		
-		
-		
-		
+		try {
+			// 1. 사용자 입력값 처리
+			String title = request.getParameter("title");
+			String userId = request.getParameter("user_id");
+			String reportType = request.getParameter("reportType");
+			String content = request.getParameter("content");
+			String reportStatus = request.getParameter("reportStatus");
+			int productNo = Integer.parseInt(request.getParameter("productNo"));
+			System.out.println(productNo);
+			Report report = new Report(0, title, reportType, content, userId, null, reportStatus, productNo);
+			
+			System.out.println("ProductReportEnrollServlet = " + report);
+			
+			// 2. 업무로직
+			int result = csboardService.insertReport(report);
+			String msg = result > 0 ? "신고하기 등록 성공!" : "신고하기 등록 실패!";
+			
+			// 3. 응답처리 : redirect
+			
+			String location = request.getContextPath() + "/product/productView?pNo=" + productNo;
+			response.sendRedirect(location);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 }

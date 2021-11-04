@@ -25,46 +25,72 @@ public class CsboardUpdateServlet extends HttpServlet {
 	 * update form 페이지 요청!
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. 사용자 입력값 처리
-		// 사용자 입력값은 문자열이기때문에 형변환 필요
-		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		try {
+			// 1. 사용자 입력값 처리
+			// 사용자 입력값은 문자열이기때문에 형변환 필요
+			int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+			
+			// 2. 업무로직
+			// csboard 하나를 요청.
+			Csboard csboard = csboardService.selectOneCsboard(boardNo);
+			// csboard가 잘 넘어왔는지 확인.
+			System.out.println("CsboardUpdateServlet@requestToForm = " + csboard);
+			
+			// 3. view단 위임
+			request.setAttribute("csboard", csboard);
+			request
+				.getRequestDispatcher("/WEB-INF/views/csboard/csboardUpdate.jsp")
+				.forward(request, response);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
 		
-		// 2. 업무로직
-		// csboard 하나를 요청.
-		Csboard csboard = csboardService.selectOneCsboard(boardNo);
-		// csboard가 잘 넘어왔는지 확인.
-		System.out.println("CsboardUpdateServlet@requestToForm = " + csboard);
-		
-		// 3. view단 위임
-		request.setAttribute("csboard", csboard);
-		request
-			.getRequestDispatcher("/WEB-INF/views/csboard/csboardUpdate.jsp")
-			.forward(request, response);
 	}
 
+	
 	/**
 	 * db update 요청!
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. 사용자 입력
-		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		String boardTitle = request.getParameter("boardTitle");
-		String boardContent = request.getParameter("boardContent");
-		String boardPassword = request.getParameter("boardPassword");
-		String boardLock = request.getParameter("boardLockYN");
-		
-		Csboard csboard = new Csboard(boardNo, null, boardTitle, boardContent, null, 0, "N", "N", boardPassword, boardLock, 0, 0, 0);
-		
-		
-		// 2. 업무로직 db 저장 update csboard set board_title = ?, board_content = ? where board_no = ?
-		int result = csboardService.updateCsboard(csboard);
-		System.out.println("CsboardUpdateServlet@update = " + result);
-		String msg = result > 0 ? "게시물 수정 성공!" : "게시물 수정 실패!";
-		
-		// 3. redirect
-		request.getSession().setAttribute("msg", msg);
-		String location = request.getContextPath() + "/csboard/csboardView?boardNo=" + boardNo;
-		response.sendRedirect(location);
+		try {
+			// 1. 사용자 입력
+			int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+			String boardTitle = request.getParameter("boardTitle");
+			String boardContent = request.getParameter("boardContent");
+			String boardPassword = request.getParameter("boardPassword");
+			String boardLock = request.getParameter("boardLockYN");
+			
+			Csboard csboard = new Csboard(boardNo, null, boardTitle, boardContent, null, 0, "N", "N", boardPassword, boardLock, 0, 0, 0);
+			
+			
+			// 2. 업무로직 db 저장 update csboard set board_title = ?, board_content = ? where board_no = ?
+			int result = csboardService.updateCsboard(csboard);
+			System.out.println("CsboardUpdateServlet@update = " + result);
+			String msg = result > 0 ? "게시물 수정 성공!" : "게시물 수정 실패!";
+			
+			// 3. redirect
+			request.getSession().setAttribute("msg", msg);
+			String location = request.getContextPath() + "/csboard/csboardView?boardNo=" + boardNo;
+			response.sendRedirect(location);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 }

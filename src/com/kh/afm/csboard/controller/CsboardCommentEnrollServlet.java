@@ -28,24 +28,33 @@ public class CsboardCommentEnrollServlet extends HttpServlet {
 	 * - n이면 n이 대입
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. 사용자 입력 -> CsboardComment 객체
-		int cbBoardNo = Integer.parseInt(request.getParameter("cbBoardNo"));
-		int cbLevel = Integer.parseInt(request.getParameter("cbLevel"));
-		int cbCommentRef = Integer.parseInt(request.getParameter("cbCommentRef"));
-		String userId = request.getParameter("userId");
-		String cbContent = request.getParameter("cbContent");
-		
-		CsboardComment cbc = new CsboardComment(0, cbLevel, userId, cbContent, cbBoardNo, cbCommentRef, null);
-		System.out.println("CsboardCommentEnrollServlet = " + cbc);
-		
-		// 2. 업무로직
-		int result = csboardService.insertCsboardComment(cbc);
-		String msg = result > 0 ? "댓글 등록 성공!" : "댓글 등록 실패!";
-		
-		// 3. redirect
-		request.getSession().setAttribute("msg", msg);
-		String location = request.getContextPath() + "/csboard/csboardView?boardNo=" + cbBoardNo;
-		response.sendRedirect(location);
+		try {
+			// 1. 사용자 입력 -> CsboardComment 객체
+			int cbBoardNo = Integer.parseInt(request.getParameter("cbBoardNo"));
+			int cbLevel = Integer.parseInt(request.getParameter("cbLevel"));
+			int cbCommentRef = Integer.parseInt(request.getParameter("cbCommentRef"));
+			String userId = request.getParameter("userId");
+			String cbContent = request.getParameter("cbContent");
+			
+			CsboardComment cbc = new CsboardComment(0, cbLevel, userId, cbContent, cbBoardNo, cbCommentRef, null);
+			System.out.println("CsboardCommentEnrollServlet = " + cbc);
+			
+			// 2. 업무로직
+			int result = csboardService.insertCsboardComment(cbc);
+			String msg = result > 0 ? "댓글 등록 성공!" : "댓글 등록 실패!";
+			
+			// 3. redirect
+			request.getSession().setAttribute("msg", msg);
+			String location = request.getContextPath() + "/csboard/csboardView?boardNo=" + cbBoardNo;
+			response.sendRedirect(location);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
 		
 	}
 

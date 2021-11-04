@@ -26,14 +26,30 @@ public class CsboardService {
 		return list;
 	}
 
-	// 총 게시글 조회
+	
+	/**
+	 * 총 게시글 조회 
+	 * DQL
+	 */
 	public int selectTotalContents() {
-		Connection conn = getConnection();
-		int totalContents = csboardDao.selectTotalContents(conn);
-		close(conn);
+		int totalContents;
+		try {
+			Connection conn = getConnection();
+			totalContents = csboardDao.selectTotalContents(conn);
+			close(conn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
 		return totalContents;
 	}
 
+	
+	/**
+	 * 게시글 등록 
+	 * DML
+	 */
 	public int insertCsboard(Csboard csboard) {
 		Connection conn = getConnection();
 		int result = 0;
@@ -59,14 +75,30 @@ public class CsboardService {
 		return result;
 	}
 
+	
+	/**
+	 * 게시글 상세보기 
+	 * DQL
+	 */
 	public Csboard selectOneCsboard(int boardNo) {
-		Connection conn = getConnection();
-		Csboard csboard = csboardDao.selectOneCsboard(conn, boardNo);
-		close(conn);
+		Csboard csboard;
+		try {
+			Connection conn = getConnection();
+			csboard = csboardDao.selectOneCsboard(conn, boardNo);
+			close(conn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
 		return csboard;
 	}
 
-	// DML
+	
+	/**
+	 * 조회수
+	 * DML 
+	 */
 	public int updateReadCount(int boardNo) {
 		Connection conn = getConnection();
 		int result = csboardDao.updateReadCount(conn, boardNo);
@@ -80,8 +112,11 @@ public class CsboardService {
 		return result;
 	}
 
-	// 게시물 삭제
-	// DML
+	
+	/**
+	 * 게시물 삭제
+	 * DML 
+	 */
 	public int deleteCsboard(int boardNo) {
 		Connection conn = getConnection();
 		int result = 0;
@@ -101,14 +136,29 @@ public class CsboardService {
 		return result;
 	}
 
-	// 게시물 찾기
-	// DQL
+	
+	/**
+	 * 게시물 찾기
+	 * DQL 
+	 */
 	public List<Csboard> searchCsboard(Map<String, Object> param) {
-		Connection conn = getConnection();
-		List<Csboard> list = csboardDao.searchCsboard(conn, param);
+		List<Csboard> list;
+		try {
+			Connection conn = getConnection();
+			list = csboardDao.searchCsboard(conn, param);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
 		return list;
 	}
 
+	
+	/**
+	 * 게시물 수정
+	 * DML 
+	 */
 	public int updateCsboard(Csboard csboard) {
 		Connection conn = getConnection();
 		int result = 0;
@@ -130,13 +180,30 @@ public class CsboardService {
 		return result;
 	}
 
+	
+	/**
+	 * 댓글조회
+	 * DQL 
+	 */
 	public List<CsboardComment> selectCommentList(int boardNo) {
-		Connection conn = getConnection();
-		List<CsboardComment> commentList = csboardDao.selectCommentList(conn, boardNo);
-		close(conn);
+		List<CsboardComment> commentList;
+		try {
+			Connection conn = getConnection();
+			commentList = csboardDao.selectCommentList(conn, boardNo);
+			close(conn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
 		return commentList;
 	}
 
+	
+	/**
+	 * 댓글 등록
+	 * DML 
+	 */
 	public int insertCsboardComment(CsboardComment cbc) {
 		Connection conn = getConnection();
 		int result = 0;
@@ -153,14 +220,29 @@ public class CsboardService {
 	}
 
 
-
+	/**
+	 * 공지사항
+	 * DQL 
+	 */
 	public List<Csboard> selectNoticeList() {
-		Connection conn = getConnection();
-		List<Csboard> noticeList = csboardDao.selectNoticeList(conn);
-		close(conn);
+		List<Csboard> noticeList;
+		try {
+			Connection conn = getConnection();
+			noticeList = csboardDao.selectNoticeList(conn);
+			close(conn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
 		return noticeList;
 	}
 
+	
+	/**
+	 * 댓글 삭제
+	 * DML 
+	 */
 	public int deleteCsboardComment(int cbNo) {
 		Connection conn = getConnection();
 		int result = 0;
@@ -175,6 +257,11 @@ public class CsboardService {
 		return result;
 	}
 
+	
+	/**
+	 * 신고하기
+	 * DML 
+	 */
 	public int insertReport(Report report) {
 		Connection conn = getConnection();
 		int result = csboardDao.insertReport(conn, report);
@@ -184,8 +271,6 @@ public class CsboardService {
 		close(conn);
 		return result;
 	}
-
-
 
 
 }
