@@ -198,7 +198,14 @@ public class ProductDao {
 				product.setUserId(rset.getString("p_user_id"));
 				product.setpTitle(rset.getString("p_title"));
 				product.setpRegDate(rset.getDate("p_reg_date"));
-				product.setpContent(rset.getString("p_content"));
+				product.setpContent(rset.getString("p_content"));					
+				if(rset.getString("p_content") != null) {
+					product.setpContent(rset.getString("p_content"));
+				}
+				else {
+					product.setpContent("없음");
+				}
+				//product.setpContent(rset.getString("p_content") == null ? "1" : rset.getString("p_content"));					
 				product.setpPost(rset.getString("p_post"));
 				product.setpPrice(rset.getInt("p_price"));
 				product.setpCnt(rset.getInt("p_cnt"));
