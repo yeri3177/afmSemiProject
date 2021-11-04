@@ -165,29 +165,74 @@ body {
  	
  	border-radius: 15px;
 }
+
+/*************************************************************
+ * 중간 productContent 영역
+ ************************************************************/
+#sellerCommentBox {
+	padding: 20px 0;
+	text-align: center;
+	min-height: 330px;
+}
  
+#sellerCommentBox img {
+	width: 120px;
+}
+
+#seller-text-box {
+	padding: 40px 0;
+}
 
 /*************************************************************
  * 댓글 영역
  ************************************************************/
- 
-.co-tag-box img {
-	width: 120px;
-	position: relative;
-}
-
+/* 댓글 전체 컨테이너 */
 .comment-container {
-	/* background-color: pink; */
 	width: 850px;
 	margin: 0 auto;
+	padding: 20px 0;
+	padding-bottom: 50px;
+	
+	/* 영역 확인용 */
+	/* background-color: pink; */
+}
+
+/* 코멘트 태그 이미지 */
+.co-tag-box img {
+	width: 125px;
+}
+
+/* 댓글쓰는칸 */
+#wr-content {
+	width: 480px;
+	height: 42px;
+	padding: 10px;
+}
+
+/*댓글등록버튼*/
+button#btn-insert {
+	width: 130px; 
+	height: 53px; 
+	color:white; 
+	background: #88c641; 
+	position:relative; 
+	font-size: 17px;
+	font-weight: bold;
+}
+
+#cmt-top-tbl {
+	margin: 0 auto;
+	margin-bottom: 26px;
+}
+
+#cmt-top-tbl  td {
+	padding: 0;
 }
  
 /*************************************************************
  * 댓글 영역 (03.hello_mvc)
  ************************************************************/
- 
-/*댓글등록버튼*/
-div.comment-container button#btn-insert{width:60px; height:50px; color:white; background:#3300ff; position:relative; top:-20px;}
+
 
 /*댓글테이블*/
 table#tbl-comment{width:580px; margin:0 auto; border-collapse:collapse;} 
