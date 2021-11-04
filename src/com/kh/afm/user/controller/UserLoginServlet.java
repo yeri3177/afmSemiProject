@@ -37,19 +37,18 @@ public class UserLoginServlet extends HttpServlet {
 		String saveId = request.getParameter("saveId");
 		
 		// 3. 업무로직 실행
-		// a. db에서 memberId와 일치하는 회원 조회 
+		// db에서 memberId와 일치하는 회원 조회 
 		User user = userService.selectOneUser(userId);	
 		HttpSession session = request.getSession();
 		
 		// 차단된 회원인지 조회하기
-		User blcokUser = userService.selectBlockUser(userId);
-		System.out.println("blcokUser = " + blcokUser);
+		User blockUser = userService.selectBlockUser(userId);
+		System.out.println("blockUser = " + blockUser);
 		
-		/*
-		 * if(blcokUser == null) {
-		 */
 		
-			// b. 리턴된 회원객체에서 비밀번호 일치여부 검사 
+		if(blockUser == null) {
+		
+			// 리턴된 회원객체에서 비밀번호 일치여부 검사 
 			if(user != null && password.equals(user.getPassword())) {
 				
 				// 로그인 성공 session객체에 로그인 정보 기록
@@ -70,12 +69,12 @@ public class UserLoginServlet extends HttpServlet {
 				response.addCookie(cookie);
 			}else {
 				// 로그인 실패 
-				request.setAttribute("msg", "로그인 실패했습니다.");
+				session.setAttribute("msg", "로그인 실패했습니다.");
 			}
-/*		}else {
+		}else {
 			// 로그인 실패 
-			request.setAttribute("msg", "차단된 회원은 로그인 하실 수 없습니다.");
-		}*/
+			session.setAttribute("msg", "차단된 회원은 로그인 하실 수 없습니다.");
+		}
 		
 		
 		// 4. 응답메세지 작성 :redirect302
