@@ -1,6 +1,8 @@
 package com.kh.afm.csboard.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,15 +22,28 @@ public class CsboardFormServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setCharacterEncoding("utf-8");
-		
-		// csboardForm.jsp에게 해당하는 html을 만들어달라고 요청
-		// getRequestDispatcher
-		// : 컨테이너 내에서 request, response 객체를 전송하여 처리할 컴포넌트(jsp 파일등)을 불러오는 메소드로 forward() 메소드와 같이 사용
-		request
-			.getRequestDispatcher("/WEB-INF/views/csboard/csboardForm.jsp")
-			.forward(request, response);
+		try {
+			request.setCharacterEncoding("utf-8");
+			
+			// csboardForm.jsp에게 해당하는 html을 만들어달라고 요청
+			// getRequestDispatcher
+			// : 컨테이너 내에서 request, response 객체를 전송하여 처리할 컴포넌트(jsp 파일등)을 불러오는 메소드로 forward() 메소드와 같이 사용
+			request
+				.getRequestDispatcher("/WEB-INF/views/csboard/csboardForm.jsp")
+				.forward(request, response);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
 		
 	}
 }
