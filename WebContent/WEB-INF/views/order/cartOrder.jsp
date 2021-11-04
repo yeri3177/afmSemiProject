@@ -38,10 +38,10 @@ function adrCheckSubmit(){
 <h2 class="orderH21">장바구니 상품 주문</h2>
 <form name="order" id="order" method="post" class="order" action="<%= request.getContextPath() %>/order/order" onsubmit="return adrCheckSubmit();">
 	<div class="displayProductHeader">
-		<div class="orderHeaderImg">상품 이미지</div>
-		<div class="orderHeaderName">상품명</div>
-		<div class="orderHeaderCnt">주문 수량</div>
-		<div class="orderHeaderPrice">주문 금액</div>
+		<div class="orderHeader">상품 이미지</div>
+		<div class="orderHeader">상품명</div>
+		<div class="orderHeader">주문 수량</div>
+		<div class="orderHeader">주문 금액</div>
 	</div>
 	<%
 	int sum = 0;
@@ -51,19 +51,20 @@ function adrCheckSubmit(){
 			sum += (order.getProductPrice() * order.getProductQuantity());
 			sumcount += order.getProductQuantity();
 	%>
-	<div class="displayProduct">
-		<div class="displayProductImg">
+	<div class="displaysProduct">
+		<div class="displayProduct">
 		<% if(order.getRenamedFilename() != null){ %>
 		<img class="orderProductThumbnail" src="<%= request.getContextPath() %>/upload/product/<%= order.getRenamedFilename() %>" alt="" />
 		<% }else{ %>
 		<img class="orderProductThumbnail" src="<%= request.getContextPath() %>/upload/product/20211027_134914715_460.gif" alt="" />
 		<% } %>
 		</div>
-		<div class="displayProductName"><%= order.getProductName() %></div>
-		<div class="displayProductQuantity"><%= order.getProductQuantity() %> 개</div>
-		<div class="displayProductPrice"><%= order.getProductPrice() * order.getProductQuantity() %> 원</div>
+		<div class="displayProduct"><%= order.getProductName() %></div>
+		<div class="displayProduct"><%= order.getProductQuantity() %> 개</div>
+		<div class="displayProduct"><%= order.getProductPrice() * order.getProductQuantity() %> 원</div>
 	</div>
 	<% i++;} %>
+	<hr/>
 		<h2 class="orderH22">배송 주소를 선택해 주세요.</h2>
 	<div class="hiddenOrderAddress">
 	<% 

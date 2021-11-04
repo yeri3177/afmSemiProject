@@ -33,7 +33,6 @@ System.out.println("msg = " + msg);
 <title>a farmer's market</title>
 
 </head>
-<body>
     <!-- Header -->
     <header class="">
     <div class="mainHeader">

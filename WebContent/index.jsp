@@ -134,7 +134,7 @@ function drawTable(data) {
 		$table.append(`<tr class="apidata"><td>\${$name.text()}</td><td>\${$rank.text()}</td><td>\${$kind.text()}</td><td>\${$dpr.text()}</td><td>\${$dpr7.text()}</td></tr>`);
 		}
 	});
-$('.apitable').html($table);
+$('.apimaintable').html($table);
 };
 </script>
 
@@ -162,9 +162,9 @@ $('.apitable').html($table);
 	
 	</div>
 </div>
-<div>
-	<h2>농산물 가격 check</h2>
-	<table class="apitable">
+<div class="apimaintableDiv">
+	<h2 class="apimaintableH2">농산물 가격 check</h2>
+	<table class="apimaintable">
 	</table>
 </div>
 

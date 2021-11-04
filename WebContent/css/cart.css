@@ -7,7 +7,7 @@
 .basketdiv .row.head {font-weight: 500;}
 .basketdiv .data {border-bottom: 1px dashed #888;float: left;width: 100%;}
 .basketdiv .data .empty{text-align: center;padding: 12px 0;}
-.basketdiv .row.head .subdiv {background-color: #E9E3D5;}
+.basketdiv .row.head .subdiv {font-size:1.5vw;background-color: #E9E3D5;}
 .basketdiv .row > .subdiv {display: block;float: left;}
 .basketdiv .row > .subdiv:nth-child(1) {width: 50%;}
 .basketdiv .row > .subdiv:nth-child(2) {width: 40%;}
@@ -41,7 +41,7 @@
 .buttongroup button, .buttongroup a {margin-right: 5px;}
 .buttongroup button:last-child, .buttongroup a:last-child {margin-right: 0;}
 .abutton, .abutton:link, .abutton:visited, .abutton:active, input[type=button] {background-color: #383838;border: 1px solid #888888;color: #ffffff;cursor: pointer;letter-spacing: -1px;padding: 3px 5px;margin: 2px 3px;width: auto;word-break: keep-all;border-radius: 5px;text-decoration: none;font-size: 0.9375em;}
-/* .abutton-alt {background-color: #d3e2c6;} */
+.abutton-alt {background-color: #d3e2c6;}
 .basketrowcmd, .sumcount, .summoney{text-align: right;margin-bottom: 10px;}
 .sumcount, .summoney{font-size: 1.25em;font-weight: bold;}
 .buttongroup{text-align: center;}

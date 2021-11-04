@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.kh.afm.cart.model.dao.CartDao;
+import com.kh.afm.index.model.exception.IndexException;
 import com.kh.afm.product.model.vo.Attachment;
 import com.kh.afm.product.model.vo.Product;
 
@@ -26,6 +27,7 @@ private Properties prop = new Properties();
 			prop.load(new FileReader(filepath));
 		} catch (IOException e) {
 			e.printStackTrace();
+			throw new IndexException("index 쿼리 오류", e);
 		}
 	}
 
@@ -74,6 +76,7 @@ private Properties prop = new Properties();
 
 		}catch(SQLException e){
 			e.printStackTrace();
+			throw new IndexException("최신상품 조회 오류", e);
 		}finally {
 			close(rset);
 			close(pstmt);
@@ -126,6 +129,7 @@ private Properties prop = new Properties();
 
 		}catch(SQLException e){
 			e.printStackTrace();
+			throw new IndexException("추천상품 조회 오류", e);
 		}finally {
 			close(rset);
 			close(pstmt);
@@ -170,6 +174,7 @@ private Properties prop = new Properties();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new IndexException("검색 조회 오류", e);
 		}finally {
 			close(rset);
 			close(pstmt);
@@ -192,6 +197,7 @@ private Properties prop = new Properties();
 				totalContents = rset.getInt(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new IndexException("검색갯수 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
