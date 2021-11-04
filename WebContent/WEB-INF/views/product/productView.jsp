@@ -94,8 +94,8 @@ $(".bx-start").hide();	//onload시 시작버튼 숨김.
 	<table>
 		<tr>
 		
-			<!--------------- 썸네일 이미지 -------------->
-		    <td colspan="2" rowspan="7">
+			<!--------------- 이미지 슬라이드 -------------->
+		    <td colspan="2" rowspan="7" id="img-slide-td">
 		    	<ul class="bxslider">
 		          <li>
 		          	<img src="<%= request.getContextPath() %>/upload/product/<%= product.getAttach1().getRenamedFileName() %>">
@@ -106,95 +106,113 @@ $(".bx-start").hide();	//onload시 시작버튼 숨김.
 		          </li>
 		    	</ul>
 		    
-		    	<%-- <img src="<%= request.getContextPath() %>/upload/product/<%= product.getAttach1().getRenamedFileName() %>" alt="대표이미지" width="500px" height="500px"/> --%>
 		    </td>
 		    
 		    <!-- 상품명 -->
 		    <td colspan="6" id="productName"> 
 		    	<%= product.getpTitle() %>
 		    </td>
-		    
-		    
-		    
+ 
+	    </tr>
+	    
+	    
+	    
+	    <tr>
+	    	<!-- 판매자 -->
+	    	<td colspan="6" class="tags-td"> 
+		    	<img class="top-tags" src="<%=request.getContextPath()%>/images/product/tag1.png" />
+		    	<span><%= product.getUserId() %></span>
+		    </td>
 	    </tr>
 	    
 	    <tr>
-	    	<td colspan="6"> 
-		    	판매자 : <%= product.getUserId() %>
+	    	<!-- 가격 -->
+		    <td colspan="6" class="tags-td"> 
+			    <img class="top-tags" src="<%=request.getContextPath()%>/images/product/tag2.png" />
+			    <span><%= product.getpPrice() %>원</span>
 		    </td>
 	    </tr>
 	    <tr>
-		    <td colspan="6"> 가격 : <%= product.getpPrice() %>원</td>
+	    	<!-- 배송비 -->
+		    <td colspan="6" class="tags-td"> 
+		    	<img class="top-tags" src="<%=request.getContextPath()%>/images/product/tag3.png" />
+		    	<span><%= "Y".equals(product.getpPost()) ? "3000원" : "무료배송" %></span>
+		    </td>
 	    </tr>
 	    <tr>
-		    <td colspan="6"> 배송비 : <%= product.getpPost() %></td>
+	    	<!-- 재고 -->
+		    <td colspan="6" class="tags-td"> 
+		    	<img class="top-tags" src="<%=request.getContextPath()%>/images/product/tag4.png" />
+		    	<span><%= product.getpCnt() %></span>
+		    </td>
 	    </tr>
 	    <tr>
-		    <td colspan="6"> 재고 : <%= product.getpCnt() %></td>
-	    </tr>
-	    <tr>
-		    <td colspan="6" class="test"> 좋아요 : <%= product.getpRecommend() %></td>
+	    	<!-- 추천 -->
+		    <td colspan="6" class="test tags-td"> 
+		    	<img class="top-tags" src="<%=request.getContextPath()%>/images/product/tag5.png" /> 
+		    	<span><%= product.getpRecommend() %></span>
+		    </td>
 	    </tr>
 	    
 	    <tr>
-		    <td colspan="6">구매개수 : <input type="number" name="productQuantity" value="" placeholder="최소 1개 이상"/></td>
+	    	<!-- 구매수량 -->
+		    <td colspan="6" class="last-tags-td">
+			    <img class="top-tags" src="<%=request.getContextPath()%>/images/product/tag6.png" />
+			    <span><input type="number" name="productQuantity" value="" placeholder="최소 1개 이상"/></span>
+		    </td>
 	    </tr>
+	   
 	    	
 	    <tr>
-	    	<td>
-	    		<input type="button" id="like" value="좋아요!"/>
+	    	
 <% 
 if(editable){ 
 %>	
-	    	</td>
-		    <td>
-		    	<input 
-					type="button" 
-					value="수정하기" 
+		    <td class="sellerControl-td" id="updateBtn-td">
+		    	<input type="button" value="수정하기" class="sellerControlBtn" id="updateBtn"
 					onclick="updateProduct()" />
 		    </td>
-		    <td>
-			    <input 
-					type="button" 
-					value="삭제하기" 
+		    <td class="sellerControl-td" id="deleteBtn-td">
+			    <input type="button" value="삭제하기" class="sellerControlBtn" id="deleteBtn"
 					onclick="deleteProduct()" />
 		    </td>
 <%
 }
 %>
-		    <td>
-		    	<input type="submit"
-		    		   value="신고하기" 
-		    		   formaction="<%= request.getContextPath() %>/csboard/productReportForm"/>
-		    		   
+			<td class="user-btn-td">
+		    	<input type="submit" value="바로구매" 
+					formaction="<%= request.getContextPath() %>/order/orderProduct" />
 		    </td>
-		    <td>
-		    	<input 
-					type="submit" 
-					value="장바구니" 
+			
+		    
+		    <td class="user-btn-td">
+		    	<input type="submit" value="장바구니" 
 					formaction="<%= request.getContextPath() %>/cart/cartInsert" />
 		    </td>
-		    <td>
-		    	<input 
-					type="submit" 
-					value="결제하기" 
-					formaction="<%= request.getContextPath() %>/order/orderProduct" />
+		    
+		    
+		    <td class="user-btn-td">
+	    		<input type="button" id="like" value="추천하기"/>
+	    	</td>
+		    
+		    <td class="user-btn-td">
+		    	<input type="submit" value="신고하기" 
+		    		   formaction="<%= request.getContextPath() %>/csboard/productReportForm"/>   
 		    </td>
 	    </tr>
 	</table>
 </form>	
-</div>
+</div> <!-- 상단 영역 박스 끝 -->
 
+<hr />
 
-	<div>
-	
-		판매자의 말
-		<br /><br />
-		<%= product.getpContent() %> 
-	
-	
-	
-	</div>	
+<div>
+
+	판매자의 말
+	<br /><br />
+	<%= product.getpContent() %> 
+
+</div>	
 	
 		
 	
