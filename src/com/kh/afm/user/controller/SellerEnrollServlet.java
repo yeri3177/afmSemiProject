@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.afm.common.MvcUtils;
 import com.kh.afm.user.model.service.UserService;
+import com.kh.afm.user.model.vo.Account;
 import com.kh.afm.user.model.vo.Address;
 import com.kh.afm.user.model.vo.User;
 
@@ -57,6 +58,9 @@ public class SellerEnrollServlet extends HttpServlet {
 		String address1 = request.getParameter("address1");
 		String address2 = request.getParameter("address2");
 		
+		String banknum = request.getParameter("banknum");
+		String bankname = request.getParameter("bankname");
+		
 		//이메일값 2개 합치기 (아이디+주소)
 		System.out.println("emailId = " + emailId);
 		System.out.println("emailAddress = " + emailAddress);
@@ -91,9 +95,13 @@ public class SellerEnrollServlet extends HttpServlet {
 		User user = new User(userId, userName, email, password, null, phone, null, UserService.SELLER_ROLE, null);
 		System.out.println("user : " + user);
 		
-		// Account 객체 생성
+		// Address 객체 생성
 		Address address = new Address(0, "기본주소", address1, address2, userId);
 		System.out.println("address : " + address);
+				
+		// Account 객체 생성
+		Account tb_account = new Account(0, banknum, bankname, userId);
+		System.out.println("account : " + tb_account);
 		
 		// 업무로직 (insert 처리)
 		int result = userService.insertUser(user);
@@ -101,6 +109,9 @@ public class SellerEnrollServlet extends HttpServlet {
 		
 		int result2 = userService.insertAddress(address);
 		System.out.println("insertAddress_result2 : " + result2);
+		
+		int result3 = userService.insertAccount(tb_account);
+		System.out.println("insertAccount_result3 : " + result3);
 		
 		String msg = result > 0 ? "성공적으로 회원가입했습니다." : "회원가입 실패했습니다.";
 		

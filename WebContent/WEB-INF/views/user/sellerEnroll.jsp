@@ -40,7 +40,7 @@ https://tyrannocoding.tistory.com/48
 			<tr>
 				<td>
 					<span class="chk">
-						<input type="checkbox" name="agree1" class="chk"/>
+						<input type="checkbox" name="agree1" class="chk" required/>
 					</span>
 					<span class="enrollchk">
 						<strong>AFM</strong>의 이용약관, 개인정보 수집 및 이용, 위치정보 이용약관(선택),<br> 
@@ -52,7 +52,7 @@ https://tyrannocoding.tistory.com/48
 				<td>
 					<div class="enrollinfo">
 						<span class="chk">
-							<input type="checkbox" name="agree2" class="chk"/>
+							<input type="checkbox" name="agree2" class="chk" required/>
 						</span>
 						<span class="enrollchk">
 							<strong>AFM</strong> 방문을 환영합니다.<br>
@@ -68,7 +68,7 @@ https://tyrannocoding.tistory.com/48
 				<td>
 					<div class="enrollinfo">
 						<span class="chk">
-							<input type="checkbox" name="agree3" id="agree3"/>
+							<input type="checkbox" name="agree3" id="agree3" required/>
 						</span>
 						<span class="enrollchk">
 						개인정보보호법에 따라 <strong>AFM</strong>에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
