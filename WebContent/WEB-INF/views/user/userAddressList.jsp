@@ -31,13 +31,13 @@
 
 <table>
 	<tr>
-		<th>주소번호</th>
-		<th>주소명칭</th>
-		<th>주소검색</th>
-		<th>도로명주소</th>
-		<th>상세주소</th>
-		<th>주소수정</th>
-		<th>주소삭제</th>
+		<th class="adrArea">주소번호</th>
+		<th class="adrArea">주소명칭</th>
+		<th class="adrArea">주소검색</th>
+		<th class="adrArea">도로명주소</th>
+		<th class="adrArea">상세주소</th>
+		<th class="btnArea">주소수정</th>
+		<th class="btnArea">주소삭제</th>
 	
 	</tr>
 
@@ -72,11 +72,11 @@
 		
 		
 		<td> <!-- 주소 수정 버튼 -->
-			<input type="button" id="updateAddressBtn-<%= i %>" data-address-no="<%= address.getAdrNo() %>" value="수정"/>
+			<input type="button" class="adrUpDelBtn" id="updateAddressBtn-<%= i %>" data-address-no="<%= address.getAdrNo() %>" value="수정"/>
 		</td>
 		
 		<td> <!-- 주소 삭제 버튼 -->
-			<input type="button" id="deleteAddressBtn-<%= i %>" data-address-no="<%= address.getAdrNo() %>" value="삭제"/>
+			<input type="button" class="adrUpDelBtn" id="deleteAddressBtn-<%= i %>" data-address-no="<%= address.getAdrNo() %>" value="삭제"/>
 		</td>
 	</tr>
 	
@@ -88,7 +88,10 @@
 </table>
 
 <!-- 주소 추가 버튼 -->
-<input type="button" id="enrollAddressBtn" value="주소추가"/>
+<input type="button" id="enrollAddressBtn" class="enrollAdrBtn" value="주소추가"/>
+
+<!-- 확인 버튼 : 내 정보 보기 페이지로 넘어감 -->
+<input type="button" id="enrollAddressOk" value="확인" class="enrollOkBtn" onclick="location.href='/afm/user/userDetail';"/>
 
 <!-- 주소 추가 폼 -->
 <div class="addressEnroll">
@@ -182,7 +185,7 @@ $("#enrollAddressBtn").click((e) => {
 				}
 			// (3) 상세주소 입력 했는지 
 				/* const $address2 = $("#adr_detail"); */
-				if(/^[가-힣-0-9\s]{2,}$/.test($address2.val()) == false){
+				if(/^[a-zA-Z가-힣-0-9\s]{2,}$/.test($address2.val()) == false){
 					alert("상세 주소를 입력해주세요.");
 					$address2.select();
 					return false;

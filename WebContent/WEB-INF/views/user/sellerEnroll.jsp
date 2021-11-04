@@ -20,32 +20,35 @@ https://tyrannocoding.tistory.com/48
 	<input type="hidden" name="userId" />
 </form>
 
-<section id="user-enroll-container">
+
+<div id="user-enroll-container">
 
 	
 	<!-- 로고이미지 -->
-	<a href="<%= request.getContextPath() %>/index.jsp"><img class="logo-img" src="<%=request.getContextPath()%>/images/common/logofont.png" /></a>
+	<a href="<%= request.getContextPath() %>/index.jsp"><img id="logo-img" src="<%=request.getContextPath()%>/images/common/logofont.png" /></a>
 		
 	
-	<form id="userEnrollFrm" name="userEnrollFrm" action="<%= request.getContextPath() %>/user/sellerEnroll" method="POST">
+	<form id="userEnrollFrm" name="userEnrollFrm" action="<%= request.getContextPath() %>/user/userEnroll" method="POST">
 	
 
 		<table>
 			<tr>
 				<td>
-					<span>약관동의</span>
+					<span class="enrollTitle">약관동의</span>
 				</td>
 			</tr>
 			
 			<tr>
 				<td>
-					<span class="chk">
-						<input type="checkbox" id="agree1" required/>
-					</span>
-					<span class="enrollchk">
-						<strong>AFM</strong>의 이용약관, 개인정보 수집 및 이용, 위치정보 이용약관(선택),<br> 
-						프로모션 정보 수신(선택)에 모두 동의합니다.
-					</span>
+					<div class="enrollall">
+						<span class="chk">
+							<input type="checkbox" id="agree1" required/>
+						</span>
+						<span class="enrollchk">
+							<strong>AFM</strong>의 이용약관, 개인정보 수집 및 이용, 위치정보 이용약관(선택),<br> 
+							프로모션 정보 수신(선택)에 모두 동의합니다.
+						</span>
+					</div>
 				</td>
 			</tr>
 			<tr>
@@ -88,39 +91,38 @@ https://tyrannocoding.tistory.com/48
 			<tr >
 				<td id="blank"></td>
 			</tr>
-			
-		<div id="enrollarea">		
+				
 			<tr>
 				<td>
-					일반회원 회원가입
+					<div class="enrollTitle">일반회원 회원가입</div>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<h4>아이디<sup>*</sup> <br /></h4>
-					<input type="text" name="userId" id="_userId" class="enrollIdInput" required/>
+					<div class="enrollLeft">아이디<sup>*</sup></div>
+					<input type="text" name="userId" id="_userId" class="enrollInput" required/>
 					
-					<input type="button" value="중복확인" id="btnCheckId" class="checkInput" onclick="checkIdDuplicate();" />
+					<input type="button" value="중복검사" id="btnCheckId" onclick="checkIdDuplicate();" />
 					<input type="hidden" id="idValid" value="0" />
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<h4>비밀번호<sup>*</sup></h4>
-					<input type="password" name="password" id="_password" class="enrollInput" required />
+					<div class="enrollLeft">비밀번호<sup>*</sup></div>
+					<input type="password" name="password" id="_password" class="enrollInput1" required />
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<h4>비밀번호 확인<sup>*</sup></h4>
-					<input type="password" id="password2" class="enrollInput" required />
+					<div class="enrollLeft">비밀번호 확인<sup>*</sup></div>
+					<input type="password" id="password2"  class="enrollInput1" required />
 				</td>
 			</tr>
 			<tr>
 				<td>
-					이메일<sup>*</sup> <br /> 
-					<input type="text" name="emailId" id="emailId" required> @ 
-					<input type="text" name="emailAddress" id="emailAddress" required readonly> 
+					<div class="enrollLeft">이메일<sup>*</sup></div> 
+					<input type="text" name="emailId" id="emailId" class="enrollInput2" required> @ 
+					<input type="text" name="emailAddress" id="emailAddress" class="enrollInput2" required readonly> 
 					
 					<select name="emailSelect" id="emailSelect" required>
 						<option value="" disabled selected>이메일선택</option>
@@ -134,51 +136,51 @@ https://tyrannocoding.tistory.com/48
 			
 			<tr>
 				<td>
-					<h4>이름<sup>*</sup></h4>
-					<input type="text" name="userName" id="userName" required class="enrollInput" />
+					<div class="enrollLeft">이름<sup>*</sup></div>
+					<input type="text" name="userName" id="userName" class="enrollInput1" required />
 				</td>
 			</tr>
 			
 			<tr>
 				<td>
-					<h4>전화번호<sup>*</sup></h4>
-					<input type="text" placeholder="(-없이)01012345678" name="phone" id="phone" class="enrollInput" maxlength="11" required />
+					<div class="enrollLeft">전화번호<sup>*</sup></div>
+					<input type="text" placeholder="(-없이)01012345678" name="phone" id="phone" class="enrollInput1" maxlength="11" required />
 				</td>
 			</tr>
 		
 			<tr>
 				<td>
-					<h4>생일</h4>
-					<input type="text" placeholder="년(4자)" name="birthyear" id="birthyear" class="enrollday" maxlength="4" />
-					<input type="number" placeholder="월" name="birthmonth" id="birthmonth" class="enrollday" maxlength="2" />
-					<input type="text" placeholder="일" name="birthday" id="birthday" class="enrollday" maxlength="2" />
+					<div class="enrollLeft">생일</div>
+					<input type="text" placeholder="년(4자)" name="birthyear" id="birthyear" class="enrollday" maxlength="4" class="enrollInput3"/>
+					<input type="number" placeholder="월" name="birthmonth" id="birthmonth" class="enrollday" maxlength="2" class="enrollInput3"/>
+					<input type="text" placeholder="일" name="birthday" id="birthday" class="enrollday" maxlength="2" class="enrollInput3"/>
 				</td>
 			</tr>
 			
 			
 			<tr>
 				<td>
-					주소<sup>*</sup> <br />
-					<input id="member_post"  type="text" placeholder="우편번호" readonly onclick="findAddr()"><br>
+					<div class="enrollLeft">주소<sup>*</sup></div>
+					<input id="member_post"  type="text" placeholder="우편번호" readonly onclick="findAddr()" class="enrollInput4"><br>
 					
-					<input id="member_addr" type="text" name="address1" id="address1" placeholder="도로명 주소" readonly> <br>
+					<input id="member_addr" type="text" name="address1" id="address1" placeholder="도로명 주소" class="enrollInput5" readonly> <br>
 					
-					<input type="text" name="address2" id="address2" placeholder="상세 주소">
+					<input type="text" name="address2" id="address2" placeholder="상세 주소" class="enrollInput5">
 				</td>
 			</tr>
 			
 			<tr>
 				<td>
-					계좌번호<sup>*</sup> <br />
-					<input type="text" placeholder="(-없이)67270201428283" name="banknum" id="banknum" maxlength="14" required />
-					<input type="text" placeholder="은행명" name="bankname" id="bankname"/>
+					<div class="enrollLeft">계좌<sup>*</sup></div>
+					<input type="text" placeholder="(-없이)67270201428283" name="banknum" id="banknum" maxlength="14" class="enrollInput6" required />
+					<input type="text" placeholder="은행명" name="bankname" id="bankname" class="enrollInput6"/>
 				</td>
 			</tr>
 			
 			
 
 			<tr>
-				<td>
+				<td id="submitbtn">
 					<input type="submit" value="가입하기" >
 				</td>
 			</tr>
@@ -186,9 +188,12 @@ https://tyrannocoding.tistory.com/48
 		
 		<div id="idChkBox">
 			
-		</div>
+	</div>
 	</form>
-</section>	
+</div>	
+
+
+
 
 <script>
 /* 체크박스 유효성 검사 */

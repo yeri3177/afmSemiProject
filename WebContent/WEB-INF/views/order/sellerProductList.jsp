@@ -11,7 +11,7 @@
 
 <% if(list.isEmpty()){ %>
 	<h1 class="sellProductListisEmpty">텅</h1>
-    <h3 class="sellProductListisEmptyh3">판매하신 내역이 없습니다.</h3>
+    <h3 class="sellProductListisEmptyh3">판매 상품이 없습니다.</h3>
 <% 
 }else{
 %>
