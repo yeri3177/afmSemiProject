@@ -27,7 +27,7 @@ https://tyrannocoding.tistory.com/48
 	<a href="<%= request.getContextPath() %>/index.jsp"><img class="logo-img" src="<%=request.getContextPath()%>/images/common/logofont.png" /></a>
 		
 	
-	<form id="userEnrollFrm" name="userEnrollFrm" action="<%= request.getContextPath() %>/user/userEnroll" method="POST">
+	<form id="userEnrollFrm" name="userEnrollFrm" action="<%= request.getContextPath() %>/user/sellerEnroll" method="POST">
 	
 
 		<table>
@@ -190,6 +190,12 @@ https://tyrannocoding.tistory.com/48
 </section>	
 
 <script>
+$(document).ready(function(){
+	$("#emailSelect").change(function(){
+		$("#emailAddress").val($(this).val());
+	});
+});
+
 /**
 * 중복검사 이후 아이디를 수정하는 경우
 */

@@ -164,8 +164,8 @@ $("#enrollAddressBtn").click((e) => {
 			// 주소입력값 유효성검사 
 			// (1) 주소명칭 입력 했는지
 				const $addressName = $("#_adrname");
-				const $_address1 = $("#user_addr")
-				const $_address2 = $("#adr_detail");
+				const $address1 = $("#user_addr");
+				const $address2 = $("#user_addrdetail");
 				
 				if(/^[가-힣]{1,}$/.test($addressName.val()) == false){
 					alert("주소 명칭을 입력해주세요.");
@@ -173,17 +173,18 @@ $("#enrollAddressBtn").click((e) => {
 					return false;
 				}
 			// (2) 도로명주소 입력 했는지
-				/* const $address1 = $("#user_addr"); */
-				if(/^[가-힣-9]{4,}$/.test($_address1.val()) == false){
+			/* const $address1 = $("#user_addr"); */
+		
+				if(/^[가-힣-0-9\s]{4,}$/.test($address1.val()) == false){
 					alert("도로명 주소를 입력해주세요.");
-					$_address1.select();
+					$address1.select();
 					return false;
 				}
 			// (3) 상세주소 입력 했는지 
 				/* const $address2 = $("#adr_detail"); */
-				if(/^[가-힣-9]{3,}$/.test($_address2.val()) == false){
+				if(/^[가-힣-0-9\s]{2,}$/.test($address2.val()) == false){
 					alert("상세 주소를 입력해주세요.");
-					$_address2.select();
+					$address2.select();
 					return false;
 				}
 			// 폼전송
