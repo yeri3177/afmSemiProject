@@ -9,7 +9,7 @@ section.csboard-container {
 }
 
 .csboard-container h2 {
-	color: green; /* 글 색상 */
+	color: red; /* 글 색상 */
 }
 
 .csboard-container table {
