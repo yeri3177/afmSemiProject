@@ -51,7 +51,7 @@ public class ProductSelectCategory extends HttpServlet {
 				
 				// b.pagebar영역
 				// totalContents, url 준비
-				int totalContents = productService.selectTotalContent(start, end);
+				int totalContents = productService.selectTotalContent();
 				String url = request.getRequestURI();
 				String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
 				System.out.println("pagebar@servlet = " + pagebar);
@@ -90,7 +90,7 @@ public class ProductSelectCategory extends HttpServlet {
 				
 				// b.pagebar영역
 				// totalContents, url 준비
-				int totalContents = productService.selectTotalContent(start, end);
+				int totalContents = productService.selectTotalContent();
 				String url = request.getRequestURI();
 				String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
 				System.out.println("pagebar@servlet = " + pagebar);
