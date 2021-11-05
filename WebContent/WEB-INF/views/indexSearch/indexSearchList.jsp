@@ -28,7 +28,7 @@
 			<div class="searchListDataDiv"><%= _product.getpNo() %></div>
 			<div class="searchListDataDiv"><img class="searchListDataImg" alt="" src="<%= request.getContextPath() %>/upload/product/<%= _product.getAttach1().getRenamedFileName() %>" widdiv="300px" height="300px"></div>
 			<div class="searchListDataDiv"><a href="<%= request.getContextPath() %>/product/productView?pNo=<%= _product.getpNo() %>"><%= _product.getpTitle() %></a></div>
-			<div class="searchListDataDiv"><%= _product.getpPrice() %></div>
+			<div class="searchListDataDiv"><%= _product.getpPrice() %> 원</div>
 			<div class="searchListDataDiv"><%= _product.getUserId() %></div>
 			<div class="searchListDataDiv"><%= (Date)_product.getpRegDate() %></div>
 			<div class="searchListDataDiv"><%= _product.getpRecommend() %></div>

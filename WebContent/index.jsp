@@ -109,7 +109,7 @@ window.addEventListener('load', function(){
 		}
 	})
 });
-$(function() {
+$(function() { 
 	setInterval(updateTable, 3600000);
 });
  
