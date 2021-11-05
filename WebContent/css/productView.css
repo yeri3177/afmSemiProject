@@ -12,7 +12,7 @@ body {
 	margin: 80px auto;
 	text-align: center;
 	border: 1px solid gray;
-	width: 1400px;
+	width: 1200px;
 	background-color: #fff;
 }
 
@@ -26,8 +26,9 @@ body {
 	text-align: left;
 	border-collapse: collapse;
 	vertical-align: middle;
-	
+	margin-right: 60px;
 }
+
 
 #prod-top-box table th, td {
 	/* border: 1px solid black; */
@@ -39,7 +40,7 @@ body {
 
 /* 상품명칸 td */
 #productName {
-	width: 540px;
+	width: 400px!important;
 	height: 80px;
 	font-size: 36px;
 	font-weight: bold;
@@ -70,31 +71,37 @@ body {
 	margin-left: 12px;
 }
 
-.last-tags-td input {
+/* 구매수량 태그 이미지 */
+.last-tags-td img {
+	position: absolute;
+	top: 4px;
+	left: 7px;
+}
+
+/* 구매수량 span 태그 (위치조정) */
+.last-tags-td span {
+	display: inline-block;
+	position: absolute;
+	top: 6px;
+	left: 120px;
+}
+
+/* 구매수량 input 태그 (디자인) */
+.last-tags-td span input {
 	width: 120px;
 	height: 28px;
-	text-align: center;
 	font-size: 17px;
-	position: relative;
-	top: -55px;
-	margin-left: 12px;
 }
 
-.last-tags-td img {
-	position: relative;
-	top: -46px;
-}
 
-#img-slide-td {
-	padding-right: 35px;
-}
+
 
 /*************************************************************
  * 이미지 영역
  ************************************************************/
 .bx-wrapper img {
-    width: 470px;
-    height: 470px;
+    width: 450px;
+    height: 450px;
 }
 
 .bx-wrapper ul {
@@ -124,7 +131,6 @@ body {
 	left: 48px;
 }
 
-
 /*************************************************************
  * 버튼 영역
  ************************************************************/
@@ -133,9 +139,14 @@ body {
  	width: 180px;
  	height: 40px; 
  	font-size: 20px;
- 	background-color: #f9a29c;
+	background-color: #ec5d53;
  	font-weight: bold;
 }
+
+.sellerControlBtn:hover {
+	cursor: pointer;
+}
+
 /* 수정, 삭제 버튼 영역 td */
 .sellerControl-td {
 	text-align: center;
@@ -156,14 +167,16 @@ body {
 }
 
 .user-btn-td input {
-	width: 150px;
+	width: 120px;
 	height: 40px;
 	
 	font-size: 17px;
- 	background-color: #ecdd55;
+ 	background-color: #ffe60a;
  	font-weight: bold;
- 	
- 	border-radius: 15px;
+}
+
+.user-btn-td input:hover {
+	cursor: pointer;
 }
 
 /*************************************************************
@@ -225,7 +238,7 @@ button#btn-insert {
 	margin-bottom: 26px;
 }
 
-#cmt-top-tbl  td {
+#cmt-top-tbl td {
 	padding: 0;
 }
  
@@ -257,3 +270,4 @@ table#tbl-comment button.btn-insert2{width:60px; height:23px; color:white; backg
 /* 삭제버튼관련 */
 table#tbl-comment button.btn-delete{background:red; color:white; display:none;}
 table#tbl-comment tr:hover button.btn-delete{display:inline;}
+

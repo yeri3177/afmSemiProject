@@ -20,7 +20,10 @@
 <!-- 상품게시판 리스트 전체 컨테이너 시작 -->
 <section id="board-container">
 
-
+	<!-- 배너 이미지 -->
+	<div>
+		<img class="listTopImage" src="<%= request.getContextPath() %>/images/product/productListBanner.gif" />
+	</div>
 
 	<!-- 카테고리 검색 시작 -->
 	<div id="search-pCategory" class="search-type">
@@ -140,11 +143,6 @@
 				} 
 			%>
 		</div>
-	</div>
-	
-	<!-- 배너 이미지 -->
-	<div>
-		<img class="listTopImage" src="<%= request.getContextPath() %>/images/product/productListBanner.gif" />
 	</div>
 
 </section> <!-- 상품게시판 리스트 전체 컨테이너 끝 -->

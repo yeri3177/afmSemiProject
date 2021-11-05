@@ -1,91 +1,104 @@
 @charset "UTF-8";
-body{
-	background-color: rgb(255,218,150);
-}
-.form{
-	margin: auto;
 
+/* 상품등록하기 페이지 전체 컨테이너 */
+#boardEnrollForm-container {
+	margin: 0 auto;
 }
-.listTopImage{
+
+/* 상단 배너 이미지 영역 */
+#banner-box {
+	margin: 20px auto;
+	text-align: center;
+}
+
+/* 상단 배너 이미지 */
+#top-banner-img {
+	width: 660px;
+	height: 120px;
+}
+
+/* 글쓰기폼 div 영역 */
+#productEnrollForm-div {
+	margin: 0 auto;
+	text-align: center;
+	position: relative;
+	margin-bottom: 50px;
+}
+
+/* 글쓰기 테이블 */
+#tbl-product-form {
+	margin: 0 auto;
+}
+
+/* 테이블전체 경계선주기 */
+#productEnrollForm-div table, td, th {
+	border: 1px solid black;
+	border-collapse: collapse;
+	padding: 13px;
+}
+
+/* 테이블 th  */
+#tbl-product-form th {
+	width: 200px;
+	background-color: #ececec;
+}
+
+/* 테이블 td */
+#tbl-product-form td {
+	width: 530px;
+	height: 55px;
+	padding: 0;
+}
+
+/* 상품명, 가격, 수량 input, 글내용 textarea 태그 */
+#tbl-product-form td input,textarea {
 	width: 100%;
 	height: 100%;
-	object-fit: cover;
+	box-sizing: border-box;
+	padding-left: 20px;
+	border: 0;
 }
-table{
-	background-color:white;
-	margin: 30px;
+
+/* 글내용 태그 */
+#tbl-product-form td textarea {
+	height: 99%;
+	margin-top:1px;
+	padding :20px;
+	font-size: 20px;
 }
-.tbl-product-form{
-	margin: auto;
-	font-size: 32px;
-	margin-top: 20px;	
+
+/* 카테고리,배송비 select 태그 */
+#tbl-product-form td select {
+	width: 200px;
+	height: 37px;
+	text-align: center;
+	margin-left: 20px;
 }
-.input-text-title{
-	width: 600px;
-	height : 32px;
-	font-size : 24px;
-	text-align : center;
+
+/* 카테고리,배송비 select 태그가 있는 td */
+.select-td {
+	text-align: left;
 }
-.input-text-price{
-	width: 300px;
-	height : 32px;
-	font-size : 24px;
-	text-align : center;
+
+/* 이미지첨부가 있는 td  */
+.file-td {
+	position: relative;
+	top: 15px;
 }
-.input-number{
-	width: 300px;
-	height : 32px;
-	font-size : 24px;
-	text-align : center;
-}
-.pCategory{
-	width: 300px;
-	height : 32px;
-	font-size : 24px;
-	text-align-last: center;
-	text-align : center;
-	cursor: pointer;
-}
-.pPost{
-	width: 300px;
-	height : 32px;
-	font-size : 24px;
-	text-align-last: center;
-	text-align : center;
-	cursor: pointer;
-}
-.file{
-	margin: 20px;
-	width: 600px;
-	height : 32px;
-	font-size : 24px;
-	text-align : left;
-	cursor: pointer;
-}
-.textarea{
-	width: 600px;
-	height: 600px;
-	font-size : 24px;
-}
+
+/* 글쓰기 버튼 */
 .enroll-btn{
-	width:100px;
-    background-color: #FFA45B;
-    border: none;
-    color:black;
-    padding: 15px 0;
-    text-align: center;
-    text-decoration: none;
-    display: inline;
-    font-size: 24px;
-    margin: 4px;
-    cursor: pointer;
-    text-weight: bold;
-    margin-top: 20px;
-    margin-right: 300px;
-    float: right;
+	width: 160px;
+	height: 43px;
+	
+    background-color: #5d9a16;
+    font-size: 20px;
+    font-weight: bold;
+   
 }
+
+/* 글쓰기 버튼 마우스오버시 */
 .enroll-btn:hover {
     background-color: #FFDC37;
-    color: black;
- 
+    font-weight: bold; 
 }
