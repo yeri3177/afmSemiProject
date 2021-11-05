@@ -80,6 +80,7 @@ public class ProductFinderServlet extends HttpServlet {
 				List<Product> list = productService.selectProductSearchList(start, end, searchKeyword);
 
 				// 페이징 - 검색된수
+				System.out.println("searchKeyword@servlet = " + searchKeyword);
 				int totalContents = productService.searchProductCount(searchKeyword);
 				
 				// 검색
