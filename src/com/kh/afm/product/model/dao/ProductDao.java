@@ -32,7 +32,6 @@ public class ProductDao {
 	
 	public List<Product> selectProductList(Connection conn, int start, int end) {
 		
-		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectProductList");
@@ -54,6 +53,8 @@ public class ProductDao {
 				product.setUserId(rset.getString("p_user_id"));
 				product.setpRegDate(rset.getDate("p_reg_date"));
 				product.setpRecommend(rset.getInt("p_recommend"));
+				product.setpCnt(rset.getInt("p_cnt"));
+				product.setpCategory(rset.getString("p_category"));
 				
 				if(rset.getString("img_flag").equals("Y")) {
 					Attachment attach = new Attachment();

@@ -1,82 +1,153 @@
 @charset "UTF-8";
-body{
-	background-color: rgb(255,218,150);
-}
-.productHeading{
-	font-size: 64px;
-	font-weight: bold;
-	text-align: center;
-	margin: 120px 120px;
-}
-.product-board{
-	margin: auto;
-	width: 80%;
-	border-collapse: collapse;
-	padding: 10px;
-}
-table{
-	background-color:white;
-}
-.thead{
-	font-size: 32px;
-	border-top: 3px solid white;
-	/* border-bottom: 3px solid #444444; */
-	padding: 20px;
-	box-shadow: 0 6px 6px -4px black;
-}
-.tbody{
-	font-size: 20px;
 
+/* 전체 바디 영역 */
+body{
+	/* background-color: rgb(255,218,150); */
 }
-th, td {
-    padding-top: 20px;
-    padding-bottom: 20px;
+
+/* 페이지전체 컨테이너 */
+#board-container {
+	margin: 0 auto;
+	padding-bottom: 160px;
+	text-align: center;
 }
-.search-type{
+
+
+/* 상단배너 이미지 */
+.listTopImage{
+	width: 900px;
+	height: 110px;
+	object-fit: cover;
+	margin: 0 auto;
+	margin-top: 40px;
+}
+
+/* 카테고리 검색 영역 div */
+.search-type {
 	font-size: 20px;
 	margin: 20px 20px;
 	text-align: center;
 }
-.search-btn{
-	margin-left: 10px;
-	border: 0;
-	vertical-align: middle;
-}
-.search-img{
+
+
+/* 카테고리검색 이미지 */
+.search-img {
 	width: 50px;
 	height: 50px;
 	cursor: pointer;
 }
-.wtite-btn{
-	width:100px;
-    background-color: #FFA45B;
-    border: none;
-    color:black;
-    padding: 15px 0;
-    text-align: center;
-    text-decoration: none;
-    display: inline;
-    font-size: 24px;
-    margin: 4px;
-    cursor: pointer;
-    text-weight: bold;
-    margin-top: 20px;
-    margin-right: 300px;
-    float: right;
+
+
+
+
+/* 상품리스트 테이블 */
+#product-board, #product-board th,td {
+	margin: 0 auto;	
+	padding: 10px;
+	
+	border: 1px solid #b8b8b8;
+	border-collapse: collapse;
+	
+	border-left: 1px solid white;
+	border-right: 1px solid white;
+	
 }
+#product-board th {
+	/* background-color: #c9d8b7; */
+	border-bottom: 2px solid #717070;
+	border-top: 3px solid #a0c850;
+}
+
+#product-board tr:hover {
+	background-color: #e7e7e7;
+}
+
+/* 상품명 td */
+#productName-td {
+	width: 350px;
+	text-align: left;
+}
+
+#productName-td a {
+	width: 100%;
+	height: 100%;
+	display: inline-block;
+	position: relative;
+}
+
+
+/* 썸네일 이미지 */
+#thumbnail-img {
+	width: 50px;
+	height: 50px;
+	position: relative;
+	top: 2px;
+}
+
+#productImg-td {
+	padding: 3px;
+}
+
+
+/* 하단 영역 박스  */
+#bottom-box {
+	display: flex;
+	justify-content: flex-end;
+	
+	margin: 0 auto;
+	width: 960px;
+}
+
+/* 글쓰기 버튼 */
+#btn-add {
+	display: inline-block;
+ 	position: relative;
+ 	top: 20px;
+	
+	width: 100px;
+	height: 40px;
+	background: #568A35;
+	font-weight: bold;
+
+} 
+
+/* 글쓰기버튼 마우스오버시 */
 .wtite-btn:hover {
     background-color: #FFDC37;
     color: black;
     
 }
-.pagebar{
-	margin: 100px 100px;
-	font-size: 30px;
+
+/* 페이징 영역 */
+div#pageBar{
+	text-align:center; 
 	padding: 5px;
 	font-family: 'Abril Fatface', cursive;
-	display: block;
+	font-size: 20px;
+	
+	width: 260px;
 	text-align: center;
-	border-radius: 10px;
-	display: block;
+	margin: 25px auto;
+	
+	display: flex;
 	justify-content: space-evenly;
+	
+	position: relative;
+}
+
+/* 현재페이지 숫자 */
+div#pageBar span.cPage{
+	color: black;
+	font-weight: bold;
+}
+
+/* 마우스올렸을때 페이지 숫자 */
+div#pageBar a:hover {
+	color: black;
+}
+
+/* 페이징 숫자 */
+div#pageBar a{
+	text-decoration: none;
+	color : gray;
 }
