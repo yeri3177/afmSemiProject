@@ -169,7 +169,7 @@ if(editable){
 			<!-- 바로구매 버튼 -->
 			<td class="user-btn-td">
 		    	<input type="submit" value="바로구매" 
-					formaction="<%= request.getContextPath() %>/order/orderProduct" />
+					formaction="<%= request.getContextPath() %>/product/productOrder" />
 		    </td>
 			
 		    <!-- 장바구니 버튼 -->
