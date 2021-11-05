@@ -74,7 +74,7 @@ public class ProductLikeServlet extends HttpServlet {
 			//3. 응답처리
 			request.getSession().setAttribute("Msg", msg);
 			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter().append("<span>" + "좋아요 : " + result + "</span>");
+			PrintWriter out = response.getWriter().append("<img class='top-tags' src='/afmSemiProject/images/product/tag5.png' />" + "<span>" + result + "</span>");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
