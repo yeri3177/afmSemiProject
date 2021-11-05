@@ -11,6 +11,8 @@
 
 <%
 	List<Product> list = (List<Product>)request.getAttribute("list");
+	
+	String searchType = request.getParameter("searchType");
 	String searchKeyword = request.getParameter("searchKeyword");
 %>
 
@@ -33,16 +35,20 @@
 			<input type="hidden" name="searchType" value="pCategory"/>
 			
 			<label>
-				<input type="radio" name="searchKeyword" value="모두보기"> 모두보기
+				<input type="radio" name="searchKeyword" value="모두보기" checked
+				<%= "모두보기".equals(searchKeyword) ? "checked" : "" %>> 모두보기
 			</label>
 			<label>
-				<input type="radio" name="searchKeyword" value="곡류"> 곡류
+				<input type="radio" name="searchKeyword" value="곡류"
+				<%= "곡류".equals(searchKeyword) ? "checked" : "" %>> 곡류
 			</label>
 			<label>	
-				<input type="radio" name="searchKeyword" value="과실류"> 과실류
+				<input type="radio" name="searchKeyword" value="과실류"
+				<%= "과실류".equals(searchKeyword) ? "checked" : "" %>> 과실류
 			</label>
 			<label>	
-				<input type="radio" name="searchKeyword" value="채소류"> 채소류 
+				<input type="radio" name="searchKeyword" value="채소류"
+				<%= "채소류".equals(searchKeyword) ? "checked" : "" %>> 채소류 
 			</label>
 			
 			<!-- 검색 버튼 -->
