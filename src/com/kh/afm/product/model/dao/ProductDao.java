@@ -708,6 +708,8 @@ public class ProductDao {
 		String sql = prop.getProperty("selectProductSearchList");
 		List<Product> list = new ArrayList<>();
 		
+		System.out.println("searchKeyword = " + searchKeyword);
+		
 		try {
 			
 			pstmt = conn.prepareStatement(sql);
@@ -762,22 +764,8 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int totalContents = 0;
-
-		String sql = null;
-		//String searchType = (String) param.get("searchType");
+		String sql = prop.getProperty("searchProductCountByCategory");
 		
-		switch (searchKeyword) {
-		case "곡류":
-			sql = prop.getProperty("");
-			break;
-		case "과실류":
-			sql = prop.getProperty("");
-			break;
-		case "채소류":
-			sql = prop.getProperty("");
-			break;
-		}
-
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, searchKeyword);
