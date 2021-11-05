@@ -27,23 +27,20 @@ public class ProductFinderServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
+			// 검색유형, 검색키워드
 			String searchType = request.getParameter("searchType");
 			String searchKeyword = request.getParameter("searchKeyword");
-			System.out.println(searchType);
-			System.out.println(searchKeyword);
 			
 			if(searchKeyword.equals("모두보기")) {
-				System.out.println("모두보기선택");
 				
 				// 1.사용자입력값 처리 cPage numPerPage = 10
 				int cPage = 1;
-				int numPerPage = 10;
+				int numPerPage = 7;
 				try {
 					cPage = Integer.parseInt(request.getParameter("cPage"));
 				} catch (NumberFormatException e) {
 					
 				}
-				System.out.println("cPage = " + cPage);
 				
 				// 2.업무로직
 				// a.content영역 - paging query
@@ -53,12 +50,10 @@ public class ProductFinderServlet extends HttpServlet {
 				System.out.println("list@servlet = " + list);
 
 				// b.pagebar영역
-				// totalContents, url 준비
-				int totalContents = productService.selectTotalContent(start, end);
+				int totalContents = productService.selectTotalContent();
 				String queryString = String.format("?searchType=%s&searchKeyword=%s", searchType, searchKeyword);
 				String url = request.getRequestURI() + queryString;
 				String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
-				System.out.println("pagebar@servlet = " + pagebar);
 				
 				// 3.view단 forwarding
 				request.setAttribute("list", list);
@@ -68,39 +63,36 @@ public class ProductFinderServlet extends HttpServlet {
 					.forward(request, response);
 			}
 			else {
-				System.out.println("그 외 선택");
 				
-				// 1.사용자입력값 처리 cPage numPerPage = 10
-							int cPage = 1;
-							int numPerPage = 10;
-							try {
-								cPage = Integer.parseInt(request.getParameter("cPage"));
-							} catch (NumberFormatException e) {
-								
-							}
-							System.out.println("cPage = " + cPage);
-							
-							// 2.업무로직
-							// a.content영역 - paging query
-							int start = cPage * numPerPage - (numPerPage -1);
-							int end = cPage * numPerPage;
-							List<Product> list = productService.selectProductSearchList(start, end, searchKeyword);
-							System.out.println("list@servlet = " + list);
+				// 페이징처리
+				int cPage = 1;
+				int numPerPage = 7;
+				try {
+					cPage = Integer.parseInt(request.getParameter("cPage"));
+				} catch (NumberFormatException e) {
+					
+				}
+				
+				int start = cPage * numPerPage - (numPerPage -1);
+				int end = cPage * numPerPage;
+				
+				// 업무로직 (검색 리스트)
+				List<Product> list = productService.selectProductSearchList(start, end, searchKeyword);
 
-							// b.pagebar영역
-							// totalContents, url 준비
-							int totalContents = productService.selectTotalContent(start, end);
-							String queryString = String.format("?searchType=%s&searchKeyword=%s", searchType, searchKeyword);
-							String url = request.getRequestURI() + queryString;
-							String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
-							System.out.println("pagebar@servlet = " + pagebar);
-							
-							// 3.view단 forwarding
-							request.setAttribute("list", list);
-							request.setAttribute("pagebar", pagebar);
-							request
-								.getRequestDispatcher("/WEB-INF/views/product/productList.jsp")
-								.forward(request, response);
+				// 페이징 - 검색된수
+				int totalContents = productService.searchProductCount(searchKeyword);
+				
+				// 검색
+				String queryString = String.format("?searchType=%s&searchKeyword=%s", searchType, searchKeyword);
+				String url = request.getRequestURI() + queryString;
+				String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
+				
+				// view단 forwarding
+				request.setAttribute("list", list);
+				request.setAttribute("pagebar", pagebar);
+				request
+					.getRequestDispatcher("/WEB-INF/views/product/productList.jsp")
+					.forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

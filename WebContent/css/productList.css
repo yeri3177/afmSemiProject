@@ -25,20 +25,22 @@ body{
 /* 카테고리 검색 영역 div */
 .search-type {
 	font-size: 20px;
-	margin: 20px 20px;
+	margin: 80px 0 20px 0;
 	text-align: center;
 }
 
-
-/* 카테고리검색 이미지 */
+/* 카테고리 검색 버튼 위치 */
+#search-btn {
+	margin-left: 20px;
+}
+/* 
+카테고리검색 이미지
 .search-img {
 	width: 50px;
 	height: 50px;
 	cursor: pointer;
 }
-
-
-
+ */
 
 /* 상품리스트 테이블 */
 #product-board, #product-board th,td {
@@ -98,24 +100,26 @@ body{
 	width: 960px;
 }
 
-/* 글쓰기 버튼 */
-#btn-add {
+/* 글쓰기 버튼 위치*/
+#write-btn {
 	display: inline-block;
  	position: relative;
  	top: 20px;
-	
+}
+
+/* 초록버튼 디자인 */
+.green-btn {
 	width: 100px;
 	height: 40px;
 	background: #568A35;
 	font-weight: bold;
-
+	font-size: 17px;
 } 
 
-/* 글쓰기버튼 마우스오버시 */
-.wtite-btn:hover {
-    background-color: #FFDC37;
-    color: black;
-    
+/* 초록버튼 마우스오버시 */
+.green-btn:hover {
+    background-color: #325b17;
+    color: #fff;
 }
 
 /* 페이징 영역 */

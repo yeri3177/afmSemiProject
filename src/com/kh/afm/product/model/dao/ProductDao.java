@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.kh.afm.admin.model.exception.AdminException;
 import com.kh.afm.product.model.exception.ProductException;
 import com.kh.afm.product.model.vo.Attachment;
 import com.kh.afm.product.model.vo.Product;
@@ -68,13 +69,13 @@ public class ProductDao {
 					product.setAttach1(attach);
 				
 				list.add(product);
-			}
+				}
 				
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new ProductException("전체회원 조회 오류",e);
+			throw new ProductException("전체상품 조회 오류",e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -752,6 +753,44 @@ public class ProductDao {
 		}
 		
 		return list;
+	}
+
+	/**
+	 * 상품카테고리 검색시 총 상품수 
+	 */
+	public int searchProductCount(Connection conn, String searchKeyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalContents = 0;
+
+		String sql = null;
+		//String searchType = (String) param.get("searchType");
+		
+		switch (searchKeyword) {
+		case "곡류":
+			sql = prop.getProperty("");
+			break;
+		case "과실류":
+			sql = prop.getProperty("");
+			break;
+		case "채소류":
+			sql = prop.getProperty("");
+			break;
+		}
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchKeyword);
+			rset = pstmt.executeQuery();
+			if (rset.next())
+				totalContents = rset.getInt(1);
+		} catch (SQLException e) {
+			throw new AdminException("검색결과 페이징 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalContents;
 	}
 
 	

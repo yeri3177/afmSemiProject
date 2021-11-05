@@ -29,7 +29,7 @@ public class ProductService {
 		return list;
 	}
 
-	public int selectTotalContent(int start, int end) {
+	public int selectTotalContent() {
 		Connection conn = getConnection();
 		int totalContents = 0;
 		try {
@@ -301,4 +301,21 @@ public class ProductService {
 		return list;
 	}
 
+	/**
+	 * 상품카테고리 검색시 총 상품수 
+	 * @param searchKeyword : 검색한 카테고리명
+	 * @return 검색된 상품수
+	 */
+	public int searchProductCount(String searchKeyword) {
+		Connection conn = getConnection();
+		int totalContent;
+		try {
+			totalContent = productDao.searchProductCount(conn, searchKeyword);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}
+		return totalContent;
+	}
 }
