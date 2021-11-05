@@ -16,16 +16,13 @@ import com.kh.afm.product.model.vo.Product;
 import com.kh.afm.product.model.vo.ProductComment;
 
 /**
- * Servlet implementation class ProductViewServlet
+ * 상품게시판 글 상세보기
  */
 @WebServlet("/product/productView")
 public class ProductViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ProductService productService = new ProductService();
 	
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
@@ -33,7 +30,6 @@ public class ProductViewServlet extends HttpServlet {
 			
 			//게시글 가져오기
 			Product product = productService.selectOneProduct(no);
-			System.out.println("product@servlet = " + product);
 			
 			//게시글 가져오기에 실패시
 			if(product == null) {
@@ -65,13 +61,8 @@ public class ProductViewServlet extends HttpServlet {
 		}
 		
 	}
-	
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

@@ -19,49 +19,37 @@
 
 <!-- bxslider -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
 <script>
 /**
  * 이미지 슬라이드
  */
 $(document).ready(function(){ 
-
 	var main = $('.bxslider').bxSlider({ 
-	
 	mode: 'fade', 
-	
 	auto: true,	//자동으로 슬라이드 
-	
 	controls : true,	//좌우 화살표	
-	
 	autoControls: true,	//stop,play 
-	
-	pager:true,	//페이징 
-	
-	pause: 3000, 
-	
+	pager:true,
+	pause: 3000, 	
 	autoDelay: 0,	
-	
-	slideWidth: 800, //이미지 박스 크기설정
-	
 	speed: 500, 
-	
 	stopAutoOnclick:true 
 
 }); 
 
 	   
-
-$(".bx-stop").click(function(){	// 중지버튼 눌렀을때 
+// 중지버튼 눌렀을때 
+$(".bx-stop").click(function(){	
     main.stopAuto(); 
     $(".bx-stop").hide(); 
     $(".bx-start").show(); 
     return false; 
 }); 
 
-
-$(".bx-start").click(function(){	//시작버튼 눌렀을때 
+//시작버튼 눌렀을때 
+$(".bx-start").click(function(){	
 
     main.startAuto(); 
     $(".bx-start").hide(); 
@@ -70,8 +58,8 @@ $(".bx-start").click(function(){	//시작버튼 눌렀을때
 }); 
 
 
-
-$(".bx-start").hide();	//onload시 시작버튼 숨김. 
+//onload시 시작버튼 숨김
+$(".bx-start").hide();	
 
 }); 
 
@@ -85,23 +73,22 @@ $(".bx-start").hide();	//onload시 시작버튼 숨김.
 
 <!-- 상단 영역 박스 -->
 <div id="prod-top-box">
-<form 
-	name="productOrderFrm"
-	method="POST">
+<form name="productOrderFrm" method="POST">
 	<input type="hidden" name="productNo" value="<%= product.getpNo() %>"/>
 	<input type="hidden" name="productRenamedFilename" value="<%= product.getAttach1().getRenamedFileName() %>"/>
 	<input type="hidden" name="productPrice" value="<%= product.getpPrice() %>"/>
+	
 	<table>
 		<tr>
 		
 			<!--------------- 이미지 슬라이드 -------------->
 		    <td colspan="2" rowspan="7" id="img-slide-td">
 		    	<ul class="bxslider">
-		          <li>
+		          <li> <!-- 썸네일 이미지 -->
 		          	<img src="<%= request.getContextPath() %>/upload/product/<%= product.getAttach1().getRenamedFileName() %>">
 		          </li>
 		          
-		          <li>
+		          <li> <!-- 본문 이미지 -->
 		         	<img src="<%= request.getContextPath() %>/upload/product/<%= product.getAttach2().getRenamedFileName() %>">
 		          </li>
 		    	</ul>
@@ -109,17 +96,14 @@ $(".bx-start").hide();	//onload시 시작버튼 숨김.
 		    </td>
 		    
 		    <!-- 상품명 -->
-		    <td colspan="6" id="productName"> 
+		    <td colspan="4" id="productName"> 
 		    	<%= product.getpTitle() %>
 		    </td>
- 
 	    </tr>
-	    
-	    
 	    
 	    <tr>
 	    	<!-- 판매자 -->
-	    	<td colspan="6" class="tags-td"> 
+	    	<td colspan="4" class="tags-td"> 
 		    	<img class="top-tags" src="<%=request.getContextPath()%>/images/product/tag1.png" />
 		    	<span><%= product.getUserId() %></span>
 		    </td>
@@ -127,28 +111,28 @@ $(".bx-start").hide();	//onload시 시작버튼 숨김.
 	    
 	    <tr>
 	    	<!-- 가격 -->
-		    <td colspan="6" class="tags-td"> 
+		    <td colspan="4" class="tags-td"> 
 			    <img class="top-tags" src="<%=request.getContextPath()%>/images/product/tag2.png" />
 			    <span><%= product.getpPrice() %>원</span>
 		    </td>
 	    </tr>
 	    <tr>
 	    	<!-- 배송비 -->
-		    <td colspan="6" class="tags-td"> 
+		    <td colspan="4" class="tags-td"> 
 		    	<img class="top-tags" src="<%=request.getContextPath()%>/images/product/tag3.png" />
 		    	<span><%= "Y".equals(product.getpPost()) ? "3000원" : "무료배송" %></span>
 		    </td>
 	    </tr>
 	    <tr>
 	    	<!-- 재고 -->
-		    <td colspan="6" class="tags-td"> 
+		    <td colspan="4" class="tags-td"> 
 		    	<img class="top-tags" src="<%=request.getContextPath()%>/images/product/tag4.png" />
 		    	<span><%= product.getpCnt() %></span>
 		    </td>
 	    </tr>
 	    <tr>
 	    	<!-- 추천 -->
-		    <td colspan="6" class="test tags-td"> 
+		    <td colspan="4" class="test tags-td"> 
 		    	<img class="top-tags" src="<%=request.getContextPath()%>/images/product/tag5.png" /> 
 		    	<span><%= product.getpRecommend() %></span>
 		    </td>
@@ -156,9 +140,9 @@ $(".bx-start").hide();	//onload시 시작버튼 숨김.
 	    
 	    <tr>
 	    	<!-- 구매수량 -->
-		    <td colspan="6" class="last-tags-td">
+		    <td colspan="4" class="last-tags-td">
 			    <img class="top-tags" src="<%=request.getContextPath()%>/images/product/tag6.png" />
-			    <span><input type="number" name="productQuantity" value="" placeholder="최소 1개 이상"/></span>
+			    <span><input type="number" name="productQuantity" value="" placeholder="최소 1개 이상" required /></span>
 		    </td>
 	    </tr>
 	   
@@ -249,8 +233,6 @@ if(editable){
 				</tr>
 			</table>
 			
-			
-			
 			<input type="hidden" name="commentLevel" value="1"/>
 			<input type="hidden" name="userId" value="<%= loginUser != null ? loginUser.getUserId() : ""%>"/>
 			<input type="hidden" name="pNo" value="<%= product.getpNo()%>"/>
@@ -322,6 +304,8 @@ if(commentList != null && !commentList.isEmpty()){
 </form>
 
 <script>
+
+/* 추천하기 버튼 클릭 이벤트 */
 $(like).click((e) => {
 	$.ajax({
 		url: "<%= request.getContextPath() %>/product/productLike",
@@ -340,6 +324,7 @@ $(like).click((e) => {
 	});
 });
 
+/* 삭제하기 버튼 클릭 이벤트 */
 $(".btn-delete").click(function(e){
 	
 	if(confirm("해당 댓글을 삭제하시겠습니까?")){
@@ -448,10 +433,6 @@ const loginAlert = () => {
 	alert("로그인후 이용할 수 있습니다.");
 	$("#userId").focus();
 };
-
-
-
-
 </script>
 
 
