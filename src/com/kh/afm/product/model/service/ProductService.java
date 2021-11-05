@@ -35,8 +35,9 @@ public class ProductService {
 		try {
 			totalContents = productDao.selectTotalContents(conn);
 		} catch (Exception e) {
-			close(conn);
 			throw e;
+		} finally {
+			close(conn);			
 		}
 		return totalContents;
 	}
@@ -72,8 +73,9 @@ public class ProductService {
 		} catch(Exception e) {
 			rollback(conn);
 			result = 0;
+		} finally {
+			close(conn);			
 		}
-		close(conn);
 		return result;
 	}
 
@@ -227,6 +229,8 @@ public class ProductService {
 		} catch(Exception e) {
 			rollback(conn);
 			throw e;
+		} finally {
+			close(conn);
 		}
 		return result;
 	}
@@ -246,6 +250,8 @@ public class ProductService {
 		} catch(Exception e) {
 			rollback(conn);
 			throw e;
+		} finally{
+			close(conn);
 		}
 		return likeCount;
 	}
