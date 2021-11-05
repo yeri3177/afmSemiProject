@@ -59,7 +59,7 @@ body{
 	border-top: 3px solid #a0c850;
 }
 
-#product-board tr:hover {
+#product-board .content-tr:hover {
 	background-color: #e7e7e7;
 }
 

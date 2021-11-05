@@ -18,7 +18,7 @@
 }
 
 /* 글쓰기폼 div 영역 */
-#productEnrollForm-div {
+.productForm-div {
 	margin: 0 auto;
 	text-align: center;
 	position: relative;
@@ -31,7 +31,7 @@
 }
 
 /* 테이블전체 경계선주기 */
-#productEnrollForm-div table, td, th {
+.productForm-div table, td, th {
 	border: 1px solid black;
 	border-collapse: collapse;
 	padding: 13px;
@@ -61,7 +61,7 @@
 
 /* 글내용 태그 */
 #tbl-product-form td textarea {
-	height: 99%;
+	height: 98%;
 	margin-top:1px;
 	padding :20px;
 	font-size: 20px;
@@ -101,4 +101,18 @@
 .enroll-btn:hover {
     background-color: #FFDC37;
     font-weight: bold; 
+}
+
+/* 이전이미지 */
+.prev-product-img img {
+	width: 300px;
+	height: 300px;
+	border: 1px dotted black;
+
+}
+
+/* 이전이미지 td */
+.prev-img-td {
+	text-align: left;
+	padding: 7px!important;
 }

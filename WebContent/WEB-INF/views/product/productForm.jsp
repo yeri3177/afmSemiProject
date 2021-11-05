@@ -14,7 +14,7 @@
 	</div>
 
 	<!-- 글쓰기 폼 영역 DIV -->
-	<div id="productEnrollForm-div">
+	<div class="productForm-div">
 	
 		<form name="productEnrollFrm" action="<%=request.getContextPath() %>/product/productEnroll" 
 			method="post" enctype="multipart/form-data">
@@ -25,17 +25,17 @@
 				<input type="hidden" name="userId" value="<%= loginUser.getUserId() %>" readonly>
 			
 			<tr>
-				<th>상품명<sup>*</sup></th>
+				<th>상품명</th>
 				<td><input type="text" name="pTitle" class="input-text-title" placeholder="제목을 입력해주세요." required></td>
 			</tr>
 			<tr>
-				<th>가격</th>
+				<th>상품 가격</th>
 				<td>
 					<input type="text" name="pPrice" class="input-text-price" placeholder="가격을 입력해주세요." value="" required/>
 				</td>
 			</tr>
 			<tr>
-				<th>수량</th>
+				<th>상품 수량</th>
 				<td>
 					<input type="number" name="pCnt" class="input-number" min=1 placeholder="최소 1개 이상" required>		
 				</td>
@@ -75,7 +75,7 @@
 			<tr>
 				<th>글 내용</th>
 				<td>
-					<textarea class="textarea" style="resize:none;" rows="10" cols="40" name="pContent"></textarea>
+					<textarea class="textarea" rows="10" cols="40" name="pContent"></textarea>
 				</td>
 			</tr>
 			

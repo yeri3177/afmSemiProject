@@ -76,7 +76,7 @@
 	<%
 		for(Product product : list){
 	%>
-			<tr>
+			<tr class="content-tr">
 				<td> <!-- 번호 -->
 					<%= product.getpNo() %>
 				</td>

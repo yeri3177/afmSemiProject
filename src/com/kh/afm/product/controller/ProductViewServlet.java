@@ -59,7 +59,6 @@ public class ProductViewServlet extends HttpServlet {
 			e.printStackTrace();
 			throw e;
 		}
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
