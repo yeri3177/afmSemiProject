@@ -69,7 +69,7 @@ public class ProductLikeServlet extends HttpServlet {
 			like++;
 			//2. 업무로직
 			int result = ProductService.productLike(pNo, like);
-			String msg = result > 0 ? "좋아요 성공!" : "좋아요 실패";
+			String msg = result > 0 ? "좋아요성공!" : "좋아요 실패";
 			
 			//3. 응답처리
 			request.getSession().setAttribute("Msg", msg);
