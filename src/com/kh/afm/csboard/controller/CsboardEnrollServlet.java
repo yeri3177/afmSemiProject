@@ -35,17 +35,13 @@ public class CsboardEnrollServlet extends HttpServlet {
 			String boardLock = request.getParameter("boardLock_yn");
 			Csboard csboard = new Csboard(0, userId, boardTitle, boardContent, null, 0, null, boardNotice, boardPassword, boardLock, 0, 0, 0);
 			
-			System.out.println("CsboardEnrollServlet@servlet = " + csboard);
-			
 			// 2. 업무로직 (db에 저장)
 			int result = csboardService.insertCsboard(csboard);
-//		String msg = result > 0 ? "게시물 등록 성공!" : "게시물 등록 실패!";
-			
-			System.out.println("CsboardEnrollServlet@servlet = " + csboard);
+			String msg = result > 0 ? "게시물 등록 성공!" : "게시물 등록 실패!";
 			
 			// 3. 응답 처리 : redirect(DML이기 때문에)
 			HttpSession session = request.getSession();
-//		session.setAttribute("msg", msg);
+			session.setAttribute("msg", msg);
 			String location = request.getContextPath() + "/csboard/csboardView?boardNo=" + csboard.getBoardNo();
 			response.sendRedirect(location);
 		} catch (IOException e) {

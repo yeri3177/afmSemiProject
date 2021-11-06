@@ -79,23 +79,24 @@ function pswdChk(url,password){
 			<th>조회</th>
 		</tr>
 		
+		
 		<%-- 공지사항 --%>
 		<%
-			for (Csboard csboard2 : noticeList){
+			for (Csboard csboard : noticeList){
 		%>
-			<% if(csboard2.getBoardNotice().equals("Y")){ %>
+			<% if(csboard.getBoardNotice().equals("Y")){ %>
 			<tr>
 				<td id="notice">공지사항</td>
-				<td><a href="<%= request.getContextPath() %>/csboard/csboardView?boardNo=<%= csboard2.getBoardNo() %>"><%= csboard2.getBoardTitle()%></a></td>
-				<td><%= csboard2.getUserId() %></td>
-				<td><%= csboard2.getBoardRegDate() %></td>
-				<td><%= csboard2.getBoardReadcount() %></td>
+				<td><a href="<%= request.getContextPath() %>/csboard/csboardView?boardNo=<%= csboard.getBoardNo() %>"><%= csboard.getBoardTitle()%></a></td>
+				<td><%= csboard.getUserId() %></td>
+				<td><%= csboard.getBoardRegDate() %></td>
+				<td><%= csboard.getBoardReadcount() %></td>
 			</tr>
 			<% } %>
-		
 		<%
 			}
 		%>
+		
 		
 <%
 	for(Csboard csboard : list){

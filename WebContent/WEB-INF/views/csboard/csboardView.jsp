@@ -50,6 +50,7 @@
 				<th colspan="6">
 					<input type="button" value="수정하기" class="modify-btn" onclick="updateCsboard()"/>
 					<input type="button" value="삭제하기" class="delete-btn" onclick="deleteCsboard()"/>
+					<input type="button" value="목록" class="back-btn" onclick= "location.href = '<%= request.getContextPath() %>/csboard/csboardList';" />
 				</th> 
 			</tr>
 		</div> 
