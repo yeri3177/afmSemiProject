@@ -12,29 +12,6 @@ CREATE TABLE tb_user (
     CONSTRAINTS ck_user_expose check(user_expose in ('Y','N')),
     CONSTRAINTS ck_user_role check(user_role in ('U','S','A'))
 );
---drop table tb_user;
-insert into tb_user
-	values (
-		'admin', '관리자','admin@admin.com','kvOffyqGmDjNUIXm8X/IIQm8+YzWKkfLw3njjegLvAITojzubkoT3myq4K3Yo5AnLW8Ig8J0Mgsf9g28/G3XUA==', sysdate,'01000000000',sysdate, 'A', default
-	);
-    
-    insert into tb_user
-    values (
-        'honggd', '홍길동','honggd@naver.com','kvOffyqGmDjNUIXm8X/IIQm8+YzWKkfLw3njjegLvAITojzubkoT3myq4K3Yo5AnLW8Ig8J0Mgsf9g28/G3XUA==', sysdate,'01000001000',sysdate, 'A', default
-    );
-    
-    insert into tb_user
-    values (
-        'aaaaa', '아아아','aaa@naver.com','kvOffyqGmDjNUIXm8X/IIQm8+YzWKkfLw3njjegLvAITojzubkoT3myq4K3Yo5AnLW8Ig8J0Mgsf9g28/G3XUA==', sysdate,'01000001010',sysdate, 'A', default
-    );
-
-delete from tb_user where user_id = 'admin';
-select * from tb_user;
-select * from user_delete;
-delete from user_delete where delete_u_id = '이창훈';
-
-
-
 
 create sequence seq_product_no;
 CREATE TABLE product (
@@ -55,10 +32,6 @@ CREATE TABLE product (
     CONSTRAINTS ck_p_expose check(p_expose in ('Y','N')),
     CONSTRAINTS ck_p_post check(p_post in ('Y','N')),
     CONSTRAINTS ck_p_category check(p_category in ('곡류','과실류','채소류'))
-);
-insert into product(
-    SEQ_PRODUCT_NO.nextval, 'admin', default, '게시물5', '게시물5입니다.', default, 32000, 3, default, default, null, default
-    
 );
 
 --drop table product;
@@ -210,6 +183,7 @@ CREATE TABLE product_delete (
 	delete_p_recommend NUMBER DEFAULT 0,
 	delete_p_date DATE DEFAULT sysdate
 );
+
 create or replace trigger trg_product_delete
     after delete on product
     for each row
@@ -232,6 +206,7 @@ CREATE TABLE user_delete (
 	user_expose CHAR(1),
 	delete_u_date DATE DEFAULT sysdate
 );
+
 create or replace trigger trg_user_delete
     after delete on tb_user
     for each row
@@ -258,6 +233,7 @@ CREATE TABLE cs_delete (
 	delete_board_step NUMBER NOT NULL,
 	delete_b_date DATE DEFAULT sysdate
 );
+
 create or replace trigger trg_cs_delete
     after delete on csboard
     for each row
@@ -267,7 +243,6 @@ begin
 end;
 /
 
--- 박종서
 comment on column csboard.board_no is '고객센터번호';
 comment on column csboard.board_title is '고객센터제목';
 comment on column csboard.user_id is '고객센터작성자 아이디';
@@ -283,10 +258,8 @@ comment on column csboard_comment.cb_board_no is '참조 원글 번호';
 comment on column csboard_comment.cb_comment_ref is '게시판댓글 참조번호';
 comment on column csboard_comment.reg_date is '게시판댓글 작성일';
 
-
 alter table tb_order add(adr_no number);
 
---박종서
 drop sequence seq_csboard_comment_no;
 create sequence seq_csboard_comment_no;
 create sequence seq_csboard_comment_cb_no;

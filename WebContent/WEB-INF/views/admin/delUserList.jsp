@@ -56,7 +56,6 @@
 </table>	
 
 
-
 <!-- 페이지바 영역 -->
 <div id="pageBar">
 	<%= request.getAttribute("pagebar") %>
@@ -64,11 +63,6 @@
 
 </section>
 
-
-<!-- 회원삭제 전송폼 -->
-<%-- <form action="<%= request.getContextPath() %>/admin/deleteDelUser" name="userDeleteFrm" method="POST">
-
-</form> --%>
 
 <script>
 // 전체선택 버튼

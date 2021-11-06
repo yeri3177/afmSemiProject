@@ -518,8 +518,8 @@ public class AdminDao {
 		// String[] -> String
 		String id_str = "";
 		for(int i=0; i<userId_arr.length; i++) {
-			id_str += (i != userId_arr.length-1) ? (id_str = "'" + userId_arr[i] + "',") : (id_str = "'" + userId_arr[i] + "'");
-			//id_str += (i != userId_arr.length-1) ? (id_str = userId_arr[i] + ",") : (id_str =  userId_arr[i] );
+			id_str += (i != userId_arr.length-1) ? 
+					(id_str = "'" + userId_arr[i] + "',") : (id_str = "'" + userId_arr[i] + "'");
 		}
 		System.out.println("id_str = "+id_str);
 		
