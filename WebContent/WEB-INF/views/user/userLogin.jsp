@@ -28,7 +28,10 @@
 
 <style>
 	body {
-		background: url('<%=request.getContextPath()%>/images/user/afm_background_1.png');
+		height: 100vh;
+		background: url('<%=request.getContextPath()%>/images/user/loginbackground.jpg');
+		background-repeat: repeat;
+		background-position:center center;	
 	}
 </style>
 </head>
@@ -47,13 +50,13 @@
 				<!-- 1행 : 아이디 -->
 				<tr>
 					<td>
-						<input type="text" name="userId" id="userId" placeholder="아이디" tabindex="1"  value="<%= saveId != null ? saveId : "" %>">
+						<input type="text" name="userId" id="userId" placeholder="아이디" tabindex="1"  value="<%= saveId != null ? saveId : "" %>" required>
 					</td>
 				</tr>
 				
 				<!-- 2행 : 비밀번호 -->
 				<tr>
-					<td><input type="password" name="password" id="password" placeholder="비밀번호" tabindex="2"></td>
+					<td><input type="password" name="password" id="password" placeholder="비밀번호" tabindex="2" required></td>
 				</tr>
 				
 				<!-- 3행 : 아이디저장 -->

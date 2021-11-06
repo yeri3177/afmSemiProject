@@ -3,11 +3,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/user.css" />
 <%
 	List<OrderDetail> list = (List<OrderDetail>) request.getAttribute("orderDetailList");
 %>
+<% if(list.isEmpty()){ %>
+	<h1 class="orderCompleteDetailisEmpty">텅</h1>
+    <h3 class="orderCompleteDetailisEmptyh3">구매하신 내역이 없습니다.</h3>
+<% 
+}else{
+%>
 
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/user.css" />
+
 
 <section id="OrderCompleteDeatil-container">
 <h1> 구매 상세 내역</h1>
@@ -40,6 +47,9 @@
 </table>
 
 </section>
+<%
+	}
+%>
 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
