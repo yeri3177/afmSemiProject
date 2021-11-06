@@ -318,4 +318,18 @@ public class ProductService {
 		}
 		return totalContent;
 	}
+
+	public static int productLikeSelect(int pNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = productDao.productLikeSelect(conn ,pNo);
+		} catch(Exception e) {
+			throw e;
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
 }
