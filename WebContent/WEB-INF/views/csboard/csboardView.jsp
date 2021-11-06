@@ -20,22 +20,26 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/csboard.css" />
 <section id="csboardView-container" class="csboard-container">
 	<h2>게시글 상세보기</h2>
+	
 	<table id="tbl-csboard-view">
+
 		<tr>
-			<th>글번호</th>
-			<td><%= csboard.getBoardNo() %></td>
+			<th>제 목</th>
+			<td><%= csboard.getBoardTitle() %></td>
+		</tr>
+		
+		<tr>
 			<th>작성자</th>
 			<td><%= csboard.getUserId() %></td>
+		</tr>
+		<tr>	
 			<th>조회수</th>
 			<td><%= csboard.getBoardReadcount() %></td>
 		</tr>
-		<tr>
-			<th>제 목</th>
-			<td colspan="5"><%= csboard.getBoardTitle() %></td>
-		</tr>
+		
 		<tr>
 			<th>내 용</th>
-			<td colspan="5">
+			<td id="content-td">
 				<%= csboard.getBoardContent() %>
 			</td>
 		</tr>
@@ -55,24 +59,38 @@
 			</tr>
 		</div> 
 <% } %> 
+
+<br /><br />
 	
-	
-	<%-- 댓글 --%>
-	<hr style="margin-top:30px"/>
-	
+	<!-- <hr style="margin-top:30px"/> -->
+
+	<!-- 댓글 -->
 	<div class="comment-container">
 		<div class="comment-editor">
+		
+			<span>Comments💬</span>
 			<form 
 			action="<%= request.getContextPath() %>/csboard/csboardCommentEnroll"
 			name="csboardCommentFrm"
 			method="POST">
-			<textarea name="cbContent" id="textarea-comment" cols="70" rows="3"></textarea>
-			<button id="btn-insert">등록</button>
-			
-			<input type="hidden" name="cbLevel" value="1" />
-			<input type="hidden" name="userId" value="<%= loginUser != null ? loginUser.getUserId() : "" %>" />
-			<input type="hidden" name="cbBoardNo" value="<%= csboard.getBoardNo() %>" />
-			<input type="hidden" name="cbCommentRef" value="0" />
+				<table id="commentEnroll-tbl">
+					<tr>
+						<td class="cmt-td">
+							<textarea name="cbContent" id="textarea-comment" cols="10" rows="3"></textarea>
+						</td>
+						
+						<td class="cmt-td" id="btn-insert-td">
+							<button id="btn-insert">댓글 등록</button> 
+						</td>
+					</tr>
+				</table>
+					
+					
+				
+				<input type="hidden" name="cbLevel" value="1" />
+				<input type="hidden" name="userId" value="<%= loginUser != null ? loginUser.getUserId() : "" %>" />
+				<input type="hidden" name="cbBoardNo" value="<%= csboard.getBoardNo() %>" />
+				<input type="hidden" name="cbCommentRef" value="0" />
 			</form>
 		</div>
 		
@@ -182,7 +200,7 @@ $(".btn-reply").click((e) => {
 		<form 
 			action="<%= request.getContextPath() %>/csboard/csboardCommentEnroll"
 			method="POST">
-			<textarea name="cbContent" id="" cols="30" rows="1"></textarea>
+			<textarea name="cbContent" id="cbContent" cols="7" rows="1"></textarea>
 			<button class="btn-insert2">등록</button>
 			
 			<input type="hidden" name="cbLevel" value="2" />

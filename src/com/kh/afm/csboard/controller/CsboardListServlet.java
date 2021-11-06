@@ -44,7 +44,7 @@ public class CsboardListServlet extends HttpServlet {
 			
 			// 공지사항 여부용
 			List<Csboard> noticeList = csboardService.selectNoticeList();
-			System.out.println("noticeList = " + noticeList);
+			//System.out.println("noticeList = " + noticeList);
 			
 			// b. pagebar 영역
 			// totalContents, url 준비
@@ -53,7 +53,7 @@ public class CsboardListServlet extends HttpServlet {
 			// 링크 클릭했을 때 이동할 페이지 제공
 			String url = request.getRequestURI();
 			String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
-			System.out.println("pagebar@servlet = " + pagebar);
+			//System.out.println("pagebar@servlet = " + pagebar);
 			
 			// 3. view단 forwarding
 			request.setAttribute("list", list);

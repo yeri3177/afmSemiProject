@@ -51,34 +51,41 @@ $(() => {
 <section id="csboardForm-container" class="csboard-container">
 <h2>고객센터 게시글 작성</h2>
 <form name="csboardEnrollFrm" action="<%=request.getContextPath() %>/csboard/csboardEnroll" method="POST">
-	<table id="tbl-board-view"> 
+	<table class="csboardForm-tbl"> 
 	<tr>
 		<th>제 목</th>
-		<td>
-			<input type="text" name="board_title" style="width: 400px" required>
+		<td class="text-td">
+			<input type="text" name="board_title" required>
 		</td>
 	</tr>
 	<tr>
 		<th>작성자</th>
-		<td>
-			<input type="text" name="user_id" value="<%= loginUser.getUserId() %>" style="width: 400px"readonly />
+		<td class="text-td">
+			<input type="text" name="user_id" value="<%= loginUser.getUserId() %>" readonly />
 			<% if(editable){ %>
 			<input type="checkbox" name="boardNotice_yn" value="Y"/>공지사항 여부
 			<% } %>
 		</td>
 	</tr>
+	
+<% if(!editable) { %>
 	<tr>
-		<% if(!editable) { %>
-		<th>비밀번호</th>
-		<td>
-			<input type="password" name="board_password" /> <input type="checkbox" name="boardLock_yn" value="Y" /> 비밀글 여부
+		<th rowspan='2'>비밀번호</th>
+		<td class="text-td">
+			<input type="password" name="board_password"/>
 		</td>
-		<% } %>  
 	</tr>
+	<tr>		
+		<td id="passwordCheck-td">	
+			<input type="checkbox" name="boardLock_yn" value="Y" /> 비밀글 여부
+		</td>
+	</tr>
+<% } %>  
+	
 	<tr>
 		<th>내 용</th>
-		<td>
-			<textarea rows="10" cols="40" name="board_content" style="width:98%;"></textarea>
+		<td class="text-td">
+			<textarea rows="10" cols="40" name="board_content"></textarea>
 		</td>
 	</tr>
 </table>

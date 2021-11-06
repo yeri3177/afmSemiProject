@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.afm.common.MvcUtils;
 import com.kh.afm.csboard.model.service.CsboardService;
 import com.kh.afm.csboard.model.vo.Csboard;
 
@@ -28,7 +29,7 @@ public class CsboardBoardFinderServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			// 1. 사용자 입력값 처리
+			// 검색타입, 검색키워드 
 			String searchType = request.getParameter("searchType");
 			String searchKeyword = request.getParameter("searchKeyword");
 			System.out.println("searchType = " + searchType);
@@ -45,8 +46,28 @@ public class CsboardBoardFinderServlet extends HttpServlet {
 			// b. select * from user where user_name like '%길동%'
 			// c. select * from csboard where board_title like '%목%'
 			List<Csboard> list = csboardService.searchCsboard(param);
-			System.out.println(list);
+			//System.out.println(list);
 			
+			// 공지사항
+			List<Csboard> noticeList = csboardService.selectNoticeList();
+			request.setAttribute("noticeList", noticeList);
+			
+			// 페이징
+			int cPage = 1;
+			int numPerPage = 10;
+			try {
+				cPage = Integer.parseInt(request.getParameter("cPage"));
+			} catch(NumberFormatException e) {
+				// 처리코드 없음
+			}
+			
+			int start = cPage * numPerPage - (numPerPage - 1);
+			int end = cPage * numPerPage;
+			int totalContents = csboardService.selectTotalContents();
+			String queryString = String.format("?searchType=%s&searchKeyword=%s", searchType, searchKeyword);
+			String url = request.getRequestURI() + queryString; 
+			String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
+			request.setAttribute("pagebar", pagebar);
 			
 			// 3. view단 처리 (html)
 			// jsp 참조용
@@ -54,15 +75,9 @@ public class CsboardBoardFinderServlet extends HttpServlet {
 			request
 				.getRequestDispatcher("/WEB-INF/views/csboard/csboardList.jsp")
 				.forward(request, response);
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw e;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
 	}
-
 }

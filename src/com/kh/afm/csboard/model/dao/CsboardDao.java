@@ -303,7 +303,6 @@ public class CsboardDao {
 			break;
 		case "boardNo":
 			sql = prop.getProperty("searchCsboardByBoardNo");
-			param.put("searchKeyword", "%" + param.get("searchKeyword") + "%");
 			break;
 		case "boardTitle":
 			sql = prop.getProperty("searchCsboardByBoardTitle");
