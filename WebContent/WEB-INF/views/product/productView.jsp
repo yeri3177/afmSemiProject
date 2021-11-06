@@ -166,6 +166,9 @@ if(editable){
 <%
 }
 %>
+<%
+if(loginUser != null){
+%>
 			<!-- 바로구매 버튼 -->
 			<td class="user-btn-td">
 		    	<input type="submit" value="바로구매" 
@@ -177,7 +180,6 @@ if(editable){
 		    	<input type="submit" value="장바구니" 
 					formaction="<%= request.getContextPath() %>/cart/cartInsert" />
 		    </td>
-		    
 		    <!-- 추천하기 버튼 -->
 		    <td class="user-btn-td">
 	    		<input type="button" id="like" value="추천하기"/>
@@ -188,6 +190,9 @@ if(editable){
 		    	<input type="submit" value="신고하기" 
 		    		   formaction="<%= request.getContextPath() %>/csboard/productReportForm"/>   
 		    </td>
+<%
+}
+%>
 	    </tr>
 	</table>
 </form>	
