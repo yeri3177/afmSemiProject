@@ -15,17 +15,27 @@ section.csboard-container {
 .csboard-container table {
 	width: 100%;
 	border-collapse: collapse;
-	font-size: 12px; /* 글꼴 크기 */
+	font-size: 15px; /* 글꼴 크기 */
 	line-height: 24px; /* 줄 간격 */
+	
+	border-top: 2px solid gray;
+	border-bottom: 2px solid gray;
+	
+	border-left: 1px solid white!important;
+	border-right: 1px solid white;
 }
 
 .csboard-container table td,th {
-	border: #d3d3d3 solid 1px; /* 경계선 색상 스타일 굵기 */
-	padding: 5px; /* 안쪽 여백 */
+	border: #a1a1a1 solid 1px; 
+	padding: 8px; 
 }
 
 .csboard-container th {
-	background: yellowgreen; /* 배경색 */
+	background: #a5cf4e;
+}
+
+.csboard-container tr:hover {
+	background: #f0f0f0; 
 }
 
 .csboard-container img {
@@ -44,47 +54,15 @@ section.csboard-container {
 }
 
 /**************************************************************
- * @csboardList.jsp
+ * 페이징
  *************************************************************/
-section#csboardList-container div#search-container {margin:0 0 10px 0; padding:3px;}
-section#csboardList-container {text-align:center;}
-
-/* 검색 컨테이너 */
-.search-container {
-	/* width: 900px; */
-	height: 32px;
-	background-color: #ffdfaf;
-	margin: 30px auto;
-	padding: 8px; 
-}
-
-.search-container span {
-	font-family: 'Abril Fatface', cursive;
-}
-
-/* 검색버튼, 글쓰기 버튼 */
-.search-btn, .write-btn, .modify-btn, .delete-btn,
-	.insert-btn, .reset-btn, .listback-btn, .modified-btn, .cancell-btn, .back-btn {
-	height: 30px;
-	width: 70px;
-	background-color: #ffb445;
-	font-weight: bold;
-}
-
-.write-btn{
-	margin-top: 50px;
-	padding: 5px;
-}
-
 /* 페이징 바 */
 .csboard-container div#pageBar{
-	margin-top:30px; 
+	margin-top:20px; 
 	text-align:center; 
 	padding: 5px;
 	font-family: 'Abril Fatface', cursive;
 	font-size: 20px;
-	
-	background-color: #ffe187;
 	width: 300px;
 	text-align: center;
 	margin: 50px auto!important;
@@ -96,13 +74,10 @@ section#csboardList-container {text-align:center;}
 
 .csboard-container div#pageBar span.cPage{
 	color: black;
-	/* font-weight: bold;  */
-	/* margin-right: 5px; */
 }
 
 /* 마우스올렸을때 페이지 숫자 */
 .csboard-container div#pageBar a:hover {
-	/* text-decoration: underline; */
 	color: black;
 }
 
@@ -110,23 +85,158 @@ section#csboardList-container {text-align:center;}
 .csboard-container div#pageBar a{
 	text-decoration: none;
 	color : gray;
-	
 }
 
-#notice{
+/**************************************************************
+ * @csboardList.jsp
+ *************************************************************/
+section#csboardList-container div#search-container {
+	margin:0 0 10px 0; 
+	padding:3px;
+}
+
+section#csboardList-container {
+	text-align:center;
+} 
+
+/* 상단 텍스트 */
+#csboardList-container p {
+	font-family: 'Alfa Slab One', cursive;
+	font-size: 45px;
+	margin: 0;
+	/* 진회색 */
+	/* color: #5a5a5a; */
+	
+	/* 진한 초록색 */
+	color: #064e08;
+}
+
+/* 검색 컨테이너 */
+.search-container {
+	/* width: 900px; */
+	height: 32px;
+	margin: 10px auto;
+	padding: 8px; 
+}
+
+/* 검색 select 태그 */
+#searchType {
+	width: 120px;
+	height: 30px;
+	text-align: center;
+	cursor: pointer;
+}
+
+/* 검색 input 태그 */
+.search-type input {
+	width: 200px;
+	height: 26px;
+	padding-left: 13px;
+}
+
+/* 검색 버튼 */
+.search-btn {
+	height: 32px;
+	width: 86px;
+	background-color: #939393;
+	font-weight: bold;
+	color: #fff;
+	position: relative;
+	top: 3px;
+	font-size: 17px;
+}
+
+
+/* 버튼 디자인 */
+.write-btn, .modify-btn, .delete-btn,
+	.insert-btn, .reset-btn, .listback-btn, .modified-btn, .cancell-btn, .back-btn {
+	height: 37px;
+	width: 130px;
+	background-color: #7fa139;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+/* 글쓰기버튼 영역 */
+.write-btn-div {
+	float:right;
+}
+
+/* 글쓰기 버튼 */
+.write-btn{
+	margin-top: 47px;
+	padding: 5px;
+	background-color: #a5cf4e;
+}
+
+
+/* 공지사항 td */
+#notice-td {
 	font-weight: bold;
 	color: red;
 }
+/* 공지사항 tr */
+#notice-tr {
+	background-color: #e7e7e7;
+}
+
+/* 제목 td */
+.title-td {
+	text-align: left!important;
+	padding-left: 20px!important;
+}
+
 
 /**************************************************************
  * @csboardForm.jsp
  *************************************************************/
+#tbl-csboard td,th{
+	text-align: center;
+}
+
+.csboardForm-tbl th {
+	width: 260px;
+}
+
+.csboardForm-tbl .text-td {
+	padding: 0!important;
+	box-sizing: border-box;
+	
+	width: 600px;
+	height: 40px;
+}
+
+.text-td input, textarea {
+	width: 100%!important;
+	height: 100%!important;
+	box-sizing: border-box;
+	border: 0;
+	padding-left: 13px;
+}
+.text-td {
+	position: relative;
+}
+.text-td textarea {
+	position: relative;
+	top: 2px;
+	padding: 10px;
+}
+
+.csboard-container input[type='check'] {
+	border: 1px solid black;
+}
+ 
  .modify-btn, .delete-btn, .back-btn {
  	margin: 10px;
  }
  
  .reset-btn {
 	margin: 30px;
+}
+
+#passwordCheck-td {
+	height: 25px!important;
+	padding: 0 0 0 13px;
 }
  
  
@@ -141,33 +251,117 @@ section#csboardList-container {text-align:center;}
  /**************************************************************
  * @csboardView.jsp
  *************************************************************/
- #wrap {
+#tbl-csboard-view th {
+	width: 200px;
+}
+
+#tbl-csboard-view td {
+	width: 400px;
+	padding-left: 17px;
+}
+/* 글내용 td */
+#content-td {
+	height: 300px;
+}
+
+
+/* 댓글영역 */
+.comment-container {
+	/* background-color: pink; */
+	position: relative;
+}
+
+/* 댓글동록 영역 */
+.comment-editor {
+	background-color: #f0f0f0; 
+	padding: 50px 20px 20px 20px;
+	position: relative;
+	margin-bottom: 30px;
+}
+
+.comment-editor span {
+	position: absolute;
+	top: 10px;
+	left: 22px;
+	font-weight: bold;
+}
+
+/* 댓글폼 textarea */
+#textarea-comment {
+	width: 100%!important;
+	height: 100%!important;
+	box-sizing: border-box;
+	padding: 15px;
+	position: relative;
+	top: 1px;	
+	left: 1px;
+}
+
+/* 댓글 textarea, button의 td */
+.cmt-td {
+	padding: 0!important;
+	height: 100px;
+	box-sizing: content-box;
+	border: 1px solid gray!important;
+}
+
+#btn-insert-td {
+	width: 200px;
+	cursor: pointer;
+}
+/* 수정,삭제,목록 버튼 영역 */
+#wrap {
  	width: 971px;
  	margin: 0;
  	margin-left: auto;
  	margin-right: auto;
- }
+}
  
 
-
-
-/*댓글등록버튼*/
+/* 댓글 등록 버튼 */
 div.comment-container button#btn-insert{
-	width : 60px; 
-	height : 50px; 
-	color : black; 
-	background:#ffb445;
+	width : 99%; 
+	height : 100%; 
 	font-weight: bold; 
 	position:relative; 
-	top:-20px;
+	left: 2px;
+	border: 0;
+	font-size: 17px;
+	background-color: #f3ea9b;
+	cursor: pointer;
 }
+
+/* 대댓 textarea */
+#cbContent {
+	width: 360px!important;
+	height: 30px!important;
+	border: 1px solid black;
+	padding: 4px!important;
+}
+
+
 
 div.comment-container {
 	text-align: center;
 }
  
-table#tbl-comment{width:580px; margin:0 auto; border-collapse:collapse;} 
-table#tbl-comment tr td{border-bottom:1px solid; border-top:1px solid; padding:5px; text-align:left; line-height:120%;}
+table#tbl-comment {
+	width:580px; 
+	margin:0 auto; 
+	border-collapse:collapse;
+} 
+
+table#tbl-comment tr,td {
+	border: 0!important;
+}
+
+
+table#tbl-comment th,td{
+	border-bottom:1px solid black!important; 
+	border-top:1px solid black!important; 
+	padding:5px; text-align:left; 
+	line-height:120%;
+}
 table#tbl-comment tr td:first-of-type{padding: 5px 5px 5px 50px;}
 table#tbl-comment tr td:last-of-type {text-align:right; width: 100px;}
 table#tbl-comment button.btn-reply{display:none;}
@@ -188,5 +382,3 @@ table#tbl-comment button.btn-insert2{width:60px; height:23px; color:white; backg
 /* 삭제버튼관련 */
 table#tbl-comment button.btn-delete{background:red; color:white; display:none;}
 table#tbl-comment tr:hover button.btn-delete{display:inline;}
- 
-

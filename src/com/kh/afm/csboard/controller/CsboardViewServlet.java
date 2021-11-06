@@ -113,7 +113,7 @@ public class CsboardViewServlet extends HttpServlet {
 		
 		// 댓글 목록 가져오기
 		List<CsboardComment> commentList = csboardService.selectCommentList(boardNo);
-		System.out.println("commentList@servlet = " + commentList);
+		//System.out.println("commentList@servlet = " + commentList);
 		
 		// 3. view단 처리 위임
 		// view단에 전달하기 위해 속성으로 저장
