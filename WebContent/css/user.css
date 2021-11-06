@@ -28,11 +28,13 @@ caption, tbody, tfoot, thead, tr, th, td, input {
 	border: 1px solid black;
 	
 	width: 550px;
+	
+	border-radius: 10px;
 }
 
 /* 화면 1.3배 확대 */
 #login-container { 
-	zoom: 1.3; 
+	zoom: 1.4; 
 }
 
 /* 로그인정보 테이블 */
@@ -168,7 +170,7 @@ sup {
 	/* background-color:silver;  */
 	border-radius: 20px;
 	width: 750px;
-	background-color: #f8ffc7;
+	background-color: #fdf6e3;
 }
 
 /* 전체선택 약관동의 부분 */
@@ -198,7 +200,7 @@ sup {
 }
 
 .enrollinfo::-webkit-scrollbar-track {
-	background-color: #9c9b9a;
+	background-color: #bbb9b9;
 	border-radius: 10px;
 	box-shadow: inset 0px 0px 5px white;
 }
@@ -248,7 +250,7 @@ sup {
 	width: 465px;
 	height: 30px;
 	margin-top: 8px;
-	background-color: gray;
+	background-color: #bbb9b9;
 	box-shadow: inset 0px 0px 5px white;
 	border-radius: 5px;
 }
@@ -390,6 +392,7 @@ section#enrolldetail-container input[readonly]{
 #OrderComplete-container {
 	margin: 100px auto;
 	text-align: center;
+	padding-bottom:300px;
 }
  
 /* 테이블영역 */ 
@@ -428,11 +431,12 @@ section#enrolldetail-container input[readonly]{
 	color:white;
 }
 /*************************************************
- * OrderComplete.jsp (구매상세내역 페이지) 
+ * OrderCompleteDetail.jsp (구매상세내역 페이지) 
  **************************************************/
 #OrderCompleteDeatil-container {
 	margin: 100px auto;
 	text-align: center;
+	padding-bottom:300px;
 }
  
 #OrderCompleteDeatil-container table {
@@ -458,12 +462,12 @@ section#enrolldetail-container input[readonly]{
 }
 
 /** 정보가 없을 경우에 **/
-.orderCompleteisEmpty{
+.orderCompleteDetailisEmpty{
 	text-align: center;
 	font-size:300px;
 	margin:0;
 }
-.orderCompleteisEmptyh3{
+.orderCompleteDetailisEmptyh3{
 	text-align: center;
 	color: #FC5230;
 	/* text-shadow: 1px 1px #FFCD4A, 2px 2px #284D8E; */
