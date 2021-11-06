@@ -64,7 +64,7 @@ section#csboardList-container {text-align:center;}
 
 /* 검색버튼, 글쓰기 버튼 */
 .search-btn, .write-btn, .modify-btn, .delete-btn,
-	.insert-btn, .reset-btn, .listback-btn, .modified-btn, .cancell-btn {
+	.insert-btn, .reset-btn, .listback-btn, .modified-btn, .cancell-btn, .back-btn {
 	height: 30px;
 	width: 70px;
 	background-color: #ffb445;
@@ -121,7 +121,7 @@ section#csboardList-container {text-align:center;}
 /**************************************************************
  * @csboardForm.jsp
  *************************************************************/
- .modify-btn, .delete-btn {
+ .modify-btn, .delete-btn, .back-btn {
  	margin: 10px;
  }
  
@@ -148,6 +148,7 @@ section#csboardList-container {text-align:center;}
  	margin-right: auto;
  }
  
+
 
 
 /*댓글등록버튼*/

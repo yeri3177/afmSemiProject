@@ -50,8 +50,8 @@ $(() => {
 
 <section id="csboardForm-container" class="csboard-container">
 <h2>고객센터 게시글 작성</h2>
-<form name="boardEnrollFrm" action="<%=request.getContextPath() %>/csboard/csboardEnroll" method="POST">
-	<table id="tbl-board-view">
+<form name="csboardEnrollFrm" action="<%=request.getContextPath() %>/csboard/csboardEnroll" method="POST">
+	<table id="tbl-board-view"> 
 	<tr>
 		<th>제 목</th>
 		<td>
@@ -84,9 +84,9 @@ $(() => {
 </table>
 <br/>
 	<div style="text-align:center;">
-		<input type="submit" class="insert-btn" value="등록" onclick="return csboardCheck()"/> 
+		<input type="submit" class="insert-btn" value="등록"/> 
 		<input type="reset" class="reset-btn" value="다시 작성" />
-		<input type="button" class="listback-btn" value="목록" onclick="location.href='CsboardServlet?command=csboard_list'"/>
+		<input type="button" class="listback-btn" value="목록" onclick="history.go(-1);"/>
 	</div>
 </form>
 </section>
