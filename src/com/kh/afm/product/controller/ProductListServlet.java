@@ -44,7 +44,6 @@ public class ProductListServlet extends HttpServlet {
 			
 			// 업무로직
 			List<Product> list = productService.selectProductList(start, end);
-			System.out.println("list@servlet = " + list);
 			
 			// view단 forwarding
 			request.setAttribute("list", list);

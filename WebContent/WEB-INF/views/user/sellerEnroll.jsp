@@ -4,7 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>판매자 회원가입</title>
+
+<!-- favicon -->
+<link rel="icon" href="<%= request.getContextPath() %>/images/common/logo_favicon.png">
+
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/user.css" />
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 </head>
