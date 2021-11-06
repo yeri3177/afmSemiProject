@@ -30,21 +30,21 @@
 	
 	<!-- 작은 채소 이미지 요소들 -->
 	<div>
-	<img class="mini-imgs" id="mini1" src="<%=request.getContextPath()%>/images/info/icon1.PNG" />
-	<img class="mini-imgs" id="mini2" src="<%=request.getContextPath()%>/images/info/icon2.PNG" />
-	<img class="mini-imgs" id="mini3" src="<%=request.getContextPath()%>/images/info/icon3.PNG" />
-	<img class="mini-imgs" id="mini4" src="<%=request.getContextPath()%>/images/info/icon4.PNG" />
-	<img class="mini-imgs" id="mini5" src="<%=request.getContextPath()%>/images/info/icon5.PNG" />
-	<img class="mini-imgs" id="mini6" src="<%=request.getContextPath()%>/images/info/icon6.PNG" />
-	<img class="mini-imgs" id="mini7" src="<%=request.getContextPath()%>/images/info/icon7.PNG" />
-	<img class="mini-imgs" id="mini8" src="<%=request.getContextPath()%>/images/info/icon8.PNG" />
-	<img class="mini-imgs" id="mini9" src="<%=request.getContextPath()%>/images/info/icon9.PNG" />
-	<img class="mini-imgs" id="mini10" src="<%=request.getContextPath()%>/images/info/icon10.PNG" />
-	<img class="mini-imgs" id="mini11" src="<%=request.getContextPath()%>/images/info/icon11.PNG" />
-	<img class="mini-imgs" id="mini12" src="<%=request.getContextPath()%>/images/info/icon12.PNG" />
-	<img class="mini-imgs" id="mini13" src="<%=request.getContextPath()%>/images/info/icon13.PNG" />
-	<img class="mini-imgs" id="mini14" src="<%=request.getContextPath()%>/images/info/icon14.PNG" />
-	<img class="mini-imgs" id="mini15" src="<%=request.getContextPath()%>/images/info/icon15.PNG" />
+		<img class="mini-imgs" id="mini1" src="<%=request.getContextPath()%>/images/info/icon1.PNG" />
+		<img class="mini-imgs" id="mini2" src="<%=request.getContextPath()%>/images/info/icon2.PNG" />
+		<img class="mini-imgs" id="mini3" src="<%=request.getContextPath()%>/images/info/icon3.PNG" />
+		<img class="mini-imgs" id="mini4" src="<%=request.getContextPath()%>/images/info/icon4.PNG" />
+		<img class="mini-imgs" id="mini5" src="<%=request.getContextPath()%>/images/info/icon5.PNG" />
+		<img class="mini-imgs" id="mini6" src="<%=request.getContextPath()%>/images/info/icon6.PNG" />
+		<img class="mini-imgs" id="mini7" src="<%=request.getContextPath()%>/images/info/icon7.PNG" />
+		<img class="mini-imgs" id="mini8" src="<%=request.getContextPath()%>/images/info/icon8.PNG" />
+		<img class="mini-imgs" id="mini9" src="<%=request.getContextPath()%>/images/info/icon9.PNG" />
+		<img class="mini-imgs" id="mini10" src="<%=request.getContextPath()%>/images/info/icon10.PNG" />
+		<img class="mini-imgs" id="mini11" src="<%=request.getContextPath()%>/images/info/icon11.PNG" />
+		<img class="mini-imgs" id="mini12" src="<%=request.getContextPath()%>/images/info/icon12.PNG" />
+		<img class="mini-imgs" id="mini13" src="<%=request.getContextPath()%>/images/info/icon13.PNG" />
+		<img class="mini-imgs" id="mini14" src="<%=request.getContextPath()%>/images/info/icon14.PNG" />
+		<img class="mini-imgs" id="mini15" src="<%=request.getContextPath()%>/images/info/icon15.PNG" />
 	</div>
 </div>
 

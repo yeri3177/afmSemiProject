@@ -1,4 +1,4 @@
-package com.kh.afm.admin.controller;
+package com.kh.afm.order.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

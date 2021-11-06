@@ -34,10 +34,11 @@ public class AdminProcessReportServlet extends HttpServlet {
 			
 			
 			// 업무로직 
-				// product_report에서 report_status값 수정(N -> Y)
+			// product_report에서 report_status값 수정(N -> Y)
 			int result1 = adminService.processReport(reportNo);
 			System.out.println("result1 = " + result1);
-				// product에서 p_expose값 수정 (AdminProductExposeUpdateServlet의 업무로직 재사용)
+			
+			// product에서 p_expose값 수정 (AdminProductExposeUpdateServlet의 업무로직 재사용)
 			int result2 = adminService.updateProductExpose(pNo, pExpose);
 			System.out.println("result2 = " + result2);
 			

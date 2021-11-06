@@ -28,9 +28,21 @@ import com.kh.afm.user.model.vo.User;
 	"/cart/cartDeleteAll",
 	"/cart/cartUpdate",
 	"/cart/deleteOneItem",
-	"/csboard/productReportForm"
-	
-	
+	"/csboard/productReportForm",
+	"/admin/adminMain",
+	"/admin/deleteDelUser",
+	"/admin/delUserList",
+	"/admin/processReport",
+	"/admin/updateProductExpose",
+	"/admin/productFinder",
+	"/admin/productList",
+	"/admin/productSort",
+	"/admin/productReportList",
+	"/admin/userAddressList",
+	"/admin/updateUserExpose",
+	"/admin/userSort",
+	"/admin/userList",
+	"/admin/userFinder"
 })
 public class LoginFilter implements Filter {
 
