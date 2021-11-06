@@ -4,7 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>afm enroll</title>
+
+<!-- favicon -->
+<link rel="icon" href="<%= request.getContextPath() %>/images/common/logo_favicon.png">
+
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/user.css" />
 </head>
 <body>

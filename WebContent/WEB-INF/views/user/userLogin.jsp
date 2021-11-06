@@ -4,7 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>user login</title>
+<title>afm login</title>
+
+<!-- favicon -->
+<link rel="icon" href="<%= request.getContextPath() %>/images/common/logo_favicon.png">
+
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/user.css" />
 <%
 	String saveId = null;
@@ -21,6 +25,12 @@
 		}
 	}
 %>
+
+<style>
+	body {
+		background: url('<%=request.getContextPath()%>/images/user/afm_background_1.png');
+	}
+</style>
 </head>
 <body>
 	<div id="login-container">
@@ -60,8 +70,6 @@
 						<input type="submit" value="로그인" class="login-con-btn" tabindex="4">
 					</td>
 				</tr>
-				
-				
 				
 				<!-- 5행 : 회원가입 -->
 				<tr>

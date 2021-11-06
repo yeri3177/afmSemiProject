@@ -26,7 +26,8 @@ body {
 	text-align: left;
 	border-collapse: collapse;
 	vertical-align: middle;
-	margin-right: 60px;
+		
+	/* border: 1px solid black; */
 }
 
 
