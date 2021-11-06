@@ -46,7 +46,7 @@ System.out.println("msg = " + msg);
           <h2 class="nickName">
           	<a class="homepageName" href="<%= request.getContextPath() %>/index.jsp">
           		<!-- 과일바구니 이미지 -->
-          		<img src="<%= request.getContextPath() %>/images/common/logo.png" class="logoImg"/>
+          		<%-- <img src="<%= request.getContextPath() %>/images/common/logo.png" class="logoImg"/> --%>
           		
           		<!-- afm 텍스트 -->
           		<img class="logofont" src="<%= request.getContextPath() %>/images/common/logofont.png">
@@ -72,17 +72,27 @@ System.out.println("msg = " + msg);
 				  <button class="profileImg">
 				  
 <% if(loginUser == null){ %>
-					  <a href="<%= request.getContextPath() %>/user/userLogin"><img class="profile" src="<%= request.getContextPath() %>/images/common/profile.png">
-					 	 <span class="buttonImgName">&nbsp;&nbsp;로그인</span>
+						
+					  <!-- 로그인 버튼 -->
+					  <a href="<%= request.getContextPath() %>/user/userLogin">
+					  
+					  		<!-- 기존 로그인 아이콘 이미지 -->
+					  		<%-- <img class="profile" src="<%= request.getContextPath() %>/images/common/profile.png"> --%>
+					 		
+					 		<!-- 과일바구니 이미지 -->
+          					<img src="<%= request.getContextPath() %>/images/common/logo.png" class="login-icon-img"/>
+					 		
+					 		<span class="buttonImgName">&nbsp;&nbsp;&nbsp;&nbsp;로그인</span>
 					  </a>
 <% }else{ %>
 					<div class="headerDropDown">
-					  <div class="headerDropDownBtn"><img class="profile" src="<%= request.getContextPath() %>/images/common/mypage.png">
+					  <div class="headerDropDownBtn">
+					  	<!-- 마이페이지 아이콘 이미지 -->
+					  	<img class="mypage-icon-img" src="<%= request.getContextPath() %>/images/common/mypage.png">
 					 	 <span class="buttonImgName"><%= loginUser.getUserName() %>님</span></div>
 					 	 <div class="headerDropDownMenu">
 						 	 <a href="<%= request.getContextPath() %>/user/userDetail">내 정보 보기</a>
 						 	 <a href="<%= request.getContextPath() %>/order/orderComplete">구매 내역</a>
-						 	 <!-- <a href="javascript:orderCheck();">주문 확인</a> -->
 						 	 <a href="<%= request.getContextPath() %>/order/orderCheck">주문 확인</a>
 					 	 <% if("S".equals(loginUser.getUserRole())){ %>
 						 	 <a href="<%= request.getContextPath() %>/order/sellerProductList">판매 내역</a>

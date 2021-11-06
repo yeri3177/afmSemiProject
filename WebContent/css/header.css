@@ -14,7 +14,21 @@ header{position: fixed;z-index:9998;}
 .indexlogoutImg a{background-color:#FBF6F0;font-size:1.2vw;}
 .indexlogoutImg div{background-color:#FBF6F0;font-size:1.2vw;}
 .indexlogout{padding-top:1.5vw;padding-left:0.5vw;width:4vw;}
-.profile{padding-top:1.5vw;padding-left:0.5vw;width:4vw;}
+
+/* 로그인 아이콘 이미지 */
+.login-icon-img {
+	padding-top: 0.7vw;
+	padding-left: 0.5vw;
+	width:6vw;
+}
+
+/* 마이페이지 아이콘 이미지 */
+.mypage-icon-img {
+	padding-top: 1.6vw;
+	padding-left: 0.5vw;
+	width: 4vw;
+}
+
 .cart{padding-top:1.5vw;padding-left:0.5vw;width:4vw;}
 .setting{padding-top:1.5vw;padding-left:0.5vw;width:4vw;}
 .logoImg{width:40%;height:40%}
@@ -57,7 +71,14 @@ header{position: fixed;z-index:9998;}
 .mainNav div:hover{background-color:#FFDC37;z-index:9996;}
 .mainNav div:hover > a{z-index:9996;}
 .dropdown{display: flex;justify-content: flex-end;z-index:9997;}
-.buttonImgName{display: flex;font-weight: 400;font-size:1.2vw;}
+
+
+.buttonImgName{
+	display: flex;
+	font-weight: 900;
+	font-size:1.2vw;
+	color: black;
+}
 
 /* 검색 영역 */
 .search{

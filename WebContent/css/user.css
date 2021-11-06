@@ -95,7 +95,7 @@ caption, tbody, tfoot, thead, tr, th, td, input {
 	margin: 0 auto;
 	text-align: center;
 	position: relative;
-	top: 70px;
+	top: 20px;
 	padding: 30px;
 	zoom: 1.2;
 }
@@ -107,6 +107,7 @@ caption, tbody, tfoot, thead, tr, th, td, input {
 
 #enrolltype-container a {
 	margin : 20px;
+	text-decoration: none;
 }
 
 
