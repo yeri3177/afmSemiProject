@@ -8,11 +8,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 
+<!-- google font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alfa+Slab+One&family=Black+Han+Sans&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alfa+Slab+One&family=Black+Han+Sans&family=Ubuntu:wght@300;400;500;700&display=swap&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
+<!-- css -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css"/>
 
 <!-- favicon -->
@@ -35,22 +36,41 @@ System.out.println("msg = " + msg);
 <title>a farmer's market</title>
 
 </head>
+
+
     <!-- Header -->
-    <header class="">
+    <header>
     <div class="mainHeader">
-          <h2 class="nickName"><a class="homepageName" href="<%= request.getContextPath() %>/index.jsp"><img src="<%= request.getContextPath() %>/images/common/logo.png" class="logoImg"/><img class="logofont" src="<%= request.getContextPath() %>/images/common/logofont.png"></a></h2>
+          
+          <!-- 로고영역 -->
+          <h2 class="nickName">
+          	<a class="homepageName" href="<%= request.getContextPath() %>/index.jsp">
+          		<!-- 과일바구니 이미지 -->
+          		<img src="<%= request.getContextPath() %>/images/common/logo.png" class="logoImg"/>
+          		
+          		<!-- afm 텍스트 -->
+          		<img class="logofont" src="<%= request.getContextPath() %>/images/common/logofont.png">
+          	</a>
+          </h2>
+      
+      <!-- 상품 검색 영역 시작-->
       <div class="search">
+	      <!-- 검색폼 시작 -->
 	      <form class="searchform" action="<%= request.getContextPath() %>/index/indexSearch">
-	      <label for="search">검색 : </label>
-	      <input type="text" id="search" name="search" class="searchinput" placeholder="상품명을 입력하세요."/>
-	      <button class="btnSearch" type="submit"><img class="searchImg" src="<%= request.getContextPath() %>/images/common/search.png"></button>
-	      </form>
-      </div>
+		      <input type="text" id="search" name="search" class="searchinput" placeholder="상품명을 입력하세요."/>
+		      
+		      <!-- 검색버튼 -->
+		      <button class="btnSearch" type="submit"><img class="searchImg" 
+		      	src="<%= request.getContextPath() %>/images/common/search.png"></button>
+	      </form> <!-- 검색폼 끝 -->
+      </div> <!-- 상품 검색 영역 끝-->
+      
       <nav class="header-navMenu">
         <div class="container">
         	<div class="dropdown">
 	        	<div class="button">
 				  <button class="profileImg">
+				  
 <% if(loginUser == null){ %>
 					  <a href="<%= request.getContextPath() %>/user/userLogin"><img class="profile" src="<%= request.getContextPath() %>/images/common/profile.png">
 					 	 <span class="buttonImgName">&nbsp;&nbsp;로그인</span>
@@ -105,13 +125,37 @@ System.out.println("msg = " + msg);
 		</div>
       </nav>
 	</div>
-          <div>
-				<div class="mainNav">
-					<div class="home"><a href="<%= request.getContextPath() %>">Home</a></div>
-					<div class="info"><a href="<%= request.getContextPath() %>/info.jsp">소개</a></div>
-					<div class="product"><a href="<%= request.getContextPath() %>/product/productList">상품</a></div>
-					<div class="cs"><a href="<%= request.getContextPath() %>/csboard/csboardList">고객센터</a></div>
-				</div>
+
+<!-- 네비게이션 영역 -->
+<div>
+	<div class="mainNav">
+		<!-- 홈메뉴 -->
+		<div class="home">
+			<a href="<%= request.getContextPath() %>">
+				<span>Home</span>
+			</a>
 		</div>
-    </header>
-    
+	
+		<!-- 소개 메뉴 -->
+		<div class="info">
+			<a href="<%= request.getContextPath() %>/info.jsp">
+				<span>About</span>
+			</a>
+		</div>
+	
+		<!-- 상품 메뉴 -->
+		<div class="product">
+			<a href="<%= request.getContextPath() %>/product/productList">
+				<span>Shopping</span>
+			</a>
+		</div>
+	
+		<!-- 고객센터 메뉴 -->
+		<div class="cs">
+			<a href="<%= request.getContextPath() %>/csboard/csboardList">
+				<span>QA</span>
+			</a>
+		</div>
+	</div>
+</div>
+</header>
