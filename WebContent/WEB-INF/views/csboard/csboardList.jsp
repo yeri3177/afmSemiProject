@@ -9,6 +9,10 @@
 	List<Csboard> list = (List<Csboard>) request.getAttribute("list");
 	String searchType = request.getParameter("searchType");
 	String searchKeyword = request.getParameter("searchKeyword");
+	
+	boolean editable = 
+		     UserService.ADMIN_ROLE.equals(loginUser.getUserRole()
+			);
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/csboard.css" />
 <style>
@@ -29,14 +33,9 @@ function pswdChk(url,password){
 			return false;
 		}
 	} else {
-		
-		location.href=url;
-		
-		
+		location.href=url;	
 	}
-	
 }
-
 </script>
 
 <section id="csboardList-container" class="csboard-container">
@@ -105,11 +104,19 @@ function pswdChk(url,password){
 		<td><%=csboard.getBoardNo()%></td>
 		<% if(csboard.getBoardLock().equals("Y")){ %>
 			<td>
+				<% if(!editable){ %>
 				<a href="javascript:pswdChk('<%= request.getContextPath() %>/csboard/csboardView?boardNo=<%= csboard.getBoardNo() %>','<%=csboard.getBoardPassword()%>');">
 					<img src="<%= request.getContextPath() %>/images/common/lock.png" alt="" style="width:16px;height:16px;"/><%= csboard.getBoardTitle() %>
 				</a>
+				<% } else { %>
+				<a href="<%= request.getContextPath() %>/csboard/csboardView?boardNo=<%= csboard.getBoardNo() %>">
+					<img src="<%= request.getContextPath() %>/images/common/lock.png" alt="" style="width:16px;height:16px;"/>
+					<%= csboard.getBoardTitle() %>
+				</a>
+				<% } %>
 			</td>
 		<% } %>
+		
 		<% if(csboard.getBoardLock().equals("N")) { %>
 			<td>
 				<a href="<%= request.getContextPath() %>/csboard/csboardView?boardNo=<%= csboard.getBoardNo() %>">
