@@ -109,7 +109,7 @@ div#search-pExpose {
 	<!-- 데이터 정렬 -->
 	<div class="sortbox">
 		
-		<form action="<%=request.getContextPath()%>/admin/userSort">
+		<form action="<%=request.getContextPath()%>/admin/productSort">
 			<span>sort</span>
 			<!-- 정렬 타입 -->
 			<label>	
@@ -194,19 +194,6 @@ div#search-pExpose {
 </form>
 
 <script>
-/* 검색할때 값 입력 유효성검사 ★★★★★★★★★★★★★★★★★★★★★★★★★보류 */
-/* $("[name=searchFrm]").submit((e) => {
-	const $searchKeyword = $("[name=searchKeyword]");
-	console.log($searchKeyword.val());
-	
-	if($searchKeyword.val() == ""){
-		alert("검색키워드를 입력하십시오.");
-		$searchKeyword.select();
-		return false;
-	} 
-	return true;
-}); */
-
 /* 노출여부값 변경시 체인지 이벤트 */
 $(".p_expose").change((e) => {
 	const $this = $(e.target);

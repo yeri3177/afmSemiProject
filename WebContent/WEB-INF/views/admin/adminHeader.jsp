@@ -58,8 +58,8 @@
 	    <div class="snb">
 	      <ul>
 	      	<!----------------- 메뉴1 --------------------->
-	        <li class="on">
-	          <a href="<%=request.getContextPath()%>/admin/userList">사용자 관리</a>
+	        <li class="" id="menu1">
+	          <a href="#">사용자 관리</a>
 	          <ul>
 	          	<!-------- 소메뉴 1-1 -------->
 	            <li>
@@ -73,8 +73,8 @@
 	        </li>
 	
 			<!----------------- 메뉴2 --------------------->
-	        <li class="on">
-	            <a href="<%=request.getContextPath()%>/admin/productList">상품 관리</a>
+	        <li class="" id="menu2">
+	            <a href="#">상품 관리</a>
 	            <ul>
 	              <!-------- 소메뉴 2-1 -------->
 	              <li>
@@ -140,6 +140,26 @@ $msgbox = $("#msgbox");
 	
 <% } %>
 
+var link = document.location.href; 
+console.log("link = " + link);
+
+$li = $('.snb ul li');
+$menu1 = $('.snb ul #menu1');
+$menu2 = $('.snb ul #menu2');
+
+var url1 = "http://localhost:9090/afm/admin/userList";
+var url2 = "http://localhost:9090/afm/admin/delUserList";
+
+var url3 = "http://localhost:9090/afm/admin/productList";
+var url4 = "http://localhost:9090/afm/admin/productReportList";
+
+if(link==url1 || link==url2){
+	$menu1.addClass('on');
+}
+
+if(link==url3 || link==url4){
+	$menu2.addClass('on');
+}
 </script>	
 
 

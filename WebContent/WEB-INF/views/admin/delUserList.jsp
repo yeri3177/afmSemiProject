@@ -41,7 +41,7 @@
 		<td><%=user.getDeleteUId()%></td>
 		<td><%=user.getDeleteUName()%></td>
 		<td><%=user.getDeleteUEmail()%></td>
-		<td><%=user.getDeleteBirthday()%></td>
+		<td><%= user.getDeleteBirthday() != null ? user.getDeleteBirthday() : "" %></td>
 		<td><%=user.getDeletePhone()%></td>
 		<td><%=user.getUserRole()%></td>
 		<td><%=user.getUserExpose()%></td>
