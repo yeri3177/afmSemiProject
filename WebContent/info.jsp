@@ -81,8 +81,26 @@
 	</div>
 </div>
 
-
-
 </section>
+
+<script>
+/* $("#mapimg").hover(e => {
+    const $mapinfo = $(".mapinfo");
+
+    const style1 = {
+        "width" : "310px"
+    };
+
+    const style2 = {
+        "width" : "360px"
+    };
+
+    $mapinfo.css("display", "block");
+
+    $mapinfo.animate(style1, 900, "easeInOutCubic", () => {
+        $mapinfo.animate(style2, 1000);
+    });
+}); */
+</script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
