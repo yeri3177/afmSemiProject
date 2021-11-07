@@ -18,8 +18,8 @@
     <thead>
         <tr>
 			<th>신고번호</th>
-			<th>신고제목</th>
 			<th>신고유형</th>
+			<th>신고제목</th>
 			<th>신고내용</th>
 			<th>작성자</th>
 			<th>작성일</th>
@@ -36,8 +36,8 @@
 %>
 	<tr>
 		<td><%= report.getReportNo() %></td>
-		<td><%= report.getReportTitle() %></td>
 		<td><%= report.getReportType() %></td>
+		<td><%= report.getReportTitle() %></td>
 		<td><%= report.getReportContent() %></td>
 		<td><%= report.getUserId() %></td>
 		<td><%= report.getReportRegDate() %></td>
