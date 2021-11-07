@@ -273,4 +273,18 @@ public class CsboardService {
 	}
 
 
+	public int selectSearchTotalContents(Map<String, Object> param) {
+		Connection conn = getConnection();
+		int totalContent;
+		try {
+			totalContent = csboardDao.selectSearchTotalContents(conn, param);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}
+		return totalContent;
+	}
+
+
 }

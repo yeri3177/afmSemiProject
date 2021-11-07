@@ -58,7 +58,7 @@ public class LoginFilter implements Filter {
 		if(loginMember == null) {
 			session.setAttribute("msg", "로그인후 이용할 수 있습니다.");
 			HttpServletResponse httpRes = (HttpServletResponse) response; 
-			httpRes.sendRedirect(httpReq.getContextPath() + "/");
+			httpRes.sendRedirect(httpReq.getContextPath() + "/user/userLogin");
 			return;
 		}
 		// pass the request along the filter chain
