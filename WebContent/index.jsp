@@ -50,7 +50,13 @@ window.addEventListener('load', function(){
 				let tempRename = pRename.split("=");
 				const rename = tempRename[1];
 				
-				let html = `<div class="RDData"><img class="RDDateImg" src="<%= request.getContextPath() %>/upload/product/\${rename}"/><p class="RDDataP">등록일 : \${regDate}</p><a href="<%= request.getContextPath() %>/product/productView?pNo=\${no}" class="RDDataA">상품명 : \${title}</a><p class="RDDataP">가격 : \${price} 원</p></div>`;
+				let html = `<div class="RDData">
+				<img class="RDDateImg" src="<%= request.getContextPath() %>/upload/product/\${rename}"/>
+				<a href="<%= request.getContextPath() %>/product/productView?pNo=\${no}" class="RDDataA">\${title}</a>
+				<p class="RDDataP">\${price}원</p>
+				<p class="RDDataP">\${regDate}</p>
+				</div>`;
+				
 				$RDdiv.append(html);
 			});
 			$(".RDproducts").html($RDdiv);
@@ -99,7 +105,12 @@ window.addEventListener('load', function(){
 				let tempRename = pRename.split("=");
 				const rename = tempRename[1];
 				
-				let html = `<div class="BEData"><img class="BEDateImg" src="<%= request.getContextPath() %>/upload/product/\${rename}"/><p class="BEDataP">추천수 : \${recommend}</p><a href="<%= request.getContextPath() %>/product/productView?pNo=\${no}" class="BEDataA">상품명 : \${title}</a><p class="BEDataP">가격 : \${price} 원</p></div>`;
+				let html = `<div class="BEData">
+				<img class="BEDateImg" src="<%= request.getContextPath() %>/upload/product/\${rename}"/>
+				<a href="<%= request.getContextPath() %>/product/productView?pNo=\${no}" class="BEDataA">\${title}</a>
+				<p class="BEDataP">\${price}원</p>
+				<p class="BEDataP">👍 \${recommend}</p>
+				</div>`;
 				$BEdiv.append(html);
 			});
 			$(".BEproducts").html($BEdiv);
@@ -150,17 +161,19 @@ $('.apimaintable').html($table);
 };
 </script>
 
-<div class="infoform">
+<%-- <div class="infoform">
 	<div>
 		<img src="<%= request.getContextPath() %>/images/common/logo.png" class="logoImg2"/>
 	</div>
+
 	<div class="infoImgText">
 		<h2>농산물을 산지에서 직접!</h2>
 		<p class="infoImgTextp">산지 직송의 신선함을 느껴보세요.</p>
 		<p class="infoImgTextp">A Farmer's Market<img class="logofont2" src="<%= request.getContextPath() %>/images/common/logofont.png"></p>
-	</div>
-</div>
-<img class="infoImg" src="<%= request.getContextPath() %>/images/common/colorful.jpg" alt="" />
+	</div>	
+</div> --%>
+
+<img class="infoImg" src="<%= request.getContextPath() %>/images/common/main_banner_img.png" />
 
 <div class="BEproductsh2">
 	<h2 class="BEproductsh2H2">베스트 상품</h2>
@@ -174,8 +187,9 @@ $('.apimaintable').html($table);
 	
 	</div>
 </div>
+
 <div class="apimaintableDiv">
-	<h2 class="apimaintableH2">농산물 가격 check</h2>
+	<h2 class="apimaintableH2">✅ 농산물 가격 check</h2>
 	<table class="apimaintable">
 	</table>
 </div>
