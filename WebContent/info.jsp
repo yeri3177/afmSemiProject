@@ -81,8 +81,37 @@
 	</div>
 </div>
 
-
-
 </section>
+
+<script>
+$("#mapimg").click(e => {
+    
+	/* 지역별 특산물 설명 각각의 아이디 */
+    const $mapspecgg = $("#map-spec-gg");
+    const $mapspechs = $("#map-spec-hs");
+    const $mapspechn = $("#map-spec-hn");
+    const $mapspecgd = $("#map-spec-gd");
+    const $mapspecyn = $("#map-spec-yn");
+    
+    $mapspecgg.css("opacity", "1");
+
+    setTimeout(function() {
+    	 $mapspechs.css("opacity", "1");
+   	}, 400);
+    
+    setTimeout(function() {
+    	$mapspechn.css("opacity", "1");
+ 	}, 800);
+    
+    setTimeout(function() {
+    	$mapspecgd.css("opacity", "1");
+   	}, 1200);
+    
+    setTimeout(function() {
+    	$mapspecyn.css("opacity", "1");
+ 	}, 1600);
+    
+});
+</script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

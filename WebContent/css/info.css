@@ -180,6 +180,12 @@
 	position: relative;
 	top: 2px;
 	left: 130px;
+	z-index: 3;
+}
+
+.topbox-img img:hover {
+	cursor: pointer;
+	transform: scale(1.1);
 }
 
 /* 캐릭터 이미지 */
@@ -188,6 +194,7 @@
 	position: relative;
 	top: 20px;
 	left: -10px;
+	z-index: 5;
 }
 
 /* 말풍선 이미지 */
@@ -196,8 +203,8 @@
 	position: relative;
 	top: -80px;
 	left: -10px;
+	z-index: 1;
 }
-
 
 /*********************************************************
  * 중간 박스 (지도영역)
@@ -229,50 +236,12 @@
 	cursor: pointer;
 }
 
-
 /* 지도 이미지 */
 #mapimg {
 	width: 650px;
 	position:relative;
-}
-
-#mapimg:hover {
 	cursor: pointer;
 }
-
-/* 애니메이션 효과 **/
-@keyframes fadein {
-	from {
-		opacity: 0;
-	}
-    to {
-        opacity: 1;
-    }
-}
-
-#mapimg:hover +#map-spec-gg {
-	animation: fadein 1s;
-}
-
-#mapimg:hover +#map-spec-hs {
-	animation: fadein 1s;
-	animation-delay: 0.3s;
-}
-#mapimg:hover +#map-spec-hn {
-	animation: fadein 1s;
-	animation-delay: 0.5s;
-}
-#mapimg:hover +#map-spec-gd {
-	animation: fadein 1s;
-	animation-delay: 0.6s;
-}  
-
-#mapimg:hover +#map-spec-yn {
-	animation: fadein 1s;
-	animation-delay: 0.2s;
-}
-
-
 
 /* 특산물 설명 텍스트 공통 클래스 */
 .mapinfo {

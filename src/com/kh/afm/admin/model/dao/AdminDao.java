@@ -527,7 +527,6 @@ public class AdminDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id_str);
 			result = pstmt.executeUpdate();			
 		} catch (SQLException e) {
 			throw new AdminException("회원탈퇴 데이터 삭제 오류", e);

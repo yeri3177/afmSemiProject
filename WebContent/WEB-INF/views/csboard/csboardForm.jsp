@@ -62,9 +62,15 @@ $(() => {
 		<th>작성자</th>
 		<td class="text-td">
 			<input type="text" name="user_id" value="<%= loginUser.getUserId() %>" readonly />
-			<% if(editable){ %>
-			<input type="checkbox" name="boardNotice_yn" value="Y"/>공지사항 여부
-			<% } %>
+<% if(editable){ %>
+	<tr>
+		<th>공지사항여부</th>
+		<td>
+			<input type="checkbox" name="boardNotice_yn" value="Y"/>공지사항
+		</td>
+	</tr>
+			
+<% } %>
 		</td>
 	</tr>
 	
