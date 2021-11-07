@@ -29,8 +29,6 @@
 
 	<!-- js -->
 	<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
-	<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery.easing.1.3.js"></script>
-	<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-ui.js"></script>
 	
 <style>
 	#msgbox {
