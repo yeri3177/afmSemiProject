@@ -338,7 +338,7 @@ sup {
 	border: 2px solid black;
 	border-radius: 20px;
 	width: 550px;
-	height: 700px;
+	height: 590px;
 }
 
 /* 테이블 */
@@ -368,6 +368,7 @@ sup {
 	background-color: #568A35;
 	border-color: white;
 	color: white;
+	margin-top: 45px;
 }
 
 /* 클래스 이름 다시 붙여서 해줘야 됨 */
@@ -430,6 +431,18 @@ section#enrolldetail-container input[readonly]{
 	background-color: #568A35;
 	color:white;
 }
+
+/** 정보가 없을 경우에 **/
+.orderCompleteisEmpty{
+	text-align: center;
+	font-size:300px;
+	margin:0;
+}
+.orderCompleteisEmptyh3{
+	text-align: center;
+	color: #FC5230;
+	/* text-shadow: 1px 1px #FFCD4A, 2px 2px #284D8E; */
+}
 /*************************************************
  * OrderCompleteDetail.jsp (구매상세내역 페이지) 
  **************************************************/
@@ -478,6 +491,7 @@ section#enrolldetail-container input[readonly]{
  #sellerProductList-container {
 	margin: 100px auto;
 	text-align: center;
+	padding-bottom:300px;
 }
  
 #sellerProductList-container table {
@@ -520,6 +534,7 @@ section#enrolldetail-container input[readonly]{
  #sellerOrderDetailList-container {
 	margin: 100px auto;
 	text-align: center;
+	padding-bottom:300px;
 }
  
 #sellerOrderDetailList-container table {

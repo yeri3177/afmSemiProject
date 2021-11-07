@@ -176,15 +176,12 @@ $("#enrollAddressBtn").click((e) => {
 					return false;
 				}
 			// (2) 도로명주소 입력 했는지
-			/* const $address1 = $("#user_addr"); */
-		
 				if(/^[가-힣-0-9\s]{4,}$/.test($address1.val()) == false){
 					alert("도로명 주소를 입력해주세요.");
 					$address1.select();
 					return false;
 				}
 			// (3) 상세주소 입력 했는지 
-				/* const $address2 = $("#adr_detail"); */
 				if(/^[a-zA-Z가-힣-0-9\s]{2,}$/.test($address2.val()) == false){
 					alert("상세 주소를 입력해주세요.");
 					$address2.select();
