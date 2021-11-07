@@ -280,7 +280,7 @@ if(commentList != null && !commentList.isEmpty()){
 		<%-- 대댓글(답글) --%>
 		<tr class="level2">
 			<td>
-				<sub class="comment-writer"><%= (pc.getUserId() == product.getUserId())? "판매자": pc.getUserId() %></sub>
+				<sub class="comment-writer"><%= (pc.getUserId().equals(product.getUserId()))? "판매자": pc.getUserId() %></sub>
 				<sub class="comment-date"><%= pc.getRegDate() %></sub>
 				<br />
 				<%-- 댓글 내용 --%>
