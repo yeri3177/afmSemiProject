@@ -25,11 +25,11 @@ public class ProductLikeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			//1. 사용자입력값 처리
+			//사용자입력값 처리
 			int pNo = Integer.parseInt(request.getParameter("pNo"));
 			int like = Integer.parseInt(request.getParameter("like"));
 			
-		//좋아요 누름 확인(cookie)
+		//좋아요 누름 확인
 		Cookie[] cookies = request.getCookies();
 		boolean hasClick = false;
 		String productValue = "";
@@ -66,9 +66,7 @@ public class ProductLikeServlet extends HttpServlet {
 			like++;
 		}
 			
-//			like++;
-			//2. 업무로직
-		
+			// 업무로직
 			int result = 0;
 		
 			if(hasClick != true) {
@@ -78,8 +76,7 @@ public class ProductLikeServlet extends HttpServlet {
 				result = ProductService.productLikeSelect(pNo);
 			}
 			
-			
-			//3. 응답처리
+			// 응답
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter().append("<img class='top-tags' src='/afm/images/product/tag5.png' />" + "<span>" + result + "</span>");
 		} catch (Exception e) {

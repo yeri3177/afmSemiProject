@@ -69,7 +69,7 @@ public class ProductUpdateServlet extends HttpServlet {
 			String originalFilename2 = multipartRequest.getOriginalFileName("upFile2");
 			String renamedFilename2 = multipartRequest.getFilesystemName("upFile2");	
 
-			// 1. 사용자입력
+			//사용자입력
 			int no = Integer.parseInt(multipartRequest.getParameter("pNo"));
 			String title = multipartRequest.getParameter("pTitle");
 			String userId = multipartRequest.getParameter("userId");
@@ -102,12 +102,12 @@ public class ProductUpdateServlet extends HttpServlet {
 
 			System.out.println("product@servlet = " + product);
 			
-			// 2. 업무로직
+			//업무로직
 			int result = ProductService.updateProduct(product);
 			String msg = result > 0 ? "게시물 수정 성공함" : "게시물 수정 실패함";
 			
 			
-			// 3. 응답처리 : redirect
+			//응답처리 : redirect
 			request.getSession().setAttribute("msg", msg);
 			String location = request.getContextPath() + "/product/productList";
 			response.sendRedirect(location);
