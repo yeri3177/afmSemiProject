@@ -16,17 +16,13 @@ import com.kh.afm.csboard.model.service.CsboardService;
 import com.kh.afm.csboard.model.vo.Csboard;
 
 /**
- * Servlet implementation class CsboardBoardFinderServlet
+ * 고객센터 검색하기 기능 
  */
 @WebServlet("/csboard/boardFinder")
 public class CsboardBoardFinderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
 	private CsboardService csboardService = new CsboardService();
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			// 검색타입, 검색키워드 
@@ -41,10 +37,7 @@ public class CsboardBoardFinderServlet extends HttpServlet {
 			param.put("searchKeyword", searchKeyword);
 			System.out.println("param@servlet = " + param);
 			
-			// 2. 업무로직
-			// a. select * from user where user_id like '%abc%'
-			// b. select * from user where user_name like '%길동%'
-			// c. select * from csboard where board_title like '%목%'
+			// 업무로직
 			List<Csboard> list = csboardService.searchCsboard(param);
 			//System.out.println(list);
 			
@@ -63,14 +56,13 @@ public class CsboardBoardFinderServlet extends HttpServlet {
 			
 			int start = cPage * numPerPage - (numPerPage - 1);
 			int end = cPage * numPerPage;
-			int totalContents = csboardService.selectTotalContents();
+			int totalContents = csboardService.selectSearchTotalContents(param);
 			String queryString = String.format("?searchType=%s&searchKeyword=%s", searchType, searchKeyword);
 			String url = request.getRequestURI() + queryString; 
 			String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContents, url);
 			request.setAttribute("pagebar", pagebar);
 			
-			// 3. view단 처리 (html)
-			// jsp 참조용
+			// 3. view단 처리 
 			request.setAttribute("list", list);
 			request
 				.getRequestDispatcher("/WEB-INF/views/csboard/csboardList.jsp")

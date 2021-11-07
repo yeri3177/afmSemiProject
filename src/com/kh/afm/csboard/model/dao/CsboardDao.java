@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.kh.afm.admin.model.exception.AdminException;
 import com.kh.afm.csboard.model.exception.CsboardException;
 import com.kh.afm.csboard.model.vo.Csboard;
 import com.kh.afm.csboard.model.vo.CsboardComment;
@@ -556,6 +557,44 @@ public class CsboardDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+
+
+	public int selectSearchTotalContents(Connection conn, Map<String, Object> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalContents = 0;
+
+		String sql = null;
+		String searchType = (String) param.get("searchType");
+		switch (searchType) {
+		case "userId":
+			sql = prop.getProperty("searchCsboardCountByUserId");
+			param.put("searchKeyword", "%" + param.get("searchKeyword") + "%");
+			break;
+		case "boardNo":
+			sql = prop.getProperty("searchCsboardCountByboardNo");	
+			break;
+		case "boardTitle":
+			sql = prop.getProperty("searchCsboardCountByboardTitle");
+			param.put("searchKeyword", "%" + param.get("searchKeyword") + "%");
+			break;
+		}
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, (String) param.get("searchKeyword"));
+			rset = pstmt.executeQuery();
+			if (rset.next())
+				totalContents = rset.getInt(1);
+		} catch (SQLException e) {
+			throw new CsboardException("검색결과 페이징 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalContents;
 	}
 
 }

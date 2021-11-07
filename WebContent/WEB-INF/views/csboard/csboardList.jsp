@@ -18,7 +18,7 @@
 <style>
 div#search-container {margin:0 0 10px 0; padding:3px; background: #568A35;}
 div#search-userId {display: <%= searchType == null || "userId".equals(searchType) ? "inline-block" : "none" %>;}
-div#search-boardNo {display: <%= "userBoard".equals(searchType) ? "inline-block" : "none" %>;}
+div#search-boardNo {display: <%= "boardNo".equals(searchType) ? "inline-block" : "none" %>;}
 div#search-boardTitle {display: <%= "boardTitle".equals(searchType) ? "inline-block" : "none" %>;}
 </style>
 
@@ -50,6 +50,7 @@ function pswdChk(url,password){
 			<option value="boardNo" <%= "boardNo".equals(searchType) ? "selected" : "" %>>글번호</option>
 			<option value="boardTitle" <%= "boardTitle".equals(searchType) ? "selected" : "" %>>제목</option>
 		</select>
+		
 		<div id="search-userId" class="search-type">
 			<form action="<%= request.getContextPath() %>/csboard/boardFinder">
 				<input type="hidden" name="searchType" value="userId" />
