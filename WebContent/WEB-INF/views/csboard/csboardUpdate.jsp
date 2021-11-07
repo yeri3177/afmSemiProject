@@ -27,11 +27,18 @@
 		<th>작성자</th>
 		<td class="text-td">
 			<input type="text" name="user_id" value="<%= csboard.getUserId() %>" style="width: 400px" readonly />
-			<% if(editable){ %>
-			<input type="checkbox" name="boardNotice_yn" value="Y"/>공지사항 여부
-			<% } %>
+		</td>
+	</tr>	
+<% if(editable){ %>
+	<tr>
+		<th>공지사항 여부</th>
+		<td>
+			<input type="checkbox" name="boardNotice_yn" value="Y"/>공지사항
 		</td>
 	</tr>
+			
+<% } %>
+	
 	
 <% if(!editable) { %>
 	<tr>
