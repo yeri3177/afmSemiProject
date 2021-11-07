@@ -87,7 +87,7 @@
 				
 				<td id="productName-td"> <!-- 상품명 -->
 					<a href="<%= request.getContextPath() %>/product/productView?pNo=<%= product.getpNo() %>">
-						<span><%= product.getpTitle() %></span>
+						<span><%= (product.getpCnt() > 0 ) ? product.getpTitle() : "판매완료된 상품입니다." %></span>
 					</a>
 				</td>
 				
