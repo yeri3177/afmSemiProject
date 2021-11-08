@@ -44,5 +44,5 @@
 👈 **깃허브 주소 링크**
 
 <!-- 유튜브 -->
-[![Youtube Badge](https://img.shields.io/badge/Youtube-ff0000?style=flat-square&logo=youtube&link=https://youtu.be/IwhNckpHgbY)](https://youtu.be/IwhNckpHgbY)
+[![Youtube Badge](https://img.shields.io/badge/Youtube-ff0000?style=flat-square&logo=youtube&link=https://youtu.be/1PMJ-3eISJw)](https://youtu.be/1PMJ-3eISJw)
 👈 **발표 영상 링크**
