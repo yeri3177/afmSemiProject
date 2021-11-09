@@ -47,7 +47,7 @@ select,button,input {
 .admin-page {
   width: 100%;
   height: 100%;
-  height: 1000px;
+  height: 900px;
   /* background: #f1f1f1; */ /* 연한회색 */
 }
 
@@ -540,7 +540,7 @@ select,button,input {
  * adminMain.jsp (관리자메인페이지)
  **************************************/
 #adminmain-container {
-	margin: 70px auto;
+	margin: 0 auto;
  	font-size: 25px;
  	padding: 30px;
 }
@@ -589,6 +589,60 @@ select,button,input {
 	justify-content: space-between
 	
 }
+
+/* 차트 캔버스 */
+canvas#myChart {
+	width: 900px!important;
+	height: 400px!important;
+	margin: 10px auto;
+}
+
+/* 요약 통계 영역 */
+#summary-div {
+	display: flex;
+	justify-content: space-evenly;
+	border:1px solid #bababa;
+	padding: 20px;
+	width: 700px;
+	margin: 0 auto;
+}
+
+.summary-data, summary-text {
+	display: inline-block;
+}
+
+/* 통계숫자 나오는 div */
+.summary-data {
+	background-color: #3872a1;
+	padding: 12px;
+	border-radius: 50%;
+	font-size: 27px;
+	font-weight: bold;
+	color: #fff;
+	width: 33px;
+	height: 33px;
+}
+
+/* 통계설명 나오는 div */
+.summary-text {
+	/* background-color: fuchsia; */
+	font-size: 18px;
+	font-weight: bold;
+	/* line-height: 98%; */
+	margin-top: 10px;
+	
+}
+
+
+.summary-h2 {
+	margin-bottom: 10px;
+}
+
+#myChart-h2 {
+	margin: 30px 0 10px 0;
+}
+
+
 /**************************************
  * productList.jsp (상품 목록)
  **************************************/
@@ -661,12 +715,16 @@ select,button,input {
  
 #reportcnt {
 	margin : 15px auto;
-	width: 350px;
-	height: 35px;
+	width: 250px;
+	height: 74px;
 	line-height: 35px;
 	font-size: 20px;
 	background-color: #d7d7d7;
+	display: inline-block;
+	margin-left: 40px;
 }
+
+
 
 #reportcnt span {
 	color: red;
@@ -682,3 +740,31 @@ select,button,input {
  #tbl-report select option[disabled] {
  	background-color: lightgray;
  }
+ 
+
+/* 프로그레스바 */
+#prg-bar {
+	width: 40%;
+	height: 40px;
+}
+
+#rate-text-top-div {
+	display: flex;
+	justify-content: space-between;
+	width:40%;
+	margin: 0 auto;
+}
+
+.reportRateDiv {
+	margin: 15px 0;
+	display: inline-block;
+	width: 60%;
+}
+
+.reportRateDiv span {
+	font-weight: bold;
+}
+
+#percentCnt {
+	color: red;
+}

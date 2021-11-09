@@ -24,14 +24,21 @@ public class AdminMainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			// 업무로직
-			Map<String, Integer> param = new HashMap<>();
+			// 간략 4개 검색
+			Map<String, Integer> summary = new HashMap<>();
 			
-			// 검색결과 리스트
-			param = adminService.adminMainQuery(param);
+			// 월별 상품수
+			int[] productsMonthCnt = new int[12];
+			
+			
+			// 업무로직
+			summary = adminService.adminMainQuery(summary);
+			productsMonthCnt = adminService.adminStatistics(productsMonthCnt);
+			
 			
 			// view단 연결 
-			request.setAttribute("param", param);
+			request.setAttribute("summary", summary);
+			request.setAttribute("productsMonthCnt", productsMonthCnt);
 			request
 				.getRequestDispatcher("/WEB-INF/views/admin/adminMain.jsp")
 				.forward(request, response);

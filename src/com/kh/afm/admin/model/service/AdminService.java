@@ -132,21 +132,7 @@ public class AdminService {
 		return list;
 	}
 	
-	/**
-	 * 메인페이지 쿼리
-	 */
-	public Map<String, Integer> adminMainQuery(Map<String, Integer> param) {
-		Connection conn = getConnection();
-		Map<String, Integer> result;
-		try {
-			result = adminDao.adminMainQuery(conn, param);
-			close(conn);
-		} catch (Exception e) {
-			rollback(conn);
-			throw e;
-		}
-		return result;
-	}
+	
 
 	/**
 	 * 페이징 - 전체탈퇴회원수 
@@ -374,5 +360,37 @@ public class AdminService {
 		}		
 		
 		return list;
+	}
+	
+	/**
+	 * 메인페이지 쿼리
+	 */
+	public Map<String, Integer> adminMainQuery(Map<String, Integer> param) {
+		Connection conn = getConnection();
+		Map<String, Integer> result;
+		try {
+			result = adminDao.adminMainQuery(conn, param);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}
+		return result;
+	}
+
+	/**
+	 * 올해 상품 등록수 조회 
+	 */
+	public int[] adminStatistics(int[] productsMonthCnt) {
+		Connection conn = getConnection();
+		int[] result;
+		try {
+			result = adminDao.adminStatistics(conn, productsMonthCnt);
+			close(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}
+		return result;
 	}
 }
