@@ -5,14 +5,31 @@
 <%
 	List<Report> list = (List<Report>) request.getAttribute("list");
 	int rcnt = (int) request.getAttribute("rcnt");
+	int size = list.size();
+	double rate = (double)rcnt/size*100;
+	
 %>
 
 <section id="productReportList-container" class="admin-container">
 
 <!-- 신고내역 건수 영역 -->
 <div id="reportcnt">
-	 [ 미처리건수 : <span><%= rcnt %></span> / 전체신고건수 : <span><%= list.size() %></span> ]
+	 <div>미처리건수 <span><%= rcnt %></span></div>
+	 <div>전체신고건수 <span><%= list.size() %></span></div>
 </div>
+
+<!-- 신고내역 처리율 -->
+<div class="reportRateDiv">
+	<div id="rate-text-top-div">
+		<span>신고처리율</span>
+		<span id="percentCnt"><%= (int)rate %>%</span>
+	</div>
+	
+	<!-- 프로그레스바 -->
+	<progress value="<%= rate %>" max="100" id="prg-bar"></progress>
+</div>
+
+<br />
 
 <table id="tbl-report">
     <thead>
@@ -108,6 +125,9 @@ $(".p_report_expose").change((e) => {
 		$this.find("[selected]").prop("selected", true);
 	}
 });
+
+
+
 
 </script>
 

@@ -1,6 +1,6 @@
 package com.kh.afm.admin.model.dao;
 
-import static com.kh.afm.common.JdbcTemplate.*;
+import static com.kh.afm.common.JdbcTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.kh.afm.admin.model.exception.AdminException;
-import com.kh.afm.product.model.vo.Attachment;
 import com.kh.afm.product.model.vo.Product;
 import com.kh.afm.product.model.vo.Report;
 import com.kh.afm.user.model.vo.Account;
@@ -913,4 +912,39 @@ public class AdminDao {
 		}
 		return list;
 	}
+
+	/**
+	 * 올해 상품 등록수 조회 
+	 */
+	public int[] adminStatistics(Connection conn, int[] productsMonthCnt) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adminStatistics");
+		ResultSet rset = null;
+		
+		// 크기 12인 배열 선언 
+		int[] statistics = new int[12];
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			for(int i=0; i<12; i++) {
+				pstmt.setInt(1, (i+1));
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					statistics[i] = rset.getInt(1);
+				}
+				
+			}
+			System.out.println("statistics = " + Arrays.toString(statistics));
+
+		} catch (SQLException e) {
+			throw new AdminException("회원 주소목록 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return statistics;
+	}
+	
 }
