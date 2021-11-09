@@ -6,7 +6,7 @@
 	List<Report> list = (List<Report>) request.getAttribute("list");
 	int rcnt = (int) request.getAttribute("rcnt");
 	int size = list.size();
-	double rate = (double)rcnt/size*100;
+	double rate = (double)(size-rcnt)/size*100;
 	
 %>
 
