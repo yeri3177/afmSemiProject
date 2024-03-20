@@ -7,7 +7,7 @@
 - **개발기간** : 2021/10/01~2021/11/07
 <br>
 
-## 💚 메뉴 구성
+## 메뉴 구성
 * **home** : 농산물 가격 api와 최신상품, 베스트상품 확인
 * **about** : afm 소개 페이지
 * **shopping** : 농산물 거래하는 게시판
@@ -20,7 +20,7 @@
 <br>
 
 
-## 💚 개발환경 및 사용언어
+## 개발환경 및 사용언어
 * **OS** : <img src ="https://img.shields.io/badge/Windows-0078D6.svg?&style=for-the-badge&logo=Windows&logoColor=white"/>
 * **IDE** : <img src ="https://img.shields.io/badge/Eclipse-2C2255.svg?&style=for-the-badge&logo=Eclipse&logoColor=white"/>
 * **WAS** : <img src ="https://img.shields.io/badge/Apache Tomcat-F8DC75.svg?&style=for-the-badge&logo=Apache Tomcat&logoColor=white"/>
